@@ -160,6 +160,43 @@ a {
     height: 400px;
 }
 
+/* Monitor container styling */
+#monitor-container {
+    background: linear-gradient(135deg, #3a3a39 0%, #2a2a29 100%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 12px !important;
+}
+
+#monitor {
+    font-size: 1.2em;
+}
+
+.timers-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tools-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+/* Log box styling */
+#logBox {
+    background-color: #2a2a29;
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid #3a3a39;
+}
+
+#logBox h5 {
+    color: #e8e8e8;
+    font-weight: 500;
+}
+
 #shell-panel {
   height:500px;
   background-color: dimgray;

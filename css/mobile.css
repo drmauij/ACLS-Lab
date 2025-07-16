@@ -28,10 +28,31 @@
         flex-direction: column;
     }
     
-    .row.align-items-start .col {
+    .row.align-items-start .col-lg-8,
+    .row.align-items-start .col-lg-4 {
         width: 100%;
         max-width: 100%;
         margin-bottom: 1rem;
+    }
+    
+    /* Monitor container on mobile */
+    #monitor-container {
+        margin: 1rem 0;
+        padding: 1rem !important;
+    }
+    
+    #monitor {
+        font-size: 1rem !important;
+    }
+    
+    .timers-section {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    .tools-section {
+        justify-content: center;
+        padding: 0.5rem !important;
     }
     
     /* Control panel adjustments */
