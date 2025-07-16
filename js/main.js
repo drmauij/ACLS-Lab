@@ -566,7 +566,8 @@
         var arg = $(this).val();
         var stepObj = steps[caseObj.stepCount];
         abstractStepHandler(actionsKey, stepObj.action, arg);
-        $('#action').val('').trigger('chosen:updated');
+        // Reset the dropdown for next selection
+        $('#action-dropdown').dropdown('clear');
         if($("#realtime").is(':checked')){
             $("#caseTimer").show();
         }else{
@@ -586,7 +587,8 @@
         var arg = $(this).val();
         var stepObj = steps[caseObj.stepCount];
         abstractStepHandler(drugsKey, stepObj.give, arg);
-        $('#drug').val('').trigger('chosen:updated');
+        // Reset the dropdown for next selection
+        $('#drug-dropdown').dropdown('clear');
     });
 
 var dataLoaded = {
