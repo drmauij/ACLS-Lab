@@ -569,12 +569,6 @@
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(actionsKey, stepObj.action, arg);
             
-            // Clear the dropdown after processing
-            setTimeout(function() {
-                $('#action-dropdown').dropdown('clear');
-                $('#action').val('');
-            }, 1000);
-            
             if($("#realtime").is(':checked')){
                 $("#caseTimer").show();
             }else{
@@ -597,12 +591,6 @@
         if (arg && caseObj && steps[caseObj.stepCount]) {
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(drugsKey, stepObj.give, arg);
-            
-            // Clear the dropdown after processing
-            setTimeout(function() {
-                $('#drug-dropdown').dropdown('clear');
-                $('#drug').val('');
-            }, 1000);
         }
     });
 
