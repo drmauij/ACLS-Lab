@@ -178,13 +178,53 @@ a:hover {
     color: #93c5fd;
 }
 
-/* Modern Card-like Components */
+/* Enhanced Modern Card Components with Glassmorphism */
 .modern-card {
-    background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
-    border: 1px solid #374151;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(145deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%);
+    border: 1px solid rgba(55, 65, 81, 0.3);
+    border-radius: 16px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+}
+
+.modern-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+        0 16px 48px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Floating Action Elements */
+.floating-element {
+    background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(55, 65, 81, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.floating-element:hover {
+    background: rgba(15, 23, 42, 0.95);
+    border-color: rgba(59, 130, 246, 0.5);
+    transform: translateY(-2px);
 }
 
 /* Header styling */
@@ -197,20 +237,39 @@ a:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
-/* Dropdown Styling */
+/* Enhanced Dropdown Styling */
 .ui.dropdown {
     background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
     border: 1px solid #374151 !important;
-    border-radius: 8px !important;
+    border-radius: 12px !important;
     color: #e5e7eb !important;
     font-family: 'Poppins', sans-serif !important;
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
-    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.ui.dropdown::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .ui.dropdown:hover {
-    border-color: #4b5563 !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1) !important;
+    transform: translateY(-1px);
+}
+
+.ui.dropdown:hover::before {
+    opacity: 1;
 }
 
 .ui.dropdown.active {
@@ -257,15 +316,96 @@ a:hover {
     color: #f9fafb !important;
 }
 
-/* Checkbox styling */
+/* Enhanced Checkbox styling */
 .ui.toggle.checkbox input:checked ~ .box:before, 
 .ui.toggle.checkbox input:checked ~ label:before {
-    background-color: #3b82f6 !important;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3) !important;
 }
 
 .ui.toggle.checkbox label {
     color: #e5e7eb !important;
     font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.ui.toggle.checkbox label:hover {
+    color: #f9fafb !important;
+}
+
+/* Modern Button Styles */
+.modern-button {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.modern-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.4);
+}
+
+.modern-button:hover::before {
+    left: 100%;
+}
+
+.modern-button:active {
+    transform: translateY(0);
+}
+
+/* Status Indicators */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.status-warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.status-info {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 /* Input Labels */
@@ -368,15 +508,87 @@ a:hover {
 #co2 { color: #f59e0b !important; }
 #temp { color: #f97316 !important; }
 
-/* Log Box - Modern Chat/Log Interface */
+/* Enhanced Log Box with Better Visual Hierarchy */
 #logBox {
     background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
     border: 1px solid #374151;
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 1.5rem;
     margin-top: 1rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3);
     position: relative;
+    backdrop-filter: blur(10px);
+}
+
+/* Progress Indicator */
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(55, 65, 81, 0.5);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Enhanced Log Entries */
+.log-entry {
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    border-left: 3px solid #3b82f6;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.log-entry:hover {
+    background: rgba(15, 23, 42, 0.8);
+    transform: translateX(5px);
+}
+
+.log-entry.success {
+    border-left-color: #22c55e;
+}
+
+.log-entry.error {
+    border-left-color: #ef4444;
+}
+
+.log-entry.warning {
+    border-left-color: #f59e0b;
+}
+
+/* Enhanced Icons */
+.icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.5rem;
 }
 
 #logBox::before {
@@ -579,7 +791,33 @@ code {
     clear: both;
 }
 
-/* Responsive Design */
+/* Enhanced Mobile Experience */
+.mobile-enhanced .ui.dropdown {
+    min-height: 48px; /* Better touch targets */
+}
+
+.mobile-enhanced .modern-button,
+.mobile-enhanced .ui.button {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+    .ui.dropdown:hover {
+        transform: none;
+    }
+    
+    .modern-card:hover {
+        transform: none;
+    }
+    
+    .ui.dropdown:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Enhanced Responsive Design */
 @media only screen and (max-width: 768px) {
     body {
         padding: 0.5rem !important;
@@ -587,26 +825,129 @@ code {
     
     .ui.horizontal.list {
         padding: 0.75rem !important;
+        border-radius: 12px;
     }
     
     #shell-panel {
-        height: 300px !important;
+        height: 350px !important;
         padding: 1rem !important;
-        font-size: 12px !important;
+        font-size: 13px !important;
+        border-radius: 12px;
     }
     
     #monitor-container {
         padding: 1rem !important;
+        border-radius: 12px;
+        margin: 0.5rem 0;
     }
     
     #vitalParam > div > div {
         font-size: 1rem;
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* Better spacing for mobile */
+    .ui.grid > .column {
+        padding: 0.5rem !important;
+    }
+    
+    .ui.stackable.grid > .column {
+        margin-bottom: 1rem;
+    }
+    
+    /* Enhanced touch targets */
+    .ui.dropdown .menu > .item {
+        padding: 1rem !important;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
     }
 }
 
-/* Animation and transitions */
+@media only screen and (max-width: 480px) {
+    .ui.horizontal.list {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .ui.horizontal.list .item {
+        margin: 0;
+    }
+    
+    #shell-panel {
+        height: 300px !important;
+        font-size: 12px !important;
+    }
+}
+
+/* Focus states for accessibility */
+.focused {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+.clicked {
+    transform: scale(0.95);
+}
+
+/* Custom scrollbars for webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(55, 65, 81, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(145deg, #374151, #4b5563);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(145deg, #4b5563, #6b7280);
+}
+
+/* Enhanced animations and transitions */
 * {
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading animations */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 2s infinite;
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
 }
 
 /* ECG images preload */

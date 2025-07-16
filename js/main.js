@@ -1,6 +1,4 @@
-
-        
-    // data preload from JSON files
+// data preload from JSON files
     var cases = {};
     var casesKey = [];
     // parse and get all the cases, populate dropdown at the same time
@@ -13,7 +11,7 @@
 			$('#case-dropdown').dropdown();
     });
 
-    
+
     var actions = {};
     var actionsKey = [];
     // parse and get all the actions
@@ -25,7 +23,7 @@
       });
 			$('#action-dropdown').dropdown();
     });
-    
+
 
     var drugs = {};
     var drugsKey = [];
@@ -39,7 +37,7 @@
 			$('#drug-dropdown').dropdown();
     });
 
-    
+
     // Timer utility function
     function pad ( val ) { return val > 9 ? val : "0" + val; }
 
@@ -157,7 +155,7 @@
       $("#hf").pulse('destroy');
       $("#hf").css('color', '#00ff00');
     });
-    
+
     function setBP(max, min) {
         if (max==0 || min==0){
             $("#bpvalue").html("-/-");
@@ -182,7 +180,7 @@
       $("#bp").css('color', 'red');
         //alarmSound.pause();
     });
-    
+
     var myIntervalO2;
     function setO2(sat) {
         $("#satvalue").html(sat);
@@ -218,7 +216,7 @@
       $("#sat").pulse('destroy');
         $("#sat").css('color', '#00ffff');
     });
-    
+
     var myIntervalCO2;
     function setCO2(co2) {
         $("#co2value").html(co2);
@@ -240,7 +238,7 @@
         $("#tempvalue").html(temp);
         $("#temp").fadeIn();
     }
-    
+
     function defibrillation() {
         stopCPR();
         var defiNummerValue = parseInt($("#defiNummerValue").html())+1;
@@ -248,8 +246,8 @@
         $("#defiLogo").fadeIn();
         $("#defiNummer").fadeIn();
     }
-    
-    
+
+
     function setLabor(param, value, unit){
         paramId = param.replace(/ /g,'');
         $("#"+paramId+"").remove(); // remove it if already exists
@@ -287,7 +285,7 @@
 		function onPlayerReady(event) {
 				event.target.playVideo() // autostart
 		}
-		
+
 		function onPlayerStateChange(event) {
 				// do other custom stuff here by watching the YT.PlayerState
 		}
@@ -299,9 +297,9 @@
 
 		var Youtube = (function () {
 		    'use strict';
-		
+
 		    var video, results;
-		
+
 		    var getThumb = function (url, size) {
 		        if (url === null) {
 		            return '';
@@ -309,13 +307,13 @@
 		        size    = (size === null) ? 'big' : size;
 		        results = url.match('[\\?&]v=([^&#]*)');
 		        video   = (results === null) ? url : results[1];
-		
+
 		        if (size === 'small') {
 		            return 'https://img.youtube.com/vi/' + video + '/2.jpg';
 		        }
 		        return 'https://img.youtube.com/vi/' + video + '/0.jpg';
 		    };
-		
+
 		    return {
 		        thumb: getThumb
 		    };
@@ -326,16 +324,16 @@
 			var response = '<a id="video-button" href="#" data-bs-toggle="modal" data-bs-target="#dynamicVideoModal"><img id="video-thumbnail" class="rounded d-block my-2" width="250px" src="'+thumb+'"/></a>';
 			$("#player").attr("src", videoId);
 			printOut(response);
-			
+
 			function loadYouTubeVideo() {
 			    // 2. This code loads the IFrame Player API code asynchronously.
 			    var tag = document.createElement('script');
 			    tag.src = "https://www.youtube.com/iframe_api";
 			    var firstScriptTag = document.getElementsByTagName('script')[0];
 			    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-			
+
 			}
-			
+
 			var myModalEl = document.getElementById('dynamicVideoModal')
 			myModalEl.addEventListener('show.bs.modal', function (event) {
 			    // dynamically create video when modal is opened
@@ -350,7 +348,7 @@
 		}
 
 
-    
+
     // custom function to print-out in div shell-panel
     function printOut(response, simple){
         if(simple){
@@ -413,7 +411,7 @@
         $("#menu").fadeIn();
         $("#monitor-container").fadeIn();
     });
-    
+
 
     // lazy highlight for action Steps
     function doSetTimeout(id, time, failure) {
@@ -427,7 +425,7 @@
       }, time);
     }
 
-    
+
     var id=0;
     var calledOptions = []; // track completed options in step with multiple options
     // functions to manage different step types (do/give/answer) response
@@ -493,7 +491,7 @@
                 response = stepObj.msgOk;
                 caseObj.stepCount++;
                 calledOptions = []; // clear the calledOptions array for this step
-                
+
 								// response printout
                 printOut("<p class='mt-1'>"+response+"</p>");
                 // check if for the current action is defined any Function to execute
@@ -513,7 +511,7 @@
                     response = response +"</form>";
 										printOut(response);
                 }
-								
+
 								if(stepObj.msgAfter){
 									printOut("<p class='mt-1'>"+stepObj.msgAfter+"</p>");
 								}
@@ -525,7 +523,7 @@
             caseObj.errorCount++;
             printOut(response);
         }
-        
+
         // append log
         var checkLog = "KO";
         if(check)
@@ -567,3 +565,44 @@
         abstractStepHandler(drugsKey, stepObj.give, arg);
         $('#drug').val('').trigger('chosen:updated');
     });
+
+$(document).ready(function() {
+    readActions();
+    readDrugs();
+    readCases();
+
+    // Add modern UI enhancements
+    initializeModernUI();
+});
+
+function initializeModernUI() {
+    // Add slide-in animation to main elements
+    $('.ui.grid, #shell-panel, #monitor-container, #logBox').addClass('slide-in');
+
+    // Enhanced dropdown interactions
+    $('.ui.dropdown').on('show.bs.dropdown', function() {
+        $(this).addClass('loading');
+    }).on('shown.bs.dropdown', function() {
+        $(this).removeClass('loading');
+    });
+
+    // Add smooth scrolling and focus effects
+    $('input, select, textarea').focus(function() {
+        $(this).parent().addClass('focused');
+    }).blur(function() {
+        $(this).parent().removeClass('focused');
+    });
+
+    // Add click feedback to buttons
+    $('.ui.button, .modern-button').on('click', function() {
+        $(this).addClass('clicked');
+        setTimeout(() => {
+            $(this).removeClass('clicked');
+        }, 200);
+    });
+
+    // Progressive enhancement for better mobile experience
+    if (window.innerWidth <= 768) {
+        $('body').addClass('mobile-enhanced');
+    }
+}
