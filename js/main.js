@@ -595,17 +595,60 @@ var dataLoaded = {
     drugs: false
 };
 
+var dropdownsInitialized = false;
+
 function checkAllDataLoaded() {
-    if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs) {
+    if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs && !dropdownsInitialized) {
         console.log('All data loaded - initializing all dropdowns');
         
-        // Clear any existing initializations
-        $('.ui.dropdown').dropdown('destroy');
-        
-        // Initialize all dropdowns with default settings
-        $('.ui.dropdown').dropdown();
-        
-        console.log('All dropdowns initialized successfully');
+        // Wait a bit for CSS to be fully applied
+        setTimeout(function() {
+            // Clear any existing initializations
+            $('.ui.dropdown').dropdown('destroy');
+            
+            // Initialize dropdowns with enhanced settings
+            $('.ui.dropdown').dropdown({
+                direction: 'downward',
+                keepOnScreen: false,
+                selectOnKeydown: false,
+                forceSelection: false,
+                allowAdditions: false,
+                hideAdditions: true,
+                action: 'activate',
+                on: 'click',
+                allowReselection: false,
+                allowTab: true,
+                allowCategorySelection: false,
+                fireOnInit: false,
+                transition: 'slide down',
+                duration: 200,
+                glyphWidth: 1.037,
+                preserveHTML: true,
+                sortSelect: false,
+                match: 'both',
+                fullTextSearch: false,
+                placeholder: 'auto',
+                placeholderText: '',
+                maxSelections: false,
+                useLabels: true,
+                delimiter: false,
+                showOnFocus: true,
+                allowLabelClick: true,
+                onShow: function() {
+                    // Ensure proper z-index when showing
+                    $(this).closest('.ui.dropdown').css('z-index', '99999999');
+                    return true;
+                },
+                onHide: function() {
+                    // Reset z-index when hiding
+                    $(this).closest('.ui.dropdown').css('z-index', '1000');
+                    return true;
+                }
+            });
+            
+            dropdownsInitialized = true;
+            console.log('All dropdowns initialized successfully with enhanced settings');
+        }, 100);
     }
 }
 
