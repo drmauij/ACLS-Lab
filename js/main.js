@@ -2,54 +2,78 @@
     var cases = {};
     var casesKey = [];
     // parse and get all the cases, populate dropdown at the same time
+    console.log('Loading cases.json...');
     $.getJSON( "/json/cases.json", function( data ) {
+      console.log('Cases data loaded:', Object.keys(data).length, 'scenarios');
       $.each( data, function( key, obj ) {
         cases[key] = obj;
         casesKey.push(""+key);
 				$('#case-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.title+'</div>');
       });
+      console.log('Case dropdown menu populated with', $('#case-dropdown .menu .item').length, 'items');
 			// Initialize dropdown after data is loaded
 			$('#case-dropdown').dropdown({
+        action: 'activate',
         onChange: function(value, text, $selectedItem) {
+          console.log('Case selected:', value, text);
           $('#case').val(value).trigger('change');
         }
       });
+      console.log('Case dropdown initialized');
+    }).fail(function(jqxhr, textStatus, error) {
+      console.error('Failed to load cases.json:', textStatus, error);
     });
 
 
     var actions = {};
     var actionsKey = [];
     // parse and get all the actions
+    console.log('Loading actions.json...');
     $.getJSON( "/json/actions.json", function( data ) {
+      console.log('Actions data loaded:', Object.keys(data).length, 'actions');
       $.each( data, function( key, obj ) {
         actions[key] = obj;
         actionsKey.push(""+key);
          $('#action-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.description+'</div>');
       });
+      console.log('Action dropdown menu populated with', $('#action-dropdown .menu .item').length, 'items');
 			// Initialize dropdown after data is loaded
 			$('#action-dropdown').dropdown({
+        action: 'activate',
         onChange: function(value, text, $selectedItem) {
+          console.log('Action selected:', value, text);
           $('#action').val(value).trigger('change');
         }
       });
+      console.log('Action dropdown initialized');
+    }).fail(function(jqxhr, textStatus, error) {
+      console.error('Failed to load actions.json:', textStatus, error);
     });
 
 
     var drugs = {};
     var drugsKey = [];
     // parse and get all the drugs
+    console.log('Loading drugs.json...');
     $.getJSON( "/json/drugs.json", function( data ) {
+      console.log('Drugs data loaded:', Object.keys(data).length, 'drugs');
       $.each( data, function( key, value ) {
         drugs[key] = value;
         drugsKey.push(""+key);
 				$('#drug-dropdown .menu').append('<div class="item" data-value="'+key+'">'+value+'</div>');
       });
+      console.log('Drug dropdown menu populated with', $('#drug-dropdown .menu .item').length, 'items');
 			// Initialize dropdown after data is loaded
 			$('#drug-dropdown').dropdown({
+        action: 'activate',
         onChange: function(value, text, $selectedItem) {
+          console.log('Drug selected:', value, text);
           $('#drug').val(value).trigger('change');
         }
       });
+      console.log('Drug dropdown initialized');
+    }).fail(function(jqxhr, textStatus, error) {
+      console.error('Failed to load drugs.json:', textStatus, error);
     });
 
 
@@ -582,6 +606,51 @@
     });
 
 $(document).ready(function() {
+    console.log('DOM ready - initializing dropdowns with debug info');
+    
+    // Debug: Check if dropdown elements exist
+    console.log('Case dropdown element exists:', $('#case-dropdown').length > 0);
+    console.log('Action dropdown element exists:', $('#action-dropdown').length > 0);
+    console.log('Drug dropdown element exists:', $('#drug-dropdown').length > 0);
+    
+    // Initialize dropdowns with debug logging
+    setTimeout(function() {
+        console.log('Attempting to initialize dropdowns after delay...');
+        
+        // Force initialize all dropdowns with debug
+        $('.ui.dropdown').each(function(index, element) {
+            const $dropdown = $(element);
+            const id = $dropdown.attr('id');
+            console.log(`Initializing dropdown: ${id}`);
+            
+            try {
+                $dropdown.dropdown({
+                    action: 'activate',
+                    onChange: function(value, text, $selectedItem) {
+                        console.log(`Dropdown ${id} changed to:`, value, text);
+                        const inputId = id.replace('-dropdown', '');
+                        $(`#${inputId}`).val(value).trigger('change');
+                    },
+                    onShow: function() {
+                        console.log(`Dropdown ${id} showing`);
+                    },
+                    onHide: function() {
+                        console.log(`Dropdown ${id} hiding`);
+                    }
+                });
+                console.log(`Successfully initialized dropdown: ${id}`);
+            } catch (error) {
+                console.error(`Failed to initialize dropdown ${id}:`, error);
+            }
+        });
+        
+        // Check dropdown menu contents
+        $('#case-dropdown .menu .item').each(function(index, item) {
+            console.log(`Case option ${index}:`, $(item).text(), $(item).data('value'));
+        });
+        
+    }, 1000);
+    
     // Add modern UI enhancements
     initializeModernUI();
 });
@@ -617,4 +686,3 @@ function initializeModernUI() {
         $('body').addClass('mobile-enhanced');
     }
 }
-// Function calls removed - data is now loaded via $.getJSON() calls above
