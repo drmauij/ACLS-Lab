@@ -296,6 +296,22 @@ a:hover {
     border-radius: 8px !important;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
     backdrop-filter: blur(10px);
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 999999 !important;
+    position: absolute !important;
+    min-width: 100% !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+}
+
+.ui.dropdown.active .menu,
+.ui.dropdown.visible .menu {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
 }
 
 .ui.dropdown .menu > .item {
