@@ -190,7 +190,7 @@ a:hover {
 /* Header styling */
 .ui.horizontal.list {
     background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
-    border: 1px solid #374151;
+    border: none;
     border-radius: 12px;
     padding: 1rem !important;
     margin-bottom: 1.5rem;
