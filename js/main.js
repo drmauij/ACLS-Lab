@@ -567,10 +567,6 @@
     });
 
 $(document).ready(function() {
-    readActions();
-    readDrugs();
-    readCases();
-
     // Add modern UI enhancements
     initializeModernUI();
 });
