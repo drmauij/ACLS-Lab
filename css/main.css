@@ -344,6 +344,192 @@ a:hover {
     color: #f9fafb !important;
 }
 
+/* Enhanced Action and Drug Dropdown Styling */
+#action-dropdown,
+#drug-dropdown {
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+    border: 1px solid #374151 !important;
+    border-radius: 12px !important;
+    color: #e5e7eb !important;
+    font-family: 'Poppins', sans-serif !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    z-index: 1000 !important;
+    overflow: visible !important;
+    min-height: 48px !important;
+    padding: 0.75rem 1rem !important;
+}
+
+#action-dropdown::before,
+#drug-dropdown::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#action-dropdown:hover,
+#drug-dropdown:hover {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1) !important;
+    transform: translateY(-1px);
+}
+
+#action-dropdown:hover::before,
+#drug-dropdown:hover::before {
+    opacity: 1;
+}
+
+#action-dropdown.active,
+#drug-dropdown.active {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Enhanced Icons for Actions and Drugs */
+#action-dropdown > .stethoscope.icon,
+#drug-dropdown > .pills.icon {
+    color: #60a5fa !important;
+    font-size: 1.2rem !important;
+    margin-right: 0.75rem !important;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+#action-dropdown:hover > .stethoscope.icon,
+#drug-dropdown:hover > .pills.icon {
+    color: #93c5fd !important;
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+#action-dropdown > .dropdown.icon,
+#drug-dropdown > .dropdown.icon {
+    color: #9ca3af !important;
+    right: 1rem !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    transition: all 0.3s ease;
+}
+
+#action-dropdown.active > .dropdown.icon,
+#drug-dropdown.active > .dropdown.icon {
+    transform: translateY(-50%) rotate(180deg) !important;
+    color: #60a5fa !important;
+}
+
+/* Text styling for action and drug dropdowns */
+#action-dropdown > .text,
+#action-dropdown > .default.text,
+#drug-dropdown > .text,
+#drug-dropdown > .default.text {
+    color: #e5e7eb !important;
+    font-weight: 500 !important;
+    margin-left: 2rem !important;
+}
+
+#action-dropdown > .default.text,
+#drug-dropdown > .default.text {
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* Menu styling for action and drug dropdowns */
+#action-dropdown .menu,
+#drug-dropdown .menu {
+    background: #1f2937 !important;
+    border: 1px solid #374151 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
+    backdrop-filter: blur(10px);
+    z-index: 99999999 !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    transform: translateZ(0) !important;
+    margin-top: 0.5rem !important;
+}
+
+#action-dropdown.active .menu,
+#action-dropdown.visible .menu,
+#drug-dropdown.active .menu,
+#drug-dropdown.visible .menu {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 99999999 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+}
+
+#action-dropdown .menu > .item,
+#drug-dropdown .menu > .item {
+    background: transparent !important;
+    color: #e5e7eb !important;
+    border: none !important;
+    padding: 0.75rem 1rem !important;
+    transition: all 0.2s ease !important;
+    font-weight: 500;
+    border-left: 3px solid transparent !important;
+}
+
+#action-dropdown .menu > .item:hover {
+    background: rgba(16, 185, 129, 0.1) !important;
+    color: #f9fafb !important;
+    border-left-color: #10b981 !important;
+}
+
+#drug-dropdown .menu > .item:hover {
+    background: rgba(139, 92, 246, 0.1) !important;
+    color: #f9fafb !important;
+    border-left-color: #8b5cf6 !important;
+}
+
+#action-dropdown .menu > .item.selected {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: #f9fafb !important;
+    border-left-color: #10b981 !important;
+}
+
+#drug-dropdown .menu > .item.selected {
+    background: rgba(139, 92, 246, 0.2) !important;
+    color: #f9fafb !important;
+    border-left-color: #8b5cf6 !important;
+}
+
+/* Special styling for action dropdown icon area */
+#action-dropdown .menu > .item::before {
+    content: '⚕';
+    margin-right: 0.5rem;
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+#drug-dropdown .menu > .item::before {
+    content: '💊';
+    margin-right: 0.5rem;
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+/* Enhanced focus states */
+#action-dropdown:focus,
+#drug-dropdown:focus {
+    outline: none !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+}
+
 
 
 /* Enhanced Checkbox styling */

@@ -63,32 +63,24 @@
 				<div id="menu" style="display:none; margin: 1rem 0 2rem 0;">
 					<div class="ui stackable two column grid">
 						<div class="column">
-							<div class="ui labeled input fluid">
-								<div class="ui label">
-									<img alt="available actions to perform" src="img/do.png" style="width: 20px;"/>
-								</div>
-								<div class="ui fluid search selection dropdown" id="action-dropdown">
-									<input type="hidden" name="action" id="action">
-									<i class="dropdown icon"></i>
-									<div class="default text">Choose an Action to perform...</div>
-									<div class="menu">
-										<!-- Options will be populated by JavaScript -->
-									</div>
+							<div class="ui left icon fluid dropdown" id="action-dropdown">
+								<input type="hidden" name="action" id="action">
+								<i class="stethoscope icon"></i>
+								<div class="default text">Choose an Action to perform...</div>
+								<i class="dropdown icon"></i>
+								<div class="menu">
+									<!-- Options will be populated by JavaScript -->
 								</div>
 							</div>
 						</div>
 						<div class="column">
-							<div class="ui labeled input fluid">
-								<div class="ui label">
-									<img alt="available drugs to administrate" src="img/drug.png" style="width: 20px;"/>
-								</div>
-								<div class="ui fluid search selection dropdown" id="drug-dropdown">
-									<input type="hidden" name="drug" id="drug">
-									<i class="dropdown icon"></i>
-									<div class="default text">Choose a Drug to give...</div>
-									<div class="menu">
-										<!-- Options will be populated by JavaScript -->
-									</div>
+							<div class="ui left icon fluid dropdown" id="drug-dropdown">
+								<input type="hidden" name="drug" id="drug">
+								<i class="pills icon"></i>
+								<div class="default text">Choose a Drug to give...</div>
+								<i class="dropdown icon"></i>
+								<div class="menu">
+									<!-- Options will be populated by JavaScript -->
 								</div>
 							</div>
 						</div>
