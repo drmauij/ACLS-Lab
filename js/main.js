@@ -599,60 +599,27 @@ function checkAllDataLoaded() {
     if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs) {
         console.log('All data loaded - initializing all dropdowns');
         
-        // Completely destroy and reinitialize dropdowns
-        $('.ui.dropdown').off().dropdown('destroy').removeClass('active visible');
+        // Clear any existing initializations
+        $('.ui.dropdown').dropdown('destroy');
         
-        // Wait a moment before reinitializing
+        // Initialize all dropdowns with default settings
+        $('.ui.dropdown').dropdown();
+        
+        console.log('All dropdowns initialized successfully');
+        
+        // Debug dropdown states
         setTimeout(function() {
-            console.log('Reinitializing dropdowns after cleanup...');
+            console.log('=== DROPDOWN DEBUG INFO ===');
+            console.log('Case dropdown menu items:', $('#case-dropdown .menu .item').length);
+            console.log('Test dropdown menu items:', $('#test-dropdown .menu .item').length);
             
-            // Initialize test dropdown with simpler settings
-            $('#test-dropdown').dropdown({
-                action: 'select',
-                fullTextSearch: true,
-                onChange: function(value, text, $selectedItem) {
-                    console.log('Test dropdown selected:', value, text);
-                }
-            });
-            console.log('Test dropdown initialized');
-            
-            // Initialize case dropdown with specific settings
-            $('#case-dropdown').dropdown({
-                action: 'select',
-                fullTextSearch: true,
-                onChange: function(value, text, $selectedItem) {
-                    console.log('Case dropdown changed:', value, text);
-                    if (value) {
-                        $('#case').val(value).trigger('change');
-                    }
-                }
-            });
-            console.log('Case dropdown initialized');
-            
-            // Initialize other dropdowns
-            $('#action-dropdown, #drug-dropdown').dropdown({
-                action: 'select',
-                fullTextSearch: true
-            });
-            console.log('Action and drug dropdowns initialized');
-            
-            // Add manual click debugging
+            // Test manual dropdown trigger
             $('#case-dropdown, #test-dropdown').on('click', function(e) {
-                console.log('Manual click detected on:', $(this).attr('id'));
-                console.log('Dropdown classes:', $(this).attr('class'));
-                console.log('Event target:', e.target);
+                console.log('Dropdown clicked:', $(this).attr('id'));
+                $(this).dropdown('show');
             });
             
-            // Force visibility test after a delay
-            setTimeout(function() {
-                console.log('=== FINAL DROPDOWN STATE CHECK ===');
-                console.log('Case dropdown classes:', $('#case-dropdown').attr('class'));
-                console.log('Test dropdown classes:', $('#test-dropdown').attr('class'));
-                console.log('Case dropdown data:', $('#case-dropdown').data());
-                console.log('Test dropdown data:', $('#test-dropdown').data());
-            }, 1000);
-            
-        }, 100);
+        }, 1000);
     }
 }
 
