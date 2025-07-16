@@ -460,6 +460,21 @@ a:hover {
     transform: translateZ(0) !important;
     will-change: transform, opacity !important;
     contain: layout style paint !important;
+    padding-top: 0 !important;
+}
+
+/* Search hint styling */
+#action-dropdown .menu::before,
+#drug-dropdown .menu::before {
+    content: "💡 Type to search...";
+    display: block;
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-style: italic;
+    border-bottom: 1px solid #374151;
+    margin-bottom: 0.5rem;
 }
 
 #action-dropdown.active .menu,
@@ -535,16 +550,29 @@ a:hover {
 /* Search input styling for dropdowns */
 #action-dropdown input.search,
 #drug-dropdown input.search {
-    background: transparent !important;
-    border: none !important;
-    color: #e5e7eb !important;
+    background: rgba(31, 41, 55, 0.9) !important;
+    border: 1px solid #4b5563 !important;
+    color: #f9fafb !important;
     font-family: 'Poppins', sans-serif !important;
-    font-size: 0.95rem !important;
-    padding: 0.5rem 2.5rem 0.5rem 1rem !important;
-    margin: 0 !important;
-    width: 100% !important;
+    font-size: 1rem !important;
+    padding: 0.75rem 1rem !important;
+    margin: 0.5rem !important;
+    width: calc(100% - 1rem) !important;
     outline: none !important;
-    box-shadow: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    border-radius: 8px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 999999 !important;
+}
+
+#action-dropdown input.search:focus,
+#drug-dropdown input.search:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    background: rgba(31, 41, 55, 1) !important;
 }
 
 #action-dropdown input.search::placeholder,
@@ -555,7 +583,9 @@ a:hover {
 
 /* Show search cursor when dropdown is focused */
 #action-dropdown.search input.search,
-#drug-dropdown.search input.search {
+#drug-dropdown.search input.search,
+#action-dropdown input.search,
+#drug-dropdown input.search {
     cursor: text !important;
 }
 

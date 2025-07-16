@@ -673,18 +673,24 @@ function checkAllDataLoaded() {
                 glyphWidth: 1.037,
                 preserveHTML: true,
                 sortSelect: false,
-                match: 'text', // Enable text matching for search
+                match: 'both', // Enable both text and value matching
                 fullTextSearch: true, // Enable full text search
+                searchingText: 'Searching...',
                 placeholder: 'auto',
                 placeholderText: '',
                 maxSelections: false,
                 useLabels: true,
                 delimiter: false,
-                showOnFocus: true,
+                showOnFocus: false, // Don't auto-show on focus to allow typing
                 allowLabelClick: true,
-                minCharacters: 1, // Start searching after 1 character
+                minCharacters: 0, // Start searching immediately
                 onShow: function() {
-                    $(this).closest('.ui.dropdown').css('z-index', '99999999');
+                    var $dropdown = $(this).closest('.ui.dropdown');
+                    $dropdown.css('z-index', '99999999');
+                    // Focus the search input when dropdown opens
+                    setTimeout(function() {
+                        $dropdown.find('input.search').focus();
+                    }, 100);
                     return true;
                 },
                 onHide: function() {
@@ -692,7 +698,7 @@ function checkAllDataLoaded() {
                     return true;
                 },
                 message: {
-                    noResults: 'No matching items found.'
+                    noResults: 'No matching items found. Try different keywords.'
                 }
             });
             
