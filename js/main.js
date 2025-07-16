@@ -11,8 +11,16 @@
 				$('#case-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.title+'</div>');
       });
       console.log('Case dropdown menu populated with', $('#case-dropdown .menu .item').length, 'items');
-			// Initialize dropdown after data is loaded
-			$('#case-dropdown').dropdown({
+      
+      // Destroy any existing dropdown initialization
+      $('#case-dropdown').dropdown('destroy');
+      
+      // Initialize dropdown with proper Semantic UI settings
+      $('#case-dropdown').dropdown({
+        action: 'activate',
+        on: 'click',
+        allowReselection: true,
+        forceSelection: false,
         onChange: function(value, text, $selectedItem) {
           console.log('Case selected:', value, text);
           if (value) {
@@ -27,7 +35,7 @@
         }
       });
 
-      console.log('Case dropdown initialized');
+      console.log('Case dropdown initialized with', $('#case-dropdown .menu .item').length, 'items');
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load cases.json:', textStatus, error);
     });
@@ -638,47 +646,6 @@ $(document).ready(function() {
     console.log('Case dropdown element exists:', $('#case-dropdown').length > 0);
     console.log('Action dropdown element exists:', $('#action-dropdown').length > 0);
     console.log('Drug dropdown element exists:', $('#drug-dropdown').length > 0);
-
-    // Initialize dropdowns with debug logging
-    setTimeout(function() {
-        console.log('Attempting to initialize dropdowns after delay...');
-
-        // Debug dropdown state
-        console.log('Checking dropdown states after delay...');
-
-        $('.ui.dropdown').each(function(index, element) {
-            const $dropdown = $(element);
-            const id = $dropdown.attr('id');
-            const menuItems = $dropdown.find('.menu .item').length;
-            const hasData = $dropdown.hasClass('loading') || menuItems > 0;
-
-            console.log(`Dropdown ${id}: ${menuItems} items, initialized: ${hasData}`);
-
-            // Add direct click handling for menu items
-            if (id === 'case-dropdown') {
-                console.log('Case dropdown ready - adding direct click handlers...');
-
-                // Direct menu item click handling
-                $dropdown.find('.menu .item').off('click').on('click', function(e) {
-                    console.log('Menu item clicked:', $(this).text(), $(this).data('value'));
-                    const value = $(this).data('value');
-                    const text = $(this).text();
-
-                    // Manually trigger the selection
-                    if (value) {
-                        $dropdown.dropdown('set selected', value);
-                        $('#case').val(value).trigger('change');
-                    }
-                });
-            }
-        });
-
-        // Check specific dropdown menu contents
-        $('#case-dropdown .menu .item').each(function(index, item) {
-            console.log(`Case option ${index}:`, $(item).text(), $(item).data('value'));
-        });
-
-    }, 1000);
 
     // Add modern UI enhancements
     initializeModernUI();
