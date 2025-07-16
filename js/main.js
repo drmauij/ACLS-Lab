@@ -656,74 +656,128 @@ function checkAllDataLoaded() {
 
             // Initialize action and drug dropdowns with search functionality
             $('#action-dropdown, #drug-dropdown').dropdown({
-                direction: 'downward',
-                keepOnScreen: false,
-                selectOnKeydown: false,
-                forceSelection: false,
-                allowAdditions: false,
-                hideAdditions: true,
-                action: 'activate',
-                on: 'click',
-                allowReselection: false,
-                allowTab: true,
-                allowCategorySelection: false,
-                fireOnInit: false,
-                transition: 'slide down',
+                action: 'select',
+                apiSettings: false,
+                className: {
+                    filtered: 'filtered'
+                },
+                debug: false,
+                delay: {
+                    hide: 300,
+                    show: 200,
+                    search: 20,
+                    touch: 50
+                },
+                direction: 'auto',
                 duration: 200,
-                glyphWidth: 1.037,
-                preserveHTML: true,
-                sortSelect: false,
-                match: 'text', // Only match text content
-                fullTextSearch: true, // Enable full text search
+                easing: 'easeOutQuint',
                 filterRemoteData: false,
-                showOnFocus: true, // Show dropdown when focused to allow search
-                allowLabelClick: true,
-                minCharacters: 0, // Start searching immediately
-                searchDelay: 100, // Small delay for search
+                forceSelection: false,
+                fullTextSearch: true,
+                glyphWidth: 1.037,
+                hideAdditions: true,
+                hideDividers: 'empty',
+                ignoreCase: false,
+                keepOnScreen: true,
+                keys: {
+                    backspace: 8,
+                    delimiter: 188,
+                    deleteKey: 46,
+                    enter: 13,
+                    escape: 27,
+                    pageUp: 33,
+                    pageDown: 34,
+                    leftArrow: 37,
+                    upArrow: 38,
+                    rightArrow: 39,
+                    downArrow: 40
+                },
+                match: 'both',
+                maxSelections: false,
+                minCharacters: 1,
+                on: 'click',
+                performance: true,
+                placeholder: 'auto',
+                preserveHTML: true,
+                saveRemoteData: true,
+                selectOnKeydown: true,
+                showOnFocus: true,
+                silent: false,
+                sortSelect: false,
+                transition: 'auto',
+                useLabels: true,
+                verbose: false,
+                onChange: function(value, text, $choice) {
+                    // Handle the selection
+                    console.log('Dropdown changed:', value, text);
+                },
                 onShow: function() {
                     var $dropdown = $(this).closest('.ui.dropdown');
                     $dropdown.css('z-index', '99999999');
-                    $dropdown.addClass('visible');
-                    // Ensure search input is visible and focused
+                    console.log('Dropdown showing, search enabled');
+                    
+                    // Force create search input if it doesn't exist
                     setTimeout(function() {
-                        var $searchInput = $dropdown.find('input.search');
-                        if ($searchInput.length) {
-                            $searchInput.show().focus();
+                        var $menu = $dropdown.find('.menu');
+                        var $existingSearch = $menu.find('input.search');
+                        
+                        if ($existingSearch.length === 0) {
+                            console.log('Creating search input manually');
+                            var $searchInput = $('<input class="search" autocomplete="off" tabindex="0" placeholder="Type to search...">');
+                            $menu.prepend($searchInput);
+                            
+                            // Add search functionality
+                            $searchInput.on('keyup input', function() {
+                                var query = $(this).val().toLowerCase();
+                                console.log('Searching for:', query);
+                                
+                                $menu.find('.item').each(function() {
+                                    var itemText = $(this).text().toLowerCase();
+                                    if (itemText.indexOf(query) !== -1 || query === '') {
+                                        $(this).show();
+                                    } else {
+                                        $(this).hide();
+                                    }
+                                });
+                                
+                                // Show/hide no results message
+                                var visibleItems = $menu.find('.item:visible').length;
+                                var $noResults = $menu.find('.message');
+                                if (visibleItems === 0 && query !== '') {
+                                    if ($noResults.length === 0) {
+                                        $menu.append('<div class="message">No matching items found</div>');
+                                    } else {
+                                        $noResults.show();
+                                    }
+                                } else {
+                                    $noResults.hide();
+                                }
+                            });
+                            
+                            // Prevent dropdown from closing when typing
+                            $searchInput.on('click keydown', function(e) {
+                                e.stopPropagation();
+                            });
+                            
+                            // Focus the search input
+                            $searchInput.focus();
+                        } else {
+                            console.log('Search input already exists, focusing it');
+                            $existingSearch.focus();
                         }
-                    }, 150);
+                    }, 100);
+                    
                     return true;
                 },
                 onHide: function() {
                     var $dropdown = $(this).closest('.ui.dropdown');
                     $dropdown.css('z-index', '1000');
-                    $dropdown.removeClass('visible');
                     return true;
-                },
-                message: {
-                    noResults: 'No matching items found. Try different keywords.'
                 }
-            });
-            
-            // Add specific handling for search functionality
-            $('#action-dropdown, #drug-dropdown').on('click', function() {
-                var $dropdown = $(this);
-                setTimeout(function() {
-                    var $searchInput = $dropdown.find('input.search');
-                    if ($searchInput.length) {
-                        $searchInput.attr('placeholder', 'Type to search...');
-                        $searchInput.show();
-                        $searchInput.focus();
-                    }
-                }, 200);
-            });
-
-            // Prevent dropdown from closing when typing in search
-            $('#action-dropdown input.search, #drug-dropdown input.search').on('keyup', function(e) {
-                e.stopPropagation();
             });
 
             dropdownsInitialized = true;
-            console.log('All dropdowns initialized successfully with enhanced settings');
+            console.log('All dropdowns initialized successfully with search functionality');
         }, 100);
     }
 }

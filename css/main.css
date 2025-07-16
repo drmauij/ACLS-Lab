@@ -1,4 +1,3 @@
-
 /*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
 
 /*
@@ -540,9 +539,8 @@ a:hover {
 }
 
 /* Search input styling for dropdowns */
-#action-dropdown input.search,
-#drug-dropdown input.search {
-    background: rgba(31, 41, 55, 0.95) !important;
+.ui.dropdown .menu input.search {
+    background: rgba(31, 41, 55, 0.98) !important;
     border: 1px solid #4b5563 !important;
     color: #f9fafb !important;
     font-family: 'Poppins', sans-serif !important;
@@ -556,9 +554,34 @@ a:hover {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    position: relative !important;
+    position: sticky !important;
+    top: 0 !important;
     z-index: 999999 !important;
-    min-height: 38px !important;
+    min-height: 40px !important;
+    line-height: 1.4 !important;
+    box-sizing: border-box !important;
+}
+
+#action-dropdown .menu input.search,
+#drug-dropdown .menu input.search {
+    background: rgba(31, 41, 55, 0.98) !important;
+    border: 1px solid #4b5563 !important;
+    color: #f9fafb !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 1rem !important;
+    padding: 0.75rem 1rem !important;
+    margin: 0.5rem !important;
+    width: calc(100% - 1rem) !important;
+    outline: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    border-radius: 6px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 999999 !important;
+    min-height: 40px !important;
     line-height: 1.4 !important;
 }
 
@@ -781,8 +804,7 @@ a:hover {
     right: 0;
     height: 2px;
     background: linear-gradient(90deg, transparent, #10b981, #3b82f6, #8b5cf6, transparent);
-    border-radius: 16px 16px 0 0;
-}
+    border-radius: 16px 16px 0 0;}
 
 #monitor-container.ui.segment {
     background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
@@ -1114,11 +1136,11 @@ code {
     .ui.dropdown:hover {
         transform: none;
     }
-    
+
     .modern-card:hover {
         transform: none;
     }
-    
+
     .ui.dropdown:active {
         transform: scale(0.98);
     }
@@ -1156,40 +1178,40 @@ code {
     body {
         padding: 0.5rem !important;
     }
-    
+
     .ui.horizontal.list {
         padding: 0.75rem !important;
         border-radius: 12px;
     }
-    
+
     #shell-panel {
         height: 350px !important;
         padding: 1rem !important;
         font-size: 13px !important;
         border-radius: 12px;
     }
-    
+
     #monitor-container {
         padding: 1rem !important;
         border-radius: 12px;
         margin: 0.5rem 0;
     }
-    
+
     #vitalParam > div > div {
         font-size: 1rem;
         padding: 0.75rem;
         margin-bottom: 0.75rem;
     }
-    
+
     /* Better spacing for mobile */
     .ui.grid > .column {
         padding: 0.5rem !important;
     }
-    
+
     .ui.stackable.grid > .column {
         margin-bottom: 1rem;
     }
-    
+
     /* Enhanced touch targets */
     .ui.dropdown .menu > .item {
         padding: 1rem !important;
@@ -1205,11 +1227,11 @@ code {
         text-align: center;
         gap: 0.5rem;
     }
-    
+
     .ui.horizontal.list .item {
         margin: 0;
     }
-    
+
     #shell-panel {
         height: 300px !important;
         font-size: 12px !important;
@@ -1307,51 +1329,51 @@ code {
         box-shadow: none !important;
         text-shadow: none !important;
     }
-    
+
     a,
     a:visited {
         text-decoration: underline;
     }
-    
+
     a[href]:after {
         content: " (" attr(href) ")";
     }
-    
+
     abbr[title]:after {
         content: " (" attr(title) ")";
     }
-    
+
     a[href^="#"]:after,
     a[href^="javascript:"]:after {
         content: "";
     }
-    
+
     pre,
     blockquote {
         border: 1px solid #999;
         page-break-inside: avoid;
     }
-    
+
     thead {
         display: table-header-group;
     }
-    
+
     tr,
     img {
         page-break-inside: avoid;
     }
-    
+
     img {
         max-width: 100% !important;
     }
-    
+
     p,
     h2,
     h3 {
         orphans: 3;
         widows: 3;
     }
-    
+
     h2,
     h3 {
         page-break-after: avoid;
