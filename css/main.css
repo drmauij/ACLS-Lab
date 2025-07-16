@@ -230,6 +230,28 @@ a:hover {
     padding: 1rem !important;
     margin-bottom: 1.5rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+
+.ui.horizontal.list .item {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.ui.horizontal.list .item img {
+    vertical-align: middle !important;
+    margin-right: 1rem !important;
+    margin-bottom: 0 !important;
+}
+
+.ui.horizontal.list .item h2 {
+    margin: 0 !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
 }
 
 /* Basic Dropdown Styling */
