@@ -606,20 +606,6 @@ function checkAllDataLoaded() {
         $('.ui.dropdown').dropdown();
         
         console.log('All dropdowns initialized successfully');
-        
-        // Debug dropdown states
-        setTimeout(function() {
-            console.log('=== DROPDOWN DEBUG INFO ===');
-            console.log('Case dropdown menu items:', $('#case-dropdown .menu .item').length);
-            console.log('Test dropdown menu items:', $('#test-dropdown .menu .item').length);
-            
-            // Test manual dropdown trigger
-            $('#case-dropdown, #test-dropdown').on('click', function(e) {
-                console.log('Dropdown clicked:', $(this).attr('id'));
-                $(this).dropdown('show');
-            });
-            
-        }, 1000);
     }
 }
 
