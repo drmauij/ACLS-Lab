@@ -199,18 +199,21 @@ a {
 
 #log {
     text-align: left !important;
+    direction: ltr !important;
 }
 
-#shell-panel,
-.shell-panel,
-[id*="shell"],
-[class*="shell"] {
+#log * {
+    text-align: left !important;
+    direction: ltr !important;
+}
+
+#shell-panel {
   height: 500px !important;
   background: linear-gradient(135deg, #3a3a39 0%, #2a2a29 100%) !important;
   color: white !important;
   padding: 1em !important;
   margin: 0.5em 0 0.5em 0 !important;
-  font-family: 'Lato', sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
   overflow: scroll !important;
   overflow-x: hidden !important;
   overflow-y: scroll !important;
@@ -220,6 +223,8 @@ a {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+  text-align: left !important;
+  direction: ltr !important;
 }
 
 #shell-cli .prompt {
