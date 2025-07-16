@@ -203,7 +203,7 @@ a {
 
 #shell-panel {
   height: 500px;
-  background-color: #3a3a39;
+  background: linear-gradient(135deg, #3a3a39 0%, #2a2a29 100%);
   color: white;
   padding: 1em;
   margin: 0.5em 0 0.5em 0;
@@ -213,6 +213,7 @@ a {
   overflow-y: scroll;
   border-radius: 12px;
   border: 1px solid #4a4a49;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   display: block !important;
 }
 
