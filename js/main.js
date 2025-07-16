@@ -617,3 +617,4 @@ function initializeModernUI() {
         $('body').addClass('mobile-enhanced');
     }
 }
+// Function calls removed - data is now loaded via $.getJSON() calls above
