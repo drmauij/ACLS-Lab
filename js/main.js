@@ -26,7 +26,7 @@
           console.log('Case dropdown menu hiding');
         }
       });
-      
+
       console.log('Case dropdown initialized');
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load cases.json:', textStatus, error);
@@ -45,16 +45,23 @@
          $('#action-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.description+'</div>');
       });
       console.log('Action dropdown menu populated with', $('#action-dropdown .menu .item').length, 'items');
-			// Initialize dropdown after data is loaded
+
+      // Clear any existing dropdown initialization
+      $('#action-dropdown').dropdown('destroy');
+
+      // Initialize dropdown after data is loaded
 			$('#action-dropdown').dropdown({
+        action: 'activate',
+        fullTextSearch: false,
+        placeholder: 'Choose an Action to perform...',
         onChange: function(value, text, $selectedItem) {
           console.log('Action selected:', value, text);
-          if (value) {
+          if (value && value !== '') {
             $('#action').val(value).trigger('change');
           }
         }
       });
-      
+
       console.log('Action dropdown initialized');
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load actions.json:', textStatus, error);
@@ -73,16 +80,23 @@
 				$('#drug-dropdown .menu').append('<div class="item" data-value="'+key+'">'+value+'</div>');
       });
       console.log('Drug dropdown menu populated with', $('#drug-dropdown .menu .item').length, 'items');
-			// Initialize dropdown after data is loaded
+
+      // Clear any existing dropdown initialization
+      $('#drug-dropdown').dropdown('destroy');
+
+      // Initialize dropdown after data is loaded
 			$('#drug-dropdown').dropdown({
+        action: 'activate',
+        fullTextSearch: false,
+        placeholder: 'Choose a Drug to give...',
         onChange: function(value, text, $selectedItem) {
           console.log('Drug selected:', value, text);
-          if (value) {
+          if (value && value !== '') {
             $('#drug').val(value).trigger('change');
           }
         }
       });
-      
+
       console.log('Drug dropdown initialized');
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load drugs.json:', textStatus, error);
@@ -619,37 +633,37 @@
 
 $(document).ready(function() {
     console.log('DOM ready - initializing dropdowns with debug info');
-    
+
     // Debug: Check if dropdown elements exist
     console.log('Case dropdown element exists:', $('#case-dropdown').length > 0);
     console.log('Action dropdown element exists:', $('#action-dropdown').length > 0);
     console.log('Drug dropdown element exists:', $('#drug-dropdown').length > 0);
-    
+
     // Initialize dropdowns with debug logging
     setTimeout(function() {
         console.log('Attempting to initialize dropdowns after delay...');
-        
+
         // Debug dropdown state
         console.log('Checking dropdown states after delay...');
-        
+
         $('.ui.dropdown').each(function(index, element) {
             const $dropdown = $(element);
             const id = $dropdown.attr('id');
             const menuItems = $dropdown.find('.menu .item').length;
             const hasData = $dropdown.hasClass('loading') || menuItems > 0;
-            
+
             console.log(`Dropdown ${id}: ${menuItems} items, initialized: ${hasData}`);
-            
+
             // Add direct click handling for menu items
             if (id === 'case-dropdown') {
                 console.log('Case dropdown ready - adding direct click handlers...');
-                
+
                 // Direct menu item click handling
                 $dropdown.find('.menu .item').off('click').on('click', function(e) {
                     console.log('Menu item clicked:', $(this).text(), $(this).data('value'));
                     const value = $(this).data('value');
                     const text = $(this).text();
-                    
+
                     // Manually trigger the selection
                     if (value) {
                         $dropdown.dropdown('set selected', value);
@@ -658,14 +672,14 @@ $(document).ready(function() {
                 });
             }
         });
-        
+
         // Check specific dropdown menu contents
         $('#case-dropdown .menu .item').each(function(index, item) {
             console.log(`Case option ${index}:`, $(item).text(), $(item).data('value'));
         });
-        
+
     }, 1000);
-    
+
     // Add modern UI enhancements
     initializeModernUI();
 });
