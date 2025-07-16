@@ -548,7 +548,7 @@ a:hover {
     font-family: 'Poppins', sans-serif !important;
     font-size: 1rem !important;
     padding: 0.75rem 1rem !important;
-    margin: 0.25rem 0.5rem !important;
+    margin: 0.5rem !important;
     width: calc(100% - 1rem) !important;
     outline: none !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
@@ -562,15 +562,27 @@ a:hover {
     line-height: 1.4 !important;
 }
 
-/* Ensure search input appears in dropdown menu */
-#action-dropdown .menu input.search,
-#drug-dropdown .menu input.search {
+/* Ensure search input is visible when dropdown is open */
+#action-dropdown.visible input.search,
+#drug-dropdown.visible input.search,
+#action-dropdown.active input.search,
+#drug-dropdown.active input.search {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Style the search input inside the menu */
+#action-dropdown .menu > input.search,
+#drug-dropdown .menu > input.search {
     position: sticky !important;
     top: 0 !important;
     background: rgba(31, 41, 55, 0.98) !important;
-    border-bottom: 1px solid #374151 !important;
-    border-radius: 6px 6px 0 0 !important;
-    margin-bottom: 0.5rem !important;
+    border: 1px solid #4b5563 !important;
+    border-radius: 6px !important;
+    margin: 0.5rem !important;
+    width: calc(100% - 1rem) !important;
+    z-index: 999999 !important;
 }
 
 #action-dropdown input.search:focus,

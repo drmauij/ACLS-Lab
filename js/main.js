@@ -676,43 +676,52 @@ function checkAllDataLoaded() {
                 match: 'text', // Only match text content
                 fullTextSearch: true, // Enable full text search
                 filterRemoteData: false,
-                searchingText: 'Searching...',
-                placeholder: 'auto',
-                placeholderText: '',
-                maxSelections: false,
-                useLabels: true,
-                delimiter: false,
-                showOnFocus: false, // Don't auto-show on focus to allow typing
+                showOnFocus: true, // Show dropdown when focused to allow search
                 allowLabelClick: true,
-                minCharacters: 1, // Start searching after 1 character
-                searchDelay: 0, // No delay for search
+                minCharacters: 0, // Start searching immediately
+                searchDelay: 100, // Small delay for search
                 onShow: function() {
                     var $dropdown = $(this).closest('.ui.dropdown');
                     $dropdown.css('z-index', '99999999');
-                    // Focus the search input when dropdown opens
+                    $dropdown.addClass('visible');
+                    // Ensure search input is visible and focused
                     setTimeout(function() {
-                        $dropdown.find('input.search').focus();
-                    }, 100);
+                        var $searchInput = $dropdown.find('input.search');
+                        if ($searchInput.length) {
+                            $searchInput.show().focus();
+                        }
+                    }, 150);
                     return true;
                 },
                 onHide: function() {
-                    $(this).closest('.ui.dropdown').css('z-index', '1000');
+                    var $dropdown = $(this).closest('.ui.dropdown');
+                    $dropdown.css('z-index', '1000');
+                    $dropdown.removeClass('visible');
                     return true;
                 },
                 message: {
                     noResults: 'No matching items found. Try different keywords.'
-                },
-                // Custom filter function for better search
-                onLabelCreate: function(value, text) {
-                    return text;
-                },
-                // Override the default search function
-                onSearch: function(query) {
-                    // This will be handled by Semantic UI's built-in search
-                    return true;
                 }
             });
             
+            // Add specific handling for search functionality
+            $('#action-dropdown, #drug-dropdown').on('click', function() {
+                var $dropdown = $(this);
+                setTimeout(function() {
+                    var $searchInput = $dropdown.find('input.search');
+                    if ($searchInput.length) {
+                        $searchInput.attr('placeholder', 'Type to search...');
+                        $searchInput.show();
+                        $searchInput.focus();
+                    }
+                }, 200);
+            });
+
+            // Prevent dropdown from closing when typing in search
+            $('#action-dropdown input.search, #drug-dropdown input.search').on('keyup', function(e) {
+                e.stopPropagation();
+            });
+
             dropdownsInitialized = true;
             console.log('All dropdowns initialized successfully with enhanced settings');
         }, 100);
