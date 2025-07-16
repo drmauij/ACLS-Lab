@@ -97,9 +97,14 @@ textarea {
 
 body {
     padding: 1em;
-    background: #252525;
-    color: #e8e8e8;
-    font-family: 'Lato', sans-serif;
+    background: #252525 !important;
+    color: #e8e8e8 !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+body.ui.inverted {
+    background: #252525 !important;
+    color: #e8e8e8 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -160,11 +165,78 @@ a {
     height: 400px;
 }
 
+/* Semantic UI Dropdown Styling */
+.ui.dropdown {
+    background: #2a2a29 !important;
+    border: 1px solid #3a3a39 !important;
+    color: #e8e8e8 !important;
+}
+
+.ui.dropdown > .dropdown.icon {
+    color: #e8e8e8 !important;
+}
+
+.ui.dropdown > .text {
+    color: #e8e8e8 !important;
+}
+
+.ui.dropdown > .default.text {
+    color: #b6b6b6 !important;
+}
+
+.ui.dropdown .menu {
+    background: #2a2a29 !important;
+    border: 1px solid #3a3a39 !important;
+}
+
+.ui.dropdown .menu > .item {
+    background: #2a2a29 !important;
+    color: #e8e8e8 !important;
+    border-top: 1px solid #3a3a39 !important;
+}
+
+.ui.dropdown .menu > .item:hover {
+    background: #3a3a39 !important;
+    color: #e8e8e8 !important;
+}
+
+.ui.dropdown .menu > .item.selected {
+    background: #3a3a39 !important;
+    color: #e8e8e8 !important;
+}
+
+/* Checkbox styling */
+.ui.toggle.checkbox input:checked ~ .box:before, 
+.ui.toggle.checkbox input:checked ~ label:before {
+    background-color: #007bff !important;
+}
+
+.ui.toggle.checkbox input:focus:checked ~ .box:before, 
+.ui.toggle.checkbox input:focus:checked ~ label:before {
+    background-color: #007bff !important;
+}
+
+.ui.toggle.checkbox label {
+    color: #e8e8e8 !important;
+}
+
+/* Label styling */
+.ui.label {
+    background: #3a3a39 !important;
+    color: #e8e8e8 !important;
+    border: 1px solid #4a4a49 !important;
+}
+
 /* Monitor container styling */
 #monitor-container {
-    background: linear-gradient(135deg, #3a3a39 0%, #2a2a29 100%);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #3a3a39 0%, #2a2a29 100%) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
     border-radius: 12px !important;
+}
+
+#monitor-container.ui.segment {
+    background: linear-gradient(135deg, #3a3a39 0%, #2a2a29 100%) !important;
+    border: 1px solid #4a4a49 !important;
 }
 
 #monitor {
@@ -263,6 +335,26 @@ log {
 }
 
 
+/* Semantic UI Table Overrides */
+.ui.inverted.table {
+    background: #2a2a29 !important;
+    color: #e8e8e8 !important;
+    border: 1px solid #3a3a39 !important;
+}
+
+.ui.inverted.table thead th {
+    background: #3a3a39 !important;
+    color: #e8e8e8 !important;
+    border: 1px solid #4a4a49 !important;
+}
+
+.ui.inverted.table td {
+    background: #2a2a29 !important;
+    color: #e8e8e8 !important;
+    border: 1px solid #3a3a39 !important;
+    font-family: 'Source Code Pro', "Lucida Sans", Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal !important;
+}
+
 table { 
     width: 100%;
     color: #e8e8e8;
@@ -283,6 +375,26 @@ th {
 
 td{
     font-family: 'Source Code Pro', "Lucida Sans", Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+}
+
+/* Semantic UI Modal Styling */
+.ui.modal {
+    background: #2a2a29 !important;
+    color: #e8e8e8 !important;
+}
+
+.ui.modal > .header {
+    background: #3a3a39 !important;
+    color: #e8e8e8 !important;
+    border-bottom: 1px solid #4a4a49 !important;
+}
+
+.ui.modal > .close.icon {
+    color: #e8e8e8 !important;
+}
+
+.ui.modal > .close.icon:hover {
+    color: #ffffff !important;
 }
 
 #labor {

@@ -8,9 +8,9 @@
       $.each( data, function( key, obj ) {
         cases[key] = obj;
         casesKey.push(""+key);
-				$('#case').append('<option style="text-align:left" value="'+key+'">'+obj.title+'</option>');
+				$('#case-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.title+'</div>');
       });
-			$('#case').selectpicker('refresh');
+			$('#case-dropdown').dropdown();
     });
 
     
@@ -21,9 +21,9 @@
       $.each( data, function( key, obj ) {
         actions[key] = obj;
         actionsKey.push(""+key);
-         $('#action').append('<option style="text-align:left" value="'+key+'">'+obj.description+'</option>');
+         $('#action-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.description+'</div>');
       });
-			$('#action').selectpicker('refresh');
+			$('#action-dropdown').dropdown();
     });
     
 
@@ -34,9 +34,9 @@
       $.each( data, function( key, value ) {
         drugs[key] = value;
         drugsKey.push(""+key);
-				$('#drug').append('<option style="text-align:left" value="'+key+'">'+value+'</option>');
+				$('#drug-dropdown .menu').append('<div class="item" data-value="'+key+'">'+value+'</div>');
       });
-			$('#drug').selectpicker('refresh');
+			$('#drug-dropdown').dropdown();
     });
 
     

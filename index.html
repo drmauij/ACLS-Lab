@@ -8,12 +8,9 @@
 
 
 
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.rtl.min.css'>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
 	<link rel='stylesheet' href='css/mobile.css'>
 	<link rel='stylesheet'
-		href='https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css'>
-
-		<link rel='stylesheet'
 		href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css'>
 	<link rel='preconnect' href='https://fonts.googleapis.com'>
 	<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
@@ -27,19 +24,32 @@
 	<title>ACLS Simulator</title>
 </head>
 
-<body class="bg-dark text-light">
-	<div class="d-flex p-3 align-items-center">
-		<img src="img/defi.png" width="40px" class="mr-3" />
-		<h2>ACLS Lab</h2>
-	</div>
-	<div class="container-fluid pt-1">
-		<div class="row align-items-start">
-			<div class="col-lg-8">
-				<div class="d-flex flex-column flex-md-row">
-						<select id="case" class="selectpicker flex-fill" data-title="Choose a Scenario to start with..."  data-width="100%" dropdownAlignRight="true"></select>
-					<div class="form-check form-switch mx-3 mt-2 mt-md-0">
-						<input class="form-check-input" type="checkbox" id="realtime" checked value="true">
-						<label class="form-check-label" for="realtime">Realtime</label>
+<body class="ui inverted">
+	<div class="ui container-fluid" style="padding: 1rem;">
+		<div class="ui horizontal list" style="align-items: center;">
+			<div class="item">
+				<img src="img/defi.png" width="40px" style="margin-right: 1rem;" />
+			</div>
+			<div class="item">
+				<h2 class="ui inverted header">ACLS Lab</h2>
+			</div>
+		</div>
+		<div class="ui stackable grid" style="padding-top: 0.5rem;">
+			<div class="twelve wide column">
+				<div class="ui stackable grid">
+					<div class="twelve wide column">
+						<div class="ui fluid selection dropdown" id="case-dropdown">
+							<input type="hidden" name="case" id="case">
+							<i class="dropdown icon"></i>
+							<div class="default text">Choose a Scenario to start with...</div>
+							<div class="menu"></div>
+						</div>
+					</div>
+					<div class="four wide column">
+						<div class="ui toggle checkbox" style="margin-top: 0.5rem;">
+							<input type="checkbox" id="realtime" checked value="true">
+							<label for="realtime">Realtime</label>
+						</div>
 					</div>
 				</div>
 				
@@ -47,18 +57,32 @@
 					ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different
 					ACLS scenarios. Choose from the above dropdown menu a scenario to start your simulation. Have fun!
 				</div>
-				<div id="menu" style="display:none;" class="mt-2 mb-4">
-					<div class="d-flex flex-column flex-md-row justify-content-between">
-						<div class="flex-fill mb-3 mb-md-0">
-							<div class="d-flex align-items-center">
-								<img alt="available actions to perform" src="img/do.png" class="me-2"/>
-								<select id="action" class="selectpicker flex-fill" data-title="Choose an Action to perform..."  data-live-search="true" data-width="100%" ></select>
+				<div id="menu" style="display:none; margin: 1rem 0 2rem 0;">
+					<div class="ui stackable two column grid">
+						<div class="column">
+							<div class="ui labeled input fluid">
+								<div class="ui label">
+									<img alt="available actions to perform" src="img/do.png" style="width: 20px;"/>
+								</div>
+								<div class="ui fluid search selection dropdown" id="action-dropdown">
+									<input type="hidden" name="action" id="action">
+									<i class="dropdown icon"></i>
+									<div class="default text">Choose an Action to perform...</div>
+									<div class="menu"></div>
+								</div>
 							</div>
 						</div>
-						<div class="flex-fill">
-							<div class="d-flex align-items-center">
-								<img alt="available drugs to administrate" src="img/drug.png" class="me-2"/>
-								<select id="drug" class="selectpicker flex-fill" data-title="Choose a Drug to give..." data-live-search="true"  data-width="100%"></select>
+						<div class="column">
+							<div class="ui labeled input fluid">
+								<div class="ui label">
+									<img alt="available drugs to administrate" src="img/drug.png" style="width: 20px;"/>
+								</div>
+								<div class="ui fluid search selection dropdown" id="drug-dropdown">
+									<input type="hidden" name="drug" id="drug">
+									<i class="dropdown icon"></i>
+									<div class="default text">Choose a Drug to give...</div>
+									<div class="menu"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -77,63 +101,62 @@
 				-->
 			
 			</div>
-			<div class="col-lg-4">
+			<div class="four wide column">
 				<!-- Monitor Container - Moved to right column -->
-				<div id="monitor-container" class="mt-3 mb-3 p-3 rounded-3" style="background-color: #3a3a39; border: 1px solid #4a4a49; display: none;">
+				<div id="monitor-container" class="ui segment" style="margin: 1rem 0; padding: 1rem; background-color: #3a3a39; border: 1px solid #4a4a49; display: none;">
 					<div id="monitor">
-						<div class="d-flex flex-wrap justify-content-between align-items-start">
-							<div class="timers-section">
-								<p id="caseTimer" class="caseTimer" style="display:none;">Scenario time: <span id="caseMinutes">00</span>:<span id="caseSeconds">00</span></p>
-								<p id="cprTimer" class="cprTimer" style="display:none;">CPR time: <span id="cprMinutes">00</span>:<span id="cprSeconds">00</span></p>
+						<div class="ui grid">
+							<div class="eight wide column">
+								<div class="timers-section">
+									<p id="caseTimer" class="caseTimer" style="display:none;">Scenario time: <span id="caseMinutes">00</span>:<span id="caseSeconds">00</span></p>
+									<p id="cprTimer" class="cprTimer" style="display:none;">CPR time: <span id="cprMinutes">00</span>:<span id="cprSeconds">00</span></p>
+								</div>
 							</div>
-							
-							<div id="tools" class="tools-section">
-								<img id="cprImg" alt="running cpr" src="img/cpr.png" style="display:none;"/>
-								<span id="cprNummer" class="cprNummer" style="display:none;">x<span id="cprNummerValue">0</span></span>
-								<img id="defiLogo" alt="Numbers of performed defibrillations" src="img/defi2.png" style="display:none;" />
-								<span id="defiNummer" class="defiNummer" style="display:none;">x<span id="defiNummerValue">0</span></span>
+							<div class="eight wide column">
+								<div id="tools" class="tools-section" style="text-align: right;">
+									<img id="cprImg" alt="running cpr" src="img/cpr.png" style="display:none;"/>
+									<span id="cprNummer" class="cprNummer" style="display:none;">x<span id="cprNummerValue">0</span></span>
+									<img id="defiLogo" alt="Numbers of performed defibrillations" src="img/defi2.png" style="display:none;" />
+									<span id="defiNummer" class="defiNummer" style="display:none;">x<span id="defiNummerValue">0</span></span>
+								</div>
 							</div>
 						</div>
 
-						<div id="vitalParam" class="p-2 mt-2 d-flex-column fs-4" style="display:none;">
-							<div class="row">
-								<div class="col-md-6">
-									<div id="hf" style="color: #00ff00;" class="mb-2">
+						<div id="vitalParam" style="padding: 0.5rem; margin-top: 0.5rem; display:none; font-size: 1.2rem;">
+							<div class="ui two column grid">
+								<div class="column">
+									<div id="hf" style="color: #00ff00; margin-bottom: 0.5rem;">
 										HF <span id="hfvalue"></span> bpm
 									</div>
-									<div id="bp" class="text-danger mb-2">
+									<div id="bp" style="color: #dc3545; margin-bottom: 0.5rem;">
 										BP <span id="bpvalue"></span> mmHg
 									</div>
 								</div>
-								<div class="col-md-6">
-									<div class="d-flex flex-column">
-										<div id="sat" class="text-info mb-2">Sat <span id="satvalue"></span>%</div>
-										<div id="co2" style="display:none" class="text-warning mb-2">
-											CO2 <span class="fs-6">exp</span> <span id="co2value"></span>
-										</div>
-										<div id="temp" style="color:#fd7e14; display:none" class="fs-5">
-											Temp <span id="tempvalue"></span> °C
-										</div>
+								<div class="column">
+									<div id="sat" style="color: #17a2b8; margin-bottom: 0.5rem;">Sat <span id="satvalue"></span>%</div>
+									<div id="co2" style="display:none; color: #ffc107; margin-bottom: 0.5rem;">
+										CO2 <span style="font-size: 0.8rem;">exp</span> <span id="co2value"></span>
+									</div>
+									<div id="temp" style="color:#fd7e14; display:none; font-size: 1rem;">
+										Temp <span id="tempvalue"></span> °C
 									</div>
 								</div>
 							</div>
-							<div class="row mt-2">
-								<div class="col-12">
-									<img id="ecgImg" alt="ECG monitor" src="img/" style="border: 1px solid #3a3a39; display:none; max-width: 100%; height: auto;" />
-								</div>
+							<div style="margin-top: 0.5rem;">
+								<img id="ecgImg" alt="ECG monitor" src="img/" style="border: 1px solid #3a3a39; display:none; max-width: 100%; height: auto;" />
 							</div>
 						</div>
 
-						<div id="labor" class="p-2 mt-2" style="display:none;">
-							<h4>Labor data</h4>
-							<div class="table-responsive">
-								<table id="laborTable" class="table table-dark table-striped table-sm">
-							  <thead>
-							    <tr>
-							      <th scope="col">Parameter</th>
-							      <th scope="col">Value</th>
-							    </tr>
-							  </thead>
+						<div id="labor" style="padding: 0.5rem; margin-top: 0.5rem; display:none;">
+							<h4 class="ui inverted header">Labor data</h4>
+							<div style="overflow-x: auto;">
+								<table id="laborTable" class="ui inverted table">
+									<thead>
+										<tr>
+											<th>Parameter</th>
+											<th>Value</th>
+										</tr>
+									</thead>
 									<tbody></tbody>
 								</table>
 							</div>
@@ -142,9 +165,9 @@
 				</div>
 				
 				<!-- Feedback Log moved to right column -->
-				<div class="mt-3" id="logBox">
-					<h5 class="mb-3">Feedback Log</h5>
-					<div id="log" style="display:inline" class="d-flex flex-column text-start"></div>
+				<div style="margin-top: 1rem;" id="logBox">
+					<h5 class="ui inverted header" style="margin-bottom: 1rem;">Feedback Log</h5>
+					<div id="log" style="display:inline-block; text-align: left;"></div>
 				</div>
 
 						<!-- Button trigger modal -->
@@ -155,33 +178,25 @@
 					-->
 						
 					
-					<div class="modal fade" id="dynamicVideoModal" tabindex="-1" aria-hidden="true">
-					    <div class="modal-dialog modal-xl">
-					        <div class="modal-content">
-					            <div class="modal-header">
-					                <h5 class="modal-title"></h5>
-					                <button type="button" id="modal-video-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					            </div>
-					            <div class="modal-body p-0 m-0">
-					                <div class="ratio ratio-16x9" id="player" src="">
-					                </div>
-					            </div>
-					        </div>
-					    </div>
+					<div class="ui modal" id="dynamicVideoModal">
+						<i class="close icon" id="modal-video-close"></i>
+						<div class="header">
+							<span class="modal-title"></span>
+						</div>
+						<div class="content" style="padding: 0; margin: 0;">
+							<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;" id="player">
+							</div>
+						</div>
 					</div>
 
-					<div class="modal fade" id="dynamicImgModal" tabindex="-1" aria-hidden="true">
-					    <div class="modal-dialog modal-xl">
-					        <div class="modal-content">
-					            <div class="modal-header">
-					                <h5 class="modal-title"></h5>
-					                <button type="button" id="modal-img-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					            </div>
-					            <div class="modal-body p-0 m-0">
-					                <img id="img-modal" class="img-fluid mx-auto d-block" src=""/>
-					            </div>
-					        </div>
-					    </div>
+					<div class="ui modal" id="dynamicImgModal">
+						<i class="close icon" id="modal-img-close"></i>
+						<div class="header">
+							<span class="modal-title"></span>
+						</div>
+						<div class="content" style="padding: 0; margin: 0;">
+							<img id="img-modal" style="width: 100%; height: auto; display: block; margin: 0 auto;" src=""/>
+						</div>
 					</div>
 
 						
@@ -193,9 +208,8 @@
 	</div>
 
 
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-	<script src='https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js'></script>
 	<script src="js/jquery.pulse.min.js"></script>
 	<script src="js/main.js"></script>
