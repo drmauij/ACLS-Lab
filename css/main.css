@@ -203,7 +203,7 @@ a {
 
 #shell-panel {
   height:500px;
-  background-color: dimgray;
+  background-color: #3a3a39;
   color: white;
   padding: 1em;
   margin: 0.5em 0 0.5em 0;
@@ -211,7 +211,8 @@ a {
   overflow: scroll;
   overflow-x: hidden;
   overflow-y: scroll;
-  border: 1px dashed #E6EBE0;
+  border-radius: 12px;
+  border: 1px solid #4a4a49;
 }
 
 #shell-cli .prompt {
