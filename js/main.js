@@ -664,6 +664,17 @@ $(document).ready(function() {
             // Debug dropdown click behavior
             if (id === 'case-dropdown') {
                 console.log('Case dropdown ready for testing...');
+                
+                // Debug menu item clicks
+                $dropdown.find('.menu .item').on('click', function(e) {
+                    console.log('Menu item clicked:', $(this).text(), $(this).data('value'));
+                    e.stopPropagation();
+                });
+                
+                // Debug dropdown events
+                $dropdown.on('click', function(e) {
+                    console.log('Dropdown clicked, target:', e.target.className);
+                });
             }
         });
         
