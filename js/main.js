@@ -627,6 +627,19 @@ function checkAllDataLoaded() {
         // Clear any existing initializations
         $('.ui.dropdown').dropdown('destroy');
         
+        // Initialize test dropdown first for comparison
+        $('#test-dropdown').dropdown({
+            action: 'activate',
+            on: 'click',
+            allowReselection: true,
+            forceSelection: false,
+            selectOnKeydown: false,
+            onChange: function(value, text, $selectedItem) {
+                console.log('Test dropdown selected:', value, text);
+            }
+        });
+        console.log('Test dropdown initialized');
+        
         // Initialize all dropdowns with consistent settings
         $('.ui.dropdown').dropdown({
             action: 'activate',
@@ -637,6 +650,22 @@ function checkAllDataLoaded() {
         });
         
         console.log('All dropdowns initialized successfully');
+        
+        // Debug dropdown states
+        setTimeout(function() {
+            console.log('=== DROPDOWN COMPARISON DEBUG ===');
+            console.log('Case dropdown menu items:', $('#case-dropdown .menu .item').length);
+            console.log('Test dropdown menu items:', $('#test-dropdown .menu .item').length);
+            
+            // Check if dropdowns are properly initialized
+            console.log('Case dropdown has .dropdown class:', $('#case-dropdown').hasClass('dropdown'));
+            console.log('Test dropdown has .dropdown class:', $('#test-dropdown').hasClass('dropdown'));
+            
+            // Check menu visibility classes
+            console.log('Case dropdown menu classes:', $('#case-dropdown .menu').attr('class'));
+            console.log('Test dropdown menu classes:', $('#test-dropdown .menu').attr('class'));
+            
+        }, 1000);
     }
 }
 

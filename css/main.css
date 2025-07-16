@@ -316,6 +316,23 @@ a:hover {
     color: #f9fafb !important;
 }
 
+/* Debug styles for dropdown comparison */
+#test-dropdown {
+    border: 2px solid #10b981 !important;
+}
+
+#test-dropdown .menu {
+    border: 2px solid #10b981 !important;
+}
+
+#case-dropdown {
+    border: 2px solid #ef4444 !important;
+}
+
+#case-dropdown .menu {
+    border: 2px solid #ef4444 !important;
+}
+
 /* Enhanced Checkbox styling */
 .ui.toggle.checkbox input:checked ~ .box:before, 
 .ui.toggle.checkbox input:checked ~ label:before {
