@@ -562,10 +562,12 @@
     }
 
     // Actions
+    var processingAction = false;
     $('#action').on('change', function(evt, params) {
         var arg = $(this).val();
         console.log('Action change triggered:', arg);
-        if (arg && caseObj && steps[caseObj.stepCount]) {
+        if (arg && caseObj && steps[caseObj.stepCount] && !processingAction) {
+            processingAction = true;
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(actionsKey, stepObj.action, arg);
             
@@ -574,6 +576,11 @@
             }else{
                 $("#caseTimer").hide();
             }
+            
+            // Reset processing flag after a short delay
+            setTimeout(() => {
+                processingAction = false;
+            }, 500);
         }
     });
 
@@ -585,12 +592,19 @@
     }
 
     // Drugs
+    var processingDrug = false;
     $('#drug').on('change', function(evt, params) {
         var arg = $(this).val();
         console.log('Drug change triggered:', arg);
-        if (arg && caseObj && steps[caseObj.stepCount]) {
+        if (arg && caseObj && steps[caseObj.stepCount] && !processingDrug) {
+            processingDrug = true;
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(drugsKey, stepObj.give, arg);
+            
+            // Reset processing flag after a short delay
+            setTimeout(() => {
+                processingDrug = false;
+            }, 500);
         }
     });
 
@@ -608,14 +622,17 @@ function checkAllDataLoaded() {
 }
 
 function initializeDropdowns() {
-    // Clear any existing dropdown instances
+    // Clear any existing dropdown instances and event handlers
     $('.ui.dropdown').dropdown('destroy');
+    $('#action, #drug, #case').off('change');
 
     // Standard dropdown for case selection
     $('#case-dropdown').dropdown({
         onChange: function(value, text, $selectedItem) {
             console.log('Case selected:', value);
-            $('#case').val(value).trigger('change');
+            if (value && value !== '' && value !== null) {
+                $('#case').val(value).trigger('change');
+            }
         }
     });
 
@@ -627,7 +644,7 @@ function initializeDropdowns() {
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Action dropdown onChange:', value, text);
-            if (value && value !== '' && value !== null) {
+            if (value && value !== '' && value !== null && value !== $('#action').val()) {
                 $('#action').val(value).trigger('change');
             }
         }
@@ -640,13 +657,13 @@ function initializeDropdowns() {
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Drug dropdown onChange:', value, text);
-            if (value && value !== '' && value !== null) {
+            if (value && value !== '' && value !== null && value !== $('#drug').val()) {
                 $('#drug').val(value).trigger('change');
             }
         }
     });
 
-    console.log('All dropdowns initialized successfully with enhanced settings');
+    console.log('All dropdowns initialized successfully with loop prevention');
 }
 
 $(document).ready(function() {
