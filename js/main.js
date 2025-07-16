@@ -13,11 +13,6 @@
       console.log('Case dropdown menu populated with', $('#case-dropdown .menu .item').length, 'items');
 			// Initialize dropdown after data is loaded
 			$('#case-dropdown').dropdown({
-        action: 'activate',
-        allowAdditions: false,
-        fullTextSearch: false,
-        forceSelection: false,
-        selectOnKeydown: false,
         onChange: function(value, text, $selectedItem) {
           console.log('Case selected:', value, text);
           if (value) {
@@ -32,9 +27,7 @@
         }
       });
       
-      // Force refresh the dropdown to recognize new items
-      $('#case-dropdown').dropdown('refresh');
-      console.log('Case dropdown initialized and refreshed');
+      console.log('Case dropdown initialized');
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load cases.json:', textStatus, error);
     });
@@ -54,11 +47,6 @@
       console.log('Action dropdown menu populated with', $('#action-dropdown .menu .item').length, 'items');
 			// Initialize dropdown after data is loaded
 			$('#action-dropdown').dropdown({
-        action: 'activate',
-        allowAdditions: false,
-        fullTextSearch: false,
-        forceSelection: false,
-        selectOnKeydown: false,
         onChange: function(value, text, $selectedItem) {
           console.log('Action selected:', value, text);
           if (value) {
@@ -67,9 +55,7 @@
         }
       });
       
-      // Force refresh the dropdown to recognize new items
-      $('#action-dropdown').dropdown('refresh');
-      console.log('Action dropdown initialized and refreshed');
+      console.log('Action dropdown initialized');
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load actions.json:', textStatus, error);
     });
@@ -89,11 +75,6 @@
       console.log('Drug dropdown menu populated with', $('#drug-dropdown .menu .item').length, 'items');
 			// Initialize dropdown after data is loaded
 			$('#drug-dropdown').dropdown({
-        action: 'activate',
-        allowAdditions: false,
-        fullTextSearch: false,
-        forceSelection: false,
-        selectOnKeydown: false,
         onChange: function(value, text, $selectedItem) {
           console.log('Drug selected:', value, text);
           if (value) {
@@ -102,9 +83,7 @@
         }
       });
       
-      // Force refresh the dropdown to recognize new items
-      $('#drug-dropdown').dropdown('refresh');
-      console.log('Drug dropdown initialized and refreshed');
+      console.log('Drug dropdown initialized');
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load drugs.json:', textStatus, error);
     });
@@ -661,19 +640,21 @@ $(document).ready(function() {
             
             console.log(`Dropdown ${id}: ${menuItems} items, initialized: ${hasData}`);
             
-            // Debug dropdown click behavior
+            // Add direct click handling for menu items
             if (id === 'case-dropdown') {
-                console.log('Case dropdown ready for testing...');
+                console.log('Case dropdown ready - adding direct click handlers...');
                 
-                // Debug menu item clicks
-                $dropdown.find('.menu .item').on('click', function(e) {
+                // Direct menu item click handling
+                $dropdown.find('.menu .item').off('click').on('click', function(e) {
                     console.log('Menu item clicked:', $(this).text(), $(this).data('value'));
-                    e.stopPropagation();
-                });
-                
-                // Debug dropdown events
-                $dropdown.on('click', function(e) {
-                    console.log('Dropdown clicked, target:', e.target.className);
+                    const value = $(this).data('value');
+                    const text = $(this).text();
+                    
+                    // Manually trigger the selection
+                    if (value) {
+                        $dropdown.dropdown('set selected', value);
+                        $('#case').val(value).trigger('change');
+                    }
                 });
             }
         });
