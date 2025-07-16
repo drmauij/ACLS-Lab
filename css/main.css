@@ -1,3 +1,4 @@
+
 /*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
 
 /*
@@ -25,13 +26,15 @@ html {
  */
 
 ::-moz-selection {
-    background: #b3d4fc;
+    background: #3b82f6;
     text-shadow: none;
+    color: white;
 }
 
 ::selection {
-    background: #b3d4fc;
+    background: #3b82f6;
     text-shadow: none;
+    color: white;
 }
 
 /*
@@ -42,7 +45,7 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #374151;
     margin: 1em 0;
     padding: 0;
 }
@@ -92,182 +95,379 @@ textarea {
 }
 
 /* ==========================================================================
-   Author's custom styles
+   Modern Dark Theme - Sopwise.ai inspired
    ========================================================================== */
 
-/* Semantic UI Dark Theme Base */
-html,
-body {
-    padding: 1em;
-    background: #1b1c1d !important;
-    background-color: #1b1c1d !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    font-family: 'Poppins', sans-serif !important;
+* {
+    box-sizing: border-box;
 }
 
-/* Semantic UI Inverted Theme */
+html,
+body {
+    padding: 0;
+    margin: 0;
+    background: #0a0a0a !important;
+    background-color: #0a0a0a !important;
+    color: #e5e7eb !important;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+body {
+    padding: 1rem !important;
+}
+
+/* Semantic UI Dark Theme Override */
 body.ui.inverted,
+body.ui.inverted.dark,
 .ui.inverted {
-    background: #1b1c1d !important;
-    background-color: #1b1c1d !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    font-family: 'Poppins', sans-serif !important;
+    background: #0a0a0a !important;
+    background-color: #0a0a0a !important;
+    color: #e5e7eb !important;
 }
 
 /* Dark theme containers */
 .ui.inverted.container-fluid,
 .ui.inverted.container,
-.ui.inverted.grid {
-    background: transparent !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
+.ui.inverted.grid,
 .ui.inverted.column {
     background: transparent !important;
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: #e5e7eb !important;
 }
 
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
-    color: #e8e8e8;
-    margin: 0 0 10px;
-    font-weight: normal;
+    color: #f9fafb !important;
+    margin: 0 0 1rem 0;
+    font-weight: 600;
     font-family: 'Poppins', sans-serif !important;
+    line-height: 1.3;
 }
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
 
 p, ul, ol, table, pre, dl {
-    margin: 0 0 5px;
-}
-
-h1, h2, h3 {
-    line-height: 1.2;
-}
-
-h1 {
-    font-size: 30px;
-}
-
-h2 {
-    font-size: 25px;
-}
-
-h4, h5, h6 {
-    color: #e8e8e8;
-}
-
-h3 {
-    font-size: 22px;
-    line-height: 24px;
-    font-weight: normal;
-    color: #b6b6b6;
-}
-
-h4 {
-    font-size: 20px;
-    font-style: italic;
+    margin: 0 0 1rem 0;
+    color: #d1d5db;
 }
 
 a {
-    color: #e8e8e8;
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.wrap {
-    width: 100%;
+a:hover {
+    color: #93c5fd;
 }
 
-.floatleft {
-    float:left;
-    width: 60%;
+/* Modern Card-like Components */
+.modern-card {
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
+    border: 1px solid #374151;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
 }
 
-.floatright {
-    float: right;
-    width: 40%;
-    font-size: 2em;
-    height: 400px;
+/* Header styling */
+.ui.horizontal.list {
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 1rem !important;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
-/* Semantic UI Dropdown Dark Theme */
+/* Dropdown Styling */
 .ui.dropdown {
-    background: #1b1c1d !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    color: rgba(255, 255, 255, 0.9) !important;
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+    border: 1px solid #374151 !important;
+    border-radius: 8px !important;
+    color: #e5e7eb !important;
     font-family: 'Poppins', sans-serif !important;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.2s ease !important;
+}
+
+.ui.dropdown:hover {
+    border-color: #4b5563 !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+}
+
+.ui.dropdown.active {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
 }
 
 .ui.dropdown > .dropdown.icon {
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: #9ca3af !important;
 }
 
-.ui.dropdown > .text {
-    color: rgba(255, 255, 255, 0.9) !important;
+.ui.dropdown > .text,
+.ui.dropdown > .default.text {
+    color: #e5e7eb !important;
 }
 
 .ui.dropdown > .default.text {
-    color: rgba(255, 255, 255, 0.5) !important;
+    opacity: 0.7;
 }
 
 .ui.dropdown .menu {
-    background: #1b1c1d !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.15) !important;
+    background: #1f2937 !important;
+    border: 1px solid #374151 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
+    backdrop-filter: blur(10px);
 }
 
 .ui.dropdown .menu > .item {
-    background: #1b1c1d !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    font-family: 'Poppins', sans-serif !important;
+    background: transparent !important;
+    color: #e5e7eb !important;
+    border: none !important;
+    padding: 0.75rem 1rem !important;
+    transition: all 0.2s ease !important;
 }
 
 .ui.dropdown .menu > .item:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: rgba(255, 255, 255, 0.95) !important;
+    background: rgba(59, 130, 246, 0.1) !important;
+    color: #f9fafb !important;
 }
 
 .ui.dropdown .menu > .item.selected {
-    background: rgba(255, 255, 255, 0.08) !important;
-    color: rgba(255, 255, 255, 0.95) !important;
+    background: rgba(59, 130, 246, 0.2) !important;
+    color: #f9fafb !important;
 }
 
 /* Checkbox styling */
 .ui.toggle.checkbox input:checked ~ .box:before, 
 .ui.toggle.checkbox input:checked ~ label:before {
-    background-color: #007bff !important;
-}
-
-.ui.toggle.checkbox input:focus:checked ~ .box:before, 
-.ui.toggle.checkbox input:focus:checked ~ label:before {
-    background-color: #007bff !important;
+    background-color: #3b82f6 !important;
 }
 
 .ui.toggle.checkbox label {
-    color: #e8e8e8 !important;
+    color: #e5e7eb !important;
+    font-weight: 500;
 }
 
-/* Label styling */
+/* Input Labels */
 .ui.label {
-    background: #3a3a39 !important;
-    color: #e8e8e8 !important;
-    border: 1px solid #4a4a49 !important;
+    background: linear-gradient(145deg, #374151 0%, #4b5563 100%) !important;
+    color: #e5e7eb !important;
+    border: 1px solid #6b7280 !important;
+    border-radius: 6px !important;
+    font-weight: 500;
 }
 
-/* Monitor container styling */
-#monitor-container {
-    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5) !important;
+/* Shell Panel - Modern Terminal Look */
+#shell-panel {
+    height: 500px !important;
+    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
+    color: #e2e8f0 !important;
+    padding: 1.5rem !important;
+    margin: 1rem 0 !important;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Consolas, monospace !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    overflow: auto !important;
+    border: 1px solid #334155 !important;
     border-radius: 12px !important;
-    font-family: 'Poppins', sans-serif !important;
+    box-shadow: 
+        0 20px 25px -5px rgba(0, 0, 0, 0.3),
+        0 10px 10px -5px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    position: relative;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    text-align: left !important;
+    direction: ltr !important;
+}
+
+#shell-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+}
+
+/* Monitor Container - Futuristic Medical Device Look */
+#monitor-container {
+    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
+    border: 1px solid #334155 !important;
+    border-radius: 16px !important;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    padding: 1.5rem !important;
+    margin: 1rem 0 !important;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+#monitor-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #10b981, #3b82f6, #8b5cf6, transparent);
+    border-radius: 16px 16px 0 0;
 }
 
 #monitor-container.ui.segment {
-    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
-    border: 1px solid #404040 !important;
+    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
+    border: 1px solid #334155 !important;
 }
 
-#monitor {
-    font-size: 1.2em;
+/* Vital Parameters - Medical UI styling */
+#vitalParam {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 1rem;
+    backdrop-filter: blur(5px);
 }
 
+#vitalParam > div > div {
+    padding: 0.5rem;
+    background: rgba(30, 41, 59, 0.3);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid currentColor;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+#hf { color: #10b981 !important; }
+#bp { color: #ef4444 !important; }
+#sat { color: #06b6d4 !important; }
+#co2 { color: #f59e0b !important; }
+#temp { color: #f97316 !important; }
+
+/* Log Box - Modern Chat/Log Interface */
+#logBox {
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+#logBox::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.5), transparent);
+}
+
+#logBox h5 {
+    color: #f9fafb !important;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+#log {
+    text-align: left !important;
+    direction: ltr !important;
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #d1d5db;
+}
+
+/* Tables - Modern Data Display */
+.ui.inverted.table {
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+    color: #e5e7eb !important;
+    border: 1px solid #374151 !important;
+    border-radius: 8px !important;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.ui.inverted.table thead th {
+    background: linear-gradient(145deg, #374151 0%, #4b5563 100%) !important;
+    color: #f9fafb !important;
+    border: none !important;
+    padding: 1rem !important;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.ui.inverted.table td {
+    background: transparent !important;
+    color: #d1d5db !important;
+    border: none !important;
+    border-bottom: 1px solid #374151 !important;
+    padding: 0.75rem 1rem !important;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.ui.inverted.table tbody tr:hover td {
+    background: rgba(59, 130, 246, 0.05) !important;
+}
+
+/* Modals - Modern Dialog Interface */
+.ui.modal {
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+    color: #e5e7eb !important;
+    border: 1px solid #374151 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(20px);
+}
+
+.ui.modal > .header {
+    background: linear-gradient(145deg, #1f2937 0%, #374151 100%) !important;
+    color: #f9fafb !important;
+    border-bottom: 1px solid #4b5563 !important;
+    border-radius: 16px 16px 0 0 !important;
+    padding: 1.5rem !important;
+    font-weight: 600;
+}
+
+.ui.modal > .close.icon {
+    color: #9ca3af !important;
+    font-size: 1.5rem !important;
+    transition: color 0.2s ease;
+}
+
+.ui.modal > .close.icon:hover {
+    color: #f9fafb !important;
+}
+
+/* Segments */
+.ui.inverted.segment,
+.ui.segment {
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+    color: #e5e7eb !important;
+    border: 1px solid #374151 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Timers and Tools */
 .timers-section {
     display: flex;
     flex-direction: column;
@@ -277,258 +477,61 @@ a {
 .tools-section {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: flex-end;
+    gap: 1rem;
     padding: 0.5rem;
 }
 
-/* Log box styling */
-#logBox {
-    background-color: #2c2c2c;
-    border-radius: 8px;
-    padding: 1rem;
-    border: 1px solid #404040;
-    font-family: 'Poppins', sans-serif !important;
+.caseTimer, .cprTimer {
+    background: rgba(59, 130, 246, 0.1);
+    color: #93c5fd;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
-#logBox h5 {
-    color: #e8e8e8;
-    font-weight: 500;
+.cprTimer {
+    background: rgba(34, 197, 94, 0.1);
+    color: #6ee7b7;
+    border-color: rgba(34, 197, 94, 0.2);
 }
 
-#log {
-    text-align: left !important;
-    direction: ltr !important;
+.cprNummer, .defiNummer {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    backdrop-filter: blur(5px);
 }
 
-#log * {
-    text-align: left !important;
-    direction: ltr !important;
+.cprNummer {
+    color: #22d3ee;
 }
 
-#shell-panel {
-  height: 500px !important;
-  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
-  color: #e8e8e8 !important;
-  padding: 1em !important;
-  margin: 0.5em 0 0.5em 0 !important;
-  font-family: 'Poppins', sans-serif !important;
-  overflow: scroll !important;
-  overflow-x: hidden !important;
-  overflow-y: scroll !important;
-  border-radius: 12px !important;
-  border: 1px solid #404040 !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5) !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  text-align: left !important;
-  direction: ltr !important;
+.defiNummer {
+    color: #fbbf24;
 }
 
-#shell-cli .prompt {
-  font-weight: bold;
-}
-
+/* Code styling */
 code {
-    font-family: 'Source Code Pro', "Lucida Sans", Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-    color: #efefef;
-    border: 1px solid #3a3a39;
-    background-color: #2a2a29;
-    border-radius: 5px;
-    -moz-border-radius: 4px;
-    padding: 0px 2px;
-    -webkit-border-radius: 2px;
-    -o-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -khtml-border-radius: 2px;
-    border-radius: 2px;
+    background: rgba(15, 23, 42, 0.8);
+    color: #94a3b8;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 0.25rem 0.5rem;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 0.875rem;
 }
 
-arg {
-    font-style: italic;
-}
-
-note {
-    display: inline;
-    font-weight: normal;
-    font-size: 12px;
-}
-
-log {
-    display: block;
-    color:darkgray;
-    font-size: 0.4em;
-}
-
-
-/* Semantic UI Segment Dark Theme */
-.ui.inverted.segment {
-    background: #1b1c1d !important;
-    background-color: #1b1c1d !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 1px 2px 0 rgba(255, 255, 255, 0.1) !important;
-}
-
-.ui.segment {
-    background: #1b1c1d !important;
-    background-color: #1b1c1d !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Semantic UI Table Overrides */
-.ui.inverted.table {
-    background: #2a2a29 !important;
-    color: #e8e8e8 !important;
-    border: 1px solid #3a3a39 !important;
-}
-
-.ui.inverted.table thead th {
-    background: #3a3a39 !important;
-    color: #e8e8e8 !important;
-    border: 1px solid #4a4a49 !important;
-}
-
-.ui.inverted.table td {
-    background: #2a2a29 !important;
-    color: #e8e8e8 !important;
-    border: 1px solid #3a3a39 !important;
-    font-family: 'Source Code Pro', "Lucida Sans", Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal !important;
-}
-
-table { 
-    width: 100%;
-    color: #e8e8e8;
-    font-weight: normal;
-    font-size: 14px;
-    border: 1px solid #3a3a39;
-}
-
-td, th {
-    padding: 4px;
-    text-align: left;
-    border: 1px solid #3a3a39;
-}
-
-th {
-    background-color: dimgray;   
-}
-
-td{
-    font-family: 'Source Code Pro', "Lucida Sans", Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-}
-
-/* Semantic UI Modal Styling */
-.ui.modal {
-    background: #2a2a29 !important;
-    color: #e8e8e8 !important;
-}
-
-.ui.modal > .header {
-    background: #3a3a39 !important;
-    color: #e8e8e8 !important;
-    border-bottom: 1px solid #4a4a49 !important;
-}
-
-.ui.modal > .close.icon {
-    color: #e8e8e8 !important;
-}
-
-.ui.modal > .close.icon:hover {
-    color: #ffffff !important;
-}
-
-#labor {
-    overflow: scroll;
-    overflow-x: hidden;
-    overflow-y: scroll;  
-}
-
-
-.logo{
-    float:left;
-    width:40px;
-    height:40px;
-}
-
-.myParagraph{
-    padding: 2em 0 0 0;
-    clear:both;
-}
-
-.profilePic{
-    float:left;
-    display:inline;
-    border: 1px solid gray;
-    border-radius:3px;
-    padding:2px;
-    margin-right:10px;
-    border-radius: 50%;
-}
-
-.caseTimer{
-    padding: 0em 1em 0em 1em;
-    font-size:0.5em;
-    display:none;
-}
-
-.cprTimer{
-    padding: 0em 1em 0em 1em;
-    font-size:0.5em;
-    color:#82CAFA;
-    display:none;
-}
-
-.cprNummer{
-    color: skyblue;
-    font-size:0.5em;
-    z-index:1;
-    position:relative;
-    margin-left:-15px;
-    display:none;
-}
-
-.defiNummer{
-    color: yellow;
-    font-size:0.5em;
-    z-index:1;
-    position:relative;
-    margin-left:-10px;
-    display:none;
-}
-
-
-/* ECG images PRELOAD */
-#preload { background: url(/img/AtrialFibrillation.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/AtrialFlutter.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/Brady.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/MultiPVC.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/SinusTach.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/SR.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/SVT.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/VF.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/VT.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/stemi.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/CPR.gif) no-repeat -9999px -9999px; }
-
-
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
-
-/*
- * Hide visually and from screen readers:
- */
-
+/* Utility classes */
 .hidden {
     display: none !important;
 }
-
-/*
- * Hide only visually, but have it available for screen readers:
- * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
- */
 
 .visuallyhidden {
     border: 0;
@@ -541,12 +544,6 @@ td{
     width: 1px;
 }
 
-/*
- * Extends the .visuallyhidden class to allow the element
- * to be focusable when navigated to via the keyboard:
- * https://www.drupal.org/node/897638
- */
-
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus {
     clip: auto;
@@ -557,124 +554,118 @@ td{
     width: auto;
 }
 
-/*
- * Hide visually and from screen readers, but maintain layout
- */
-
 .invisible {
     visibility: hidden;
 }
 
-/*
- * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *    `contenteditable` attribute is included anywhere else in the document.
- *    Otherwise it causes space to appear at the top and bottom of elements
- *    that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *    `:before` to contain the top-margins of child elements.
- */
-
 .clearfix:before,
 .clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+    content: " ";
+    display: table;
 }
 
 .clearfix:after {
     clear: both;
 }
 
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
-
-@media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+    body {
+        padding: 0.5rem !important;
+    }
+    
+    .ui.horizontal.list {
+        padding: 0.75rem !important;
+    }
+    
+    #shell-panel {
+        height: 300px !important;
+        padding: 1rem !important;
+        font-size: 12px !important;
+    }
+    
+    #monitor-container {
+        padding: 1rem !important;
+    }
+    
+    #vitalParam > div > div {
+        font-size: 1rem;
+    }
 }
 
-@media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
+/* Animation and transitions */
+* {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid the additional HTTP request:
-   http://www.phpied.com/delay-loading-your-print-css/
-   ========================================================================== */
+/* ECG images preload */
+#preload { background: url(/img/AtrialFibrillation.gif) no-repeat -9999px -9999px; }
+#preload { background: url(/img/AtrialFlutter.gif) no-repeat -9999px -9999px; }
+#preload { background: url(/img/Brady.gif) no-repeat -9999px -9999px; }
+#preload { background: url(/img/MultiPVC.gif) no-repeat -9999px -9999px; }
+#preload { background: url(/img/SinusTach.gif) no-repeat -9999px -9999px; }
+#preload { background: url(/img/SR.gif) no-repeat -9999px -9999px; }
+#preload { background: url(/img/SVT.gif) no-repeat -9999px -9999px; }
+#preload { background: url(/img/VF.gif) no-repeat -9999px -9999px; }
+#preload { background: url(/img/VT.gif) no-repeat -9999px -9999px; }
+#preload { background: url(/img/stemi.gif) no-repeat -9999px -9999px; }
+#preload { background: url(/img/CPR.gif) no-repeat -9999px -9999px; }
 
+/* Print styles */
 @media print {
     *,
     *:before,
     *:after {
         background: transparent !important;
-        color: #000 !important; /* Black prints faster:
-                                   http://www.sanbeiji.com/archives/953 */
+        color: #000 !important;
         box-shadow: none !important;
         text-shadow: none !important;
     }
-
+    
     a,
     a:visited {
         text-decoration: underline;
     }
-
+    
     a[href]:after {
         content: " (" attr(href) ")";
     }
-
+    
     abbr[title]:after {
         content: " (" attr(title) ")";
     }
-
-    /*
-     * Don't show links that are fragment identifiers,
-     * or use the `javascript:` pseudo protocol
-     */
-
+    
     a[href^="#"]:after,
     a[href^="javascript:"]:after {
         content: "";
     }
-
+    
     pre,
     blockquote {
         border: 1px solid #999;
         page-break-inside: avoid;
     }
-
-    /*
-     * Printing Tables:
-     * http://css-discuss.incutio.com/wiki/Printing_Tables
-     */
-
+    
     thead {
         display: table-header-group;
     }
-
+    
     tr,
     img {
         page-break-inside: avoid;
     }
-
+    
     img {
         max-width: 100% !important;
     }
-
+    
     p,
     h2,
     h3 {
         orphans: 3;
         widows: 3;
     }
-
+    
     h2,
     h3 {
         page-break-after: avoid;
