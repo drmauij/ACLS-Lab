@@ -564,13 +564,10 @@
     // Actions
     $('#action').on('change', function(evt, params) {
         var arg = $(this).val();
+        console.log('Action change triggered:', arg);
         if (arg && caseObj && steps[caseObj.stepCount]) {
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(actionsKey, stepObj.action, arg);
-            // Reset the dropdown for next selection
-            setTimeout(function() {
-                $('#action-dropdown').dropdown('clear');
-            }, 100);
             if($("#realtime").is(':checked')){
                 $("#caseTimer").show();
             }else{
@@ -589,13 +586,10 @@
     // Drugs
     $('#drug').on('change', function(evt, params) {
         var arg = $(this).val();
+        console.log('Drug change triggered:', arg);
         if (arg && caseObj && steps[caseObj.stepCount]) {
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(drugsKey, stepObj.give, arg);
-            // Reset the dropdown for next selection
-            setTimeout(function() {
-                $('#drug-dropdown').dropdown('clear');
-            }, 100);
         }
     });
 
@@ -630,9 +624,19 @@ function initializeDropdowns() {
         forceSelection: false,
         fullTextSearch: true,
         onChange: function(value, text, $selectedItem) {
-            console.log('Action selected:', value, text);
-            if (value) {
+            console.log('Action dropdown onChange:', value, text);
+            if (value && value !== '') {
+                // Temporarily disable the dropdown to prevent loops
+                var $dropdown = $(this);
+                $dropdown.addClass('processing');
+                
                 $('#action').val(value).trigger('change');
+                
+                // Reset after a short delay
+                setTimeout(function() {
+                    $dropdown.dropdown('clear');
+                    $dropdown.removeClass('processing');
+                }, 500);
             }
         }
     });
@@ -642,9 +646,19 @@ function initializeDropdowns() {
         forceSelection: false,
         fullTextSearch: true,
         onChange: function(value, text, $selectedItem) {
-            console.log('Drug selected:', value, text);
-            if (value) {
+            console.log('Drug dropdown onChange:', value, text);
+            if (value && value !== '') {
+                // Temporarily disable the dropdown to prevent loops
+                var $dropdown = $(this);
+                $dropdown.addClass('processing');
+                
                 $('#drug').val(value).trigger('change');
+                
+                // Reset after a short delay
+                setTimeout(function() {
+                    $dropdown.dropdown('clear');
+                    $dropdown.removeClass('processing');
+                }, 500);
             }
         }
     });
