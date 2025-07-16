@@ -561,17 +561,22 @@
         }
     }
 
-    // Actions
-    $('#action').on('change', function(evt, params) {
-        var arg = $(this).val();
-        var stepObj = steps[caseObj.stepCount];
-        abstractStepHandler(actionsKey, stepObj.action, arg);
-        // Reset the dropdown for next selection
-        $('#action-dropdown').dropdown('clear');
-        if($("#realtime").is(':checked')){
-            $("#caseTimer").show();
-        }else{
-            $("#caseTimer").hide();
+    // Actions - Use Semantic UI dropdown onChange event to avoid duplicates
+    $('#action-dropdown').dropdown({
+        onChange: function(value, text, $selectedItem) {
+            if (value && caseObj && steps[caseObj.stepCount]) {
+                var stepObj = steps[caseObj.stepCount];
+                abstractStepHandler(actionsKey, stepObj.action, value);
+                // Reset the dropdown for next selection
+                setTimeout(function() {
+                    $('#action-dropdown').dropdown('clear');
+                }, 100);
+                if($("#realtime").is(':checked')){
+                    $("#caseTimer").show();
+                }else{
+                    $("#caseTimer").hide();
+                }
+            }
         }
     });
 
@@ -582,13 +587,18 @@
         abstractStepHandler(optionsKey, stepObj.choose, arg);
     }
 
-    // Drugs
-    $('#drug').on('change', function(evt, params) {
-        var arg = $(this).val();
-        var stepObj = steps[caseObj.stepCount];
-        abstractStepHandler(drugsKey, stepObj.give, arg);
-        // Reset the dropdown for next selection
-        $('#drug-dropdown').dropdown('clear');
+    // Drugs - Use Semantic UI dropdown onChange event to avoid duplicates
+    $('#drug-dropdown').dropdown({
+        onChange: function(value, text, $selectedItem) {
+            if (value && caseObj && steps[caseObj.stepCount]) {
+                var stepObj = steps[caseObj.stepCount];
+                abstractStepHandler(drugsKey, stepObj.give, value);
+                // Reset the dropdown for next selection
+                setTimeout(function() {
+                    $('#drug-dropdown').dropdown('clear');
+                }, 100);
+            }
+        }
     });
 
 var dataLoaded = {
@@ -608,8 +618,8 @@ function checkAllDataLoaded() {
             // Clear any existing initializations
             $('.ui.dropdown').dropdown('destroy');
             
-            // Initialize dropdowns with enhanced settings
-            $('.ui.dropdown').dropdown({
+            // Initialize case dropdown only (actions and drugs have their own initialization with onChange handlers)
+            $('#case-dropdown').dropdown({
                 direction: 'downward',
                 keepOnScreen: false,
                 selectOnKeydown: false,
