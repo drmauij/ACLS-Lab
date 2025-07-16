@@ -101,10 +101,6 @@ textarea {
     box-sizing: border-box;
 }
 
-* {
-    box-sizing: border-box;
-}
-
 html,
 body,
 html *,
@@ -236,7 +232,7 @@ a:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
-/* Enhanced Dropdown Styling */
+/* Basic Dropdown Styling */
 .ui.dropdown {
     background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
     border: 1px solid #374151 !important;
@@ -244,32 +240,10 @@ a:hover {
     color: #e5e7eb !important;
     font-family: 'Poppins', sans-serif !important;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    position: relative !important;
-    z-index: 1000 !important;
-    overflow: visible !important;
-}
-
-.ui.dropdown::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 .ui.dropdown:hover {
     border-color: #3b82f6 !important;
-    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1) !important;
-    transform: translateY(-1px);
-}
-
-.ui.dropdown:hover::before {
-    opacity: 1;
 }
 
 .ui.dropdown.active {
@@ -290,39 +264,14 @@ a:hover {
     opacity: 0.7;
 }
 
+/* Dropdown Menu */
 .ui.dropdown .menu {
     background: #1f2937 !important;
     border: 1px solid #374151 !important;
     border-radius: 8px !important;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
-    backdrop-filter: blur(10px);
-    z-index: 99999999 !important;
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
     max-height: 300px !important;
     overflow-y: auto !important;
-    transform: translateZ(0) !important;
-}
-
-.ui.dropdown.active .menu,
-.ui.dropdown.visible .menu {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    z-index: 99999999 !important;
-    transform: translateY(0) !important;
-    pointer-events: auto !important;
-}
-
-.ui.dropdown .menu {
-    pointer-events: none !important;
-}
-
-.ui.dropdown.active .menu,
-.ui.dropdown.visible .menu {
-    pointer-events: auto !important;
 }
 
 .ui.dropdown .menu > .item {
@@ -343,53 +292,19 @@ a:hover {
     color: #f9fafb !important;
 }
 
-/* Enhanced Action and Drug Dropdown Styling */
-#action-dropdown,
-#drug-dropdown {
-    background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
-    border: 1px solid #374151 !important;
-    border-radius: 12px !important;
+/* Search Input in Dropdown - Following Semantic UI Documentation */
+.ui.search.dropdown > input.search {
+    background: transparent !important;
+    border: none !important;
     color: #e5e7eb !important;
     font-family: 'Poppins', sans-serif !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    position: relative !important;
-    z-index: 1000 !important;
-    overflow: visible !important;
-    min-height: 48px !important;
-    padding: 0.75rem 1rem !important;
-    isolation: isolate !important;
+    padding: 0.67em 1em !important;
+    width: 100% !important;
+    outline: none !important;
 }
 
-#action-dropdown::before,
-#drug-dropdown::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-#action-dropdown:hover,
-#drug-dropdown:hover {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1) !important;
-    transform: translateY(-1px);
-}
-
-#action-dropdown:hover::before,
-#drug-dropdown:hover::before {
-    opacity: 1;
-}
-
-#action-dropdown.active,
-#drug-dropdown.active {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+.ui.search.dropdown > input.search:focus {
+    background: transparent !important;
 }
 
 /* Enhanced Icons for Actions and Drugs */
@@ -398,193 +313,7 @@ a:hover {
     color: #60a5fa !important;
     font-size: 1.2rem !important;
     margin-right: 0.75rem !important;
-    opacity: 0.8;
-    transition: all 0.3s ease;
 }
-
-#action-dropdown:hover > .stethoscope.icon,
-#drug-dropdown:hover > .pills.icon {
-    color: #93c5fd !important;
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-#action-dropdown > .dropdown.icon,
-#drug-dropdown > .dropdown.icon {
-    color: #9ca3af !important;
-    right: 1rem !important;
-    position: absolute !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    transition: all 0.3s ease;
-}
-
-#action-dropdown.active > .dropdown.icon,
-#drug-dropdown.active > .dropdown.icon {
-    transform: translateY(-50%) rotate(180deg) !important;
-    color: #60a5fa !important;
-}
-
-/* Text styling for action and drug dropdowns */
-#action-dropdown > .text,
-#action-dropdown > .default.text,
-#drug-dropdown > .text,
-#drug-dropdown > .default.text {
-    color: #e5e7eb !important;
-    font-weight: 500 !important;
-    margin-left: 2rem !important;
-}
-
-#action-dropdown > .default.text,
-#drug-dropdown > .default.text {
-    opacity: 0.7;
-    font-style: italic;
-}
-
-/* Menu styling for action and drug dropdowns */
-#action-dropdown .menu,
-#drug-dropdown .menu {
-    background: #1f2937 !important;
-    border: 1px solid #374151 !important;
-    border-radius: 8px !important;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
-    backdrop-filter: blur(10px);
-    z-index: 99999999 !important;
-    position: absolute !important;
-    top: calc(100% + 0.5rem) !important;
-    left: 0 !important;
-    right: 0 !important;
-    max-height: 300px !important;
-    overflow-y: auto !important;
-    transform: translateZ(0) !important;
-    will-change: transform, opacity !important;
-    contain: layout style paint !important;
-    padding-top: 0 !important;
-}
-
-/* Remove search hint to avoid conflicts */
-#action-dropdown .menu::before,
-#drug-dropdown .menu::before {
-    display: none;;
-}
-
-#action-dropdown.active .menu,
-#action-dropdown.visible .menu,
-#drug-dropdown.active .menu,
-#drug-dropdown.visible .menu {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    z-index: 99999999 !important;
-    transform: translateY(0) !important;
-    pointer-events: auto !important;
-}
-
-#action-dropdown .menu > .item,
-#drug-dropdown .menu > .item {
-    background: transparent !important;
-    color: #e5e7eb !important;
-    border: none !important;
-    padding: 0.75rem 1rem !important;
-    transition: all 0.2s ease !important;
-    font-weight: 500;
-    border-left: 3px solid transparent !important;
-}
-
-#action-dropdown .menu > .item:hover {
-    background: rgba(16, 185, 129, 0.1) !important;
-    color: #f9fafb !important;
-    border-left-color: #10b981 !important;
-}
-
-#drug-dropdown .menu > .item:hover {
-    background: rgba(139, 92, 246, 0.1) !important;
-    color: #f9fafb !important;
-    border-left-color: #8b5cf6 !important;
-}
-
-#action-dropdown .menu > .item.selected {
-    background: rgba(16, 185, 129, 0.2) !important;
-    color: #f9fafb !important;
-    border-left-color: #10b981 !important;
-}
-
-#drug-dropdown .menu > .item.selected {
-    background: rgba(139, 92, 246, 0.2) !important;
-    color: #f9fafb !important;
-    border-left-color: #8b5cf6 !important;
-}
-
-/* Special styling for action dropdown icon area */
-#action-dropdown .menu > .item::before {
-    content: '⚕';
-    margin-right: 0.5rem;
-    opacity: 0.6;
-    font-size: 0.9rem;
-}
-
-#drug-dropdown .menu > .item::before {
-    content: '💊';
-    margin-right: 0.5rem;
-    opacity: 0.6;
-    font-size: 0.9rem;
-}
-
-/* Enhanced focus states */
-#action-dropdown:focus,
-#drug-dropdown:focus {
-    outline: none !important;
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
-}
-
-/* Search dropdown styling - Semantic UI search mode */
-#action-dropdown.ui.search.dropdown,
-#drug-dropdown.ui.search.dropdown {
-    position: relative !important;
-}
-
-/* Search input styling for dropdowns - following Semantic UI pattern */
-#action-dropdown input.search,
-#drug-dropdown input.search {
-    background: rgba(31, 41, 55, 0.95) !important;
-    border: 1px solid #4b5563 !important;
-    color: #f9fafb !important;
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 1rem !important;
-    padding: 0.67em 1em !important;
-    margin: 0 !important;
-    width: 100% !important;
-    outline: none !important;
-    border-radius: 0 !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-top: none !important;
-    border-bottom: 1px solid #374151 !important;
-    box-sizing: border-box !important;
-}
-
-#action-dropdown input.search:focus,
-#drug-dropdown input.search:focus {
-    border-bottom-color: #3b82f6 !important;
-    background: rgba(31, 41, 55, 1) !important;
-}
-
-/* No results message styling */
-#action-dropdown .message,
-#drug-dropdown .message {
-    background: rgba(31, 41, 55, 0.9) !important;
-    border: 1px solid #4b5563 !important;
-    color: #9ca3af !important;
-    padding: 1rem !important;
-    text-align: center !important;
-    font-style: italic !important;
-    border-radius: 8px !important;
-    margin: 0.5rem !important;
-}nt;
-}
-
-
 
 /* Enhanced Checkbox styling */
 .ui.toggle.checkbox input:checked ~ .box:before, 
@@ -596,11 +325,6 @@ a:hover {
 .ui.toggle.checkbox label {
     color: #e5e7eb !important;
     font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.ui.toggle.checkbox label:hover {
-    color: #f9fafb !important;
 }
 
 /* Modern Button Styles */
@@ -687,79 +411,44 @@ a:hover {
     font-weight: 500;
 }
 
-/* Shell Panel - Modern Story Content Look */
+/* Shell Panel */
 #shell-panel {
     height: 500px !important;
     background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
     color: #e2e8f0 !important;
     padding: 1.5rem !important;
     margin: 1rem 0 !important;
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-family: 'Poppins', sans-serif !important;
     font-size: 16px !important;
     line-height: 1.6 !important;
-    font-weight: 400 !important;
     overflow: auto !important;
     border: 1px solid #334155 !important;
     border-radius: 12px !important;
-    box-shadow: 
-        0 20px 25px -5px rgba(0, 0, 0, 0.3),
-        0 10px 10px -5px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
-    position: relative;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    text-align: left !important;
-    direction: ltr !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3) !important;
 }
 
-#shell-panel::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
-}
-
-/* Monitor Container - Futuristic Medical Device Look */
+/* Monitor Container */
 #monitor-container {
     background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
     border: 1px solid #334155 !important;
     border-radius: 16px !important;
-    box-shadow: 
-        0 25px 50px -12px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4) !important;
     padding: 1.5rem !important;
     margin: 1rem 0 !important;
-    position: relative;
-    backdrop-filter: blur(10px);
 }
-
-#monitor-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #10b981, #3b82f6, #8b5cf6, transparent);
-    border-radius: 16px 16px 0 0;}
 
 #monitor-container.ui.segment {
     background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
     border: 1px solid #334155 !important;
 }
 
-/* Vital Parameters - Medical UI styling */
+/* Vital Parameters */
 #vitalParam {
     background: rgba(15, 23, 42, 0.5);
     border: 1px solid #334155;
     border-radius: 12px;
     padding: 1rem;
     margin-top: 1rem;
-    backdrop-filter: blur(5px);
 }
 
 #vitalParam > div > div {
@@ -1208,8 +897,7 @@ code {
     background: linear-gradient(145deg, #4b5563, #6b7280);
 }
 
-/* Enhanced animations and transitions */
-* {
+/* Enhanced animations and transitions */* {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

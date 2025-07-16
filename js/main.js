@@ -11,7 +11,7 @@
 				$('#case-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.title+'</div>');
       });
       console.log('Case dropdown menu populated with', $('#case-dropdown .menu .item').length, 'items');
-      
+
       dataLoaded.cases = true;
       checkAllDataLoaded();
     }).fail(function(jqxhr, textStatus, error) {
@@ -605,105 +605,52 @@ var dataLoaded = {
     drugs: false
 };
 
-var dropdownsInitialized = false;
-
 function checkAllDataLoaded() {
-    if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs && !dropdownsInitialized) {
-        console.log('All data loaded - initializing all dropdowns');
-        
-        // Wait a bit for CSS to be fully applied
-        setTimeout(function() {
-            // Clear any existing initializations
-            $('.ui.dropdown').dropdown('destroy');
-            
-            // Initialize case dropdown with standard settings
-            $('#case-dropdown').dropdown({
-                direction: 'downward',
-                keepOnScreen: false,
-                selectOnKeydown: false,
-                forceSelection: false,
-                allowAdditions: false,
-                hideAdditions: true,
-                action: 'activate',
-                on: 'click',
-                allowReselection: false,
-                allowTab: true,
-                allowCategorySelection: false,
-                fireOnInit: false,
-                transition: 'slide down',
-                duration: 200,
-                glyphWidth: 1.037,
-                preserveHTML: true,
-                sortSelect: false,
-                match: 'both',
-                fullTextSearch: false,
-                placeholder: 'auto',
-                placeholderText: '',
-                maxSelections: false,
-                useLabels: true,
-                delimiter: false,
-                showOnFocus: true,
-                allowLabelClick: true,
-                onShow: function() {
-                    $(this).closest('.ui.dropdown').css('z-index', '99999999');
-                    return true;
-                },
-                onHide: function() {
-                    $(this).closest('.ui.dropdown').css('z-index', '1000');
-                    return true;
-                }
-            });
-
-            // Initialize action and drug dropdowns with proper search selection
-            $('#action-dropdown, #drug-dropdown').dropdown({
-                // Core search dropdown settings from Semantic UI docs
-                direction: 'downward',
-                selectOnKeydown: false,
-                forceSelection: false,
-                allowAdditions: false,
-                action: 'activate',
-                on: 'click',
-                allowReselection: true,
-                allowTab: true,
-                fireOnInit: false,
-                transition: 'slide down',
-                duration: 200,
-                preserveHTML: true,
-                
-                // Search specific settings
-                match: 'text',
-                fullTextSearch: true,
-                searchingText: 'Searching...',
-                placeholder: 'auto',
-                showOnFocus: true,
-                allowLabelClick: true,
-                minCharacters: 1,
-                searchDelay: 300,
-                
-                // Z-index management
-                onShow: function() {
-                    $(this).closest('.ui.dropdown').css('z-index', '99999999');
-                    return true;
-                },
-                
-                onHide: function() {
-                    $(this).closest('.ui.dropdown').css('z-index', '1000');
-                    return true;
-                },
-                
-                message: {
-                    noResults: 'No matching items found. Try different keywords.'
-                }
-            });
-
-            dropdownsInitialized = true;
-            console.log('All dropdowns initialized successfully with search functionality');
-        }, 100);
+    if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs) {
+        console.log('All data loaded - initializing dropdowns');
+        initializeDropdowns();
     }
 }
 
+function initializeDropdowns() {
+    // Clear any existing dropdown instances
+    $('.ui.dropdown').dropdown('destroy');
+
+    // Standard dropdown for case selection
+    $('#case-dropdown').dropdown({
+        onChange: function(value, text, $selectedItem) {
+            $('#case').val(value).trigger('change');
+        }
+    });
+
+    // Search selection dropdowns for actions and drugs
+    $('#action-dropdown').dropdown({
+        // Enable search functionality 
+        allowReselection: true,
+        forceSelection: false,
+        onChange: function(value, text, $selectedItem) {
+            if (value) {
+                $('#action').val(value).trigger('change');
+            }
+        }
+    });
+
+    $('#drug-dropdown').dropdown({
+        // Enable search functionality
+        allowReselection: true, 
+        forceSelection: false,
+        onChange: function(value, text, $selectedItem) {
+            if (value) {
+                $('#drug').val(value).trigger('change');
+            }
+        }
+    });
+
+    console.log('Dropdowns initialized successfully');
+}
+
 $(document).ready(function() {
-    console.log('DOM ready - waiting for data to load before dropdown initialization');
+    console.log('DOM ready - waiting for data to load');
 
     // Add modern UI enhancements
     initializeModernUI();
