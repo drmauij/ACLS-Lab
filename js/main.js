@@ -673,8 +673,9 @@ function checkAllDataLoaded() {
                 glyphWidth: 1.037,
                 preserveHTML: true,
                 sortSelect: false,
-                match: 'both', // Enable both text and value matching
+                match: 'text', // Only match text content
                 fullTextSearch: true, // Enable full text search
+                filterRemoteData: false,
                 searchingText: 'Searching...',
                 placeholder: 'auto',
                 placeholderText: '',
@@ -683,7 +684,8 @@ function checkAllDataLoaded() {
                 delimiter: false,
                 showOnFocus: false, // Don't auto-show on focus to allow typing
                 allowLabelClick: true,
-                minCharacters: 0, // Start searching immediately
+                minCharacters: 1, // Start searching after 1 character
+                searchDelay: 0, // No delay for search
                 onShow: function() {
                     var $dropdown = $(this).closest('.ui.dropdown');
                     $dropdown.css('z-index', '99999999');
@@ -699,6 +701,15 @@ function checkAllDataLoaded() {
                 },
                 message: {
                     noResults: 'No matching items found. Try different keywords.'
+                },
+                // Custom filter function for better search
+                onLabelCreate: function(value, text) {
+                    return text;
+                },
+                // Override the default search function
+                onSearch: function(query) {
+                    // This will be handled by Semantic UI's built-in search
+                    return true;
                 }
             });
             

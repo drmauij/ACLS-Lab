@@ -463,18 +463,10 @@ a:hover {
     padding-top: 0 !important;
 }
 
-/* Search hint styling */
+/* Remove search hint to avoid conflicts */
 #action-dropdown .menu::before,
 #drug-dropdown .menu::before {
-    content: "💡 Type to search...";
-    display: block;
-    background: rgba(59, 130, 246, 0.1);
-    color: #60a5fa;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    font-style: italic;
-    border-bottom: 1px solid #374151;
-    margin-bottom: 0.5rem;
+    display: none;;
 }
 
 #action-dropdown.active .menu,
@@ -550,22 +542,35 @@ a:hover {
 /* Search input styling for dropdowns */
 #action-dropdown input.search,
 #drug-dropdown input.search {
-    background: rgba(31, 41, 55, 0.9) !important;
+    background: rgba(31, 41, 55, 0.95) !important;
     border: 1px solid #4b5563 !important;
     color: #f9fafb !important;
     font-family: 'Poppins', sans-serif !important;
     font-size: 1rem !important;
     padding: 0.75rem 1rem !important;
-    margin: 0.5rem !important;
+    margin: 0.25rem 0.5rem !important;
     width: calc(100% - 1rem) !important;
     outline: none !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     position: relative !important;
     z-index: 999999 !important;
+    min-height: 38px !important;
+    line-height: 1.4 !important;
+}
+
+/* Ensure search input appears in dropdown menu */
+#action-dropdown .menu input.search,
+#drug-dropdown .menu input.search {
+    position: sticky !important;
+    top: 0 !important;
+    background: rgba(31, 41, 55, 0.98) !important;
+    border-bottom: 1px solid #374151 !important;
+    border-radius: 6px 6px 0 0 !important;
+    margin-bottom: 0.5rem !important;
 }
 
 #action-dropdown input.search:focus,
