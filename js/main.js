@@ -386,54 +386,7 @@
     var steps = {};
     var onceTimeStepsActions = []; // track the onceTimeSteps actions
     var caseTimer = null;
-    // Note: Change handlers are now set up in checkAllDataLoaded() function
-
-    // Cases
-    $('#case').on('change', function(evt, params) {
-        var arg = $(this).val();
-        caseObj = cases[arg];
-        steps = caseObj.steps;
-        onceTimeStepsActions = [];
-        clearInterval(cprTimer);
-        clearInterval(caseTimer);
-        caseObj.stepCount = 1;
-        caseObj.errorCount = 0; // track fails number!
-        // response case description
-        response = "<strong>"+caseObj.title+"</strong>";
-        response = response + "<p>" + caseObj.description + "</p>";
-        // clean UI
-        $("#cprTimer").hide();
-        $("#caseTimer").hide();
-        $("#log").html("");
-        $("#vitalParam").hide()
-        $('#ecgImg').trigger('zoom.destroy');
-        $('#ecgImg').attr({'src':''});
-        $("#labor").hide();
-				$("#laborTable tbody").empty();
-        $("#defiLogo").hide();
-        $("#defiNummer").hide();
-        $("#defiNummerValue").html("0");
-        $("#cprImg").hide();
-        $("#cprNummer").hide();
-        $("#cprNummerValue").html("0");
-        $("#co2").hide();
-				$("#temp").hide();
-        $("#menu").hide();
-        $("#shell-panel").empty();
-        // set caseTimer
-        caseSec = 0;
-        caseTimer = setInterval( function(){
-            $("#caseSeconds").html(pad(++caseSec%60));
-            $("#caseMinutes").html(pad(parseInt(caseSec/60,10)));
-        }, 1000);
-        if($("#realtime").is(':checked'))
-            $("#caseTimer").show();
-        // print-out
-        printOut(response);
-        // show menu and monitor container
-        $("#menu").fadeIn();
-        $("#monitor-container").fadeIn();
-    });
+    // Note: Change handlers are now set up in attachChangeHandlers() function
 
 
     // lazy highlight for action Steps
@@ -561,6 +514,89 @@
         }
     }
 
+    // Quiz
+    function choose(arg){
+        var optionsKey = ['a','b','c','d'];
+        var stepObj = steps[caseObj.stepCount];
+        abstractStepHandler(optionsKey, stepObj.choose, arg);
+    }
+
+var dataLoaded = {
+    cases: false,
+    actions: false,
+    drugs: false
+};
+
+function checkAllDataLoaded() {
+    if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs) {
+        console.log('All data loaded - initializing dropdowns');
+        initializeDropdowns();
+    }
+}
+
+function attachChangeHandlers() {
+    // Remove existing handlers to prevent duplicates
+    $('#case, #action, #drug').off('change');
+    
+    // Cases
+    $('#case').on('change', function(evt, params) {
+        var arg = $(this).val();
+        console.log('Case change event triggered with value:', arg);
+        if (!arg || arg === '') {
+            console.log('No case selected, returning');
+            return;
+        }
+        
+        caseObj = cases[arg];
+        if (!caseObj) {
+            console.error('Case not found:', arg);
+            return;
+        }
+        
+        console.log('Starting case:', caseObj.title);
+        steps = caseObj.steps;
+        onceTimeStepsActions = [];
+        clearInterval(cprTimer);
+        clearInterval(caseTimer);
+        caseObj.stepCount = 1;
+        caseObj.errorCount = 0; // track fails number!
+        // response case description
+        response = "<strong>"+caseObj.title+"</strong>";
+        response = response + "<p>" + caseObj.description + "</p>";
+        // clean UI
+        $("#cprTimer").hide();
+        $("#caseTimer").hide();
+        $("#log").html("");
+        $("#vitalParam").hide()
+        $('#ecgImg').trigger('zoom.destroy');
+        $('#ecgImg').attr({'src':''});
+        $("#labor").hide();
+        $("#laborTable tbody").empty();
+        $("#defiLogo").hide();
+        $("#defiNummer").hide();
+        $("#defiNummerValue").html("0");
+        $("#cprImg").hide();
+        $("#cprNummer").hide();
+        $("#cprNummerValue").html("0");
+        $("#co2").hide();
+        $("#temp").hide();
+        $("#menu").hide();
+        $("#shell-panel").empty();
+        // set caseTimer
+        caseSec = 0;
+        caseTimer = setInterval( function(){
+            $("#caseSeconds").html(pad(++caseSec%60));
+            $("#caseMinutes").html(pad(parseInt(caseSec/60,10)));
+        }, 1000);
+        if($("#realtime").is(':checked'))
+            $("#caseTimer").show();
+        // print-out
+        printOut(response);
+        // show menu and monitor container
+        $("#menu").fadeIn();
+        $("#monitor-container").fadeIn();
+    });
+
     // Actions
     var processingAction = false;
     $('#action').on('change', function(evt, params) {
@@ -584,13 +620,6 @@
         }
     });
 
-    // Quiz
-    function choose(arg){
-        var optionsKey = ['a','b','c','d'];
-        var stepObj = steps[caseObj.stepCount];
-        abstractStepHandler(optionsKey, stepObj.choose, arg);
-    }
-
     // Drugs
     var processingDrug = false;
     $('#drug').on('change', function(evt, params) {
@@ -607,18 +636,6 @@
             }, 500);
         }
     });
-
-var dataLoaded = {
-    cases: false,
-    actions: false,
-    drugs: false
-};
-
-function checkAllDataLoaded() {
-    if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs) {
-        console.log('All data loaded - initializing dropdowns');
-        initializeDropdowns();
-    }
 }
 
 function initializeDropdowns() {
@@ -626,11 +643,15 @@ function initializeDropdowns() {
     $('.ui.dropdown').dropdown('destroy');
     $('#action, #drug, #case').off('change');
 
+    // Re-attach the change event handlers first
+    attachChangeHandlers();
+
     // Standard dropdown for case selection
     $('#case-dropdown').dropdown({
         onChange: function(value, text, $selectedItem) {
-            console.log('Case selected:', value);
-            if (value && value !== '' && value !== null) {
+            console.log('Case dropdown onChange triggered:', value, text);
+            if (value && value !== '' && value !== null && value !== 'test') {
+                console.log('Setting case value and triggering change:', value);
                 $('#case').val(value).trigger('change');
             }
         }
