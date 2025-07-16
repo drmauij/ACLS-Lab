@@ -656,41 +656,44 @@ function checkAllDataLoaded() {
 
             // Initialize action and drug dropdowns with search functionality
             $('#action-dropdown, #drug-dropdown').dropdown({
-                // Core search settings
-                action: 'nothing', // Prevent auto-close on selection
+                // Basic settings
+                direction: 'downward',
+                keepOnScreen: false,
+                selectOnKeydown: false,
+                forceSelection: false,
+                allowAdditions: false,
+                hideAdditions: true,
+                action: 'select', // Use default select action
                 on: 'click',
                 allowReselection: true,
                 allowTab: true,
-                forceSelection: false,
-                allowAdditions: false,
+                allowCategorySelection: false,
+                fireOnInit: false,
+                transition: 'slide down',
+                duration: 200,
+                glyphWidth: 1.037,
+                preserveHTML: true,
+                sortSelect: false,
                 
                 // Search configuration
-                match: 'text',
-                fullTextSearch: true,
+                match: 'text', // Only match text content
+                fullTextSearch: true, // Enable full text search
                 filterRemoteData: false,
-                minCharacters: 0, // Start searching immediately
-                searchDelay: 0, // No delay
-                
-                // Display settings
-                direction: 'downward',
-                transition: 'fade',
-                duration: 150,
-                showOnFocus: false, // Don't auto-show to allow typing first
-                preserveHTML: true,
+                searchingText: 'Searching...',
+                placeholder: 'auto',
+                placeholderText: '',
+                maxSelections: false,
+                useLabels: true,
+                delimiter: false,
+                showOnFocus: true, // Show on focus
+                allowLabelClick: true,
+                minCharacters: 1, // Start searching after 1 character
+                searchDelay: 100, // Small delay for better performance
                 
                 // Event handlers
                 onShow: function() {
                     var $dropdown = $(this).closest('.ui.dropdown');
                     $dropdown.css('z-index', '99999999');
-                    
-                    // Focus on search input after dropdown opens
-                    setTimeout(function() {
-                        var $search = $dropdown.find('input.search');
-                        if ($search.length > 0) {
-                            $search.focus();
-                        }
-                    }, 100);
-                    
                     return true;
                 },
                 
@@ -698,19 +701,6 @@ function checkAllDataLoaded() {
                     var $dropdown = $(this).closest('.ui.dropdown');
                     $dropdown.css('z-index', '1000');
                     return true;
-                },
-                
-                // Handle item selection manually to prevent auto-close
-                onSelect: function(value, text, $selectedItem) {
-                    var $dropdown = $(this).closest('.ui.dropdown');
-                    var dropdownId = $dropdown.attr('id');
-                    
-                    // Set the hidden input value
-                    $dropdown.find('input[type="hidden"]').val(value).trigger('change');
-                    
-                    // Clear search and close dropdown
-                    $dropdown.dropdown('hide');
-                    $dropdown.dropdown('clear');
                 },
                 
                 message: {

@@ -544,72 +544,26 @@ a:hover {
     position: relative !important;
 }
 
-/* Search input styling for dropdowns */
+/* Search input styling for dropdowns - simplified */
 #action-dropdown input.search,
 #drug-dropdown input.search {
     background: rgba(31, 41, 55, 0.95) !important;
     border: 1px solid #4b5563 !important;
     color: #f9fafb !important;
     font-family: 'Poppins', sans-serif !important;
-    font-size: 1rem !important;
-    padding: 0.75rem 3rem 0.75rem 2.5rem !important;
-    margin: 0 !important;
-    width: 100% !important;
-    height: 48px !important;
+    font-size: 0.9rem !important;
+    padding: 0.5rem 2.5rem 0.5rem 2.5rem !important;
+    margin: 0.25rem 0.5rem !important;
+    width: calc(100% - 1rem) !important;
     outline: none !important;
-    border-radius: 12px !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: relative !important;
-    z-index: 2 !important;
-    cursor: text !important;
+    border-radius: 6px !important;
     box-sizing: border-box !important;
-}
-
-#action-dropdown input.search::placeholder,
-#drug-dropdown input.search::placeholder {
-    color: #9ca3af !important;
-    font-style: italic !important;
 }
 
 #action-dropdown input.search:focus,
 #drug-dropdown input.search:focus {
     border-color: #3b82f6 !important;
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
-    background: rgba(31, 41, 55, 1) !important;
-}
-
-/* Hide default text when search is active */
-#action-dropdown.search.ui.dropdown > .default.text,
-#drug-dropdown.search.ui.dropdown > .default.text {
-    display: none !important;
-}
-
-#action-dropdown.search.ui.dropdown > .text,
-#drug-dropdown.search.ui.dropdown > .text {
-    display: none !important;
-}
-
-/* Ensure icons don't overlap search input */
-#action-dropdown.search .stethoscope.icon,
-#drug-dropdown.search .pills.icon {
-    position: absolute !important;
-    left: 0.75rem !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    z-index: 3 !important;
-    pointer-events: none !important;
-}
-
-#action-dropdown.search .dropdown.icon,
-#drug-dropdown.search .dropdown.icon {
-    position: absolute !important;
-    right: 0.75rem !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    z-index: 3 !important;
-    pointer-events: none !important;
 }
 
 /* No results message styling */
