@@ -409,8 +409,9 @@
             $("#caseTimer").show();
         // print-out
         printOut(response);
-        // show menu
+        // show menu and monitor container
         $("#menu").fadeIn();
+        $("#monitor-container").fadeIn();
     });
     
 

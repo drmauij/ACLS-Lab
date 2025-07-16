@@ -197,6 +197,10 @@ a {
     font-weight: 500;
 }
 
+#log {
+    text-align: left !important;
+}
+
 #shell-panel {
   height:500px;
   background-color: dimgray;
