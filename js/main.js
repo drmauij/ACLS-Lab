@@ -616,8 +616,8 @@ function checkAllDataLoaded() {
             // Clear any existing initializations
             $('.ui.dropdown').dropdown('destroy');
             
-            // Initialize all dropdowns with proper settings
-            $('.ui.dropdown').dropdown({
+            // Initialize case dropdown with standard settings
+            $('#case-dropdown').dropdown({
                 direction: 'downward',
                 keepOnScreen: false,
                 selectOnKeydown: false,
@@ -645,14 +645,54 @@ function checkAllDataLoaded() {
                 showOnFocus: true,
                 allowLabelClick: true,
                 onShow: function() {
-                    // Ensure proper z-index when showing
                     $(this).closest('.ui.dropdown').css('z-index', '99999999');
                     return true;
                 },
                 onHide: function() {
-                    // Reset z-index when hiding
                     $(this).closest('.ui.dropdown').css('z-index', '1000');
                     return true;
+                }
+            });
+
+            // Initialize action and drug dropdowns with search functionality
+            $('#action-dropdown, #drug-dropdown').dropdown({
+                direction: 'downward',
+                keepOnScreen: false,
+                selectOnKeydown: false,
+                forceSelection: false,
+                allowAdditions: false,
+                hideAdditions: true,
+                action: 'activate',
+                on: 'click',
+                allowReselection: false,
+                allowTab: true,
+                allowCategorySelection: false,
+                fireOnInit: false,
+                transition: 'slide down',
+                duration: 200,
+                glyphWidth: 1.037,
+                preserveHTML: true,
+                sortSelect: false,
+                match: 'text', // Enable text matching for search
+                fullTextSearch: true, // Enable full text search
+                placeholder: 'auto',
+                placeholderText: '',
+                maxSelections: false,
+                useLabels: true,
+                delimiter: false,
+                showOnFocus: true,
+                allowLabelClick: true,
+                minCharacters: 1, // Start searching after 1 character
+                onShow: function() {
+                    $(this).closest('.ui.dropdown').css('z-index', '99999999');
+                    return true;
+                },
+                onHide: function() {
+                    $(this).closest('.ui.dropdown').css('z-index', '1000');
+                    return true;
+                },
+                message: {
+                    noResults: 'No matching items found.'
                 }
             });
             

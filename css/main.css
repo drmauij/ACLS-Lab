@@ -532,6 +532,47 @@ a:hover {
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
 }
 
+/* Search input styling for dropdowns */
+#action-dropdown input.search,
+#drug-dropdown input.search {
+    background: transparent !important;
+    border: none !important;
+    color: #e5e7eb !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 0.95rem !important;
+    padding: 0.5rem 2.5rem 0.5rem 1rem !important;
+    margin: 0 !important;
+    width: 100% !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#action-dropdown input.search::placeholder,
+#drug-dropdown input.search::placeholder {
+    color: #9ca3af !important;
+    font-style: italic !important;
+}
+
+/* Show search cursor when dropdown is focused */
+#action-dropdown.search input.search,
+#drug-dropdown.search input.search {
+    cursor: text !important;
+}
+
+/* No results message styling */
+#action-dropdown .message,
+#drug-dropdown .message {
+    background: rgba(31, 41, 55, 0.9) !important;
+    border: 1px solid #4b5563 !important;
+    color: #9ca3af !important;
+    padding: 1rem !important;
+    text-align: center !important;
+    font-style: italic !important;
+    border-radius: 8px !important;
+    margin: 0.5rem !important;
+}nt;
+}
+
 
 
 /* Enhanced Checkbox styling */
