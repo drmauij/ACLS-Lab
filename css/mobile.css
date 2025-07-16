@@ -5,6 +5,7 @@
 @media (max-width: 768px) {
     body {
         font-size: 14px;
+        padding: 0.5rem !important;
     }
     
     .container-fluid {
@@ -13,19 +14,26 @@
     
     /* Header adjustments */
     .d-flex.p-3.align-items-center {
-        padding: 1rem !important;
-        flex-direction: column;
+        padding: 0.5rem !important;
+        flex-direction: row;
+        justify-content: center;
         text-align: center;
+    }
+    
+    .d-flex.p-3.align-items-center img {
+        width: 30px;
+        margin-right: 0.5rem;
     }
     
     .d-flex.p-3.align-items-center h2 {
         font-size: 1.5rem;
-        margin-top: 0.5rem;
+        margin: 0;
     }
     
     /* Main layout - stack vertically on mobile */
     .row.align-items-start {
         flex-direction: column;
+        margin: 0;
     }
     
     .row.align-items-start .col-lg-8,
@@ -33,21 +41,37 @@
         width: 100%;
         max-width: 100%;
         margin-bottom: 1rem;
+        padding: 0.5rem;
+    }
+    
+    /* Scenario dropdown */
+    .d-flex.flex-column.flex-md-row {
+        flex-direction: column !important;
+        gap: 0.5rem;
+    }
+    
+    .selectpicker {
+        width: 100% !important;
+    }
+    
+    .form-check.form-switch {
+        align-self: center;
+        margin: 0.5rem 0;
     }
     
     /* Monitor container on mobile */
     #monitor-container {
-        margin: 1rem 0;
-        padding: 1rem !important;
+        margin: 0.5rem 0;
+        padding: 0.75rem !important;
     }
     
     #monitor {
-        font-size: 1rem !important;
+        font-size: 0.9rem !important;
     }
     
     .timers-section {
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
     }
     
     .tools-section {
@@ -55,21 +79,24 @@
         padding: 0.5rem !important;
     }
     
-    /* Control panel adjustments */
-    .d-flex select {
-        margin-bottom: 0.5rem;
-    }
-    
-    .d-sm-flex.justify-content-between {
+    /* Menu section adjustments */
+    #menu .d-flex.flex-column.flex-md-row {
         flex-direction: column !important;
-        gap: 1rem;
+        gap: 0.75rem;
     }
     
-    .d-sm-flex.justify-content-between .flex-fill,
-    .d-sm-flex.justify-content-between > div {
+    #menu .flex-fill {
+        width: 100% !important;
+    }
+    
+    #menu .d-flex.align-items-center {
         width: 100%;
-        display: flex;
-        flex-direction: column;
+    }
+    
+    #menu .d-flex.align-items-center img {
+        width: 24px;
+        height: 24px;
+        margin-right: 0.5rem;
     }
     
     /* Action and drug selectors */
@@ -80,24 +107,27 @@
     
     /* Shell panel */
     #shell-panel {
-        height: 300px;
-        font-size: 13px;
+        height: 250px;
+        font-size: 12px;
         margin: 0.5rem 0;
-    }
-    
-    /* Monitor section */
-    #monitor {
-        order: -1; /* Show monitor first on mobile */
-        margin-bottom: 1rem;
+        padding: 0.75rem;
     }
     
     /* Vital parameters */
     #vitalParam {
-        font-size: 1.2rem !important;
+        font-size: 1rem !important;
         padding: 0.5rem;
     }
     
-    #vitalParam > div {
+    #vitalParam .row {
+        margin: 0;
+    }
+    
+    #vitalParam .col-md-6 {
+        padding: 0.25rem;
+    }
+    
+    #vitalParam > div > div {
         margin-bottom: 0.5rem;
         text-align: center;
     }
@@ -131,7 +161,19 @@
     
     /* Log section */
     #logBox {
-        margin: 1rem 0;
+        margin: 0.5rem 0;
+        padding: 0.75rem;
+    }
+    
+    #logBox h5 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    #log {
+        font-size: 13px;
+        max-height: 300px;
+        overflow-y: auto;
     }
     
     #log .d-flex {
@@ -144,23 +186,46 @@
         padding: 0.5rem;
     }
     
-    #labor h3 {
-        font-size: 1.2rem;
+    #labor h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
     }
     
     .table-responsive {
-        font-size: 12px;
+        font-size: 11px;
+    }
+    
+    .table-responsive table {
+        margin: 0;
+    }
+    
+    .table-responsive td, 
+    .table-responsive th {
+        padding: 0.25rem;
     }
     
     /* Bootstrap select adjustments */
+    .bootstrap-select {
+        width: 100% !important;
+    }
+    
     .bootstrap-select .dropdown-toggle {
         height: auto !important;
-        padding: 0.5rem !important;
+        padding: 0.75rem !important;
+        font-size: 14px !important;
+        white-space: normal !important;
+        text-align: left !important;
     }
     
     .bootstrap-select .dropdown-menu {
-        max-height: 200px;
+        max-height: 250px;
         overflow-y: auto;
+        font-size: 14px;
+    }
+    
+    .bootstrap-select .dropdown-item {
+        padding: 0.75rem 1rem !important;
+        white-space: normal !important;
     }
     
     /* Form switches */
@@ -180,10 +245,49 @@
     }
 }
 
+/* ECG image */
+    #ecgImg {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin: 0.5rem 0;
+    }
+    
+    /* Timers */
+    .caseTimer, .cprTimer {
+        font-size: 0.9rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Tools section */
+    #tools {
+        text-align: center;
+        padding: 0.5rem !important;
+    }
+    
+    #tools img {
+        width: 28px;
+        height: auto;
+        margin: 0 0.25rem;
+    }
+    
+    /* Modal adjustments */
+    .modal-dialog {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+    
+    .modal-body {
+        padding: 0.5rem;
+    }
+}
+
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575px) {
     body {
         font-size: 12px;
+        padding: 0.25rem !important;
     }
     
     .d-flex.p-3.align-items-center h2 {
@@ -191,24 +295,34 @@
     }
     
     #shell-panel {
-        height: 250px;
-        font-size: 12px;
+        height: 200px;
+        font-size: 11px;
+        padding: 0.5rem;
     }
     
     #vitalParam {
-        font-size: 1rem !important;
+        font-size: 0.9rem !important;
     }
     
     .bootstrap-select .dropdown-toggle {
         font-size: 12px;
+        padding: 0.5rem !important;
     }
     
     #tools img {
-        width: 25px;
+        width: 24px;
     }
     
     .caseTimer, .cprTimer {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+    }
+    
+    #monitor-container {
+        padding: 0.5rem !important;
+    }
+    
+    #logBox {
+        padding: 0.5rem;
     }
 }
 
@@ -218,22 +332,22 @@
         flex-direction: row;
     }
     
-    .row.align-items-start .col:first-child {
-        flex: 1;
-        margin-right: 1rem;
+    .row.align-items-start .col-lg-8 {
+        flex: 2;
+        margin-right: 0.5rem;
     }
     
-    .row.align-items-start .col:last-child {
+    .row.align-items-start .col-lg-4 {
         flex: 1;
-        margin-left: 1rem;
+        margin-left: 0.5rem;
     }
     
     #shell-panel {
-        height: 200px;
+        height: 180px;
     }
     
-    #monitor {
-        order: 0;
+    #monitor-container {
+        padding: 0.5rem !important;
     }
 }
 
@@ -248,6 +362,15 @@
     
     .dropdown-item {
         padding: 0.75rem 1rem;
+    }
+    
+    .form-check-input {
+        width: 44px;
+        height: 24px;
+    }
+    
+    .form-check-label {
+        padding-left: 0.5rem;
     }
 }
 
