@@ -538,30 +538,56 @@ a:hover {
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
 }
 
-/* Search input styling for dropdowns */
-.ui.dropdown .menu input.search {
-    background: rgba(31, 41, 55, 0.98) !important;
-    border: 1px solid #4b5563 !important;
-    color: #f9fafb !important;
+/* Search dropdown styling - Semantic UI search mode */
+#action-dropdown.ui.search.dropdown,
+#drug-dropdown.ui.search.dropdown {
+    position: relative !important;
+}
+
+#action-dropdown.ui.search.dropdown input.search,
+#drug-dropdown.ui.search.dropdown input.search {
+    background: transparent !important;
+    border: none !important;
+    color: #e5e7eb !important;
     font-family: 'Poppins', sans-serif !important;
     font-size: 1rem !important;
-    padding: 0.75rem 1rem !important;
-    margin: 0.5rem !important;
-    width: calc(100% - 1rem) !important;
+    padding: 0.75rem 3rem 0.75rem 2.5rem !important;
+    margin: 0 !important;
+    width: 100% !important;
     outline: none !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
-    border-radius: 6px !important;
+    border-radius: 12px !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    position: sticky !important;
+    position: absolute !important;
     top: 0 !important;
-    z-index: 999999 !important;
-    min-height: 40px !important;
-    line-height: 1.4 !important;
+    left: 0 !important;
+    z-index: 1 !important;
+    height: 100% !important;
     box-sizing: border-box !important;
+    cursor: text !important;
 }
 
+#action-dropdown.ui.search.dropdown input.search::placeholder,
+#drug-dropdown.ui.search.dropdown input.search::placeholder {
+    color: #9ca3af !important;
+    font-style: italic !important;
+}
+
+#action-dropdown.ui.search.dropdown input.search:focus,
+#drug-dropdown.ui.search.dropdown input.search:focus {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Hide the default text when search is active */
+#action-dropdown.ui.search.dropdown .default.text,
+#drug-dropdown.ui.search.dropdown .default.text {
+    display: none !important;
+}
+
+/* Menu search input styling for better UX */
 #action-dropdown .menu input.search,
 #drug-dropdown .menu input.search {
     background: rgba(31, 41, 55, 0.98) !important;
@@ -585,48 +611,11 @@ a:hover {
     line-height: 1.4 !important;
 }
 
-/* Ensure search input is visible when dropdown is open */
-#action-dropdown.visible input.search,
-#drug-dropdown.visible input.search,
-#action-dropdown.active input.search,
-#drug-dropdown.active input.search {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
-/* Style the search input inside the menu */
-#action-dropdown .menu > input.search,
-#drug-dropdown .menu > input.search {
-    position: sticky !important;
-    top: 0 !important;
-    background: rgba(31, 41, 55, 0.98) !important;
-    border: 1px solid #4b5563 !important;
-    border-radius: 6px !important;
-    margin: 0.5rem !important;
-    width: calc(100% - 1rem) !important;
-    z-index: 999999 !important;
-}
-
-#action-dropdown input.search:focus,
-#drug-dropdown input.search:focus {
+#action-dropdown .menu input.search:focus,
+#drug-dropdown .menu input.search:focus {
     border-color: #3b82f6 !important;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
     background: rgba(31, 41, 55, 1) !important;
-}
-
-#action-dropdown input.search::placeholder,
-#drug-dropdown input.search::placeholder {
-    color: #9ca3af !important;
-    font-style: italic !important;
-}
-
-/* Show search cursor when dropdown is focused */
-#action-dropdown.search input.search,
-#drug-dropdown.search input.search,
-#action-dropdown input.search,
-#drug-dropdown input.search {
-    cursor: text !important;
 }
 
 /* No results message styling */
