@@ -1,0 +1,240 @@
+
+/* Mobile Responsive Styles for ACLS Simulator */
+
+/* Base mobile styles */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .container-fluid {
+        padding: 0.5rem;
+    }
+    
+    /* Header adjustments */
+    .d-flex.p-3.align-items-center {
+        padding: 1rem !important;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .d-flex.p-3.align-items-center h2 {
+        font-size: 1.5rem;
+        margin-top: 0.5rem;
+    }
+    
+    /* Main layout - stack vertically on mobile */
+    .row.align-items-start {
+        flex-direction: column;
+    }
+    
+    .row.align-items-start .col {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    /* Control panel adjustments */
+    .d-flex select {
+        margin-bottom: 0.5rem;
+    }
+    
+    .d-sm-flex.justify-content-between {
+        flex-direction: column !important;
+        gap: 1rem;
+    }
+    
+    .d-sm-flex.justify-content-between .flex-fill,
+    .d-sm-flex.justify-content-between > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Action and drug selectors */
+    #action, #drug {
+        width: 100% !important;
+        margin-top: 0.5rem;
+    }
+    
+    /* Shell panel */
+    #shell-panel {
+        height: 300px;
+        font-size: 13px;
+        margin: 0.5rem 0;
+    }
+    
+    /* Monitor section */
+    #monitor {
+        order: -1; /* Show monitor first on mobile */
+        margin-bottom: 1rem;
+    }
+    
+    /* Vital parameters */
+    #vitalParam {
+        font-size: 1.2rem !important;
+        padding: 0.5rem;
+    }
+    
+    #vitalParam > div {
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    
+    /* ECG image */
+    #ecgImg {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        margin: 0.5rem 0;
+    }
+    
+    /* Timers */
+    .caseTimer, .cprTimer {
+        font-size: 1rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Tools section */
+    #tools {
+        text-align: center;
+        padding: 0.5rem !important;
+    }
+    
+    #tools img {
+        width: 30px;
+        height: auto;
+        margin: 0 0.25rem;
+    }
+    
+    /* Log section */
+    #logBox {
+        margin: 1rem 0;
+    }
+    
+    #log .d-flex {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    /* Labor data table */
+    #labor {
+        padding: 0.5rem;
+    }
+    
+    #labor h3 {
+        font-size: 1.2rem;
+    }
+    
+    .table-responsive {
+        font-size: 12px;
+    }
+    
+    /* Bootstrap select adjustments */
+    .bootstrap-select .dropdown-toggle {
+        height: auto !important;
+        padding: 0.5rem !important;
+    }
+    
+    .bootstrap-select .dropdown-menu {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    
+    /* Form switches */
+    .form-check.form-switch {
+        margin: 1rem 0;
+        justify-content: center;
+    }
+    
+    /* Modal adjustments */
+    .modal-dialog {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+    
+    .modal-body {
+        padding: 0.5rem;
+    }
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575px) {
+    body {
+        font-size: 12px;
+    }
+    
+    .d-flex.p-3.align-items-center h2 {
+        font-size: 1.25rem;
+    }
+    
+    #shell-panel {
+        height: 250px;
+        font-size: 12px;
+    }
+    
+    #vitalParam {
+        font-size: 1rem !important;
+    }
+    
+    .bootstrap-select .dropdown-toggle {
+        font-size: 12px;
+    }
+    
+    #tools img {
+        width: 25px;
+    }
+    
+    .caseTimer, .cprTimer {
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .row.align-items-start {
+        flex-direction: row;
+    }
+    
+    .row.align-items-start .col:first-child {
+        flex: 1;
+        margin-right: 1rem;
+    }
+    
+    .row.align-items-start .col:last-child {
+        flex: 1;
+        margin-left: 1rem;
+    }
+    
+    #shell-panel {
+        height: 200px;
+    }
+    
+    #monitor {
+        order: 0;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (pointer: coarse) {
+    .bootstrap-select .dropdown-toggle,
+    button,
+    .form-check-input {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .dropdown-item {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    #tools img,
+    .d-flex.p-3.align-items-center img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
