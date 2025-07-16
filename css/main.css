@@ -490,10 +490,15 @@ a:hover {
 }
 
 #hf { color: #10b981 !important; }
+#hf #hfvalue { color: #10b981 !important; }
 #bp { color: #ef4444 !important; }
+#bp #bpvalue { color: #ef4444 !important; }
 #sat { color: #06b6d4 !important; }
+#sat #satvalue { color: #06b6d4 !important; }
 #co2 { color: #f59e0b !important; }
+#co2 #co2value { color: #f59e0b !important; }
 #temp { color: #f97316 !important; }
+#temp #tempvalue { color: #f97316 !important; }
 
 /* Enhanced Log Box with Better Visual Hierarchy */
 #logBox {
