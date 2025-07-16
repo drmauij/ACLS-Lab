@@ -8,7 +8,12 @@
         casesKey.push(""+key);
 				$('#case-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.title+'</div>');
       });
-			$('#case-dropdown').dropdown();
+			// Initialize dropdown after data is loaded
+			$('#case-dropdown').dropdown({
+        onChange: function(value, text, $selectedItem) {
+          $('#case').val(value).trigger('change');
+        }
+      });
     });
 
 
@@ -21,7 +26,12 @@
         actionsKey.push(""+key);
          $('#action-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.description+'</div>');
       });
-			$('#action-dropdown').dropdown();
+			// Initialize dropdown after data is loaded
+			$('#action-dropdown').dropdown({
+        onChange: function(value, text, $selectedItem) {
+          $('#action').val(value).trigger('change');
+        }
+      });
     });
 
 
@@ -34,7 +44,12 @@
         drugsKey.push(""+key);
 				$('#drug-dropdown .menu').append('<div class="item" data-value="'+key+'">'+value+'</div>');
       });
-			$('#drug-dropdown').dropdown();
+			// Initialize dropdown after data is loaded
+			$('#drug-dropdown').dropdown({
+        onChange: function(value, text, $selectedItem) {
+          $('#drug').val(value).trigger('change');
+        }
+      });
     });
 
 
