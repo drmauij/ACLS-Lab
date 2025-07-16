@@ -16,9 +16,13 @@
         action: 'activate',
         allowAdditions: false,
         fullTextSearch: false,
+        forceSelection: false,
+        selectOnKeydown: false,
         onChange: function(value, text, $selectedItem) {
           console.log('Case selected:', value, text);
-          $('#case').val(value).trigger('change');
+          if (value) {
+            $('#case').val(value).trigger('change');
+          }
         },
         onShow: function() {
           console.log('Case dropdown menu showing');
@@ -53,9 +57,13 @@
         action: 'activate',
         allowAdditions: false,
         fullTextSearch: false,
+        forceSelection: false,
+        selectOnKeydown: false,
         onChange: function(value, text, $selectedItem) {
           console.log('Action selected:', value, text);
-          $('#action').val(value).trigger('change');
+          if (value) {
+            $('#action').val(value).trigger('change');
+          }
         }
       });
       
@@ -84,9 +92,13 @@
         action: 'activate',
         allowAdditions: false,
         fullTextSearch: false,
+        forceSelection: false,
+        selectOnKeydown: false,
         onChange: function(value, text, $selectedItem) {
           console.log('Drug selected:', value, text);
-          $('#drug').val(value).trigger('change');
+          if (value) {
+            $('#drug').val(value).trigger('change');
+          }
         }
       });
       
@@ -649,20 +661,9 @@ $(document).ready(function() {
             
             console.log(`Dropdown ${id}: ${menuItems} items, initialized: ${hasData}`);
             
-            // Force a click test
+            // Debug dropdown click behavior
             if (id === 'case-dropdown') {
-                console.log('Testing case dropdown click...');
-                $dropdown.find('.dropdown.icon, .text, .default.text').off('click.debug').on('click.debug', function(e) {
-                    console.log('Case dropdown clicked, current state:', $dropdown.hasClass('active'));
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    if ($dropdown.hasClass('active')) {
-                        $dropdown.dropdown('hide');
-                    } else {
-                        $dropdown.dropdown('show');
-                    }
-                });
+                console.log('Case dropdown ready for testing...');
             }
         });
         
