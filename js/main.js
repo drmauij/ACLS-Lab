@@ -654,8 +654,11 @@ function checkAllDataLoaded() {
                 }
             });
 
-            // Initialize action and drug dropdowns with proper search functionality
+            // Initialize action and drug dropdowns with search functionality
             $('#action-dropdown, #drug-dropdown').dropdown({
+                // Enable search functionality
+                apiSettings: false,
+                cache: false,
                 direction: 'downward',
                 keepOnScreen: false,
                 selectOnKeydown: false,
@@ -664,7 +667,7 @@ function checkAllDataLoaded() {
                 hideAdditions: true,
                 action: 'activate',
                 on: 'click',
-                allowReselection: false,
+                allowReselection: true,
                 allowTab: true,
                 allowCategorySelection: false,
                 fireOnInit: false,
@@ -673,25 +676,36 @@ function checkAllDataLoaded() {
                 glyphWidth: 1.037,
                 preserveHTML: true,
                 sortSelect: false,
-                match: 'text', // Only match text content
-                fullTextSearch: true, // Enable full text search
+                match: 'text',
+                fullTextSearch: true,
                 filterRemoteData: false,
                 searchingText: 'Searching...',
                 placeholder: 'auto',
-                placeholderText: '',
+                placeholderText: 'Type to search...',
                 maxSelections: false,
                 useLabels: true,
                 delimiter: false,
-                showOnFocus: false, // Don't auto-show on focus to allow typing
+                showOnFocus: true,
                 allowLabelClick: true,
-                minCharacters: 0, // Start searching immediately
-                searchDelay: 0, // No delay for search
+                minCharacters: 1,
+                searchDelay: 100,
                 onShow: function() {
                     var $dropdown = $(this).closest('.ui.dropdown');
                     $dropdown.css('z-index', '99999999');
                     
-                    // Enable search mode
+                    // Add search class to enable search input
                     $dropdown.addClass('search selection');
+                    
+                    // Ensure search input is visible and functional
+                    setTimeout(function() {
+                        var $search = $dropdown.find('input.search');
+                        if ($search.length === 0) {
+                            // Create search input if it doesn't exist
+                            $dropdown.prepend('<input class="search" autocomplete="off" tabindex="0" style="width: 100%;">');
+                            $search = $dropdown.find('input.search');
+                        }
+                        $search.focus();
+                    }, 50);
                     
                     return true;
                 },
@@ -702,10 +716,6 @@ function checkAllDataLoaded() {
                 },
                 message: {
                     noResults: 'No matching items found. Try different keywords.'
-                },
-                // Custom filter function for better search
-                onLabelCreate: function(value, text) {
-                    return text;
                 }
             });
 
