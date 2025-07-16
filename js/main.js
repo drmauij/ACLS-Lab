@@ -619,16 +619,18 @@ function initializeDropdowns() {
     // Standard dropdown for case selection
     $('#case-dropdown').dropdown({
         onChange: function(value, text, $selectedItem) {
+            console.log('Case selected:', value);
             $('#case').val(value).trigger('change');
         }
     });
 
     // Search selection dropdowns for actions and drugs
     $('#action-dropdown').dropdown({
-        // Enable search functionality 
         allowReselection: true,
         forceSelection: false,
+        fullTextSearch: true,
         onChange: function(value, text, $selectedItem) {
+            console.log('Action selected:', value, text);
             if (value) {
                 $('#action').val(value).trigger('change');
             }
@@ -636,17 +638,18 @@ function initializeDropdowns() {
     });
 
     $('#drug-dropdown').dropdown({
-        // Enable search functionality
         allowReselection: true, 
         forceSelection: false,
+        fullTextSearch: true,
         onChange: function(value, text, $selectedItem) {
+            console.log('Drug selected:', value, text);
             if (value) {
                 $('#drug').val(value).trigger('change');
             }
         }
     });
 
-    console.log('Dropdowns initialized successfully');
+    console.log('All dropdowns initialized successfully with enhanced settings');
 }
 
 $(document).ready(function() {
