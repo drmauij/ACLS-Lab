@@ -504,10 +504,14 @@
         var checkLog = "KO";
         if(check)
             checkLog = "OK";
-        if(actions[arg])
+        if(actions[arg]) {
             $("<log>["+checkLog+"] "+actions[arg].description+"</log>").appendTo("#log").hide().fadeIn();
-        if(drugs[arg])
+            $("#logBox").fadeIn(); // Show log box when first entry is added
+        }
+        if(drugs[arg]) {
             $("<log>["+checkLog+"] "+drugs[arg]+"</log>").appendTo("#log").hide().fadeIn();
+            $("#logBox").fadeIn(); // Show log box when first entry is added
+        }
         // if is the last step => print final score (log OK / step totali)
         if(caseObj.stepCount>Object.keys(steps).length){
             $("<h3>You failed " + caseObj.errorCount + " on " + Object.keys(steps).length + "</h3>").appendTo("#log").hide().fadeIn();
@@ -567,6 +571,7 @@ function attachChangeHandlers() {
         $("#cprTimer").hide();
         $("#caseTimer").hide();
         $("#log").html("");
+        $("#logBox").hide(); // Hide log box when case is reset
         $("#vitalParam").hide()
         $('#ecgImg').trigger('zoom.destroy');
         $('#ecgImg').attr({'src':''});
