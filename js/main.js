@@ -561,21 +561,20 @@
         }
     }
 
-    // Actions - Use Semantic UI dropdown onChange event to avoid duplicates
-    $('#action-dropdown').dropdown({
-        onChange: function(value, text, $selectedItem) {
-            if (value && caseObj && steps[caseObj.stepCount]) {
-                var stepObj = steps[caseObj.stepCount];
-                abstractStepHandler(actionsKey, stepObj.action, value);
-                // Reset the dropdown for next selection
-                setTimeout(function() {
-                    $('#action-dropdown').dropdown('clear');
-                }, 100);
-                if($("#realtime").is(':checked')){
-                    $("#caseTimer").show();
-                }else{
-                    $("#caseTimer").hide();
-                }
+    // Actions
+    $('#action').on('change', function(evt, params) {
+        var arg = $(this).val();
+        if (arg && caseObj && steps[caseObj.stepCount]) {
+            var stepObj = steps[caseObj.stepCount];
+            abstractStepHandler(actionsKey, stepObj.action, arg);
+            // Reset the dropdown for next selection
+            setTimeout(function() {
+                $('#action-dropdown').dropdown('clear');
+            }, 100);
+            if($("#realtime").is(':checked')){
+                $("#caseTimer").show();
+            }else{
+                $("#caseTimer").hide();
             }
         }
     });
@@ -587,17 +586,16 @@
         abstractStepHandler(optionsKey, stepObj.choose, arg);
     }
 
-    // Drugs - Use Semantic UI dropdown onChange event to avoid duplicates
-    $('#drug-dropdown').dropdown({
-        onChange: function(value, text, $selectedItem) {
-            if (value && caseObj && steps[caseObj.stepCount]) {
-                var stepObj = steps[caseObj.stepCount];
-                abstractStepHandler(drugsKey, stepObj.give, value);
-                // Reset the dropdown for next selection
-                setTimeout(function() {
-                    $('#drug-dropdown').dropdown('clear');
-                }, 100);
-            }
+    // Drugs
+    $('#drug').on('change', function(evt, params) {
+        var arg = $(this).val();
+        if (arg && caseObj && steps[caseObj.stepCount]) {
+            var stepObj = steps[caseObj.stepCount];
+            abstractStepHandler(drugsKey, stepObj.give, arg);
+            // Reset the dropdown for next selection
+            setTimeout(function() {
+                $('#drug-dropdown').dropdown('clear');
+            }, 100);
         }
     });
 
@@ -618,8 +616,8 @@ function checkAllDataLoaded() {
             // Clear any existing initializations
             $('.ui.dropdown').dropdown('destroy');
             
-            // Initialize case dropdown only (actions and drugs have their own initialization with onChange handlers)
-            $('#case-dropdown').dropdown({
+            // Initialize all dropdowns with proper settings
+            $('.ui.dropdown').dropdown({
                 direction: 'downward',
                 keepOnScreen: false,
                 selectOnKeydown: false,
