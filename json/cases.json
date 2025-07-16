@@ -1,0 +1,1528 @@
+{
+    "acls1": {
+      "title": "A man collapses on the street (keep calm and give CPR)",
+      "description": "You are walking along the street when an elderly gentleman ahead of you suddenly collapses. You rush to him and find him unresponsive. What would be your next step?",
+      "steps": {
+          "1": {
+            "action": "callHelp",
+            "msgOk": "Help is on the way! What next?",
+            "msgKo": "Don't forget to call for help first!"
+          },
+          "2": {
+            "action": "patientCheck",
+            "msgOk": "The man isn't breathing and no pulse is palpable...what next?",
+            "msgKo": "You should first check the patient status!"
+          },
+          "3": {
+            "action": "startCPR",
+            "msgOk": "You start performing the CPR (30:2) untill the arrival of the paramedics. The rate of compressions should be maintained at:",
+            "msgKo": "You should start with CPR as soon as possible!",
+            "callFunc": {
+              "startCPR": "'bls'"
+            },
+            "quiz": {
+                "a": "No more than 80/min",
+                "b": "No more than 100/min",
+                "c": "At least 200/min",
+                "d": "At least 100/min"
+            }
+          },
+          "4": {
+            "choose": "d",
+            "msgOk": "Correct! The reanimation team is meanwhile arrived, what do you ask for?",
+            "msgKo": "False! The right one is the option d"
+            },
+          "5": {
+            "action": ["vitalParams", "ecg"],
+            "allrequest": false,
+            "msgOk": "The ECG and vital parameters are shown on the monitor of the portable defibrillator. What kind of rythm is the one displayed?",
+            "msgKo": "First get an ECG to assess the hearth rythm!",
+            "callFunc": {
+              "stopCPR": null,
+              "setECG": "'VT.gif', 180",
+              "setBP": "0, 0",
+              "setO2": "95"
+            },
+            "quiz": {
+                "a": "Ventricular fibrillation (VF)",
+                "b": "Ventricular tachycardia (VT)",
+                "c": "Supraventricular tachycardias (SVT)",
+                "d": "Torsades de pointes"
+            }
+          },
+          "6": {
+            "choose": "b",
+            "msgOk": "Correct! What is your next action by a Ventricular tachycardia?",
+            "msgKo": "False! The right one is the option b"
+            },
+          "7": {
+            "action": "defibrillation",
+            "msgOk": "A 200J (biphasic) shock is delivered, what next?",
+            "msgKo": "By VT in instabil patients you should immediatly perform a defibrillation!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "8": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediatly the CPR (30:2) after the shock delivery for 2 minutes. What do you want to do meanwhile?",
+            "msgKo": "You have to resume the CPR immediatly after the shock!",
+            "callFunc": {
+              "startCPR": null
+            }
+          },
+          "9": {
+            "action": "venousAccess",
+            "msgOk": "You successfully established an IV access. Remember to check the blood sugar value! 2 Minutes are meanwhile over...",
+            "msgKo": "You should think to take an IV access while the CPR is running",
+            "callFunc": {
+              "setLabor": "'Blood sugar', 90, 'mg/dL'",
+                "completeCPR": null
+            }
+          },
+          "10": {
+            "action": "ecg",
+            "msgOk": "You get the new ECG. The patient remains instabil. You also notice a rapid decrease of the oxygen saturation. What do you do?",
+            "msgKo": "After 2 minutes CPR cycles you should check again the hearth rhythm",
+            "callFunc": {
+              "stopCPR": null,
+              "setECG": "'VF.gif', 0",
+              "setBP": "0, 0",
+              "setO2": "85"
+            }
+          },
+          "11": {
+            "action": "defibrillation",
+            "msgOk": "A second shock is delivered. You resume immediatly with CPR (30:2). What do you want to do meanwhile?",
+            "msgKo": "Give a second shock and prepare to intubate while performing again the CPR",
+            "callFunc": {
+              "defibrillation": null,
+              "startCPR": null
+            }
+          },
+          "12": {
+            "action": "intubate",
+            "msgOk": "Correct! You intubate the patient. What it's important to do immediatly after you placed the tube?",
+            "msgKo": "You should think to secure the airways of the patient!"
+          },
+          "13": {
+            "action": "lungsCheck",
+            "msgOk": "After you place the tube you check for lungs sound at both sides. The airways are secured! You start to ventilate the patient and the oxygen saturation improves. Whats is another good practice once you have intubated the patient?",
+            "msgKo": "After placing the tube you should check for its right position!",
+            "callFunc": {
+              "setO2": "95"
+            }
+          },
+          "14": {
+            "action": "co2Check",
+            "msgOk": "Correct! Checking for exhaled CO2 (capnography) is the best way to be sure about a successful intubation, to monitor for the quality of given CPR and to early recognition of ROSC (Return of Spontan Circulation). Other 2 minutes are meanwhile over, what next?",
+            "msgKo": "Think to check for CO2 level once you've intubated the patient!",
+            "callFunc": {
+              "completeCPR": null,
+              "setCO2": "20"
+            }
+          },
+          "15": {
+            "action": "ecg",
+            "msgOk": "Correct! You check for the third time the ECG rythm",
+            "msgKo": "Time to check again the ECG rythm!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VF.gif', 0",
+                "setBP": "0, 0",
+                "setCO2": "0"
+            }
+          },
+          "16": {
+            "action": "defibrillation",
+            "msgOk": "A third shock is delivered",
+            "msgKo": "Give a third shock and restart CPR!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "17": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediately the CPR. Compressions should not be interrupted for longer than how many seconds?",
+            "msgKo": "Resume immediatly the CPR!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "15"
+            },
+            "quiz": {
+                "a": "5 to 10",
+                "b": "20",
+                "c": "4",
+                "d": "15"
+            }
+          },
+          "18": {
+            "choose": "a",
+            "msgOk": "Correct! <strong>After the third schock</strong> what do you ask your partner to administrate?",
+            "msgKo": "False! The right one is the option a"
+            },
+          "19": {
+            "give": ["adrenaline", "amiodarone"],
+            "allrequest": true,
+            "msgOk": "Good choice! You partner administrates a shot of Adrenaline 1 mg flush IV and Amiodarone 300 mg IV. You start thinking about reversible causes of asystole. Wich one of the following is NOT one of them?",
+            "msgKo": "By VT/VF after the third shock you should think to give one shot of Adrenaline and one of Amiodaron",
+            "quiz": {
+                "a": "Hypovolemia",
+                "b": "Hyper-/hypokalemia",
+                "c": "Hypoglycemia",
+                "d": "Hypoxia"
+            }
+          },
+          "20": {
+            "choose": "c",
+            "msgOk": "Correct! While hypoglycemia or low serum blood glucose can have many negative effects on the body, is NOT considerd anymore a reversibile cause of cardiac arrest. After giving Adrenaline you perform your CPR for further 2 minutes. What next?",
+            "msgKo": "False! The right one is the option c",
+            "callFunc": {
+              "completeCPR": null
+                }
+            },
+          "21": {
+            "action": "ecg",
+            "msgOk": "The resulting ECG is displayed on the monitor. What now?",
+            "msgKo": "Check again the ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VF.gif', 0",
+                "setBP": "0, 0",
+                "setO2": "85",
+                "setCO2": "5"
+                }
+          },
+          "22": {
+            "action": "defibrillation",
+            "msgOk": "Correct! A firth shock is delivered. What next?",
+            "msgKo": "Give a firth shock and resume immedialty the CPR!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "23": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediately the CPR. What are you going to give to the patient meanwhile?",
+            "msgKo": "After delivering the shock you should immediately resume the CPR!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "15"
+            }
+          },
+          "24": {
+            "give": "adrenaline",
+            "msgOk": "Good choice again! You partner prepares and administrates again Adrenaline 1 mg IV flush. 2 minutes are now over. What do you do?",
+            "msgKo": "Time to give Adrenaline again!",
+            "callFunc": {
+              "completeCPR": null
+            }
+          },
+          "25": {
+            "action": "ecg",
+            "msgOk": "The resulting ECG is displayed on the monitor. What now?",
+            "msgKo": "Check again the ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VT.gif', 200",
+                "setBP": "0, 0",
+                "setO2": "88",
+                "setCO2": "5"
+                }
+          },
+          "26": {
+            "action": "defibrillation",
+            "msgOk": "Correct! A fifth shock is delivered. What next?",
+            "msgKo": "Give a fifth shock and resume immedialty the CPR!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "27": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediately the CPR. What are you going to give to the patient meanwhile?",
+            "msgKo": "After delivering the shock you should immediately resume the CPR!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "15"
+            }
+          },
+          "28": {
+            "give": "amiodaron150",
+            "msgOk": "You partner prepares and administrates another shot of Amiodarone 150 mg IV. While the CPR is running you have the feeling the patient is breathing alone...",
+            "msgKo": "Give a second shot of Amiodaron (150mg IV)!",
+            "callFunc": {
+              "setCO2": "50"
+            }
+          },
+          "29": {
+            "action": "ecg",
+            "msgOk": "It seems you succeeded on getting back your patient. How can you be sure of it?",
+            "msgKo": "Check again your ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'SinusTach.gif', 120",
+                "setO2": "95",
+                "setBP": "90, 50"
+                }
+          },
+          "30": {
+            "action": "pulseCheck",
+            "msgOk": "The pulse is palpable! You succeeded to get the ROSC (Return of spontaneous circulation).  You rush now with your patient in the nearest Hospital. End of the simulation.",
+            "msgKo": "You should check for the patient pulse!"
+          }
+      }
+    },
+    
+    "acls2": {
+      "title": "A man with chest pain (so this is Christmas)",
+      "description": "Your emergency team is called on the christmas night to the home of a 61 year old male who began experiencing substernal chest pain while shoveling snow. He rates the pain as 8 on a scale of 1 - 10. He is slightly diaphoretic with some dyspnea. What comes first?",
+      "steps": {
+          "1": {
+            "action": ["ecg", "vitalParams"],
+            "allrequest": false,
+            "msgOk": "The ECG and vital parameters are displayed on monitor of the portable defibrillator. Your diagnosis is:",
+            "msgKo": "Get an ECG/vital paramenters as soon as possible!",
+            "callFunc": {
+              "setECG": "'stemi.gif', 80",
+              "setBP": "158, 84",
+              "setO2": "85"
+            },
+            "quiz": {
+                "a": "Supraventricular tachycardia",
+                "b": "Normal ECG: the pain is not cardiac",
+                "c": "STEMI (ST Elevation Myocardial Infarction)",
+                "d": "NSTEMI (non ST Elevation Myocardial Infarction)"
+            } 
+          },
+          "2": {
+            "choose": "c",
+            "msgOk": "Correct! While your partner is trying to establish an IV access, you notice the O2 saturation is lowering. What next?",
+            "msgKo": "False! The right one is the option c"
+            },
+          "3": {
+            "give": "oxygen",
+            "msgOk": "Correct! After giving some oxygen the saturation improves. Your partner has in the meanwhile successfully established an IV access (check out the Blood Sugar value) and gave him some fluid. The patient complains now all the time about chest pain. What are you going to do?",
+            "msgKo": "Give some oxygen to the patient!",
+            "callFunc": {
+              "setO2": "95",
+              "setLabor": "'Blood sugar', 110, 'mg/dL'"
+                }
+          },
+          "4": {
+            "give": ["morphine", "nitrospray"],
+            "allrequest": true,
+            "msgOk": "Good choice! The chest pain immediatly recedes. Immediate care of this patient also includes:",
+            "msgKo": "Give some morphin/nitrospray to reduce the patient pain!",
+            "quiz": {
+                "a": "emergency catheterization and metoprolol",
+                "b": "aspirin, heparin, emergent catheterization",
+                "c": "aspirin and rtPA",
+                "d": "atorvastatin, nitrospray and aspirin"  
+            }
+          },
+          "5": {
+            "choose": "b",
+            "msgOk": "Correct! You admistrate ASS (500 mg, IV) and Heparin (5000 IE, IV). As you are preparing the patient for transport, he suddenly becomes dizzy and feels as if he is going to pass out.",
+            "msgKo": "False! The right one is the option b",
+            "callFunc": {
+              "setECG": "'Brady.gif', 32",
+              "setBP": "70, 30",
+              "setO2": "97"
+            }
+          },
+          "6": {
+            "give": "atropine",
+            "msgOk": "There is no response to the administration of Atropine. The patient becomes suddenly unconscious. What are you going to do?",
+            "msgKo": "By Sinus Bradycardia you should try to give some Atropine!"
+          },
+          "7": {
+            "action": ["pulseCheck", "patientCheck"],
+            "allrequest": false,
+            "msgOk": "Correct! You go looking for the femoralis pulse but you can't feel anything. What next?",
+            "msgKo": "You shoud first check for the patient pulse!"
+          },
+          "8": {
+            "action": "startCPR",
+            "msgOk": "Correct! By PEA (Pulseless Electrical Activity) you should start immediately to perform the CPR. And what else are you giving?",
+            "msgKo": "By patients with PEA (Pulseless Electrical Activity) you should start immediately to perform the CPR!",
+            "callFunc": {
+              "startCPR": null
+            }
+          },
+          "9": {
+            "give": "adrenaline",
+            "msgOk": "Good choice! At your command your partner administrates Adrenaline (1 mg, IV push) to the patient. For how long you have now to perform the CPR before to check the hearh rythm again?",
+            "msgKo": "Adrenaline, 1 mg IV push is the drug of choice by cardiac arrest!",
+            "quiz": {
+                "a": "5 minutes",
+                "b": "2 minutes",
+                "c": "3 minutes",
+                "d": "1 minutes"  
+            }
+          },
+          "10": {
+            "choose": "b",
+            "msgOk": "Correct! You are now performing CPR since 2 minutes. What next?",
+            "msgKo": "False! The right one is the option b",
+            "callFunc": {
+              "completeCPR": null
+                }
+            },
+          "11": {
+            "action": "ecg",
+            "msgOk": "You got the new ECG. The patiest ist still unconscious. You check again for the pulse and again you can't find anything. What next?",
+            "msgKo": "After 2 minutes CPR cycle you should check again the hearth rhythm",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'MultiPVC.gif', 60",
+                "setBP": "0, 0",
+                "setO2": "90"
+                }
+            },
+          "12": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume again the CPR...what are you going to do next?",
+            "msgKo": "Resume immediately the CPR after assessing the pulse absence!",
+            "callFunc": {
+              "startCPR": null
+            }
+          },
+          "13": {
+            "action": "intubate",
+            "msgOk": "With some difficult you intubate the patient, but you are not sure you went in the right place...",
+            "msgKo": "Secure the airways of the patient!"
+          },
+          "14": {
+            "action": "lungsCheck",
+            "msgOk": "After you place the tube you check for lungs sound at both sides. You can only hear sounds from the right one, while the left one remains silent...",
+            "msgKo": "After placing the tube you should check for its right position!",
+            "callFunc": {
+              "setO2": "77"
+            }
+          },
+          "15": {
+            "action": "retrieveTube",
+            "msgOk": "You pull the tube a couple of centimeters back (until 20 cm) and you check again for lungs sound. The left one now sounds clearer, the saturation improves. What is another good practice to implement once you have intubated the patient?",
+            "msgKo": "Try to pull the tube back!",
+            "callFunc": {
+              "setO2": "90"
+            }
+          },
+          "16": {
+            "action": "co2Check",
+            "msgOk": "Correct! Checking for exhaled CO2 (capnography) is the best way to be sure about a successful intubation, to monitor for the quality of given CPR and to early recognition of ROSC (Return of Spontan Circulation). Other 2 minutes are meanwhile over, what next?",
+            "msgKo": "Think to check for CO2 level once you've intubated the patient!",
+            "callFunc": {
+                "completeCPR": null,
+                "setCO2": "15"
+            }
+          },
+          "17": {
+            "action": "ecg",
+            "msgOk": "You got the new ECG. What next?",
+            "msgKo": "After 2 minutes CPR cycle you should check again the hearth rhythm",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VT.gif', 200",
+                "setBP": "40, 20",
+                "setO2": "95",
+                "setCO2": "5"
+                }
+            },
+          "18": {
+            "action": "defibrillation",
+            "msgOk": "Correct! A shock is delivered. What next?",
+            "msgKo": "Give a shock!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "19": {
+            "action": "startCPR",
+            "msgOk": "After giving the schock you resume immediatly the CPR for 2 minutes. What next?",
+            "msgKo": "Give a shock",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "15",
+                "completeCPR": null
+            }
+          },
+          "20": {
+            "action": "ecg",
+            "msgOk": "It seems you succeed on getting back your patient. How can you be sure of it?",
+            "msgKo": "Time to check again the ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'stemi.gif', 90",
+                "setBP": "110, 60",
+                "setO2": "99",
+                "setCO2": "50"
+            }
+          },
+          "21": {
+            "action": "pulseCheck",
+            "msgOk": "The pulse is palpable! You succeed to get the ROSC (Return of spontaneous circulation).  You rush now with your patient in the nearest Hospital. Where are you suppose to carry this patient?",
+            "msgKo": "You shoud check for the patient pulse!",
+            "quiz": {
+                "a": "Intensiv Care Unit",
+                "b": "Emergency Care Unit",
+                "c": "Cardiac Catherization Lab",
+                "d": "It doesn't matter at all"  
+            }
+          },
+          "22": {
+            "choose": "c",
+            "msgOk": "Correct! Patients with a confirmed Acute Coronay Syndrome are supposed to be carried as soon as possibile to a Cardiac Catherization Lab! End of simulation.",
+            "msgKo": "False! The right one is the option c"
+          }
+      }
+    },
+    
+    "acls3": {
+      "title": "The woman in the restaurant (first eat, then talk!)",
+      "description": "You sit in a restaurant when suddendly the woman at the near table begins to cough. You notice she can't talk and is turning blue. She is still conscious but you feel that is not going to remain longer this way. What do you do?",
+      "steps": {
+          "1": {
+            "action": "callHelp",
+            "msgOk": "You tell the waitress to call the emergency number. You reach then the woman's table and...",
+            "msgKo": "Be sure to call for help first!"
+            },
+          "2": {
+            "action": "backBlows",
+            "msgOk": "You first deliver five back blows between the woman's shoulder blades with the heel of your hand. It doesnt seem to help much...what next?",
+            "msgKo": "Give five back blows between the woman's shoulder!"
+            },
+          "3": {
+            "action": "heimlichManeuver",
+            "msgOk": "You move rapidly behind the woman, wrap your arms around the waist, and give five abdominal thrusts. The woman is still conscius but is now completly blue. What now?",
+            "msgKo": "Perform the Heimlich Maneuver!"
+            },
+          "4": {
+            "action": "backBlows",
+            "msgOk": "As soon as you are going to deliver again five back blows the woman turns unconscious and collapses in your arms. You go check for the pulse but cant feel anything. What do you do now?",
+            "msgKo": "Give again five back blows!"
+            },
+          "5": {
+            "action": "airwayCheck",
+            "msgOk": "You open the woman mounth and check briefly for any piece of food, but you can't see anything. The woman isn't breathing and still unconscious...",
+            "msgKo": "Check the upper airways to make it free!"
+            },
+          "6": {
+            "action": "startCPR",
+            "msgOk": "You start immediatly with the chest compressions (30:2). Meanwhile the emergency team is arrived. You explain quickly the situation. What do you ask as first assestment?",
+            "msgKo": "Once the patient turns unconscious you should immediatly start with CPR!",
+            "callFunc": {
+              "startCPR": "'bls'"
+            }
+            },
+          "7": {
+            "action": ["vitalParams", "ecg"],
+            "allrequest": false,
+            "msgOk": "You get on the defibrillation monitor the vital paramenters of the patient...what are you going to do next?",
+            "msgKo": "Assess the vital parameters of the patient before going on!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VT.gif', 200",
+                "setBP": "0 ,0",
+                "setO2": "30"
+                }
+            },
+          "8": {
+            "action": "defibrillation",
+            "msgOk": "A 200J (biphasic) shock is delivered, what next?",
+            "msgKo": "By VT in instabil patients you should immediatly perform a defibrillation!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "9": {
+            "action": "startCPR",
+            "msgOk": "Correct! Your partner resumes immediatly the CPR (30:2) after the shock delivery for 2 minutes. What do you want to do meanwhile?",
+            "msgKo": "You have to resume the CPR immediatly after the shock!",
+            "callFunc": {
+              "startCPR": null
+            }
+          },
+          "10": {
+            "action": "intubate",
+            "failureStep": 3,
+            "msgOk": "As soon as you attempt to intubate the patient you notice a piece of bread stuck just above di epiglottis. What's your next move?",
+            "msgKo": "Secure the airways of the patient!"
+          },
+          "11": {
+            "action": "airwayFree",
+            "msgOk": "With some difficult and the help of the Magill's forceps you manage to remove a piece of bread. The way is free...what now?",
+            "msgKo": "The upper airways of the patient are probably obstructed. Make it free as soon as possible!"
+          },
+          "12": {
+            "action": "intubate",
+            "msgOk": "You succeed to place the tube and start to ventilate the patient. What is an important practice to implement after you have intubated the patient?",
+            "msgKo": "Intubate the patient now!"
+          },
+          "13": {
+            "action": "lungsCheck",
+            "msgOk": "You check for lungs sound at both sides, it seems you landed in the right place! The oxygenation rapidily improves. CPR is running. You also notice your partner has in the same time applied a CO2 sensor to the tube. You take a look at the defibrillator and see 3 minutes are just passed away since the first defibrillation attempt...",
+            "msgKo": "After placing the tube you should check for its right position!",
+            "callFunc": {
+              "completeCPR": 180,
+              "setO2": "90",
+              "setCO2": "50"
+            }
+          },
+          "14": {
+            "action": "ecg",
+            "msgOk": "You get the new ECG. What kind of rythm is the one displayed on the monitor?",
+            "msgKo": "After 2 minutes CPR cycles you should check again the hearth rhythm",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VF.gif', 0",
+                "setBP": "0, 0",
+                "setO2": "95",
+                "setCO2": "10"
+                },
+            "quiz": {
+                "a": "Ventricular fibrillation (VF)",
+                "b": "Ventricular tachycardias (VT)",
+                "c": "Supraventricular tachycardias (SVT)",
+                "d": "Torsades de pointes"
+                }
+            },
+          "15": {
+            "choose": "a",
+            "msgOk": "Correct! What are you going to do by ventricular fibrillation?",
+            "msgKo": "False! The right one is the option a"
+          },
+          "16": {
+            "action": "defibrillation",
+            "msgOk": "A second shock (200J, biphasic) is delivered, what next?",
+            "msgKo": "By VF you should immediatly perform a defibrillation!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "17": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediatly the CPR (30:2) after the shock delivery for 2 minutes. The airways are secured. What do you want to do meanwhile?",
+            "msgKo": "You have to resume the CPR immediatly after the shock!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "13"
+                }
+          },
+          "18": {
+            "action": "venousAccess",
+            "msgOk": "Your partner successfully establishes an IV access and lets some fluid running throught it. 2 minutes are meanwhile over, What now?",
+            "msgKo": "You should think to take an IV access as soon as possible while the CPR is running!",
+            "callFunc": {
+              "completeCPR": null,
+              "setLabor": "'Blood sugar', 159, 'mg/dL'"
+            }
+          },
+          "19": {
+            "action": "ecg",
+            "msgOk": "You get the new ECG...",
+            "msgKo": "After 2 minutes CPR cycles you should check again the hearth rhythm",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VT.gif', 200",
+                "setBP": "0, 0",
+                "setO2": "95",
+                "setCO2": "5"
+                }
+            },
+          "20": {
+            "action": "defibrillation",
+            "msgOk": "A third shock (200J, biphasic) is delivered, what next?",
+            "msgKo": "By VT you should immediatly perform a defibrillation!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "21": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediatly the CPR (30:2) after the shock delivery for 2 minutes. What do you ask your partner to administrate now?",
+            "msgKo": "You have to resume the CPR immediatly after the shock!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "13"
+                }
+          },
+          "22": {
+            "give": "adrenaline",
+            "msgOk": "Good choice! You partner administrates adrenaline 1 mg flush IV. What else?",
+            "msgKo": "Adrenaline, 1 mg IV push is the drug of choice by cardiac arrest!"
+          },
+          "23": {
+            "give": "amiodarone",
+            "msgOk": "Good choice again! You partner administrates Amiodarone 300 mg IV. 1 minute is now over. While you are still ventilating the patient you have the feeling she starts breathing spontaneously. You ask your partner to interrupt the CPR and what do you check for?",
+            "msgKo": "Amiodaron, after giving Adrenaline, is the drug of choice by cardiac arrest!",
+            "callFunc": {
+                "completeCPR": 60,
+                "stopCPR":null,
+                "setECG": "'SR.gif', 100",
+                "setBP": "90, 50",
+                "setO2": "95",
+                "setCO2": "55"
+            }  
+          },
+          "24": {
+            "action": "pulseCheck",
+            "msgOk": "The pulse is palpable! You succeeded to get the ROSC (Return of spontaneous circulation).  You rush now with your patient in the nearest Hospital. End of the simulation.",
+            "msgKo": "You shoud check for the patient pulse!"
+          }
+          
+      }
+    },
+    
+    "acls4": {
+      "title": "The boy who drowned (this is water)",
+      "description": "You are taking the sun at the lake beach when suddendly you hear some people screaming. You see they are pulling a boy (about 19 years old) out of the water. He looks very pale and apparently unconscious...",
+      "steps": {
+          "1": {
+            "action": "callHelp",
+            "msgOk": "You grab your mobile and call the emergency number! What next?",
+            "msgKo": "Don´t forget to call for help first!"
+          },
+          "2": {
+            "action": "patientCheck",
+            "msgOk": "The boy isn't breathing and no pulse is palpable...what next?",
+            "msgKo": "You should first assess the Patient status!"
+          },
+          "3": {
+            "action": "startCPR",
+            "msgOk": "You start the CPR (30:2). After about 5 minutes finally arrives the emergency team. What do you ask for?",
+            "msgKo": "You should start with CPR as soon as possible!",
+            "callFunc": {
+              "startCPR": "'bls'",
+              "completeCPR": 310    
+            }
+          },
+          "4": {
+            "action": ["vitalParams", "ecg"],
+            "allrequest": false,
+            "msgOk": "The ECG and vital parameters are displayed on monitor of the portable defibrillator. What next?",
+            "msgKo": "First get an ECG to assess the hearth rythm!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VF.gif', 0",
+                "setBP": "0, 0",
+                "setO2": "20"
+            }
+          },
+          "5": {
+            "action": "defibrillation",
+            "msgOk": "A 200J (biphasic) shock is delivered, what next?",
+            "msgKo": "By VF you should immediatly perform a defibrillation!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "6": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediatly the CPR (30:2) after the shock delivery for 2 minutes. What do you want to do meanwhile?",
+            "msgKo": "You have to resume the CPR immediatly after the shock!",
+            "callFunc": {
+              "startCPR": null
+            }
+          },
+          "7": {
+            "action": "intubate",
+            "msgOk": "Correct! You intubate the patient. What it's important to do immediatly after you placed the tube?",
+            "msgKo": "You should think to secure the airways of the patient!"
+          },
+          "8": {
+            "action": "lungsCheck",
+            "msgOk": "After you place the tube you check for lungs sound at both sides. The airways are secured! You start to ventilate the patient with 100% oxygen and saturation slowly improves. Whats is another good practice once you have intubated the patient?",
+            "msgKo": "After placing the tube you should check for its right position!",
+            "callFunc": {
+              "setO2": "60"
+            }
+          },
+          "9": {
+            "action": "co2Check",
+            "msgOk": "Correct! Checking for exhaled CO2 (capnography) is the best way to be sure about a successful intubation, to monitor for the quality of given CPR and to early recognition of ROSC (Return of Spontan Circulation). 2 minutes are meanwhile over, what next?",
+            "msgKo": "Think to check for CO2 level once you've intubated the patient!",
+            "callFunc": {
+              "setCO2": "25"
+            }
+          },
+          "10": {
+            "action": "ecg",
+            "msgOk": "You get the new ECG. What next?",
+            "msgKo": "After 2 minutes CPR cycles you should check again the hearth rhythm",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VF.gif', 0",
+                "setBP": "0, 0",
+                "setO2": "80"
+                }
+            },
+          "11": {
+            "action": "defibrillation",
+            "msgOk": "A second shock is delivered...",
+            "msgKo": "Give a second shock and take an IV access",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "12": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediatly the CPR (30:2) after the shock delivery for 2 minutes. What do you want to do meanwhile?",
+            "msgKo": "You have to resume the CPR immediatly after the shock!",
+            "callFunc": {
+              "startCPR": null
+            }
+          },
+          "13": {
+            "action": "venousAccess",
+            "msgOk": "You successfully establishes an IV access and let some fluid running throught it. Remember to check the blood sugar value! What next?",
+            "msgKo": "You should think to take an IV access while the CPR is running",
+            "callFunc": {
+              "setLabor": "'Blood sugar', 130, 'mg/dL'"
+            }
+          },
+          "14": {
+            "action": "ecg",
+            "msgOk": "Correct! You check for the third time the ECG rythm",
+            "msgKo": "Time to check again the ECG rythm!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'Asystole.gif', 0",
+                "setBP": "0, 0",
+                "setCO2": "0"
+            }
+          },
+          "15": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediately the CPR without giving any additional shock. What do you ask your partner for?",
+            "msgKo": "Asystole is not a defibrillable rythm! Resume immediatly the CPR!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "30"
+            }
+          },
+          "16": {
+            "give": "adrenaline",
+            "msgOk": "Correct! After giving Adrenaline you perform your CPR for further 2 minutes. What next?",
+            "msgKo": "False! The right one is the option b",
+            "callFunc": {
+              "completeCPR": 120
+            }
+          },
+          "17": {
+            "action": "ecg",
+            "msgOk": "The resulting ECG is displayed on the monitor. What now?",
+            "msgKo": "Check again your ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VF.gif', 150",
+                "setBP": "50, 20",
+                "setO2": "85",
+                "setCO2": "5"
+                }
+          },
+          "18": {
+            "action": "defibrillation",
+            "msgOk": "Correct! A third shock is delivered. What next?",
+            "msgKo": "Give a third shock and start again the CPR!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "19": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediately the CPR. After the third shock what do you ask your partner to do?",
+            "msgKo": "After delivering the shock you should immediately resume the CPR!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "13"
+            }
+          },
+          "20": {
+            "give": "adrenaline",
+            "msgOk": "Good choice! You partner administrates adrenaline 1 mg flush IV. What else?",
+            "msgKo": "Adrenaline, 1 mg IV push is the drug of choice by cardiac arrest!"
+          },
+          "21": {
+            "give": "amiodarone",
+            "msgOk": "Good choice again! You partner administrates Amiodarone 300 mg IV. 2 minutes are now over. What do you do?",
+            "msgKo": "Amiodaron, after giving Adrenaline, is the drug of choice by cardiac arrest!",
+            "callFunc": {
+                "completeCPR": 120,
+                "setCO2": "50"
+                }
+          },
+          "22": {
+            "action": "ecg",
+            "msgOk": "It seems you succeeded on getting back your patient. How can you be sure of it?",
+            "msgKo": "Check again your ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'SinusTach.gif', 120",
+                "setO2": "89",
+                "setBP": "90, 40"
+                }
+          },
+          "23": {
+            "action": "pulseCheck",
+            "msgOk": "The pulse is palpable! You succeeded to get the ROSC (Return of spontaneous circulation).  You rush now with your patient in the nearest Hospital. End of the simulation.",
+            "msgKo": "You shoud check for the patient pulse!"
+          }
+      }
+    },
+	
+    "acls5": {
+      "title": "The girl returning from holiday (that long night)",
+      "description": "You met a 20 years old girl with her boyfriend on the train back from the airport and they are telling you about their just-had beautiful holiday. Suddendly she starts having difficult to breath. In a minute she collapses and turns unresponsive. What do you do?",
+      "steps": {
+          "1": {
+            "action": "callHelp",
+            "msgOk": "Help is on the way! What next?",
+            "msgKo": "Don't forget to call for help first!"
+          },
+          "2": {
+            "action": "patientCheck",
+            "msgOk": "The girl is still gasping but you can't find any palplable pulse...what next?",
+            "msgKo": "You should first check the patient status!"
+          },
+          "3": {
+            "action": "startCPR",
+            "msgOk": "You start performing the CPR (30:2) untill, after about 5 minutes, the arrival of the paramedics. Once there what do you ask for?",
+            "msgKo": "You should start with CPR as soon as possible!",
+            "callFunc": {
+              "startCPR": "'bls'"
+            }
+          },
+          "4": {
+            "action": ["vitalParams", "ecg"],
+            "allrequest": false,
+            "msgOk": "The ECG and vital parameters are shown on the monitor of the portable defibrillator. What do you do?",
+            "msgKo": "First get an ECG to assess the hearth rythm!",
+            "callFunc": {
+              "stopCPR": null,
+              "setECG": "'Brady.gif', 40",
+              "setBP": "0, 0",
+              "setO2": "75"
+            }
+          },
+          "5": {
+            "action": "pulseCheck",
+            "msgOk": "Even if the ECG monitor displays some electric activity, you are still unable to find any palpable (femoralis) pulse...",
+            "msgKo": "Check for a palpable pulse!"
+          },
+          "6": {
+            "action": "startCPR",
+            "msgOk": "Correct! By PEA (Pulseless Electrical Activity) you should re-start immediately to perform the CPR. What's your next step?",
+            "msgKo": "By patients with PEA (Pulseless Electrical Activity) you should start immediately to perform the CPR!",
+            "callFunc": {
+              "startCPR": null
+            }
+          },
+          "7": {
+            "action": "venousAccess",
+            "failureStep": 3,
+            "msgOk": "Unfortunatly your partner fails to take the IV access. He tries once more time in another place, but still no success. He looks at you asking what to do...",
+            "msgKo": "You should think to take an IV access while the CPR is running"
+          },
+          "8": {
+            "action": "osseousAccess",
+            "msgOk": "You got your IO access and fluid is running good throught it. What next?",
+            "msgKo": "Think about intraosseous (IO) access when IV fails",
+            "callFunc": {
+              "setLabor": "'Blood sugar', 90, 'mg/dL'"
+            }
+          },
+          "9": {
+            "give": "adrenaline",
+            "msgOk": "Your partner administrates adrenaline 1mg IV push, 2 Minutes are meanwhile over...",
+            "msgKo": "Administrate a first shot of adrenaline!",
+            "callFunc": {
+              "completeCPR": null
+            }
+          },
+          "10": {
+            "action": "ecg",
+            "msgOk": "You get the new ECG. The pulse is still not palpable. You also notice a rapid decrease of the oxygen saturation. What do you do?",
+            "msgKo": "After 2 minutes CPR cycles you should check again the hearth rhythm",
+            "callFunc": {
+              "stopCPR": null,
+              "setECG": "'Brady.gif', 20",
+              "setBP": "0, 0",
+              "setO2": "45"
+            }
+          },
+          "11": {
+            "action": "startCPR",
+            "msgOk": "You resume immediatly with the CPR. What's your next step?",
+            "msgKo": "By patients with PEA (Pulseless Electrical Activity) you should immediately resume the CPR!",
+            "callFunc": {
+              "startCPR": null
+            }
+          },
+          "12": {
+            "action": "intubate",
+            "msgOk": "Correct! You intubate the patient. What's it important to do immediatly after you placed the tube?",
+            "msgKo": "You should think to secure the airways of the patient!"
+          },
+          "13": {
+            "action": "lungsCheck",
+            "msgOk": "After you place the tube you check for lungs sound at both sides. The airways are secured! What is another good practice once you have intubated the patient?",
+            "msgKo": "After placing the tube you should check for its right position!",
+            "callFunc": {
+              "setO2": "65"
+            }
+          },
+          "14": {
+            "action": "co2Check",
+            "msgOk": "Correct! Unfortunatly even after starting to ventilate the patient you cannot help but notice that the oxygen saturation doesn't improve very much while the exhaled CO2 remains very low. 2 minutes are meanwhile over, what next?",
+            "msgKo": "Think to check for CO2 level once you've intubated the patient!",
+            "callFunc": {
+              "completeCPR": null,
+              "setCO2": "10"
+            }
+          },
+          "15": {
+            "action": "ecg",
+            "msgOk": "Correct! You check for the third time the ECG rythm",
+            "msgKo": "Time to check again the ECG rythm!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'Asystole.gif', 0",
+                "setBP": "0, 0",
+                "setCO2": "0"
+            }
+          },
+          "16": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediately the CPR. What next?",
+            "msgKo": "Resume immediatly the CPR!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "15"
+            }
+          },
+          "17": {
+            "give": "adrenaline",
+            "msgOk": "Your partner administrates a second shot of adrenaline 1mg IV push. While the CPR is running you start thinking about possible reversible causes of asystolie. Which one would you suspect to be in this case?",
+            "msgKo": "Administrate a second shot of adrenaline!",
+            "quiz": {
+                "a": "Toxins",
+                "b": "Hyper-/hypokalemia",
+                "c": "Thrombosis (coronary and pulmonary)",
+                "d": "Tension pneumothorax"
+            }
+          },       
+          "18": {
+            "choose": "c",
+            "msgOk": "Correct! The suspect of an acute pulmonary embolism starts to appear in your mind. What elements would you looking for in order to reinforce you hypothesis?",
+            "msgKo": "False! The right one is the option c"
+            },
+          "19": {
+            "action": "anamnesis",
+            "msgOk": "Her boyfriend tells you that they were just back from a long flight (>12 hours), she hasn't any known allergy, she smokes about 20 cigarettes/day and that she is actually on birth control. What's your next move?",
+            "msgKo": "Think about to get more info about the patient medical history"
+          },
+          "20": {
+            "give": ["heparine10000", "actilyse"],
+            "allrequest": true, 
+            "msgOk": "Good choice! You partner prepares and administrates 10000 IE Heparine and 20 mg Actilyse (thrombolytic therapy) IV. For how long after the initiation of the thrombolytic therapy are you supposed to carry on the CPR if the patient doesn't present any ROSC (Return of Spontaneous Circulation)?",
+            "msgKo": "Start immediatly a thrombolytic therapy with heparin and actilyse!",
+             "quiz": {
+                "a": "at least 1 hour",
+                "b": "it depends on the clinical picture",
+                "c": "at least 20 minutes",
+                "d": "no more than 5 minutes"
+            }
+          },
+          "21": {
+            "choose": "a",
+            "msgOk": "Correct! After initiate the thrombolytic therapy and in absence of ROSC signs you must keep doing CPR at least 1 hour. Two minutes are meanwhile over...",
+            "msgKo": "False! The right one is the option a",
+            "callFunc": {
+              "completeCPR": null
+                }
+            },
+          "22": {
+            "action": "ecg",
+            "msgOk": "The resulting ECG is displayed on the monitor. What now?",
+            "msgKo": "Check again the ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'Brady.gif', 20",
+                "setBP": "0, 0",
+                "setO2": "88",
+                "setCO2": "5"
+                }
+          },
+          "23": {
+            "action": "pulseCheck",
+            "msgOk": "The pulse is still not palpable...",
+            "msgKo": "Check for the pulse!"
+          },
+          "24": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediately the CPR. What are you going to give to the patient meanwhile?",
+            "msgKo": "By PEA you should immediately resume the CPR!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "15"
+            }
+          },
+          "25": {
+            "give": "adrenaline",
+            "msgOk": "You partner prepares and administrates another shot of Adrenaline 1 mg IV push. While the CPR is running you have the feeling the patient is breathing alone...",
+            "msgKo": "Give a third shot of Adrenaline!",
+            "callFunc": {
+              "setCO2": "50"
+            }
+          },
+          "26": {
+            "action": "ecg",
+            "msgOk": "It seems you succeeded on getting back your patient. How can you be sure of it?",
+            "msgKo": "Check again your ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'SinusTach.gif', 120",
+                "setO2": "95",
+                "setBP": "90, 50"
+                }
+          },
+          "27": {
+            "action": "pulseCheck",
+            "msgOk": "The pulse is palpable! You succeeded to get the ROSC (Return of spontaneous circulation).  You rush now with your patient in the nearest Hospital. End of the simulation.",
+            "msgKo": "You should check for the patient pulse!"
+          }
+      }
+    },
+	
+    "acls6": {
+      "title": "A severe COPD patient (hold your breath)",
+      "description": "You get an emergency call from the internal medicine peripheral station (Department of Pneumology) where a patient was found unresponsive by a nurse. You rush there with your emergency team. As soon as you enter the room you can see the patient still sitting on a chair but looking unconscious...",
+      "steps": {
+          "1": {
+            "action": "patientCheck",
+            "msgOk": "The man doesn't answer at your call, he is somehow gasping but you can still feel a weak pulse at the carotid. You move the patient on the patient on the floor. What next?",
+            "msgKo": "You should first check the patient status!"
+          },
+          "2": {
+            "action": ["vitalParams", "ecg"],
+            "allrequest": false,
+            "msgOk": "The ECG and vital parameters are shown on the monitor of the portable defibrillator...",
+            "msgKo": "First get an ECG to assess the hearth rythm!",
+            "callFunc": {
+              "stopCPR": null,
+              "setECG": "'SR.gif', 45",
+              "setBP": "80, 30",
+              "setO2": "70"
+            }
+          },
+          "3": {
+            "give": "oxygen",
+            "msgOk": "Correct! After giving some oxygen the saturation improves a little bit. You go check again for the pulse and it is still there, even if weak. What do you wanna do now?",
+            "msgKo": "Give some oxygen to the patient!",
+            "callFunc": {
+              "setO2": "80"
+                }
+          },
+          "4": {
+            "action": "venousAccess",
+            "msgOk": "You successfully established an IV access. At this very moment the patient start to vomit massively while his oxygen saturations drammaticaly decreases...",
+            "msgKo": "You should think to take an IV access as soon as possible!",
+            "callFunc": {
+              "setLabor": "'Blood sugar', 90, 'mg/dL'",
+                "setO2": "55"
+            }
+          },
+          "5": {
+            "action": "airwayFree",
+            "msgOk": "With the help of a suction device you manage to clear the upper airways of the patient from the vomit. What next?",
+            "msgKo": "The upper airways of the patient are probably obstructed from the vomit. Make it free as soon as possible!"
+          },
+          "6": {
+            "action": "intubate",
+            "msgOk": "You succeed to place the tube and start to ventilate the patient. What is an important practice to implement after you have intubated the patient?",
+            "msgKo": "Intubate the patient now!"
+          },
+          "7": {
+            "action": "lungsCheck",
+            "msgOk": "You check for lungs sound at both sides and find it somehow less pronounced on the right side. The oxygenation improves. CPR is running. You also notice your partner has in the same time applied a CO2 sensor to the tube. You take a look at the ecg track of the patient and...",
+            "msgKo": "After placing the tube you should check for its right position!",
+            "callFunc": {
+              "setO2": "78",
+              "setCO2": "20",
+              "setECG": "'VT.gif', 220",
+              "setBP": "0, 0"
+            }
+          },
+          "8": {
+            "action": "defibrillation",
+            "msgOk": "Correct! A first shock is delivered. What next?",
+            "msgKo": "Give a first shock to the patient!",
+            "callFunc": {
+              "defibrillation": null,
+                "setECG": "'VF.gif', 300"
+            }
+          },
+          "9": {
+            "action": "defibrillation",
+            "msgOk": "Correct! A second shock is delivered. What next?",
+            "msgKo": "Give a second shock to the patient! According to the last resuscitation guidelines a patient with a monitored and witnessed cardiac arrest where the initial rhythm is VF/pVT, you should give up to three quick successive (stacked) shocks",
+            "callFunc": {
+              "defibrillation": null,
+                "setECG": "'VF.gif', 350"
+            }
+          },
+          "10": {
+            "action": "defibrillation",
+            "msgOk": "Correct! A third shock is delivered. What next?",
+            "msgKo": "Give a third shock and prepare to start the CPR!",
+            "callFunc": {
+              "defibrillation": null,
+              "setECG": "'VT.gif', 220"
+            }
+          },
+          "11": {
+            "action": "startCPR",
+            "msgOk": "After the delivering of the third schock you should immediatly start to perform the CPR. What depth should you achieve with chest compression?",
+            "msgKo": "You should start with CPR after delivering the third shock!",
+            "callFunc": {
+              "startCPR": null
+            },
+            "quiz": {
+                "a": "1 cm",
+                "b": "about 5 cm",
+                "c": "al least 3 cm",
+                "d": "It doesn't really matter"
+            }
+          },
+          "12": {
+            "choose": "b",
+            "msgOk": "Correct! What do you ask your partner for next?",
+            "msgKo": "False! The right one is the option b"
+            },
+          "13": {
+            "give": ["adrenaline", "amiodarone"],
+            "allrequest": true,
+            "msgOk": "Good choice! You partner administrates a shot of Adrenaline 1 mg flush IV and Amiodarone 300 mg IV. You start now thinking about reversible causes of VF/pVT. Wich one of the following is the most probabile in this context?",
+            "msgKo": "By VF/pVT after the third shock you should think to give one shot of Adrenaline and one of Amiodaron",
+            "quiz": {
+                "a": "Hypovolemia",
+                "b": "Hyper-/hypokalemia",
+                "c": "Thrombosis coronary/pulmonary",
+                "d": "Tension pneumothorax"
+            }
+          },
+          "14": {
+            "choose": "d",
+            "msgOk": "Correct! Patient with severe COPD can often develop as complication a spontan tension pneumothorax, which can lead to cardiac arrest. How can you prove it?",
+            "msgKo": "False! The right one is the option c",
+            "callFunc": {
+              "completeCPR": null
+                }
+            },
+          "15": {
+            "action": "lungsCheck",
+            "msgOk": "Correct! With the suspect of pneumothorax in your mind you check again for lungs sound at both sides. While on the left side it appears to be good ventilated, on the right side the sound is distinctly less pronunced. What next?!",
+            "msgKo": "To confirm your suspect try to check again for lungs sounds!"
+          },
+          "16": {
+            "action": "relievePnx",
+            "msgOk": "Good job! As soon you place the needle on the collapsed lung the oxygenation suddendly improves. What next?",
+            "msgKo": "You should immediatly act to relieve the pneumothorax!"
+          },
+          "17": {
+            "action": "ecg",
+            "msgOk": "The resulting ECG is displayed on the monitor. What now?",
+            "msgKo": "Check again the ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VF.gif', 250",
+                "setBP": "0, 0",
+                "setO2": "95",
+                "setCO2": "20"
+                }
+          },
+          "18": {
+            "action": "defibrillation",
+            "msgOk": "Correct! A firth shock is delivered. What next?",
+            "msgKo": "Give a firth shock and resume immedialty the CPR!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "19": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediately the CPR. What are you going to give to the patient meanwhile?",
+            "msgKo": "After delivering the shock you should immediately resume the CPR!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "15"
+            }
+          },
+          "20": {
+            "give": "adrenaline",
+            "msgOk": "Good choice again! You partner prepares and administrates again Adrenaline 1 mg IV flush. 2 minutes are now over. What do you do?",
+            "msgKo": "Time to give Adrenaline again!",
+            "callFunc": {
+              "completeCPR": null
+            }
+          },
+          "21": {
+            "action": "ecg",
+            "msgOk": "The resulting ECG is displayed on the monitor. What now?",
+            "msgKo": "Check again the ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'VT.gif', 200",
+                "setBP": "0, 0",
+                "setO2": "90",
+                "setCO2": "5"
+                }
+          },
+          "22": {
+            "action": "defibrillation",
+            "msgOk": "Correct! A fifth shock is delivered. What next?",
+            "msgKo": "Give a fifth shock and resume immedialty the CPR!",
+            "callFunc": {
+              "defibrillation": null
+            }
+          },
+          "23": {
+            "action": "startCPR",
+            "msgOk": "Correct! You resume immediately the CPR. What are you going to give to the patient meanwhile?",
+            "msgKo": "After delivering the shock you should immediately resume the CPR!",
+            "callFunc": {
+                "startCPR": null,
+                "setCO2": "15"
+            }
+          },
+          "24": {
+            "give": "amiodaron150",
+            "msgOk": "You partner prepares and administrates another shot of Amiodarone 150 mg IV. While the CPR is running you have the feeling the patient is breathing alone...",
+            "msgKo": "Give a second shot of Amiodaron (150mg IV)!",
+            "callFunc": {
+              "setCO2": "50"
+            }
+          },
+          "25": {
+            "action": "ecg",
+            "msgOk": "It seems you succeeded on getting back your patient. How can you be sure of it?",
+            "msgKo": "Check again your ECG!",
+            "callFunc": {
+                "stopCPR": null,
+                "setECG": "'SinusTach.gif', 120",
+                "setO2": "95",
+                "setBP": "90, 50"
+                }
+          },
+          "26": {
+            "action": "pulseCheck",
+            "msgOk": "The pulse is palpable! You succeeded to get the ROSC (Return of spontaneous circulation).  You rush now with your patient in the nearest Hospital. End of the simulation.",
+            "msgKo": "You should check for the patient pulse!"
+          }
+      }
+    },
+
+    "acls7": {
+      "title": "What an accident (bleeding all the way)",
+      "description": "It's winter time! You and your team got an emergency call: a boy was on his way with his e-bike when a car hit him at a <strong>speed of about 50km/h</strong>. When you arrive on the scene the boy is awake, responsive and complains about a <strong>diffuse pain on the right side of his belly</strong>...",
+      "steps": {
+          "1": {
+            "action": ["vitalParams"],
+            "allrequest": false,
+            "msgOk": "The ECG and vital parameters are shown on the monitor of the portable defibrillator...what next?",
+            "msgKo": "First get the patient vital parameters!",
+            "callFunc": {
+              "setECG": "'SVT.gif', 120",
+              "setBP": "90, 50",
+              "setO2": "98"
+            }
+          },
+          "2": {
+            "action": "venousAccess",
+            "msgOk": "It's a bit difficult since <strong>the patient appears to be somehow centralized</strong> but you successfully got an IV access and start some fluids. What now?",
+            "msgKo": "You should think to take an IV access as soon as possible!",
+            "callFunc": {
+              "setLabors": "[['Blood sugar', 5.7, 'mmol/l']]",
+              "setO2": "98",
+							"setTemp": "35.7"
+            }
+          },
+          "3": {
+            "action": "bodyCheck",
+            "msgOk": "You performe a complete body check of the patient: the young boy comfirm the belly pain, gives a mild pain in his cervical area  and complains when you apply pressure on his pelvis...what do you do next?",
+            "msgKo": "You should perform a trauma body-check of the patient..."
+          },
+          "4": {
+            "action": "immobilization",
+            "msgOk": "You immobilize the patient and cover him with a warm blanket. While doing that the patient complains about an <strong>increasing pain on his right flank</strong>. <br/>Give him <strong>something for the pain</strong> and <strong>early bleeding management</strong>...",
+            "msgKo": "Think about immobilizing the patient",
+						"callFunc": {
+							"setECG": "'SVT.gif', 140",
+							"setBP": "89, 40",
+							"setO2": "96"
+						}
+          },
+					"5": {
+					"give": ["fentanyl", "tranexam"],
+					"allrequest": true,
+					"msgOk": "Good choice! You partner administrates some Fentanyl and Tranexamic acid. What are contraindications for the last one?",
+					"msgKo": "Give something for the pain and early bleeding management",
+					"quiz": {
+							"a": "Epilepsy",
+							"b": "Hyper-/hypokalemia",
+							"c": "Coronary/pulmonary Thrombosis",
+							"d": "a+c"
+						}
+					},
+				"6": {
+					"choose": "d",
+					"msgOk": "Correct! In patients with Epilepsy or coronary/pulmonary Thrombosis, the administration of Tranexamic acid should be carefully evaluated. <br/>On the way to the hospital your patient cardiocirculatory looks like progressively worsening, What can you give?",
+					"msgKo": "False! The right one is the option d",
+					"callFunc": {
+						"setECG": "'SVT.gif', 145",
+						"setBP": "80, 35",
+						"setO2": "92"
+					}
+				},
+				"7": {
+				"give": ["colloid", "noradrenaline"],
+				"allrequest": true,
+				"msgOk": "Good choice! You set up a Colloid bag and a Noradrenalin pump. Your patient cardiocirculatory improves...what are <strong>contraindications for colloids </strong>?",
+				"msgKo": "Try to improve the cardiocirculatory situation of the patient",
+				"callFunc": {
+					"setECG": "'SVT.gif', 120",
+					"setBP": "100, 45",
+					"setO2": "95"
+				},
+				"quiz": {
+						"a": "Diabetis",
+						"b": "Renal insufficiency or Sepsis",
+						"c": "Epilepsy in patient history",
+						"d": "Glaukom"
+					}
+				},
+				"8": {
+					"choose": "b",
+					"msgOk": "Correct! By Sepsis or patients with renal insuffiency the give of Colloids is contraindicated. Meanwhile you arrived at the hospital and you enter the trauma room.<br/>After handing over the patient, the trauma surgeon performs a FAST ultrasound exam. As you take a look at the ultrasound screen you see the following frozen picture...what it represents?",
+					"msgKo": "False! The right one is the option b",
+					"callFunc": {
+						"setTemp": "36",
+						"loadImg": "'RUQ.png'"
+					},
+					"quiz": {
+						"a": "Unremarkable liver image",
+						"b": "Free fluid in Koller-Pouch (splenorenal recess)",
+						"c": "Free fluid in Morison's Pouch",
+						"d": "None above is correct"
+					}
+				},
+				"9": {
+					"choose": "c",
+					"msgOk": "Correct! Your patient is probably having an abdominal bleeding. The patient looks at the moment cardiocirculatory stabil. After a phisical survey and some blood samplings (which is somehow diffucult by the centralized state of the patient), the trauma sugeon decides for a full-body CT examination.<br/>The CT excludes intracranial hemorrhage but confirms a liver laceration from which the patient has already lost about 2000 ml of blood.<ul><li>The surgeon decides for an emergency surgery and you head to the operating room.</li><li>You now have about <strong>15 minutes time</strong> before the surgery starts.</li></ul>Meanwhile you get back the ROTEM result with some ABG values. What do you ask for to give?",
+					"msgKo": "False! The right one is the option c",
+					"callFunc": {
+						"loadImg": "'rotem_hyperfibrinolyse.png'"
+					}
+				},
+				"10": {
+					"give": ["tranexam"],
+					"msgOk": "Good choice! The ROTEM clearly shows an hyperfibrinolysis state which can be corrected with the admnistration of tranexamic acid.<br/>Take now a look at the AGB values, any way to optimize the coaugulation process?",
+					"msgKo": "Correct the the hyperfibrinolysis and try improving the coaugulation conditions",
+					"callFunc": {
+						"setTemp": "35.2",
+						"setLabors": "[['pH', 7.2, ''], ['Hb', 5.5, 'g/l'], ['Calcium', 1.0, 'mmol/l'], ['Lactat', 6.0, 'mmol/l']]"
+					}
+				},
+				"11": {
+					"give": ["blood", "nabic", "calcium"],
+					"allrequest": true,
+					"msgOk": "Well done! An optimal pH and calcium level play an important role on improving the coaugulation.<br/>Is there any other quick action you can take to better it further?",
+					"msgKo": "Correct the the hyperfibrinolysis and try improving the coaugulation general conditions"
+				},
+				"12": {
+					"action": "warming",
+					"msgOk": "Good choice! Warm management represents an important factor to promote an optimal coaugulation process.<br/>Meanwhile you prepare to intubate the patient. What drugs would you use to induce anesthesia when emorragic shock is suspected?",
+					"msgKo": "Think about warming management!",
+					"quiz": {
+							"a": "Etomidat, Fentanyl, Rocuronium",
+							"b": "Ketamine, Midazolam, Succinylcholine",
+							"c": "Propofol, Fentanyl, Succinylcholine",
+							"d": "All above are correct"
+						}
+				},
+				"13": {
+					"choose": "b",
+					"msgOk": "Right choice! Your patient is now intubated. What´s next?",
+					"msgKo": "False! The right one is the option b",
+					"callFunc": {
+						"setO2": "99",
+						"setCO2": "4.1"
+					}
+				},
+				"14": {
+					"action": "arterialAccess",
+					"msgOk": "Good job! You succesfully place an arterial line and get another sampling for a new ROTEM/AGB test. The body tempeature slowly improves.<br/>You still lack a good venous access. What next?",
+					"msgKo": "You should consider to get a better cardiocirculatory monitor",
+					"callFunc": {
+						"setTemp": "35.7"
+					}
+				},
+				"15": {
+					"action": "centralAccess",
+					"msgOk": "Just in time! You just managed to place a large bore CVC when the operation starts. The surgeon reports a big blood clot and some active bleeding. Time to start with coagulation management! According to the following ROTEM result what are you supposed to give the patient?",
+					"msgKo": "You should consider to place a large bore CVC!",
+					"callFunc": {
+						"setLabors": "[['pH', 7.28, ''], ['Hb', 6.2, 'g/l'], ['Calcium', 1.2, 'mmol/l'], ['Lactat', 8.0, 'mmol/l'], ['Platelets', 50, '/nl'], ['Quick', 35, '%'], ['INR', 2,1, '/nl'], ['PTT', 58, 'sec.']]",
+						"loadImg": "'rotem_fibrinogen.png'"
+					}
+				},
+				"16": {
+					"give": ["fibrinogen"],
+					"msgOk": "Correct! The ROTEM result show clearly a fibrinogen deficiency.<br/>Based on a CT (Clotting Time), CFT (Clot Formation Time) and other labor values, what can you additionaly give in order to improve the coaugulation?",
+					"msgKo": "Give fibrinogen (2-6 gr iv) to improve the patient coagulation"
+				},
+				"17": {
+					"give": ["ppsb"],
+					"msgOk": "Right one! Prothrombin Complex Concentrate (PCC/PPSB) contains blood clotting factors <strong>II, VII, IX, and X</strong>. Is used to reverses the effects of warfarin or in cases of significant bleeding in people with a coagulopathy.<br/>The patient's hemodynamics suddenly worsens. What can you give to improve it?",
+					"msgKo": "Consider Prothrombin Complex Concentrate (PCC/PPSB) to improve CT/CFT time",
+					"callFunc": {
+						"setECG": "'SVT.gif', 150",
+						"setBP": "90, 30",
+						"setO2": "92"
+					}
+				},
+				"18": {
+					"give": ["blood", "colloid", "crystalloid"],
+					"allrequest": true,
+					"msgOk": "Correct! While giving the patient more fluids you get another samplings for a ROTEM and AGB test. You get the following back. What can you give to further improve the patient's coaugulation?",
+					"msgKo": "Try giving more blood and fluids in order to further improve the patient's hemodynamics",
+					"callFunc": {
+						"setECG": "'SVT.gif', 110",
+						"setBP": "100, 50",
+						"setO2": "97",
+						"setLabors": "[['pH', 7.31, ''], ['Hb', 7.5, 'g/l'], ['Lactat', 7.0, 'mmol/l']]",
+						"loadImg": "'rotem_thrombo.png'"
+					}
+				},
+				"19": {
+					"give": ["platelets", "ffp"],
+					"allrequest": true,
+					"msgOk": "Well done! Suddendly your patient cardicirculatory normalizes. You take a final ROTEM and AGB and you get the following back. It looks so much better! The surgeon confirms you the bleeding was stopped. Well done!",
+					"msgKo": "Give Platelets and Fresh Frozen Plasma",
+					"msgAfter": "ONE MORE THING...once the patient is stabil again, you retrace your steps and notice you missed something within your bleeding management process...what was it?",
+					"callFunc": {
+						"setECG": "'SR.gif', 90",
+						"setBP": "110, 50",
+						"setLabors": "[['Lactat', 6.0, 'mmol/l']]",
+						"setO2": "99",
+						"loadImg": "'rotem_normal.png'"
+					}
+				}
+
+				
+      }
+    }
+	
+}

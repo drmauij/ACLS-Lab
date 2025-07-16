@@ -1,0 +1,188 @@
+{
+    "callHelp": {
+        "description": "Call for Help/ACLS team",
+        "steps":{
+            "1":["Calling for help...", 1000]
+        }
+    },
+    "anamnesis": {"description":"Ask for patient medical history"},
+    "patientCheck":{
+        "description":"Check patient status (responsivness, breathing and pulse)",
+        "steps":{
+            "1":["Assessing patient responsivness", 1000],
+            "2":["Checking airways and breathing", 3000],
+            "3":["Checking pulse", 4000]
+        }
+    },
+    "pulseCheck": {
+        "description":"Check patient pulse",
+        "steps":{
+            "1":["Checking patient pulse", 2000]
+        }
+    },
+		"bodyCheck": {
+			"description":"Perform a trauma Body-Check",
+			"steps":{
+					"1":["Assessing CGS", 3000],
+					"2":["Checking pupils reaction", 5000],
+					"3":["Checking for neck pain", 6000],
+					"4":["abdominal pain...", 8000],
+					"5":["pelvic ring fracture...", 9000],
+					"6":["bilateral lungs sound...", 12000],
+					"7":["upper and down limbs mobility, sensitivity and perfusion...", 15000],
+					"8":["spine/back pain...", 17000]
+			}
+		},
+	  "immobilization": {
+        "description":"Immobilize the patient",
+        "steps":{
+            "1":["Applying a cervical collar", 4000],
+						"2":["Applying pelvic slings", 7000],
+						"3":["Immobilize the patien within a vacuum mattress", 15000],
+						"4":["Covering the patient with a warm blanket", 16000]
+        }
+    },
+    "startCPR": {"description":"Start CPR 30:2 for 2 minutes"},
+    "ecg": {
+        "description": "Get patient ECG",
+        "onceTimeSteps": true,
+        "steps":{
+            "1":["Placing the defibrillator paddles", 3000],
+            "2":["Switching on the defibrillator monitor", 3500]
+        }
+    },
+    "vitalParams": {
+        "description":"Get patient vital parameters",
+        "onceTimeSteps": true,
+        "steps":{
+            "1":["Applying the ECG electrodes", 3000],
+            "3":["Measuring the Oxygen", 5100],
+            "2":["Getting the blood pressure", 5000]
+        }
+    },
+    "bloodPressure": {"description":"Get patient blood pressure"},
+    "defibrillation": {
+        "description":"Perform a defibrillation (200J, biphasic)",
+        "steps":{
+            "1":["Loading defibrillator to 200J", 2000],
+            "2":["All clear!", 2500],
+            "3":["Schock delivering!", 2600]
+        }                
+    },
+    "cardioversion": {
+        "description":"Deliver a synchronized shock (100J, biphasic)",
+        "steps":{
+            "1":["Setting defibrillator in sync mode", 500],
+            "2":["Loading defibrillator to 100J", 2500],
+            "3":["All clear!", 3000],
+            "4":["Schock delivering!", 3100]
+        }              
+        },
+    "venousAccess": {
+        "description":"Start a periphere venous (IV) access",
+        "onceTimeSteps": true,
+        "steps":{
+            "1":["Gathering the materials", 6000],
+            "2":["Preparing the iv site", 7000],
+            "3":["Placing the needle", 10000],
+            "4":["Securing the iv access", 11500],
+            "5": ["Administering fluid throught IV line", 13000]
+        }           
+    },
+    "centralAccess": {
+        "description":"Start a central venous catheter (CVC)",
+        "onceTimeSteps": true,
+        "steps":{
+            "1":["Gathering the materials", 6000],
+            "2":["Preparing the puncture site", 7000],
+            "3":["Placing the needle", 10000],
+            "4":["Securing the iv access", 13500],
+            "5": ["Administering fluid throught CVC line", 15000]
+        }           
+    },
+    "arterialAccess": {
+        "description":"Start an arterial access",
+        "onceTimeSteps": true,
+        "steps":{
+            "1":["Gathering the materials", 6000],
+            "2":["Preparing the puncture site", 7000],
+            "3":["Placing the needle", 10000],
+            "4":["Securing the arterial access", 12500]
+        }           
+    },
+    "osseousAccess": {
+        "description":"Start an intraosseous (IO) access",
+        "steps":{
+            "1":["Gathering the materials", 5000],
+            "2":["Identifying the placing site", 5500],
+            "3":["Preparing the puncture site", 7000],
+            "4":["Placing the intraosseous needle (positive marrow aspiration)", 10000],
+            "5":["Securing the intraosseous access", 11500],
+            "6": ["Administering fluid throught IO line", 13000]
+        }
+    },
+    "intubate": {
+        "description":"Intubate the patient",
+        "steps":{
+            "1":["Gathering the materials", 5000],
+            "2":["Inserting the laringoskope", 5500],
+            "3":["Identifying the vocal cords", 8000],
+            "4":["Placing the tube", 10000],
+            "5":["Blocking the cuff/securing the tube", 11500]
+        }
+    },
+    "co2Check": {
+        "description":"Check CO2",
+        "onceTimeSteps": true,
+        "steps":{
+            "1":["Getting out the CO2 sensor", 2000],
+            "2":["Connecting the sensor to the tube", 3000]
+        }
+    },
+    "lungsCheck": {
+        "description":"Check for bilateral lungs sounds",
+        "steps":{
+            "1":["Getting the stethoscope", 1000],
+            "2":["Cheking the left lung", 1500],
+            "3":["Cheking the right lung", 2500]
+        }  
+    },
+    "retrieveTube": {
+        "description":"Retrieve the tube",
+        "steps":{
+            "1":["Unblocking the tube cuff", 600],
+            "2":["Pulling the tube 2 cm back", 1200],
+            "3":["Re-blocking the cuff", 1500]
+        }  
+    },
+    "relievePnx": {
+        "description":"Perform an emergency lung decompression",
+        "steps":{
+            "1":["Gathering the materials", 5000],
+            "2":["Identifying the decompression site", 5500],
+            "3":["Preparing the puncture site", 7000],
+            "4":["Placing the needle (positive air aspiration)", 10000],
+            "5":["Securing the needle", 11500]
+        }
+    },
+    "airwayCheck": {
+        "description":"Check the upper airways for food/blood",
+        "steps":{
+            "1":["Opening the patient mounth", 1000],
+            "2":["Checking the upper airways for food/blood", 2000]
+        }
+    },
+    "airwayFree": {
+        "description":"Free the upper airways from food/blood/secretions",
+        "steps":{
+            "1":["Opening the patient mounth", 500],
+            "2":["Inserting the laringoskope", 1000],
+            "3":["Checking the upper airways for food/blood/vomit", 1500],
+            "4":["Preparing removal tools (Magill's forceps/suction device)", 3000],
+            "5":["Removing food/blood/vomit from the upper airways", 5000]
+        }
+    },
+    "heimlichManeuver": {"description":"Give five abdominal thrusts"},
+    "backBlows": {"description": "Give five back blows between the patient's shoulder blades"},
+		"warming": {"description": "Cover the patient with a warm blanket and/or give warm fluids"}
+}
