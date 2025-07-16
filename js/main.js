@@ -14,12 +14,23 @@
 			// Initialize dropdown after data is loaded
 			$('#case-dropdown').dropdown({
         action: 'activate',
+        allowAdditions: false,
+        fullTextSearch: false,
         onChange: function(value, text, $selectedItem) {
           console.log('Case selected:', value, text);
           $('#case').val(value).trigger('change');
+        },
+        onShow: function() {
+          console.log('Case dropdown menu showing');
+        },
+        onHide: function() {
+          console.log('Case dropdown menu hiding');
         }
       });
-      console.log('Case dropdown initialized');
+      
+      // Force refresh the dropdown to recognize new items
+      $('#case-dropdown').dropdown('refresh');
+      console.log('Case dropdown initialized and refreshed');
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load cases.json:', textStatus, error);
     });
@@ -40,12 +51,17 @@
 			// Initialize dropdown after data is loaded
 			$('#action-dropdown').dropdown({
         action: 'activate',
+        allowAdditions: false,
+        fullTextSearch: false,
         onChange: function(value, text, $selectedItem) {
           console.log('Action selected:', value, text);
           $('#action').val(value).trigger('change');
         }
       });
-      console.log('Action dropdown initialized');
+      
+      // Force refresh the dropdown to recognize new items
+      $('#action-dropdown').dropdown('refresh');
+      console.log('Action dropdown initialized and refreshed');
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load actions.json:', textStatus, error);
     });
@@ -66,12 +82,17 @@
 			// Initialize dropdown after data is loaded
 			$('#drug-dropdown').dropdown({
         action: 'activate',
+        allowAdditions: false,
+        fullTextSearch: false,
         onChange: function(value, text, $selectedItem) {
           console.log('Drug selected:', value, text);
           $('#drug').val(value).trigger('change');
         }
       });
-      console.log('Drug dropdown initialized');
+      
+      // Force refresh the dropdown to recognize new items
+      $('#drug-dropdown').dropdown('refresh');
+      console.log('Drug dropdown initialized and refreshed');
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load drugs.json:', textStatus, error);
     });
@@ -617,34 +638,35 @@ $(document).ready(function() {
     setTimeout(function() {
         console.log('Attempting to initialize dropdowns after delay...');
         
-        // Force initialize all dropdowns with debug
+        // Debug dropdown state
+        console.log('Checking dropdown states after delay...');
+        
         $('.ui.dropdown').each(function(index, element) {
             const $dropdown = $(element);
             const id = $dropdown.attr('id');
-            console.log(`Initializing dropdown: ${id}`);
+            const menuItems = $dropdown.find('.menu .item').length;
+            const hasData = $dropdown.hasClass('loading') || menuItems > 0;
             
-            try {
-                $dropdown.dropdown({
-                    action: 'activate',
-                    onChange: function(value, text, $selectedItem) {
-                        console.log(`Dropdown ${id} changed to:`, value, text);
-                        const inputId = id.replace('-dropdown', '');
-                        $(`#${inputId}`).val(value).trigger('change');
-                    },
-                    onShow: function() {
-                        console.log(`Dropdown ${id} showing`);
-                    },
-                    onHide: function() {
-                        console.log(`Dropdown ${id} hiding`);
+            console.log(`Dropdown ${id}: ${menuItems} items, initialized: ${hasData}`);
+            
+            // Force a click test
+            if (id === 'case-dropdown') {
+                console.log('Testing case dropdown click...');
+                $dropdown.find('.dropdown.icon, .text, .default.text').off('click.debug').on('click.debug', function(e) {
+                    console.log('Case dropdown clicked, current state:', $dropdown.hasClass('active'));
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    if ($dropdown.hasClass('active')) {
+                        $dropdown.dropdown('hide');
+                    } else {
+                        $dropdown.dropdown('show');
                     }
                 });
-                console.log(`Successfully initialized dropdown: ${id}`);
-            } catch (error) {
-                console.error(`Failed to initialize dropdown ${id}:`, error);
             }
         });
         
-        // Check dropdown menu contents
+        // Check specific dropdown menu contents
         $('#case-dropdown .menu .item').each(function(index, item) {
             console.log(`Case option ${index}:`, $(item).text(), $(item).data('value'));
         });
