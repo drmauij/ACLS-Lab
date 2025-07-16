@@ -544,26 +544,30 @@ a:hover {
     position: relative !important;
 }
 
-/* Search input styling for dropdowns - simplified */
+/* Search input styling for dropdowns - following Semantic UI pattern */
 #action-dropdown input.search,
 #drug-dropdown input.search {
     background: rgba(31, 41, 55, 0.95) !important;
     border: 1px solid #4b5563 !important;
     color: #f9fafb !important;
     font-family: 'Poppins', sans-serif !important;
-    font-size: 0.9rem !important;
-    padding: 0.5rem 2.5rem 0.5rem 2.5rem !important;
-    margin: 0.25rem 0.5rem !important;
-    width: calc(100% - 1rem) !important;
+    font-size: 1rem !important;
+    padding: 0.67em 1em !important;
+    margin: 0 !important;
+    width: 100% !important;
     outline: none !important;
-    border-radius: 6px !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: 1px solid #374151 !important;
     box-sizing: border-box !important;
 }
 
 #action-dropdown input.search:focus,
 #drug-dropdown input.search:focus {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+    border-bottom-color: #3b82f6 !important;
+    background: rgba(31, 41, 55, 1) !important;
 }
 
 /* No results message styling */

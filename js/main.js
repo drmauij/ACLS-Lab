@@ -654,52 +654,40 @@ function checkAllDataLoaded() {
                 }
             });
 
-            // Initialize action and drug dropdowns with search functionality
+            // Initialize action and drug dropdowns with proper search selection
             $('#action-dropdown, #drug-dropdown').dropdown({
-                // Basic settings
+                // Core search dropdown settings from Semantic UI docs
                 direction: 'downward',
-                keepOnScreen: false,
                 selectOnKeydown: false,
                 forceSelection: false,
                 allowAdditions: false,
-                hideAdditions: true,
-                action: 'select', // Use default select action
+                action: 'activate',
                 on: 'click',
                 allowReselection: true,
                 allowTab: true,
-                allowCategorySelection: false,
                 fireOnInit: false,
                 transition: 'slide down',
                 duration: 200,
-                glyphWidth: 1.037,
                 preserveHTML: true,
-                sortSelect: false,
                 
-                // Search configuration
-                match: 'text', // Only match text content
-                fullTextSearch: true, // Enable full text search
-                filterRemoteData: false,
+                // Search specific settings
+                match: 'text',
+                fullTextSearch: true,
                 searchingText: 'Searching...',
                 placeholder: 'auto',
-                placeholderText: '',
-                maxSelections: false,
-                useLabels: true,
-                delimiter: false,
-                showOnFocus: true, // Show on focus
+                showOnFocus: true,
                 allowLabelClick: true,
-                minCharacters: 1, // Start searching after 1 character
-                searchDelay: 100, // Small delay for better performance
+                minCharacters: 1,
+                searchDelay: 300,
                 
-                // Event handlers
+                // Z-index management
                 onShow: function() {
-                    var $dropdown = $(this).closest('.ui.dropdown');
-                    $dropdown.css('z-index', '99999999');
+                    $(this).closest('.ui.dropdown').css('z-index', '99999999');
                     return true;
                 },
                 
                 onHide: function() {
-                    var $dropdown = $(this).closest('.ui.dropdown');
-                    $dropdown.css('z-index', '1000');
+                    $(this).closest('.ui.dropdown').css('z-index', '1000');
                     return true;
                 },
                 
