@@ -99,7 +99,7 @@ body {
     padding: 1em;
     background: #252525;
     color: #e8e8e8;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -201,13 +201,16 @@ a {
     text-align: left !important;
 }
 
-#shell-panel {
+#shell-panel,
+.shell-panel,
+[id*="shell"],
+[class*="shell"] {
   height: 500px !important;
   background: linear-gradient(135deg, #3a3a39 0%, #2a2a29 100%) !important;
   color: white !important;
   padding: 1em !important;
   margin: 0.5em 0 0.5em 0 !important;
-  font-family: 'Source Code Pro' !important;
+  font-family: 'Lato', sans-serif !important;
   overflow: scroll !important;
   overflow-x: hidden !important;
   overflow-y: scroll !important;
@@ -215,6 +218,8 @@ a {
   border: 1px solid #4a4a49 !important;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
   display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 #shell-cli .prompt {
