@@ -442,7 +442,7 @@ a:hover {
 /* Shell Panel */
 #shell-panel {
     height: 500px !important;
-    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
+    background: transparent !important;
     color: #e2e8f0 !important;
     padding: 1.5rem !important;
     margin: 1rem 0 !important;
@@ -450,9 +450,9 @@ a:hover {
     font-size: 16px !important;
     line-height: 1.6 !important;
     overflow: auto !important;
-    border: 1px solid #334155 !important;
+    border: none !important;
     border-radius: 12px !important;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: none !important;
 }
 
 /* Monitor Container */
