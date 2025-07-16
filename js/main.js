@@ -568,6 +568,13 @@
         if (arg && caseObj && steps[caseObj.stepCount]) {
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(actionsKey, stepObj.action, arg);
+            
+            // Clear the dropdown after processing
+            setTimeout(function() {
+                $('#action-dropdown').dropdown('clear');
+                $('#action').val('');
+            }, 1000);
+            
             if($("#realtime").is(':checked')){
                 $("#caseTimer").show();
             }else{
@@ -590,6 +597,12 @@
         if (arg && caseObj && steps[caseObj.stepCount]) {
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(drugsKey, stepObj.give, arg);
+            
+            // Clear the dropdown after processing
+            setTimeout(function() {
+                $('#drug-dropdown').dropdown('clear');
+                $('#drug').val('');
+            }, 1000);
         }
     });
 
@@ -623,20 +636,11 @@ function initializeDropdowns() {
         allowReselection: true,
         forceSelection: false,
         fullTextSearch: true,
+        clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Action dropdown onChange:', value, text);
-            if (value && value !== '') {
-                // Temporarily disable the dropdown to prevent loops
-                var $dropdown = $(this);
-                $dropdown.addClass('processing');
-                
+            if (value && value !== '' && value !== null) {
                 $('#action').val(value).trigger('change');
-                
-                // Reset after a short delay
-                setTimeout(function() {
-                    $dropdown.dropdown('clear');
-                    $dropdown.removeClass('processing');
-                }, 500);
             }
         }
     });
@@ -645,20 +649,11 @@ function initializeDropdowns() {
         allowReselection: true, 
         forceSelection: false,
         fullTextSearch: true,
+        clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Drug dropdown onChange:', value, text);
-            if (value && value !== '') {
-                // Temporarily disable the dropdown to prevent loops
-                var $dropdown = $(this);
-                $dropdown.addClass('processing');
-                
+            if (value && value !== '' && value !== null) {
                 $('#drug').val(value).trigger('change');
-                
-                // Reset after a short delay
-                setTimeout(function() {
-                    $dropdown.dropdown('clear');
-                    $dropdown.removeClass('processing');
-                }, 500);
             }
         }
     });
