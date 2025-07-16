@@ -12,30 +12,8 @@
       });
       console.log('Case dropdown menu populated with', $('#case-dropdown .menu .item').length, 'items');
       
-      // Destroy any existing dropdown initialization
-      $('#case-dropdown').dropdown('destroy');
-      
-      // Initialize dropdown with proper Semantic UI settings
-      $('#case-dropdown').dropdown({
-        action: 'activate',
-        on: 'click',
-        allowReselection: true,
-        forceSelection: false,
-        onChange: function(value, text, $selectedItem) {
-          console.log('Case selected:', value, text);
-          if (value) {
-            $('#case').val(value).trigger('change');
-          }
-        },
-        onShow: function() {
-          console.log('Case dropdown menu showing');
-        },
-        onHide: function() {
-          console.log('Case dropdown menu hiding');
-        }
-      });
-
-      console.log('Case dropdown initialized with', $('#case-dropdown .menu .item').length, 'items');
+      dataLoaded.cases = true;
+      checkAllDataLoaded();
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load cases.json:', textStatus, error);
     });
@@ -54,23 +32,8 @@
       });
       console.log('Action dropdown menu populated with', $('#action-dropdown .menu .item').length, 'items');
 
-      // Clear any existing dropdown initialization
-      $('#action-dropdown').dropdown('destroy');
-
-      // Initialize dropdown after data is loaded
-			$('#action-dropdown').dropdown({
-        action: 'activate',
-        fullTextSearch: false,
-        placeholder: 'Choose an Action to perform...',
-        onChange: function(value, text, $selectedItem) {
-          console.log('Action selected:', value, text);
-          if (value && value !== '') {
-            $('#action').val(value).trigger('change');
-          }
-        }
-      });
-
-      console.log('Action dropdown initialized');
+      dataLoaded.actions = true;
+      checkAllDataLoaded();
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load actions.json:', textStatus, error);
     });
@@ -89,23 +52,8 @@
       });
       console.log('Drug dropdown menu populated with', $('#drug-dropdown .menu .item').length, 'items');
 
-      // Clear any existing dropdown initialization
-      $('#drug-dropdown').dropdown('destroy');
-
-      // Initialize dropdown after data is loaded
-			$('#drug-dropdown').dropdown({
-        action: 'activate',
-        fullTextSearch: false,
-        placeholder: 'Choose a Drug to give...',
-        onChange: function(value, text, $selectedItem) {
-          console.log('Drug selected:', value, text);
-          if (value && value !== '') {
-            $('#drug').val(value).trigger('change');
-          }
-        }
-      });
-
-      console.log('Drug dropdown initialized');
+      dataLoaded.drugs = true;
+      checkAllDataLoaded();
     }).fail(function(jqxhr, textStatus, error) {
       console.error('Failed to load drugs.json:', textStatus, error);
     });
@@ -438,6 +386,33 @@
     var steps = {};
     var onceTimeStepsActions = []; // track the onceTimeSteps actions
     var caseTimer = null;
+    // Set up individual change handlers after initialization
+    $(document).on('ready', function() {
+        // Case dropdown change handler
+        $('#case-dropdown').on('change', function(value, text, $selectedItem) {
+            console.log('Case selected:', value, text);
+            if (value) {
+                $('#case').val(value).trigger('change');
+            }
+        });
+        
+        // Action dropdown change handler  
+        $('#action-dropdown').on('change', function(value, text, $selectedItem) {
+            console.log('Action selected:', value, text);
+            if (value && value !== '') {
+                $('#action').val(value).trigger('change');
+            }
+        });
+        
+        // Drug dropdown change handler
+        $('#drug-dropdown').on('change', function(value, text, $selectedItem) {
+            console.log('Drug selected:', value, text);
+            if (value && value !== '') {
+                $('#drug').val(value).trigger('change');
+            }
+        });
+    });
+
     // Cases
     $('#case').on('change', function(evt, params) {
         var arg = $(this).val();
@@ -639,13 +614,34 @@
         $('#drug').val('').trigger('chosen:updated');
     });
 
-$(document).ready(function() {
-    console.log('DOM ready - initializing dropdowns with debug info');
+var dataLoaded = {
+    cases: false,
+    actions: false,
+    drugs: false
+};
 
-    // Debug: Check if dropdown elements exist
-    console.log('Case dropdown element exists:', $('#case-dropdown').length > 0);
-    console.log('Action dropdown element exists:', $('#action-dropdown').length > 0);
-    console.log('Drug dropdown element exists:', $('#drug-dropdown').length > 0);
+function checkAllDataLoaded() {
+    if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs) {
+        console.log('All data loaded - initializing all dropdowns');
+        
+        // Clear any existing initializations
+        $('.ui.dropdown').dropdown('destroy');
+        
+        // Initialize all dropdowns with consistent settings
+        $('.ui.dropdown').dropdown({
+            action: 'activate',
+            on: 'click',
+            allowReselection: true,
+            forceSelection: false,
+            selectOnKeydown: false
+        });
+        
+        console.log('All dropdowns initialized successfully');
+    }
+}
+
+$(document).ready(function() {
+    console.log('DOM ready - waiting for data to load before dropdown initialization');
 
     // Add modern UI enhancements
     initializeModernUI();
@@ -654,13 +650,6 @@ $(document).ready(function() {
 function initializeModernUI() {
     // Add slide-in animation to main elements
     $('.ui.grid, #shell-panel, #monitor-container, #logBox').addClass('slide-in');
-
-    // Enhanced dropdown interactions
-    $('.ui.dropdown').on('show.bs.dropdown', function() {
-        $(this).addClass('loading');
-    }).on('shown.bs.dropdown', function() {
-        $(this).removeClass('loading');
-    });
 
     // Add smooth scrolling and focus effects
     $('input, select, textarea').focus(function() {
