@@ -656,64 +656,63 @@ function checkAllDataLoaded() {
 
             // Initialize action and drug dropdowns with search functionality
             $('#action-dropdown, #drug-dropdown').dropdown({
-                // Enable search functionality
-                apiSettings: false,
-                cache: false,
-                direction: 'downward',
-                keepOnScreen: false,
-                selectOnKeydown: false,
-                forceSelection: false,
-                allowAdditions: false,
-                hideAdditions: true,
-                action: 'activate',
+                // Core search settings
+                action: 'nothing', // Prevent auto-close on selection
                 on: 'click',
                 allowReselection: true,
                 allowTab: true,
-                allowCategorySelection: false,
-                fireOnInit: false,
-                transition: 'slide down',
-                duration: 200,
-                glyphWidth: 1.037,
-                preserveHTML: true,
-                sortSelect: false,
+                forceSelection: false,
+                allowAdditions: false,
+                
+                // Search configuration
                 match: 'text',
                 fullTextSearch: true,
                 filterRemoteData: false,
-                searchingText: 'Searching...',
-                placeholder: 'auto',
-                placeholderText: 'Type to search...',
-                maxSelections: false,
-                useLabels: true,
-                delimiter: false,
-                showOnFocus: true,
-                allowLabelClick: true,
-                minCharacters: 1,
-                searchDelay: 100,
+                minCharacters: 0, // Start searching immediately
+                searchDelay: 0, // No delay
+                
+                // Display settings
+                direction: 'downward',
+                transition: 'fade',
+                duration: 150,
+                showOnFocus: false, // Don't auto-show to allow typing first
+                preserveHTML: true,
+                
+                // Event handlers
                 onShow: function() {
                     var $dropdown = $(this).closest('.ui.dropdown');
                     $dropdown.css('z-index', '99999999');
                     
-                    // Add search class to enable search input
-                    $dropdown.addClass('search selection');
-                    
-                    // Ensure search input is visible and functional
+                    // Focus on search input after dropdown opens
                     setTimeout(function() {
                         var $search = $dropdown.find('input.search');
-                        if ($search.length === 0) {
-                            // Create search input if it doesn't exist
-                            $dropdown.prepend('<input class="search" autocomplete="off" tabindex="0" style="width: 100%;">');
-                            $search = $dropdown.find('input.search');
+                        if ($search.length > 0) {
+                            $search.focus();
                         }
-                        $search.focus();
-                    }, 50);
+                    }, 100);
                     
                     return true;
                 },
+                
                 onHide: function() {
                     var $dropdown = $(this).closest('.ui.dropdown');
                     $dropdown.css('z-index', '1000');
                     return true;
                 },
+                
+                // Handle item selection manually to prevent auto-close
+                onSelect: function(value, text, $selectedItem) {
+                    var $dropdown = $(this).closest('.ui.dropdown');
+                    var dropdownId = $dropdown.attr('id');
+                    
+                    // Set the hidden input value
+                    $dropdown.find('input[type="hidden"]').val(value).trigger('change');
+                    
+                    // Clear search and close dropdown
+                    $dropdown.dropdown('hide');
+                    $dropdown.dropdown('clear');
+                },
+                
                 message: {
                     noResults: 'No matching items found. Try different keywords.'
                 }
