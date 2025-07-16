@@ -95,37 +95,36 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+/* Semantic UI Dark Theme Base */
 html,
 body {
     padding: 1em;
-    background: #1a1a1a !important;
-    background-color: #1a1a1a !important;
-    color: #e8e8e8 !important;
+    background: #1b1c1d !important;
+    background-color: #1b1c1d !important;
+    color: rgba(255, 255, 255, 0.9) !important;
     font-family: 'Poppins', sans-serif !important;
 }
 
+/* Semantic UI Inverted Theme */
 body.ui.inverted,
 .ui.inverted {
-    background: #1a1a1a !important;
-    background-color: #1a1a1a !important;
-    color: #e8e8e8 !important;
+    background: #1b1c1d !important;
+    background-color: #1b1c1d !important;
+    color: rgba(255, 255, 255, 0.9) !important;
     font-family: 'Poppins', sans-serif !important;
 }
 
-/* Override any white backgrounds from Semantic UI */
-.ui.container-fluid,
-.ui.container,
-.ui.grid,
-.ui.column,
-.ui.segment {
+/* Dark theme containers */
+.ui.inverted.container-fluid,
+.ui.inverted.container,
+.ui.inverted.grid {
     background: transparent !important;
-    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.9) !important;
 }
 
-/* Ensure all elements inherit dark theme */
-* {
-    background-color: inherit !important;
-    color: inherit !important;
+.ui.inverted.column {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.9) !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -187,46 +186,47 @@ a {
     height: 400px;
 }
 
-/* Semantic UI Dropdown Styling */
+/* Semantic UI Dropdown Dark Theme */
 .ui.dropdown {
-    background: #2c2c2c !important;
-    border: 1px solid #404040 !important;
-    color: #e8e8e8 !important;
+    background: #1b1c1d !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
     font-family: 'Poppins', sans-serif !important;
 }
 
 .ui.dropdown > .dropdown.icon {
-    color: #e8e8e8 !important;
+    color: rgba(255, 255, 255, 0.7) !important;
 }
 
 .ui.dropdown > .text {
-    color: #e8e8e8 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .ui.dropdown > .default.text {
-    color: #b6b6b6 !important;
+    color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .ui.dropdown .menu {
-    background: #2c2c2c !important;
-    border: 1px solid #404040 !important;
+    background: #1b1c1d !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.15) !important;
 }
 
 .ui.dropdown .menu > .item {
-    background: #2c2c2c !important;
-    color: #e8e8e8 !important;
-    border-top: 1px solid #404040 !important;
+    background: #1b1c1d !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
     font-family: 'Poppins', sans-serif !important;
 }
 
 .ui.dropdown .menu > .item:hover {
-    background: #404040 !important;
-    color: #e8e8e8 !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
 }
 
 .ui.dropdown .menu > .item.selected {
-    background: #404040 !important;
-    color: #e8e8e8 !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
 }
 
 /* Checkbox styling */
@@ -361,19 +361,20 @@ log {
 }
 
 
-/* Semantic UI Segment Overrides */
-.ui.segment {
-    background: #2c2c2c !important;
-    background-color: #2c2c2c !important;
-    color: #e8e8e8 !important;
-    border: 1px solid #404040 !important;
+/* Semantic UI Segment Dark Theme */
+.ui.inverted.segment {
+    background: #1b1c1d !important;
+    background-color: #1b1c1d !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 1px 2px 0 rgba(255, 255, 255, 0.1) !important;
 }
 
-.ui.inverted.segment {
-    background: #2c2c2c !important;
-    background-color: #2c2c2c !important;
-    color: #e8e8e8 !important;
-    border: 1px solid #404040 !important;
+.ui.segment {
+    background: #1b1c1d !important;
+    background-color: #1b1c1d !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Semantic UI Table Overrides */
