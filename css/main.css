@@ -942,7 +942,7 @@ body.monitor-visible #main-content {
     }
 
     #app-header {
-        padding: 0.5rem;
+        padding: 0.5rem 0.5rem 0.25rem 0.5rem !important;
     }
 
     #app-footer {
@@ -950,15 +950,16 @@ body.monitor-visible #main-content {
     }
 
     #main-content {
-        top: 80px;
+        top: 70px !important;
         bottom: 120px;
         padding: 0.5rem;
-        overflow-y: auto;
-        overflow-x: hidden;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
     }
 
     body.monitor-visible #main-content {
-        top: 80px !important;
+        top: 70px !important;
     }
 
     .desktop-layout {
@@ -967,12 +968,14 @@ body.monitor-visible #main-content {
 
     .mobile-layout {
         display: block;
+        height: 100%;
+        overflow-y: auto !important;
     }
 
     .ui.horizontal.list {
-        padding: 0.5rem !important;
+        padding: 0.5rem 0.5rem 0.25rem 0.5rem !important;
         border-radius: 12px;
-        margin-bottom: 0.5rem !important;
+        margin-bottom: 0.25rem !important;
     }
 
     /* Force action/drug dropdowns to stay in one row */
@@ -1001,6 +1004,21 @@ body.monitor-visible #main-content {
         margin-bottom: 0.5rem !important;
         font-size: 0.9rem !important;
     }
+
+    /* Force scenario dropdown to open upward on mobile */
+    #case-dropdown .menu {
+        bottom: 100% !important;
+        top: auto !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+    /* Ensure shell panel and mobile content scroll properly */
+    #shell-panel,
+    #shell-panel-mobile {
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        max-height: calc(100vh - 300px) !important;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -1014,19 +1032,25 @@ body.monitor-visible #main-content {
         margin: 0;
     }
 
-    #shell-panel {
-        height: 250px !important;
+    #shell-panel,
+    #shell-panel-mobile {
+        min-height: 200px !important;
+        max-height: calc(100vh - 250px) !important;
         font-size: 12px !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
     }
     
     #main-content {
-        top: 70px;
+        top: 60px !important;
         bottom: 110px;
         padding: 0.25rem;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
     }
 
     #app-header {
-        padding: 0.25rem;
+        padding: 0.25rem 0.25rem 0.125rem 0.25rem !important;
     }
 
     #app-footer {
@@ -1041,6 +1065,15 @@ body.monitor-visible #main-content {
 
     #menu .ui.stackable.grid > .column {
         padding: 0 0.125rem !important;
+    }
+
+    /* Force scenario dropdown to open upward on very small screens */
+    #case-dropdown .menu {
+        bottom: 100% !important;
+        top: auto !important;
+        margin-bottom: 0.5rem !important;
+        max-height: 200px !important;
+        overflow-y: auto !important;
     }
 }
 
