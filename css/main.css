@@ -856,6 +856,17 @@ code {
     margin-bottom: 0.25rem !important;
 }
 
+/* Dynamic layout adjustments when monitor is visible */
+body.monitor-visible #main-content {
+    top: 180px !important;
+}
+
+@media only screen and (max-width: 768px) {
+    body.monitor-visible #main-content {
+        top: 140px !important;
+    }
+}
+
 /* Enhanced Responsive Design for Sticky Layout */
 @media only screen and (max-width: 768px) {
     body {
@@ -871,8 +882,8 @@ code {
     }
 
     #main-content {
-        top: 120px;
-        bottom: 100px;
+        top: 100px;
+        bottom: 120px;
         flex-direction: column;
     }
 
