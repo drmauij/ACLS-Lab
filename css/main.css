@@ -896,7 +896,7 @@ code {
     z-index: 1000;
     background: linear-gradient(145deg, #0a0a0a 0%, #111827 100%);
     border-bottom: 1px solid #374151;
-    padding: 0.75rem 1rem;
+    padding: 1rem 1.5rem 0.5rem 1.5rem;
     backdrop-filter: blur(10px);
     height: 80px;
 }
