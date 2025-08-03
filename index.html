@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -6,19 +5,19 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-	
+
 	<!-- SEO Meta Tags -->
 	<meta name="description" content="Interactive ACLS (Advanced Cardiac Life Support) simulator for medical training. Practice emergency scenarios, learn CPR techniques, and master life-saving procedures with realistic simulations.">
 	<meta name="keywords" content="ACLS, Advanced Cardiac Life Support, medical simulation, CPR training, emergency medicine, medical education, cardiac arrest, resuscitation">
 	<meta name="author" content="Acutiq">
 	<meta name="robots" content="index, follow">
-	
+
 	<!-- Open Graph Meta Tags -->
 	<meta property="og:title" content="ACLS Simulator - Interactive Medical Training Tool">
 	<meta property="og:description" content="Master ACLS procedures with our interactive simulator. Practice emergency scenarios and life-saving techniques in a realistic training environment.">
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="img/defi.png">
-	
+
 	<!-- Twitter Card Meta Tags -->
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="ACLS Simulator - Interactive Medical Training Tool">
@@ -77,21 +76,11 @@
 				<!-- Monitor Container in header for better visibility -->
 				<div id="monitor-container" class="ui inverted segment" style="margin: 0; padding: 0.75rem; display: none; font-size: 0.85rem;">
 					<div id="monitor">
-						<div class="ui inverted grid" style="margin: 0;">
-							<div class="eight wide column" style="padding: 0.25rem;">
-								<div class="timers-section">
-									<p id="caseTimer" class="caseTimer" style="display:none; margin: 0.25rem 0; font-size: 0.75rem;">Scenario time: <span id="caseMinutes">00</span>:<span id="caseSeconds">00</span></p>
-									<p id="cprTimer" class="cprTimer" style="display:none; margin: 0.25rem 0; font-size: 0.75rem;">CPR time: <span id="cprMinutes">00</span>:<span id="cprSeconds">00</span></p>
-								</div>
-							</div>
-							<div class="eight wide column" style="padding: 0.25rem;">
-								<div id="tools" class="tools-section" style="text-align: right;">
-									<img id="cprImg" alt="running cpr" src="img/cpr.png" style="display:none; width: 20px;"/>
-									<span id="cprNummer" class="cprNummer" style="display:none; font-size: 0.7rem;">x<span id="cprNummerValue">0</span></span>
-									<img id="defiLogo" alt="Numbers of performed defibrillations" src="img/defi2.png" style="display:none; width: 20px;" />
-									<span id="defiNummer" class="defiNummer" style="display:none; font-size: 0.7rem;">x<span id="defiNummerValue">0</span></span>
-								</div>
-							</div>
+						<div id="tools" class="tools-section" style="text-align: center; padding: 0.5rem;">
+							<img id="cprImg" alt="running cpr" src="img/cpr.png" style="display:none; width: 20px; margin-right: 0.5rem;"/>
+							<span id="cprNummer" class="cprNummer" style="display:none; font-size: 0.7rem; margin-right: 1rem;">x<span id="cprNummerValue">0</span></span>
+							<img id="defiLogo" alt="Numbers of performed defibrillations" src="img/defi2.png" style="display:none; width: 20px; margin-right: 0.5rem;" />
+							<span id="defiNummer" class="defiNummer" style="display:none; font-size: 0.7rem;">x<span id="defiNummerValue">0</span></span>
 						</div>
 					</div>
 				</div>
@@ -185,6 +174,12 @@
 
 	<!-- Sticky Footer -->
 	<footer id="app-footer" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; background: linear-gradient(145deg, #111827 0%, #1f2937 100%); border-top: 1px solid #374151; padding: 1rem;">
+		<div id="monitor">
+			<div class="timers-section"  style="text-align: center;">
+				<p id="caseTimer" class="caseTimer" style="display:none; margin: 0.25rem 0; font-size: 0.75rem;">Scenario time: <span id="caseMinutes">00</span>:<span id="caseSeconds">00</span></p>
+				<p id="cprTimer" class="cprTimer" style="display:none; margin: 0.25rem 0; font-size: 0.75rem;">CPR time: <span id="cprMinutes">00</span>:<span id="cprSeconds">00</span></p>
+			</div>
+		</div>
 		<div id="menu" style="display:none; margin: 0;">
 			<div class="ui stackable two column grid" style="margin: 0;">
 				<div class="column" style="padding: 0.5rem;">
@@ -209,7 +204,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- Acutiq Attribution -->
 		<div style="margin-top: 0.5rem; padding: 0.5rem 0; text-align: center; border-top: 1px solid #374151;">
 			<p style="margin: 0; color: #6b7280; font-size: 0.75rem; opacity: 0.7;">

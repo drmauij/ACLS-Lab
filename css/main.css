@@ -701,12 +701,13 @@ a:hover {
 .caseTimer, .cprTimer {
     background: rgba(59, 130, 246, 0.1);
     color: #93c5fd;
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 6px;
     font-family: 'JetBrains Mono', Consolas, monospace;
     font-weight: 600;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     border: 1px solid rgba(59, 130, 246, 0.2);
+    display: inline-block;
 }
 
 .cprTimer {
@@ -879,6 +880,17 @@ body.monitor-visible #main-content {
 
     #app-footer {
         padding: 0.75rem;
+    }
+    
+    .timers-section {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        align-items: center !important;
+    }
+    
+    .caseTimer, .cprTimer {
+        font-size: 0.75rem !important;
+        padding: 0.3rem 0.6rem !important;
     }
 
     #main-content {
