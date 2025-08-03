@@ -102,13 +102,37 @@ textarea {
 }
 
 html,
-body,
-html *,
-body * {
+body {
     background: #0a0a0a !important;
     background-color: #0a0a0a !important;
     color: #e5e7eb !important;
     border-color: #374151 !important;
+}
+
+/* Apply dark theme more selectively to avoid text background issues */
+.ui.dropdown,
+.ui.dropdown .menu,
+.ui.dropdown .menu > .item,
+.ui.segment,
+.ui.grid,
+.ui.column,
+.ui.container,
+.ui.list {
+    background-color: transparent !important;
+    color: #e5e7eb !important;
+    border-color: #374151 !important;
+}
+
+/* Ensure text elements don't have forced backgrounds */
+span, 
+div:not(.ui),
+p,
+a,
+label,
+.text,
+.default.text {
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 html,
@@ -286,10 +310,14 @@ a:hover {
 .ui.dropdown > .text,
 .ui.dropdown > .default.text {
     color: #e5e7eb !important;
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 .ui.dropdown > .default.text {
     opacity: 0.7;
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 /* Dropdown Menu */
@@ -487,6 +515,11 @@ a:hover {
     border-radius: 12px !important;
     box-shadow: none !important;
     min-height: 0;
+}
+
+#shell-panel * {
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 /* Monitor Container */
