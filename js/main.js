@@ -832,6 +832,7 @@ function initializeDropdowns() {
         search: false,
         selectOnKeydown: false,
         clearable: true,
+        direction: 'upward',
         onChange: function(value, text, $selectedItem) {
             console.log('Action dropdown onChange:', value, text);
             if (value && value !== '' && value !== null && value !== $('#action').val() && !processingActionChange) {
@@ -851,6 +852,7 @@ function initializeDropdowns() {
         search: false,
         selectOnKeydown: false,
         clearable: true,
+        direction: 'upward',
         onChange: function(value, text, $selectedItem) {
             console.log('Drug dropdown onChange:', value, text);
             if (value && value !== '' && value !== null && value !== $('#drug').val() && !processingDrugChange) {

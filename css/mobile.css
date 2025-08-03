@@ -423,4 +423,13 @@
         -ms-user-select: none !important;
         user-select: none !important;
     }
+    
+    /* Mobile dropdown positioning */
+    #action-dropdown .menu,
+    #drug-dropdown .menu {
+        max-height: 50vh !important;
+        bottom: 100% !important;
+        top: auto !important;
+        margin-bottom: 2px !important;
+    }
 }

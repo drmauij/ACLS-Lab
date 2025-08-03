@@ -310,6 +310,28 @@ a:hover {
     background: #1f2937 !important;
     border: 1px solid #374151 !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+}
+
+/* Force upward direction for action and drug dropdowns */
+#action-dropdown .menu,
+#drug-dropdown .menu {
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    bottom: 100% !important;
+    top: auto !important;
+    margin-bottom: 2px !important;
+    margin-top: 0 !important;
+}
+
+/* Ensure dropdown menus stay within viewport */
+#action-dropdown.ui.dropdown.upward .menu,
+#drug-dropdown.ui.dropdown.upward .menu {
+    bottom: 100% !important;
+    top: auto !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
 }
 
 .ui.dropdown .menu > .item {
