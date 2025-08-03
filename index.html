@@ -68,124 +68,135 @@
 	<main id="main-content">
 		<div class="ui inverted container-fluid" style="height: 100%; display: flex; flex-direction: column;">
 			
-			<!-- Scenario Selection - Now in main content -->
-			<div class="ui inverted stackable grid scenario-selection-container">
-				<div class="sixteen wide column">
-					<div class="ui fluid selection dropdown" id="case-dropdown">
-						<input type="hidden" name="case" id="case">
-						<i class="dropdown icon"></i>
-						<div class="default text">Choose a Scenario to start with...</div>
-						<div class="menu">
-							<!-- Options will be populated by JavaScript -->
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<!-- Desktop Layout -->
-			<div class="desktop-layout">
-				<div class="ui inverted stackable grid" style="flex: 1; margin: 0;">
-					<!-- Left Column - Shell Panel -->
-					<div class="ten wide column" style="display: flex; flex-direction: column;">
-						<div id="shell-panel" style="flex: 1; overflow-y: auto;">
-							ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different
-							ACLS scenarios. Choose from the above dropdown menu a scenario to start your simulation. Have fun!
+			<!-- Main Container with Sidebar Layout -->
+			<div class="main-container" style="flex: 1;">
+				
+				<!-- Content Area -->
+				<div class="content-area">
+					<!-- Scenario Selection - Now in main content -->
+					<div class="ui inverted stackable grid scenario-selection-container">
+						<div class="sixteen wide column">
+							<div class="ui fluid selection dropdown" id="case-dropdown">
+								<input type="hidden" name="case" id="case">
+								<i class="dropdown icon"></i>
+								<div class="default text">Choose a Scenario to start with...</div>
+								<div class="menu">
+									<!-- Options will be populated by JavaScript -->
+								</div>
+							</div>
 						</div>
 					</div>
 					
-					<!-- Right Column - Monitor and Log -->
-					<div class="six wide column" style="display: flex; flex-direction: column;">
+					<!-- Desktop Layout -->
+					<div class="desktop-layout">
+						<div class="ui inverted stackable grid" style="flex: 1; margin: 0;">
+							<!-- Shell Panel takes full width now -->
+							<div class="sixteen wide column" style="display: flex; flex-direction: column;">
+								<div id="shell-panel" style="flex: 1; overflow-y: auto;">
+									ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different
+									ACLS scenarios. Choose from the above dropdown menu a scenario to start your simulation. Have fun!
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Mobile Layout -->
+					<div class="mobile-layout" style="display: none;">
+						<div style="flex: 1; display: flex; flex-direction: column;">
+							<!-- Shell Panel -->
+							<div id="shell-panel-mobile" style="flex: 1; overflow-y: auto; min-height: 200px; margin-bottom: 1rem;">
+								ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different
+								ACLS scenarios. Choose a scenario from above to start your simulation. Have fun!
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Sidebar for Monitor and Log -->
+				<aside class="sidebar">
+					<div class="sidebar-content">
 						<!-- Monitor Container -->
-						<div id="monitor-container" class="ui inverted segment" style="margin: 0 0 1rem 0; padding: 1rem; display: none;">
-							<div id="monitor">
-								<div class="ui inverted grid">
-									<div class="eight wide column">
-										<div class="timers-section">
-											<p id="caseTimer" class="caseTimer" style="display:none;">Scenario time: <span id="caseMinutes">00</span>:<span id="caseSeconds">00</span></p>
-											<p id="cprTimer" class="cprTimer" style="display:none;">CPR time: <span id="cprMinutes">00</span>:<span id="cprSeconds">00</span></p>
+						<div class="sidebar-monitor">
+							<div id="monitor-container" class="ui inverted segment" style="margin: 0; padding: 1rem; display: none;">
+								<div id="monitor">
+									<div class="ui inverted grid">
+										<div class="eight wide column">
+											<div class="timers-section">
+												<p id="caseTimer" class="caseTimer" style="display:none;">Scenario time: <span id="caseMinutes">00</span>:<span id="caseSeconds">00</span></p>
+												<p id="cprTimer" class="cprTimer" style="display:none;">CPR time: <span id="cprMinutes">00</span>:<span id="cprSeconds">00</span></p>
+											</div>
+										</div>
+										<div class="eight wide column">
+											<div id="tools" class="tools-section" style="text-align: right;">
+												<img id="cprImg" alt="running cpr" src="img/cpr.png" style="display:none;"/>
+												<span id="cprNummer" class="cprNummer" style="display:none;">x<span id="cprNummerValue">0</span></span>
+												<img id="defiLogo" alt="Numbers of performed defibrillations" src="img/defi2.png" style="display:none;" />
+												<span id="defiNummer" class="defiNummer" style="display:none;">x<span id="defiNummerValue">0</span></span>
+											</div>
 										</div>
 									</div>
-									<div class="eight wide column">
-										<div id="tools" class="tools-section" style="text-align: right;">
-											<img id="cprImg" alt="running cpr" src="img/cpr.png" style="display:none;"/>
-											<span id="cprNummer" class="cprNummer" style="display:none;">x<span id="cprNummerValue">0</span></span>
-											<img id="defiLogo" alt="Numbers of performed defibrillations" src="img/defi2.png" style="display:none;" />
-											<span id="defiNummer" class="defiNummer" style="display:none;">x<span id="defiNummerValue">0</span></span>
-										</div>
-									</div>
-								</div>
 
-								<div id="vitalParam" style="padding: 0.5rem; margin-top: 0.5rem; display:none; font-size: 1.2rem;">
-									<div class="ui two column grid">
-										<div class="column">
-											<div id="hf" style="color: #00ff00; margin-bottom: 0.5rem;">
-												HF <span id="hfvalue"></span> bpm
+									<div id="vitalParam" style="padding: 0.5rem; margin-top: 0.5rem; display:none; font-size: 1.2rem;">
+										<div class="ui two column grid">
+											<div class="column">
+												<div id="hf" style="color: #00ff00; margin-bottom: 0.5rem;">
+													HF <span id="hfvalue"></span> bpm
+												</div>
+												<div id="bp" style="color: #dc3545; margin-bottom: 0.5rem;">
+													BP <span id="bpvalue"></span> mmHg
+												</div>
 											</div>
-											<div id="bp" style="color: #dc3545; margin-bottom: 0.5rem;">
-												BP <span id="bpvalue"></span> mmHg
+											<div class="column">
+												<div id="sat" style="color: #17a2b8; margin-bottom: 0.5rem;">Sat <span id="satvalue"></span>%</div>
+												<div id="co2" style="display:none; color: #ffc107; margin-bottom: 0.5rem;">
+													CO2 <span style="font-size: 0.8rem;">exp</span> <span id="co2value"></span>
+												</div>
+												<div id="temp" style="color:#fd7e14; display:none; font-size: 1rem;">
+													Temp <span id="tempvalue"></span> °C
+												</div>
 											</div>
 										</div>
-										<div class="column">
-											<div id="sat" style="color: #17a2b8; margin-bottom: 0.5rem;">Sat <span id="satvalue"></span>%</div>
-											<div id="co2" style="display:none; color: #ffc107; margin-bottom: 0.5rem;">
-												CO2 <span style="font-size: 0.8rem;">exp</span> <span id="co2value"></span>
-											</div>
-											<div id="temp" style="color:#fd7e14; display:none; font-size: 1rem;">
-												Temp <span id="tempvalue"></span> °C
-											</div>
+										<div style="margin-top: 0.5rem;">
+											<img id="ecgImg" alt="ECG monitor" src="img/" style="border: 1px solid #3a3a39; display:none; max-width: 100%; height: auto;" />
 										</div>
 									</div>
-									<div style="margin-top: 0.5rem;">
-										<img id="ecgImg" alt="ECG monitor" src="img/" style="border: 1px solid #3a3a39; display:none; max-width: 100%; height: auto;" />
-									</div>
-								</div>
 
-								<div id="labor" style="padding: 0.5rem; margin-top: 0.5rem; display:none;">
-									<h4 class="ui inverted header">Labor data</h4>
-									<div style="overflow-x: auto;">
-										<table id="laborTable" class="ui inverted table">
-											<thead>
-												<tr>
-													<th>Parameter</th>
-													<th>Value</th>
-												</tr>
-											</thead>
-											<tbody></tbody>
-										</table>
+									<div id="labor" style="padding: 0.5rem; margin-top: 0.5rem; display:none;">
+										<h4 class="ui inverted header">Labor data</h4>
+										<div style="overflow-x: auto;">
+											<table id="laborTable" class="ui inverted table">
+												<thead>
+													<tr>
+														<th>Parameter</th>
+														<th>Value</th>
+													</tr>
+												</thead>
+												<tbody></tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						
 						<!-- Log Box -->
-						<div id="logBox" style="flex: 1; overflow-y: auto; min-height: 200px;">
-							<h5 class="ui inverted header" style="margin-bottom: 1rem;">Feedback Log</h5>
-							<div id="log" style="display:inline-block; text-align: left;"></div>
+						<div class="sidebar-log">
+							<div id="logBox" style="flex: 1; overflow-y: auto; min-height: 200px;">
+								<h5 class="ui inverted header" style="margin-bottom: 1rem;">Feedback Log</h5>
+								<div id="log" style="display:inline-block; text-align: left;"></div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<!-- Mobile Layout -->
-			<div class="mobile-layout" style="display: none;">
-				<div style="flex: 1; display: flex; flex-direction: column;">
-					<!-- Shell Panel -->
-					<div id="shell-panel-mobile" style="flex: 1; overflow-y: auto; min-height: 200px; margin-bottom: 1rem;">
-						ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different
-						ACLS scenarios. Choose a scenario from above to start your simulation. Have fun!
-					</div>
-					
-					<!-- Monitor Container Mobile -->
-					<div id="monitor-container-mobile" class="ui inverted segment" style="margin: 0 0 1rem 0; padding: 1rem; display: none;">
-						<!-- Monitor content will be moved here on mobile -->
-					</div>
-					
-					<!-- Log Box Mobile -->
-					<div id="logBox-mobile" style="flex: 1; overflow-y: auto; min-height: 150px;">
-						<h5 class="ui inverted header" style="margin-bottom: 1rem;">Feedback Log</h5>
-						<div id="log-mobile" style="display:inline-block; text-align: left;"></div>
-					</div>
-				</div>
+				</aside>
+				
+				<!-- Sidebar Trigger for Mobile -->
+				<button class="sidebar-trigger" id="sidebar-trigger">
+					Monitor & Logs
+				</button>
+				
+				<!-- Sidebar Overlay for Mobile -->
+				<div class="sidebar-overlay" id="sidebar-overlay"></div>
+				
 			</div>
 		</div>
 	</main>

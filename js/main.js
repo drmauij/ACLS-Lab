@@ -612,6 +612,10 @@ function attachChangeHandlers() {
         $("#monitor-container-mobile").fadeIn();
         // Add class to body to adjust layout
         $('body').addClass('monitor-visible');
+        // Update sidebar trigger visibility
+        if (typeof updateSidebarVisibility === 'function') {
+            updateSidebarVisibility();
+        }
 
         // Mirror content for mobile layout
         updateMobileLayout();
@@ -627,25 +631,61 @@ function attachChangeHandlers() {
             
             // Show the mobile shell panel
             $("#shell-panel-mobile").show();
-
-            // Mirror monitor content
-            var monitorContent = $("#monitor-container").html();
-            if (monitorContent && monitorContent.trim() !== '') {
-                $("#monitor-container-mobile").html(monitorContent);
-                if ($("#monitor-container").is(':visible')) {
-                    $("#monitor-container-mobile").show();
-                } else {
-                    $("#monitor-container-mobile").hide();
-                }
-            }
-
-            // Mirror log content
-            var logContent = $("#log").html();
-            if (logContent && logContent.trim() !== '') {
-                $("#log-mobile").html(logContent);
-            }
         }
     }
+
+    // Sidebar functionality
+    function initializeSidebar() {
+        const sidebar = $('.sidebar');
+        const sidebarTrigger = $('#sidebar-trigger');
+        const sidebarOverlay = $('#sidebar-overlay');
+        
+        // Show/hide sidebar trigger based on screen size
+        function updateSidebarVisibility() {
+            if ($(window).width() <= 768) {
+                sidebarTrigger.show();
+                // Check if monitor is visible to show/hide trigger
+                if ($("#monitor-container").is(':visible') || $("#logBox").is(':visible')) {
+                    sidebarTrigger.removeClass('hidden');
+                } else {
+                    sidebarTrigger.addClass('hidden');
+                }
+            } else {
+                sidebarTrigger.hide();
+                sidebar.removeClass('active');
+                sidebarOverlay.removeClass('active').hide();
+            }
+        }
+        
+        // Toggle sidebar on mobile
+        sidebarTrigger.on('click', function() {
+            sidebar.addClass('active');
+            sidebarOverlay.addClass('active').show();
+        });
+        
+        // Close sidebar when clicking overlay
+        sidebarOverlay.on('click', function() {
+            sidebar.removeClass('active');
+            sidebarOverlay.removeClass('active').fadeOut(300);
+        });
+        
+        // Close sidebar on escape key
+        $(document).on('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.hasClass('active')) {
+                sidebar.removeClass('active');
+                sidebarOverlay.removeClass('active').fadeOut(300);
+            }
+        });
+        
+        // Update on window resize
+        $(window).on('resize', updateSidebarVisibility);
+        updateSidebarVisibility();
+        
+        return updateSidebarVisibility;
+    }
+    
+    // Initialize sidebar
+    const updateSidebarVisibility = initializeSidebar();
 
     // Update mobile content when main content changes
     function syncMobileContent() {
