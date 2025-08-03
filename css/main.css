@@ -972,10 +972,22 @@ body.monitor-visible #main-content {
         overflow-y: auto !important;
     }
 
+    /* Keep logo and text together on mobile */
+    .ui.inverted.grid {
+        align-items: center !important;
+    }
+    
     .ui.horizontal.list {
+        display: flex !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
         padding: 0.5rem 0.5rem 0.25rem 0.5rem !important;
         border-radius: 12px;
         margin-bottom: 0.25rem !important;
+    }
+    
+    .ui.horizontal.list .item {
+        flex-shrink: 0 !important;
     }
 
     /* Force action/drug dropdowns to stay in one row */
