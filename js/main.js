@@ -829,8 +829,6 @@ function initializeDropdowns() {
         allowReselection: true,
         forceSelection: false,
         fullTextSearch: false,
-        search: false,
-        selectOnKeydown: false,
         clearable: true,
         direction: 'upward',
         onChange: function(value, text, $selectedItem) {
@@ -849,8 +847,6 @@ function initializeDropdowns() {
         allowReselection: true, 
         forceSelection: false,
         fullTextSearch: false,
-        search: false,
-        selectOnKeydown: false,
         clearable: true,
         direction: 'upward',
         onChange: function(value, text, $selectedItem) {

@@ -478,8 +478,8 @@ a:hover {
     padding: 0 !important;
     margin: 0 !important;
     font-family: 'Poppins', sans-serif !important;
-    font-size: 0.9rem !important;
-    line-height: 1.6 !important;
+    font-size: 1.1rem !important;
+    line-height: 1.7 !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
     border: none !important;
@@ -964,27 +964,29 @@ body.monitor-visible #main-content {
 }
 
 .sidebar-collapse-btn {
-    background: transparent;
-    border: none;
-    color: #9ca3af;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
     cursor: pointer;
-    padding: 0.25rem;
-    border-radius: 4px;
+    padding: 0.5rem;
+    border-radius: 6px;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
 }
 
 .sidebar-collapse-btn:hover {
-    background: rgba(55, 65, 81, 0.5);
-    color: #f9fafb;
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.5);
+    color: #f87171;
+    transform: scale(1.05);
 }
 
 .sidebar-collapse-btn i {
-    font-size: 1rem !important;
+    font-size: 1.2rem !important;
 }
 
 .sidebar-content {
