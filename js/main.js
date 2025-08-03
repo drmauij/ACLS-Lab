@@ -87,7 +87,7 @@
             $("#cprSeconds").html(pad(++cprSec%60));
             $("#cprMinutes").html(pad(parseInt(cprSec/60,10)));
         }, 1000);
-        if($("#realtime").is(':checked'))
+        if($("#realtime-toggle").hasClass('active'))
             $("#cprTimer").show();
     }
     function stopCPR() {
@@ -103,7 +103,7 @@
         if (setSec!=null){
             _setSec = parseInt(setSec);
         }
-        if($("#realtime").is(':checked')){
+        if($("#realtime-toggle").hasClass('active')){
             $("#cprTimer").show();
             $("#caseTimer").show();
         }
@@ -416,7 +416,7 @@
             check = true;
             var wholetime = 0;
             // check if real-time context && the current action has substeps to print-out
-            if(($("#realtime").is(':checked') && actions[arg] && actions[arg].steps) || ($("#realtime").is(':checked') && drugs[arg] && drugs[arg].steps)){
+            if(($("#realtime-toggle").hasClass('active') && actions[arg] && actions[arg].steps) || ($("#realtime-toggle").hasClass('active') && drugs[arg] && drugs[arg].steps)){
                 // check if the substeps are to shown everytime or just the first time
                 // if true but not in the array, once is run => push in it!
                 if(!actions[arg].onceTimeSteps || (actions[arg].onceTimeSteps && onceTimeStepsActions.indexOf(arg)==-1)){
@@ -593,7 +593,7 @@ function attachChangeHandlers() {
             $("#caseSeconds").html(pad(++caseSec%60));
             $("#caseMinutes").html(pad(parseInt(caseSec/60,10)));
         }, 1000);
-        if($("#realtime").is(':checked'))
+        if($("#realtime-toggle").hasClass('active'))
             $("#caseTimer").show();
         // print-out
         printOut(response);
@@ -649,7 +649,7 @@ function attachChangeHandlers() {
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(actionsKey, stepObj.action, arg);
 
-            if($("#realtime").is(':checked')){
+            if($("#realtime-toggle").hasClass('active')){
                 $("#caseTimer").show();
             }else{
                 $("#caseTimer").hide();
