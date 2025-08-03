@@ -621,11 +621,12 @@ function attachChangeHandlers() {
     // Function to update mobile layout content
     function updateMobileLayout() {
         if ($(window).width() <= 768) {
-            // Mirror shell panel content
+            // Mirror shell panel content - force update even if empty
             var shellContent = $("#shell-panel").html();
-            if (shellContent && shellContent.trim() !== '') {
-                $("#shell-panel-mobile").html(shellContent);
-            }
+            $("#shell-panel-mobile").html(shellContent || 'ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different ACLS scenarios. Choose a scenario from above to start your simulation. Have fun!');
+            
+            // Show the mobile shell panel
+            $("#shell-panel-mobile").show();
 
             // Mirror monitor content
             var monitorContent = $("#monitor-container").html();

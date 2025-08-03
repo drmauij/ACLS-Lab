@@ -969,27 +969,52 @@ body.monitor-visible #main-content {
     }
 
     .desktop-layout {
-        display: none;
+        display: none !important;
     }
 
     .mobile-layout {
-        display: block;
-        height: 100%;
+        display: block !important;
+        height: 100% !important;
+        width: 100% !important;
         overflow-y: visible !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    /* Completely override any desktop grid styling on mobile */
+    .mobile-layout .ui.grid,
+    .mobile-layout .ui.column,
+    .mobile-layout .ten.wide.column,
+    .mobile-layout .six.wide.column {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: none !important;
+        margin: 0 !important;
+        padding: 0.5rem !important;
+    }
+
+    .mobile-layout > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: none !important;
     }
 
     /* Ensure shell panel content is visible on mobile */
     #shell-panel-mobile {
-        min-height: 150px !important;
+        min-height: 200px !important;
         max-height: none !important;
         padding: 1rem !important;
         background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+        border: 1px solid #374151 !important;
         border-radius: 12px !important;
         margin-bottom: 1rem !important;
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
         font-size: 14px !important;
         line-height: 1.6 !important;
+        width: 100% !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
     }
 
     /* Keep logo and text together on mobile */
