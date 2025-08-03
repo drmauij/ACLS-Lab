@@ -334,7 +334,7 @@ a:hover {
     background: transparent !important;
     color: #e5e7eb !important;
     border: none !important;
-    padding: 0.25rem 1rem !important;
+    padding: 0.125rem 1rem !important;
     margin: 0 !important;
     line-height: 1 !important;
     transition: all 0.2s ease !important;
