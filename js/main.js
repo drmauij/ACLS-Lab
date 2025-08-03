@@ -437,7 +437,7 @@
                             actionStepTime = actionSteps[i][1];
                         }
                         id=id+1;
-                        printOut("<img id='img_"+id+"' src='img/ripple.gif'/><span class='text-light' id='"+id+"'>&nbsp;"+actionStepDescription+"</span><br/>", true);
+        printOut("<i id='img_"+id+"' class='ui loading spinner icon'></i><span class='text-light' id='"+id+"'>&nbsp;"+actionStepDescription+"</span><br/>", true);
                         doSetTimeout(id, actionStepTime, failure);
                         wholetime = actionStepTime+500;
                         c++;
@@ -547,12 +547,12 @@ function attachChangeHandlers() {
     $('#case').on('change', function(evt, params) {
         var arg = $(this).val();
         console.log('Case change event triggered with value:', arg);
-        
+
         // Clear any existing timeout
         if (caseChangeTimeout) {
             clearTimeout(caseChangeTimeout);
         }
-        
+
         // Debounce the case change
         caseChangeTimeout = setTimeout(() => {
             if (!arg || arg === '') {
@@ -628,7 +628,7 @@ function attachChangeHandlers() {
             // Mirror shell panel content - force update even if empty
             var shellContent = $("#shell-panel").html();
             $("#shell-panel-mobile").html(shellContent || 'ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different ACLS scenarios. Choose a scenario from above to start your simulation. Have fun!');
-            
+
             // Show the mobile shell panel
             $("#shell-panel-mobile").show();
         }
@@ -639,7 +639,7 @@ function attachChangeHandlers() {
         const sidebar = $('.sidebar');
         const sidebarTrigger = $('#sidebar-trigger');
         const sidebarOverlay = $('#sidebar-overlay');
-        
+
         // Show/hide sidebar trigger based on screen size
         function updateSidebarVisibility() {
             if ($(window).width() <= 768) {
@@ -656,25 +656,25 @@ function attachChangeHandlers() {
                 sidebarOverlay.removeClass('active').hide();
             }
         }
-        
+
         // Toggle sidebar on mobile
         sidebarTrigger.on('click', function() {
             sidebar.addClass('active');
             sidebarOverlay.addClass('active').show();
         });
-        
+
         // Close sidebar when clicking overlay
         sidebarOverlay.on('click', function() {
             sidebar.removeClass('active');
             sidebarOverlay.removeClass('active').fadeOut(300);
         });
-        
+
         // Close sidebar when clicking collapse button
         $('#sidebar-collapse').on('click', function() {
             sidebar.removeClass('active');
             sidebarOverlay.removeClass('active').fadeOut(300);
         });
-        
+
         // Close sidebar on escape key
         $(document).on('keydown', function(e) {
             if (e.key === 'Escape' && sidebar.hasClass('active')) {
@@ -682,14 +682,14 @@ function attachChangeHandlers() {
                 sidebarOverlay.removeClass('active').fadeOut(300);
             }
         });
-        
+
         // Update on window resize
         $(window).on('resize', updateSidebarVisibility);
         updateSidebarVisibility();
-        
+
         return updateSidebarVisibility;
     }
-    
+
     // Initialize sidebar
     const updateSidebarVisibility = initializeSidebar();
 
