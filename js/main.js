@@ -694,7 +694,6 @@ function initializeDropdowns() {
         forceSelection: false,
         fullTextSearch: true,
         clearable: true,
-        direction: 'upward',
         onChange: function(value, text, $selectedItem) {
             console.log('Case dropdown onChange triggered:', value, text);
             if (value && value !== '' && value !== null && value !== 'test') {

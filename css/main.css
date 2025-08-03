@@ -1005,11 +1005,10 @@ body.monitor-visible #main-content {
         font-size: 0.9rem !important;
     }
 
-    /* Force scenario dropdown to open upward on mobile */
+    /* Allow scenario dropdown to open naturally on mobile */
     #case-dropdown .menu {
-        bottom: 100% !important;
-        top: auto !important;
-        margin-bottom: 0.25rem !important;
+        max-height: 200px !important;
+        overflow-y: auto !important;
     }
 
     /* Ensure shell panel and mobile content scroll properly */
@@ -1067,11 +1066,8 @@ body.monitor-visible #main-content {
         padding: 0 0.125rem !important;
     }
 
-    /* Force scenario dropdown to open upward on very small screens */
+    /* Allow scenario dropdown to open naturally on very small screens */
     #case-dropdown .menu {
-        bottom: 100% !important;
-        top: auto !important;
-        margin-bottom: 0.5rem !important;
         max-height: 200px !important;
         overflow-y: auto !important;
     }
