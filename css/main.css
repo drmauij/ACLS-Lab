@@ -491,17 +491,17 @@ a:hover {
 
 /* Monitor Container */
 #monitor-container {
-    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
-    border: 1px solid #334155 !important;
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+    border: none !important;
     border-radius: 16px !important;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.2) !important;
     padding: 1.5rem !important;
     margin: 1rem 0 !important;
 }
 
 #monitor-container.ui.segment {
-    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
-    border: 1px solid #334155 !important;
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+    border: none !important;
 }
 
 /* Vital Parameters */
@@ -537,11 +537,11 @@ a:hover {
 /* Enhanced Log Box with Better Visual Hierarchy */
 #logBox {
     background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
-    border: 1px solid #374151;
+    border: none;
     border-radius: 16px;
     padding: 1.5rem;
     margin-top: 1rem;
-    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.2);
     position: relative;
     backdrop-filter: blur(10px);
     display: none;
