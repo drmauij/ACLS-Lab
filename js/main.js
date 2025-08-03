@@ -800,10 +800,13 @@ function initializeDropdowns() {
     });
 
     // Search selection dropdowns for actions and drugs
+    // Disable search on mobile to prevent keyboard from sliding out
+    const isMobile = window.innerWidth <= 768;
+    
     $('#action-dropdown').dropdown({
         allowReselection: true,
         forceSelection: false,
-        fullTextSearch: true,
+        fullTextSearch: !isMobile,
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Action dropdown onChange:', value, text);
@@ -820,7 +823,7 @@ function initializeDropdowns() {
     $('#drug-dropdown').dropdown({
         allowReselection: true, 
         forceSelection: false,
-        fullTextSearch: true,
+        fullTextSearch: !isMobile,
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Drug dropdown onChange:', value, text);
