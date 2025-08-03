@@ -393,10 +393,10 @@
     function doSetTimeout(id, time, failure) {
       setTimeout(function() {
           if(failure==false){
-            $('#img_'+id).attr({'src':'img/done.png'}).hide().fadeIn();
+            $('#img_'+id).removeClass('ui loading spinner icon').addClass('ui check green icon').hide().fadeIn();
             $('#'+id).css("color", "white").hide().fadeIn();
           }else{
-            $('#img_'+id).attr({'src':'img/fail.png'}).hide().fadeIn();
+            $('#img_'+id).removeClass('ui loading spinner icon').addClass('ui times red icon').hide().fadeIn();
           }
       }, time);
     }
