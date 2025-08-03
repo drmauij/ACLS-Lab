@@ -249,9 +249,9 @@ a:hover {
 /* Header styling */
 .ui.horizontal.list {
     border: none;
-    padding: 1rem !important;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none;
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
@@ -892,8 +892,9 @@ code {
     z-index: 1000;
     background: linear-gradient(145deg, #0a0a0a 0%, #111827 100%);
     border-bottom: 1px solid #374151;
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 1rem;
     backdrop-filter: blur(10px);
+    height: 60px;
 }
 
 #app-footer {
@@ -910,7 +911,7 @@ code {
 
 #main-content {
     position: fixed;
-    top: 80px;
+    top: 60px;
     bottom: 200px;
     left: 0;
     right: 0;
@@ -943,6 +944,7 @@ body.monitor-visible #main-content {
 
     #app-header {
         padding: 0.25rem 0.5rem !important;
+        height: 50px;
     }
 
     #app-footer {
@@ -950,7 +952,7 @@ body.monitor-visible #main-content {
     }
 
     #main-content {
-        top: 60px !important;
+        top: 50px !important;
         bottom: 120px;
         padding: 0.5rem;
         overflow-y: auto !important;
@@ -959,7 +961,7 @@ body.monitor-visible #main-content {
     }
 
     body.monitor-visible #main-content {
-        top: 60px !important;
+        top: 50px !important;
     }
 
     .desktop-layout {

@@ -41,24 +41,20 @@
 	<header id="app-header">
 		<div class="ui inverted container-fluid">
 			<!-- Two Column Header Layout -->
-			<div class="ui inverted grid" style="margin: 0; align-items: center;">
-				<!-- Left Column: Logo and Title -->
-				<div class="twelve wide column" style="padding: 0.25rem 0;">
-					<div class="ui horizontal list" style="margin: 0; align-items: center; justify-content: flex-start;">
-						<div class="item" style="display: flex; align-items: center; flex-wrap: nowrap;">
-							<img src="img/defi.png" width="32px" style="margin-right: 0.75rem; flex-shrink: 0;" />
-							<div style="flex-shrink: 0;">
-								<h2 class="ui inverted header" style="margin: 0; white-space: nowrap; font-size: 1.25rem;">ACLS Lab</h2>
-								<p style="margin: 0; color: #6b7280; font-size: 0.7rem; opacity: 0.7; white-space: nowrap;">
-									Powered by <a href="https://acutiq.com" target="_blank" style="color: #6b7280; text-decoration: none; opacity: 0.8;">Acutiq</a>
-								</p>
-							</div>
-						</div>
+			<div style="display: flex; align-items: center; justify-content: space-between; height: 100%; margin: 0; padding: 0;">
+				<!-- Left: Logo and Title -->
+				<div style="display: flex; align-items: center; flex-shrink: 0;">
+					<img src="img/defi.png" width="32px" style="margin-right: 0.75rem;" />
+					<div>
+						<h2 class="ui inverted header" style="margin: 0; font-size: 1.25rem; line-height: 1.2;">ACLS Lab</h2>
+						<p style="margin: 0; color: #6b7280; font-size: 0.7rem; opacity: 0.7; line-height: 1;">
+							Powered by <a href="https://acutiq.com" target="_blank" style="color: #6b7280; text-decoration: none; opacity: 0.8;">Acutiq</a>
+						</p>
 					</div>
 				</div>
 				
-				<!-- Right Column: Toggle Button -->
-				<div class="four wide column" style="padding: 0.25rem 0; text-align: right;">
+				<!-- Right: Toggle Button -->
+				<div style="flex-shrink: 0;">
 					<div class="ui toggle button active" id="realtime-toggle">
 						<i class="clock icon"></i>
 						<span class="toggle-text">Realtime</span>
