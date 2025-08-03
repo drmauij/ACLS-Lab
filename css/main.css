@@ -921,7 +921,7 @@ border-top: 1px solid #374151;
     right: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 /* Monitor adjustments */
@@ -1270,15 +1270,15 @@ body.monitor-visible #main-content {
         page-break-after: avoid;
     }
 }
-/* Scenario Selection Container - Proper spacing from header */
+/* Scenario Selection Container - Reduced spacing */
 .scenario-selection-container {
-    margin-bottom: 1rem !important;
-    margin-top: 1.5rem !important;
-    padding-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+    margin-top: 0.5rem !important;
+    padding-top: 0.25rem !important;
 }
 
 #case-dropdown {
-    margin-top: 0.75rem !important;
+    margin-top: 0.25rem !important;
     z-index: 999 !important;
 }
 
