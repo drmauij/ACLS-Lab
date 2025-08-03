@@ -1270,15 +1270,15 @@ body.monitor-visible #main-content {
         page-break-after: avoid;
     }
 }
-/* Scenario Selection Container - Reduced spacing */
+/* Scenario Selection Container - Minimal spacing */
 .scenario-selection-container {
-    margin-bottom: 0.5rem !important;
-    margin-top: 0.5rem !important;
-    padding-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+    margin-top: 0.25rem !important;
+    padding-top: 0.125rem !important;
 }
 
 #case-dropdown {
-    margin-top: 0.25rem !important;
+    margin-top: 0.125rem !important;
     z-index: 999 !important;
 }
 
