@@ -896,9 +896,9 @@ code {
     z-index: 1000;
     background: linear-gradient(145deg, #0a0a0a 0%, #111827 100%);
     border-bottom: 1px solid #374151;
-    padding: 0.25rem 1rem;
+    padding: 0.75rem 1rem;
     backdrop-filter: blur(10px);
-    height: 60px;
+    height: 80px;
 }
 
 #app-footer {
@@ -915,7 +915,7 @@ code {
 
 #main-content {
     position: fixed;
-    top: 60px;
+    top: 80px;
     bottom: 200px;
     left: 0;
     right: 0;
@@ -926,7 +926,7 @@ code {
 
 /* Monitor adjustments */
 body.monitor-visible #main-content {
-    top: 100px !important;
+    top: 120px !important;
 }
 
 /* Desktop/Mobile Layout Toggle */
@@ -947,8 +947,8 @@ body.monitor-visible #main-content {
     }
 
     #app-header {
-        padding: 0.25rem 0.5rem !important;
-        height: 50px;
+        padding: 0.5rem 0.5rem !important;
+        height: 65px;
     }
 
     #app-footer {
@@ -956,7 +956,7 @@ body.monitor-visible #main-content {
     }
 
     #main-content {
-        top: 50px !important;
+        top: 65px !important;
         bottom: 120px;
         padding: 0.5rem;
         overflow-y: auto !important;
@@ -965,7 +965,7 @@ body.monitor-visible #main-content {
     }
 
     body.monitor-visible #main-content {
-        top: 50px !important;
+        top: 65px !important;
     }
 
     .desktop-layout {
