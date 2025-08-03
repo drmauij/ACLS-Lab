@@ -343,16 +343,48 @@ a:hover {
     margin-right: 0.75rem !important;
 }
 
-/* Enhanced Checkbox styling */
+/* Enhanced Semantic UI Toggle styling */
+.ui.toggle.checkbox {
+    line-height: 1.5rem;
+}
+
 .ui.toggle.checkbox input:checked ~ .box:before, 
 .ui.toggle.checkbox input:checked ~ label:before {
     background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
     box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3) !important;
+    border: none !important;
+}
+
+.ui.toggle.checkbox .box:before,
+.ui.toggle.checkbox label:before {
+    background: #374151 !important;
+    border: 1px solid #4b5563 !important;
+    transition: all 0.2s ease !important;
+}
+
+.ui.toggle.checkbox .box:after,
+.ui.toggle.checkbox label:after {
+    background: #f9fafb !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.2s ease !important;
 }
 
 .ui.toggle.checkbox label {
     color: #e5e7eb !important;
     font-weight: 500;
+    margin-left: 0.5rem !important;
+    font-size: 0.875rem;
+}
+
+.ui.toggle.checkbox:hover .box:before,
+.ui.toggle.checkbox:hover label:before {
+    background: #4b5563 !important;
+    border-color: #6b7280 !important;
+}
+
+.ui.toggle.checkbox input:checked:hover ~ .box:before,
+.ui.toggle.checkbox input:checked:hover ~ label:before {
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
 }
 
 /* Modern Button Styles */
