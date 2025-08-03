@@ -382,6 +382,18 @@ a:hover {
     font-size: 0.875rem;
 }
 
+/* Reduce toggle button size */
+#realtime-toggle {
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.75rem !important;
+    min-height: auto !important;
+}
+
+#realtime-toggle i {
+    font-size: 0.75rem !important;
+    margin-right: 0.25rem !important;
+}
+
 /* Modern Button Styles */
 .modern-button {
     background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
