@@ -732,12 +732,12 @@ function initializeDropdowns() {
 $(document).ready(function() {
     console.log('DOM ready - waiting for data to load');
 
-    // Initialize Semantic UI toggle
-    $('#realtime-toggle').checkbox({
-        onChecked: function() {
+    // Initialize Semantic UI toggle button
+    $('#realtime-toggle').on('click', function() {
+        $(this).toggleClass('active');
+        if ($(this).hasClass('active')) {
             console.log("Realtime enabled");
-        },
-        onUnchecked: function() {
+        } else {
             console.log("Realtime disabled");
         }
     });
