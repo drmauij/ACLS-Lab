@@ -334,7 +334,7 @@ a:hover {
     background: transparent !important;
     color: #e5e7eb !important;
     border: none !important;
-    padding: 0.125rem 1rem !important;
+    padding: 0.375rem 1rem 0.125rem 1rem !important;
     margin: 0 !important;
     line-height: 1 !important;
     transition: all 0.2s ease !important;
@@ -982,7 +982,7 @@ body.monitor-visible #main-content {
     .ui.inverted.grid {
         align-items: center !important;
     }
-    
+
     .ui.horizontal.list {
         display: flex !important;
         align-items: center !important;
@@ -991,7 +991,7 @@ body.monitor-visible #main-content {
         border-radius: 12px;
         margin-bottom: 0.25rem !important;
     }
-    
+
     .ui.horizontal.list .item {
         flex-shrink: 0 !important;
     }
@@ -1000,12 +1000,12 @@ body.monitor-visible #main-content {
     #menu .ui.stackable.grid {
         margin: 0 !important;
     }
-    
+
     #menu .ui.stackable.grid > .column {
         margin-bottom: 0 !important;
         padding: 0 0.25rem !important;
     }
-    
+
     #menu .ui.stackable.two.column.grid > .column {
         width: 50% !important;
         flex: 0 0 50% !important;
@@ -1057,7 +1057,7 @@ body.monitor-visible #main-content {
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
     }
-    
+
     #main-content {
         top: 50px !important;
         bottom: 110px;
