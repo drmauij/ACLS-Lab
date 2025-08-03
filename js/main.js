@@ -800,16 +800,35 @@ function initializeDropdowns() {
     });
 
     // Search selection dropdowns for actions and drugs
-    // Disable search on mobile and touch devices to prevent keyboard from sliding out
-    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    const isSmallScreen = window.innerWidth <= 768;
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const disableSearch = isMobileDevice || isSmallScreen || isTouchDevice;
+    // Comprehensive mobile detection to disable search functionality
+    function isMobileOrTouch() {
+        // User agent detection
+        const userAgent = navigator.userAgent.toLowerCase();
+        const mobileKeywords = ['android', 'webos', 'iphone', 'ipad', 'ipod', 'blackberry', 'iemobile', 'opera mini', 'mobile', 'tablet'];
+        const isMobileUA = mobileKeywords.some(keyword => userAgent.includes(keyword));
+        
+        // Screen size detection
+        const isSmallScreen = window.innerWidth <= 768 || window.screen.width <= 768;
+        
+        // Touch capability detection
+        const isTouchDevice = 'ontouchstart' in window || 
+                             navigator.maxTouchPoints > 0 || 
+                             navigator.msMaxTouchPoints > 0;
+        
+        // Platform detection
+        const isMobilePlatform = /Mobi|Android/i.test(navigator.userAgent) || 
+                                /iPad|iPhone|iPod/.test(navigator.userAgent);
+        
+        return isMobileUA || isSmallScreen || isTouchDevice || isMobilePlatform;
+    }
+    
+    const disableSearch = isMobileOrTouch();
+    console.log('Mobile detection - disabling search:', disableSearch);
     
     $('#action-dropdown').dropdown({
         allowReselection: true,
         forceSelection: false,
-        fullTextSearch: !disableSearch,
+        fullTextSearch: false, // Always disable search for actions
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Action dropdown onChange:', value, text);
@@ -826,7 +845,7 @@ function initializeDropdowns() {
     $('#drug-dropdown').dropdown({
         allowReselection: true, 
         forceSelection: false,
-        fullTextSearch: !disableSearch,
+        fullTextSearch: false, // Always disable search for drugs
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Drug dropdown onChange:', value, text);
