@@ -779,8 +779,9 @@ function initializeDropdowns() {
     let processingCaseChange = false;
     let processingActionChange = false;
     let processingDrugChange = false;
+    let selectedScenarioValue = null;
 
-    // Standard dropdown for case selection
+    // Standard dropdown for case selection in modal
     $('#case-dropdown').dropdown({
         allowReselection: true,
         forceSelection: false,
@@ -788,16 +789,39 @@ function initializeDropdowns() {
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Case dropdown onChange triggered:', value, text);
-            if (value && value !== '' && value !== null && value !== 'test' && !processingCaseChange) {
-                processingCaseChange = true;
-                console.log('Setting case value and triggering change:', value);
-                $('#case').val(value).trigger('change');
-                setTimeout(() => {
-                    processingCaseChange = false;
-                }, 100);
+            selectedScenarioValue = value;
+            if (value && value !== '' && value !== null && value !== 'test') {
+                $('#startScenarioBtn').show();
+            } else {
+                $('#startScenarioBtn').hide();
             }
         }
     });
+
+    // Handle start scenario button click
+    $('#startScenarioBtn').off('click').on('click', function() {
+        if (selectedScenarioValue && !processingCaseChange) {
+            processingCaseChange = true;
+            console.log('Starting scenario from modal:', selectedScenarioValue);
+            $('#case').val(selectedScenarioValue).trigger('change');
+            $('#scenarioSelectionModal').modal('hide');
+            setTimeout(() => {
+                processingCaseChange = false;
+            }, 100);
+        }
+    });
+
+    // Show modal on page load if no scenario is selected
+    if (!$('#case').val()) {
+        setTimeout(() => {
+            $('#scenarioSelectionModal').modal({
+                closable: false,
+                onDeny: function() {
+                    return true; // Allow closing
+                }
+            }).modal('show');
+        }, 500);
+    }
 
     // Search selection dropdowns for actions and drugs
     // Detect mobile to configure dropdowns appropriately

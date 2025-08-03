@@ -242,6 +242,25 @@
     .modal-body {
         padding: 0.5rem;
     }
+/* Modal adjustments for mobile */
+    #scenarioSelectionModal .ui.modal {
+        width: 95% !important;
+        margin: 0 auto !important;
+    }
+
+    #scenarioSelectionModal .content {
+        padding: 1rem !important;
+    }
+
+    #scenarioSelectionModal .content p {
+        font-size: 0.95rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    #scenarioSelectionModal #case-dropdown {
+        font-size: 0.9rem !important;
+        padding: 0.75rem !important;
+    }
 }
 
 /* ECG image */
@@ -330,6 +349,14 @@
 
     #logBox {
         padding: 0.5rem;
+    }
+/* Very small screen modal adjustments */
+    #scenarioSelectionModal .ui.modal {
+        width: 98% !important;
+    }
+
+    #scenarioSelectionModal .content p {
+        font-size: 0.9rem !important;
     }
 }
 

@@ -1551,26 +1551,34 @@ body.monitor-visible #main-content {
         page-break-after: avoid;
     }
 }
-/* Scenario Selection Container - Minimal spacing */
-.scenario-selection-container {
-    margin-bottom: 0.25rem !important;
-    margin-top: 0.25rem !important;
-    padding-top: 0.125rem !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 0.125rem !important;
-    padding-right: 0.125rem !important;
+/* Scenario Selection Modal */
+#scenarioSelectionModal .ui.modal {
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
 }
 
-#case-dropdown {
-    margin-top: 0.125rem !important;
-    z-index: 999 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+#scenarioSelectionModal .header {
+    background: linear-gradient(145deg, #1f2937 0%, #374151 100%) !important;
+    color: #f9fafb !important;
+    border-bottom: 1px solid #4b5563 !important;
 }
 
-/* Ensure dropdown menu appears below header */
-#case-dropdown .menu {
-    margin-top: 2px !important;
-    z-index: 1001 !important;
+#scenarioSelectionModal .content {
+    padding: 2rem !important;
+}
+
+#scenarioSelectionModal .content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #d1d5db;
+}
+
+#scenarioSelectionModal #case-dropdown {
+    font-size: 1.1rem !important;
+    padding: 1rem !important;
+}
+
+#scenarioSelectionModal .actions {
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+    border-top: 1px solid #4b5563 !important;
 }

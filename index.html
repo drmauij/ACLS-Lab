@@ -73,28 +73,13 @@
 				
 				<!-- Content Area -->
 				<div class="content-area">
-					<!-- Scenario Selection - Now in main content -->
-					<div class="ui inverted stackable grid scenario-selection-container">
-						<div class="sixteen wide column">
-							<div class="ui fluid selection dropdown" id="case-dropdown">
-								<input type="hidden" name="case" id="case">
-								<i class="dropdown icon"></i>
-								<div class="default text">Choose a Scenario to start with...</div>
-								<div class="menu">
-									<!-- Options will be populated by JavaScript -->
-								</div>
-							</div>
-						</div>
-					</div>
-					
 					<!-- Desktop Layout -->
 					<div class="desktop-layout">
 						<div class="ui inverted stackable grid" style="flex: 1; margin: 0;">
-							<!-- Shell Panel takes full width now -->
+							<!-- Chat Panel takes full width now -->
 							<div class="sixteen wide column" style="display: flex; flex-direction: column;">
 								<div id="shell-panel" style="flex: 1; overflow-y: auto;">
-									ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different
-									ACLS scenarios. Choose from the above dropdown menu a scenario to start your simulation. Have fun!
+									Welcome to ACLS Lab! Select a scenario to begin your training.
 								</div>
 							</div>
 						</div>
@@ -103,10 +88,9 @@
 					<!-- Mobile Layout -->
 					<div class="mobile-layout" style="display: none;">
 						<div style="flex: 1; display: flex; flex-direction: column;">
-							<!-- Shell Panel -->
+							<!-- Chat Panel -->
 							<div id="shell-panel-mobile" style="flex: 1; overflow-y: auto; min-height: 200px; margin-bottom: 1rem;">
-								ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different
-								ACLS scenarios. Choose a scenario from above to start your simulation. Have fun!
+								Welcome to ACLS Lab! Select a scenario to begin your training.
 							</div>
 						</div>
 					</div>
@@ -241,6 +225,33 @@
 	</footer>
 
 	<!-- Modals -->
+	<div class="ui modal" id="scenarioSelectionModal">
+		<div class="header">
+			<i class="heartbeat icon"></i>
+			Select the Scenario
+		</div>
+		<div class="content">
+			<p>ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different ACLS scenarios. Choose a scenario below to start your simulation. Have fun!</p>
+			<div class="ui fluid selection dropdown" id="case-dropdown">
+				<input type="hidden" name="case" id="case">
+				<i class="dropdown icon"></i>
+				<div class="default text">Choose a Scenario to start with...</div>
+				<div class="menu">
+					<!-- Options will be populated by JavaScript -->
+				</div>
+			</div>
+		</div>
+		<div class="actions">
+			<div class="ui black deny button">
+				Cancel
+			</div>
+			<div class="ui positive right labeled icon button" id="startScenarioBtn" style="display: none;">
+				Start Scenario
+				<i class="checkmark icon"></i>
+			</div>
+		</div>
+	</div>
+
 	<div class="ui modal" id="dynamicVideoModal">
 		<i class="close icon" id="modal-video-close"></i>
 		<div class="header">
