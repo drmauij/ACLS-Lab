@@ -736,11 +736,11 @@ $(document).ready(function() {
     $('#realtime-toggle').on('click', function() {
         $(this).toggleClass('active');
         if ($(this).hasClass('active')) {
-            $(this).find('i').removeClass('flash').addClass('clock');
+            $(this).find('i').removeClass('bolt').addClass('clock');
             $(this).find('.toggle-text').text('Realtime');
             console.log("Realtime enabled");
         } else {
-            $(this).find('i').removeClass('clock').addClass('flash');
+            $(this).find('i').removeClass('clock').addClass('bolt');
             $(this).find('.toggle-text').text('Instant');
             console.log("Instant mode enabled");
         }
