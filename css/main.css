@@ -1275,11 +1275,17 @@ body.monitor-visible #main-content {
     margin-bottom: 0.25rem !important;
     margin-top: 0.25rem !important;
     padding-top: 0.125rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
 }
 
 #case-dropdown {
     margin-top: 0.125rem !important;
     z-index: 999 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 /* Ensure dropdown menu appears below header */
