@@ -800,37 +800,18 @@ function initializeDropdowns() {
     });
 
     // Search selection dropdowns for actions and drugs
-    // Comprehensive mobile detection to disable search functionality
-    function isMobileOrTouch() {
-        // User agent detection
-        const userAgent = navigator.userAgent.toLowerCase();
-        const mobileKeywords = ['android', 'webos', 'iphone', 'ipad', 'ipod', 'blackberry', 'iemobile', 'opera mini', 'mobile', 'tablet'];
-        const isMobileUA = mobileKeywords.some(keyword => userAgent.includes(keyword));
-        
-        // Screen size detection
-        const isSmallScreen = window.innerWidth <= 768 || window.screen.width <= 768;
-        
-        // Touch capability detection
-        const isTouchDevice = 'ontouchstart' in window || 
-                             navigator.maxTouchPoints > 0 || 
-                             navigator.msMaxTouchPoints > 0;
-        
-        // Platform detection
-        const isMobilePlatform = /Mobi|Android/i.test(navigator.userAgent) || 
-                                /iPad|iPhone|iPod/.test(navigator.userAgent);
-        
-        return isMobileUA || isSmallScreen || isTouchDevice || isMobilePlatform;
+    // Detect mobile to configure dropdowns appropriately
+    function isMobile() {
+        return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
     
-    const disableSearch = isMobileOrTouch();
-    console.log('Mobile detection - disabling search:', disableSearch);
+    const mobileMode = isMobile();
+    console.log('Mobile mode detected:', mobileMode);
     
-    $('#action-dropdown').dropdown({
+    // Configure action dropdown based on device type
+    const actionDropdownConfig = {
         allowReselection: true,
         forceSelection: false,
-        fullTextSearch: false,
-        search: false,
-        selectOnKeydown: false,
         clearable: true,
         direction: 'upward',
         onChange: function(value, text, $selectedItem) {
@@ -843,14 +824,12 @@ function initializeDropdowns() {
                 }, 100);
             }
         }
-    });
+    };
 
-    $('#drug-dropdown').dropdown({
-        allowReselection: true, 
+    // Configure drug dropdown based on device type  
+    const drugDropdownConfig = {
+        allowReselection: true,
         forceSelection: false,
-        fullTextSearch: false,
-        search: false,
-        selectOnKeydown: false,
         clearable: true,
         direction: 'upward',
         onChange: function(value, text, $selectedItem) {
@@ -863,7 +842,26 @@ function initializeDropdowns() {
                 }, 100);
             }
         }
-    });
+    };
+
+    // Add search functionality for desktop only
+    if (!mobileMode) {
+        actionDropdownConfig.search = true;
+        actionDropdownConfig.fullTextSearch = true;
+        drugDropdownConfig.search = true;  
+        drugDropdownConfig.fullTextSearch = true;
+    } else {
+        // Mobile mode - no search functionality
+        actionDropdownConfig.search = false;
+        actionDropdownConfig.fullTextSearch = false;
+        actionDropdownConfig.selectOnKeydown = false;
+        drugDropdownConfig.search = false;
+        drugDropdownConfig.fullTextSearch = false;
+        drugDropdownConfig.selectOnKeydown = false;
+    }
+
+    $('#action-dropdown').dropdown(actionDropdownConfig);
+    $('#drug-dropdown').dropdown(drugDropdownConfig);
 
     console.log('All dropdowns initialized successfully with loop prevention');
 }
