@@ -441,7 +441,7 @@ a:hover {
 
 /* Shell Panel */
 #shell-panel {
-    height: 500px !important;
+    flex: 1;
     background: transparent !important;
     color: #e2e8f0 !important;
     padding: 1.5rem !important;
@@ -449,10 +449,12 @@ a:hover {
     font-family: 'Poppins', sans-serif !important;
     font-size: 16px !important;
     line-height: 1.6 !important;
-    overflow: auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
     border: none !important;
     border-radius: 12px !important;
     box-shadow: none !important;
+    min-height: 0;
 }
 
 /* Monitor Container */
@@ -868,7 +870,8 @@ code {
     bottom: 200px;
     left: 0;
     right: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 1rem;
 }
 
@@ -906,6 +909,8 @@ body.monitor-visible #main-content {
         top: 140px;
         bottom: 180px;
         padding: 0.5rem;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     body.monitor-visible #main-content {
