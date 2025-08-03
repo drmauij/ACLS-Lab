@@ -620,14 +620,30 @@ function attachChangeHandlers() {
 
     // Function to update mobile layout content
     function updateMobileLayout() {
-        // Mirror shell panel content
-        $("#shell-panel-mobile").html($("#shell-panel").html());
+        if ($(window).width() <= 768) {
+            // Mirror shell panel content
+            var shellContent = $("#shell-panel").html();
+            if (shellContent && shellContent.trim() !== '') {
+                $("#shell-panel-mobile").html(shellContent);
+            }
 
-        // Mirror monitor content
-        $("#monitor-container-mobile").html($("#monitor-container").html());
+            // Mirror monitor content
+            var monitorContent = $("#monitor-container").html();
+            if (monitorContent && monitorContent.trim() !== '') {
+                $("#monitor-container-mobile").html(monitorContent);
+                if ($("#monitor-container").is(':visible')) {
+                    $("#monitor-container-mobile").show();
+                } else {
+                    $("#monitor-container-mobile").hide();
+                }
+            }
 
-        // Mirror log content
-        $("#log-mobile").html($("#log").html());
+            // Mirror log content
+            var logContent = $("#log").html();
+            if (logContent && logContent.trim() !== '') {
+                $("#log-mobile").html(logContent);
+            }
+        }
     }
 
     // Update mobile content when main content changes
@@ -647,6 +663,20 @@ function attachChangeHandlers() {
     // Sync content on any major updates
     $(document).on('DOMSubtreeModified', '#shell-panel, #monitor, #log', function() {
         syncMobileContent();
+    });
+
+    // Force mobile update when scenario content changes
+    setInterval(function() {
+        if ($(window).width() <= 768) {
+            updateMobileLayout();
+        }
+    }, 500);
+
+    // Additional trigger for scenario changes
+    $(document).on('change', '#case', function() {
+        setTimeout(function() {
+            updateMobileLayout();
+        }, 100);
     });
 
     // Actions
