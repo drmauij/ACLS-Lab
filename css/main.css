@@ -1270,16 +1270,20 @@ body.monitor-visible #main-content {
         page-break-after: avoid;
     }
 }
-<!-- Scenario Selection - Now in main content -->
-			<div class="ui inverted stackable grid" style="margin-bottom: 1rem; margin-top: 1rem;">
-				<div class="sixteen wide column">
-					<div class="ui fluid selection dropdown" id="case-dropdown" style="margin-top: 0.5rem;">
-						<input type="hidden" name="case" id="case">
-						<i class="dropdown icon"></i>
-						<div class="default text">Choose a Scenario to start with...</div>
-						<div class="menu">
-							<!-- Options will be populated by JavaScript -->
-						</div>
-					</div>
-				</div>
-			</div>
+/* Scenario Selection Container - Proper spacing from header */
+.scenario-selection-container {
+    margin-bottom: 1rem !important;
+    margin-top: 1.5rem !important;
+    padding-top: 1rem !important;
+}
+
+#case-dropdown {
+    margin-top: 0.75rem !important;
+    z-index: 999 !important;
+}
+
+/* Ensure dropdown menu appears below header */
+#case-dropdown .menu {
+    margin-top: 2px !important;
+    z-index: 1001 !important;
+}
