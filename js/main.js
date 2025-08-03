@@ -600,8 +600,6 @@ function attachChangeHandlers() {
         // show menu and monitor container
         $("#menu").fadeIn();
         $("#monitor-container").fadeIn();
-        // Add class to body to adjust layout
-        $('body').addClass('monitor-visible');
     });
 
     // Actions
