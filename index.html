@@ -40,30 +40,34 @@
 	<!-- Sticky Header -->
 	<header id="app-header">
 		<div class="ui inverted container-fluid">
-			<!-- Logo, Title and Realtime Toggle -->
-			<div class="ui horizontal list" style="align-items: center; margin-bottom: 1rem; justify-content: space-between;">
-				<div style="display: flex; align-items: center; flex: 1;">
-					<div class="item">
-						<img src="img/defi.png" width="40px" style="margin-right: 1rem;" />
-					</div>
-					<div class="item" style="flex: 1;">
-						<div style="display: flex; justify-content: space-between; align-items: flex-start;">
-							<h2 class="ui inverted header" style="margin-bottom: 0;">ACLS Lab</h2>
-							<p style="margin: 0; color: #6b7280; font-size: 0.75rem; opacity: 0.7; text-align: right;">
-								Powered by <a href="https://acutiq.com" target="_blank" style="color: #6b7280; text-decoration: none; opacity: 0.8;">Acutiq</a>
-							</p>
+			<!-- Two Column Header Layout -->
+			<div class="ui inverted grid" style="margin: 0; align-items: center;">
+				<!-- Left Column: Logo and Title -->
+				<div class="twelve wide column" style="padding: 0.5rem 0;">
+					<div class="ui horizontal list" style="margin: 0; align-items: center;">
+						<div class="item">
+							<img src="img/defi.png" width="40px" style="margin-right: 1rem;" />
+						</div>
+						<div class="item">
+							<div>
+								<h2 class="ui inverted header" style="margin: 0;">ACLS Lab</h2>
+								<p style="margin: 0; color: #6b7280; font-size: 0.75rem; opacity: 0.7;">
+									Powered by <a href="https://acutiq.com" target="_blank" style="color: #6b7280; text-decoration: none; opacity: 0.8;">Acutiq</a>
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="item" style="margin-left: auto;">
+				
+				<!-- Right Column: Toggle Button -->
+				<div class="four wide column" style="padding: 0.5rem 0; text-align: right;">
 					<div class="ui toggle button active" id="realtime-toggle">
 						<i class="clock icon"></i>
 						<span class="toggle-text">Realtime</span>
 					</div>
 				</div>
 			</div>
-			
-			</div>
+		</div>
 	</header>
 
 	<!-- Main Content Area -->
