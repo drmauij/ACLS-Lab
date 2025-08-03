@@ -314,6 +314,12 @@ a:hover {
     overflow-y: auto !important;
 }
 
+/* Fix scenario dropdown in modal - allow full scrolling */
+#scenarioSelectionModal #case-dropdown .menu {
+    max-height: 300px !important;
+    overflow-y: auto !important;
+}
+
 /* Force upward direction for action and drug dropdowns */
 #action-dropdown .menu,
 #drug-dropdown .menu {

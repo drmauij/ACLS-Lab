@@ -805,7 +805,14 @@ function initializeDropdowns() {
     if (!$('#case').val()) {
         setTimeout(() => {
             $('#scenarioSelectionModal').modal({
-                closable: true
+                closable: false,
+                allowMultiple: false,
+                onDeny: function() {
+                    return false; // Prevent closing
+                },
+                onApprove: function() {
+                    return false; // Prevent closing
+                }
             }).modal('show');
         }, 500);
     }
