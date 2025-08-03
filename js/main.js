@@ -669,6 +669,12 @@ function attachChangeHandlers() {
             sidebarOverlay.removeClass('active').fadeOut(300);
         });
         
+        // Close sidebar when clicking collapse button
+        $('#sidebar-collapse').on('click', function() {
+            sidebar.removeClass('active');
+            sidebarOverlay.removeClass('active').fadeOut(300);
+        });
+        
         // Close sidebar on escape key
         $(document).on('keydown', function(e) {
             if (e.key === 'Escape' && sidebar.hasClass('active')) {
