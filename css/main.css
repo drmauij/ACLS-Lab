@@ -857,14 +857,14 @@ code {
 }
 
 /* Dynamic layout adjustments when monitor is visible */
-body.monitor-visible #main-content {
-    top: 180px !important;
+body.monitor-visible #app-footer {
+    height: auto !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
 }
 
-@media only screen and (max-width: 768px) {
-    body.monitor-visible #main-content {
-        top: 140px !important;
-    }
+body.monitor-visible #main-content {
+    bottom: 40vh !important;
 }
 
 /* Enhanced Responsive Design for Sticky Layout */
@@ -879,6 +879,11 @@ body.monitor-visible #main-content {
 
     #app-footer {
         padding: 0.75rem;
+        max-height: 50vh !important;
+    }
+
+    body.monitor-visible #main-content {
+        bottom: 35vh !important;
     }
 
     #main-content {

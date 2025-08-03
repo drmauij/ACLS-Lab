@@ -53,7 +53,7 @@
 			</div>
 		</div>
 		<div class="ui inverted stackable grid" style="margin-top: 1rem; margin-bottom: 0;">
-			<div class="twelve wide column" style="padding: 0.5rem;">
+			<div class="sixteen wide column" style="padding: 0.5rem;">
 				<div class="ui inverted stackable grid" style="margin: 0;">
 					<div class="twelve wide column" style="padding: 0.25rem;">
 						<div class="ui fluid selection dropdown" id="case-dropdown">
@@ -73,29 +73,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="four wide column" style="padding: 0.5rem;">
-				<!-- Monitor Container in header for better visibility -->
-				<div id="monitor-container" class="ui inverted segment" style="margin: 0; padding: 0.75rem; display: none; font-size: 0.85rem;">
-					<div id="monitor">
-						<div class="ui inverted grid" style="margin: 0;">
-							<div class="eight wide column" style="padding: 0.25rem;">
-								<div class="timers-section">
-									<p id="caseTimer" class="caseTimer" style="display:none; margin: 0.25rem 0; font-size: 0.75rem;">Scenario time: <span id="caseMinutes">00</span>:<span id="caseSeconds">00</span></p>
-									<p id="cprTimer" class="cprTimer" style="display:none; margin: 0.25rem 0; font-size: 0.75rem;">CPR time: <span id="cprMinutes">00</span>:<span id="cprSeconds">00</span></p>
-								</div>
-							</div>
-							<div class="eight wide column" style="padding: 0.25rem;">
-								<div id="tools" class="tools-section" style="text-align: right;">
-									<img id="cprImg" alt="running cpr" src="img/cpr.png" style="display:none; width: 20px;"/>
-									<span id="cprNummer" class="cprNummer" style="display:none; font-size: 0.7rem;">x<span id="cprNummerValue">0</span></span>
-									<img id="defiLogo" alt="Numbers of performed defibrillations" src="img/defi2.png" style="display:none; width: 20px;" />
-									<span id="defiNummer" class="defiNummer" style="display:none; font-size: 0.7rem;">x<span id="defiNummerValue">0</span></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</header>
 
@@ -109,7 +86,7 @@
 			</div>
 		</div>
 
-		<!-- Right Column - Vital Parameters and Log -->
+		<!-- Right Column - Vital Parameters -->
 		<div style="width: 350px; display: flex; flex-direction: column; padding: 1rem; padding-left: 0.5rem; overflow-y: auto;">
 			<!-- Vital Parameters -->
 			<div id="vitalParam" style="padding: 1rem; margin-bottom: 1rem; display:none; font-size: 1.1rem; background: rgba(15, 23, 42, 0.5); border: 1px solid #334155; border-radius: 12px;">
@@ -152,12 +129,6 @@
 					</table>
 				</div>
 			</div>
-
-			<!-- Feedback Log -->
-			<div id="logBox" style="flex: 1; background: linear-gradient(145deg, #111827 0%, #1f2937 100%); border: 1px solid #374151; border-radius: 16px; padding: 1rem; box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3); position: relative; backdrop-filter: blur(10px); display: none; min-height: 200px;">
-				<h5 class="ui inverted header" style="margin-bottom: 1rem; color: #f9fafb !important; font-weight: 600; font-size: 1rem;">Feedback Log</h5>
-				<div id="log" style="text-align: left !important; direction: ltr !important; font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.6; color: #d1d5db; height: calc(100% - 2rem); overflow-y: auto;"></div>
-			</div>
 		</div>
 
 		<!-- Modals -->
@@ -185,6 +156,34 @@
 
 	<!-- Sticky Footer -->
 	<footer id="app-footer" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; background: linear-gradient(145deg, #111827 0%, #1f2937 100%); border-top: 1px solid #374151; padding: 1rem;">
+		<!-- Monitor Container -->
+		<div id="monitor-container" class="ui inverted segment" style="margin: 0 0 1rem 0; padding: 0.75rem; display: none; font-size: 0.85rem;">
+			<div id="monitor">
+				<div class="ui inverted grid" style="margin: 0;">
+					<div class="eight wide column" style="padding: 0.25rem;">
+						<div class="timers-section">
+							<p id="caseTimer" class="caseTimer" style="display:none; margin: 0.25rem 0; font-size: 0.75rem;">Scenario time: <span id="caseMinutes">00</span>:<span id="caseSeconds">00</span></p>
+							<p id="cprTimer" class="cprTimer" style="display:none; margin: 0.25rem 0; font-size: 0.75rem;">CPR time: <span id="cprMinutes">00</span>:<span id="cprSeconds">00</span></p>
+						</div>
+					</div>
+					<div class="eight wide column" style="padding: 0.25rem;">
+						<div id="tools" class="tools-section" style="text-align: right;">
+							<img id="cprImg" alt="running cpr" src="img/cpr.png" style="display:none; width: 20px;"/>
+							<span id="cprNummer" class="cprNummer" style="display:none; font-size: 0.7rem;">x<span id="cprNummerValue">0</span></span>
+							<img id="defiLogo" alt="Numbers of performed defibrillations" src="img/defi2.png" style="display:none; width: 20px;" />
+							<span id="defiNummer" class="defiNummer" style="display:none; font-size: 0.7rem;">x<span id="defiNummerValue">0</span></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Feedback Log Container -->
+		<div id="logBox" style="background: linear-gradient(145deg, #111827 0%, #1f2937 100%); border: 1px solid #374151; border-radius: 16px; padding: 1rem; box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3); position: relative; backdrop-filter: blur(10px); display: none; margin-bottom: 1rem; max-height: 200px;">
+			<h5 class="ui inverted header" style="margin-bottom: 1rem; color: #f9fafb !important; font-weight: 600; font-size: 1rem;">Feedback Log</h5>
+			<div id="log" style="text-align: left !important; direction: ltr !important; font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.6; color: #d1d5db; height: calc(100% - 2rem); overflow-y: auto;"></div>
+		</div>
+
 		<div id="menu" style="display:none; margin: 0;">
 			<div class="ui stackable two column grid" style="margin: 0;">
 				<div class="column" style="padding: 0.5rem;">
