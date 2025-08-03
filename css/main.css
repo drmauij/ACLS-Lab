@@ -478,8 +478,8 @@ a:hover {
     padding: 0 !important;
     margin: 0 !important;
     font-family: 'Poppins', sans-serif !important;
-    font-size: 1.1rem !important;
-    line-height: 1.7 !important;
+    font-size: 1.3rem !important;
+    line-height: 1.8 !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
     border: none !important;
@@ -966,16 +966,17 @@ body.monitor-visible #main-content {
 .sidebar-collapse-btn {
     background: rgba(239, 68, 68, 0.1);
     border: 1px solid rgba(239, 68, 68, 0.3);
-    color: #ef4444;
+    color: #ef4444 !important;
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 6px;
     transition: all 0.2s ease;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     width: 36px;
     height: 36px;
+    position: relative;
 }
 
 .sidebar-collapse-btn:hover {

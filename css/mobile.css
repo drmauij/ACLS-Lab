@@ -297,7 +297,8 @@
     #shell-panel-mobile {
         min-height: auto !important;
         max-height: calc(100vh - 250px) !important;
-        font-size: 0.9rem !important;
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
         padding: 0 !important;
@@ -404,10 +405,22 @@
         min-width: 36px;
         min-height: 36px;
         padding: 0.75rem;
+        display: flex !important;
+        color: #ef4444 !important;
+        background: rgba(239, 68, 68, 0.2) !important;
+        border: 1px solid rgba(239, 68, 68, 0.4) !important;
     }
 
     .sidebar-collapse-btn i {
         font-size: 1.1rem;
+        display: block !important;
+    }
+
+    /* Increase mobile scenario content font size */
+    #shell-panel,
+    #shell-panel-mobile {
+        font-size: 1.1rem !important;
+        line-height: 1.7 !important;
     }
 
     /* Force disable search input on mobile dropdowns */
