@@ -892,7 +892,7 @@ code {
     z-index: 1000;
     background: linear-gradient(145deg, #0a0a0a 0%, #111827 100%);
     border-bottom: 1px solid #374151;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     backdrop-filter: blur(10px);
 }
 
@@ -910,7 +910,7 @@ code {
 
 #main-content {
     position: fixed;
-    top: 100px;
+    top: 80px;
     bottom: 200px;
     left: 0;
     right: 0;
@@ -942,7 +942,7 @@ body.monitor-visible #main-content {
     }
 
     #app-header {
-        padding: 0.5rem 0.5rem 0.25rem 0.5rem !important;
+        padding: 0.25rem 0.5rem !important;
     }
 
     #app-footer {
@@ -950,7 +950,7 @@ body.monitor-visible #main-content {
     }
 
     #main-content {
-        top: 70px !important;
+        top: 60px !important;
         bottom: 120px;
         padding: 0.5rem;
         overflow-y: auto !important;
@@ -959,7 +959,7 @@ body.monitor-visible #main-content {
     }
 
     body.monitor-visible #main-content {
-        top: 70px !important;
+        top: 60px !important;
     }
 
     .desktop-layout {
@@ -1053,7 +1053,7 @@ body.monitor-visible #main-content {
     }
     
     #main-content {
-        top: 60px !important;
+        top: 50px !important;
         bottom: 110px;
         padding: 0.25rem;
         overflow-y: auto !important;
@@ -1061,7 +1061,7 @@ body.monitor-visible #main-content {
     }
 
     #app-header {
-        padding: 0.25rem 0.25rem 0.125rem 0.25rem !important;
+        padding: 0.125rem 0.25rem !important;
     }
 
     #app-footer {
