@@ -382,3 +382,45 @@
         image-rendering: crisp-edges;
     }
 }
+
+/* Mobile-specific sidebar styling */
+@media (max-width: 768px) {
+    .sidebar-header {
+        padding: 0.75rem 1rem;
+        min-height: 60px;
+    }
+    
+    .sidebar-title {
+        font-size: 1rem;
+    }
+    
+    .sidebar-collapse-btn {
+        min-width: 36px;
+        min-height: 36px;
+        padding: 0.75rem;
+    }
+    
+    .sidebar-collapse-btn i {
+        font-size: 1.1rem;
+    }
+    
+    /* Force disable search input on mobile dropdowns */
+    .ui.dropdown input.search {
+        display: none !important;
+        pointer-events: none !important;
+    }
+    
+    .ui.dropdown .menu .item input {
+        display: none !important;
+    }
+    
+    /* Prevent any input focus that could trigger keyboard */
+    #action-dropdown input,
+    #drug-dropdown input {
+        pointer-events: none !important;
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+    }
+}

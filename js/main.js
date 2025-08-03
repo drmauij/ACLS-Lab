@@ -828,7 +828,9 @@ function initializeDropdowns() {
     $('#action-dropdown').dropdown({
         allowReselection: true,
         forceSelection: false,
-        fullTextSearch: false, // Always disable search for actions
+        fullTextSearch: false,
+        search: false,
+        selectOnKeydown: false,
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Action dropdown onChange:', value, text);
@@ -845,7 +847,9 @@ function initializeDropdowns() {
     $('#drug-dropdown').dropdown({
         allowReselection: true, 
         forceSelection: false,
-        fullTextSearch: false, // Always disable search for drugs
+        fullTextSearch: false,
+        search: false,
+        selectOnKeydown: false,
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Drug dropdown onChange:', value, text);

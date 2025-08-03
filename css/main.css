@@ -1064,6 +1064,47 @@ body.monitor-visible #main-content {
     transform: translateY(-50%) translateX(-2px);
 }
 
+/* Sidebar header and close button styling */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+    background: #1f2937;
+}
+
+.sidebar-title {
+    color: #e5e7eb;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.sidebar-collapse-btn {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    min-height: 32px;
+}
+
+.sidebar-collapse-btn:hover {
+    background: rgba(55, 65, 81, 0.5);
+    color: #f9fafb;
+}
+
+.sidebar-collapse-btn i {
+    font-size: 1.2rem;
+}
+
 /* Sidebar overlay for mobile */
 .sidebar-overlay {
     position: fixed;
