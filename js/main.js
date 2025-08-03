@@ -542,22 +542,31 @@ function attachChangeHandlers() {
     // Remove existing handlers to prevent duplicates
     $('#case, #action, #drug').off('change');
 
-    // Cases
+    // Cases with debouncing to prevent rapid triggers
+    let caseChangeTimeout;
     $('#case').on('change', function(evt, params) {
         var arg = $(this).val();
         console.log('Case change event triggered with value:', arg);
-        if (!arg || arg === '') {
-            console.log('No case selected, returning');
-            return;
+        
+        // Clear any existing timeout
+        if (caseChangeTimeout) {
+            clearTimeout(caseChangeTimeout);
         }
+        
+        // Debounce the case change
+        caseChangeTimeout = setTimeout(() => {
+            if (!arg || arg === '') {
+                console.log('No case selected, returning');
+                return;
+            }
 
-        caseObj = cases[arg];
-        if (!caseObj) {
-            console.error('Case not found:', arg);
-            return;
-        }
+            caseObj = cases[arg];
+            if (!caseObj) {
+                console.error('Case not found:', arg);
+                return;
+            }
 
-        console.log('Starting case:', caseObj.title);
+            console.log('Starting case:', caseObj.title);
         steps = caseObj.steps;
         onceTimeStepsActions = [];
         clearInterval(cprTimer);
@@ -606,6 +615,7 @@ function attachChangeHandlers() {
 
         // Mirror content for mobile layout
         updateMobileLayout();
+        }, 150); // 150ms debounce delay
     });
 
     // Function to update mobile layout content
@@ -688,6 +698,11 @@ function initializeDropdowns() {
     // Re-attach the change event handlers first
     attachChangeHandlers();
 
+    // Add flag to prevent recursive calls
+    let processingCaseChange = false;
+    let processingActionChange = false;
+    let processingDrugChange = false;
+
     // Standard dropdown for case selection
     $('#case-dropdown').dropdown({
         allowReselection: true,
@@ -696,9 +711,13 @@ function initializeDropdowns() {
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Case dropdown onChange triggered:', value, text);
-            if (value && value !== '' && value !== null && value !== 'test') {
+            if (value && value !== '' && value !== null && value !== 'test' && !processingCaseChange) {
+                processingCaseChange = true;
                 console.log('Setting case value and triggering change:', value);
                 $('#case').val(value).trigger('change');
+                setTimeout(() => {
+                    processingCaseChange = false;
+                }, 100);
             }
         }
     });
@@ -711,8 +730,12 @@ function initializeDropdowns() {
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Action dropdown onChange:', value, text);
-            if (value && value !== '' && value !== null && value !== $('#action').val()) {
+            if (value && value !== '' && value !== null && value !== $('#action').val() && !processingActionChange) {
+                processingActionChange = true;
                 $('#action').val(value).trigger('change');
+                setTimeout(() => {
+                    processingActionChange = false;
+                }, 100);
             }
         }
     });
@@ -724,8 +747,12 @@ function initializeDropdowns() {
         clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Drug dropdown onChange:', value, text);
-            if (value && value !== '' && value !== null && value !== $('#drug').val()) {
+            if (value && value !== '' && value !== null && value !== $('#drug').val() && !processingDrugChange) {
+                processingDrugChange = true;
                 $('#drug').val(value).trigger('change');
+                setTimeout(() => {
+                    processingDrugChange = false;
+                }, 100);
             }
         }
     });
