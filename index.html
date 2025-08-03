@@ -33,200 +33,216 @@
 	<link rel='stylesheet' href='css/main.css'>
 	<link rel='stylesheet' href='css/mobile.css'>
 
-
-	<style>
-		/* Inline styles removed - using main.css instead */
-	</style>
-
 	<title>ACLS Simulator - Interactive Medical Training Tool | Advanced Cardiac Life Support</title>
 </head>
 
 <body class="ui inverted dark">
-	<div class="ui inverted container-fluid" style="padding: 1rem;">
-		<div class="ui horizontal list" style="align-items: center;">
-			<div class="item">
-				<img src="img/defi.png" width="40px" style="margin-right: 1rem;" />
+	<!-- Sticky Header -->
+	<header id="app-header">
+		<div class="ui inverted container-fluid">
+			<!-- Logo and Title -->
+			<div class="ui horizontal list" style="align-items: center; margin-bottom: 1rem;">
+				<div class="item">
+					<img src="img/defi.png" width="40px" style="margin-right: 1rem;" />
+				</div>
+				<div class="item">
+					<h2 class="ui inverted header">ACLS Lab</h2>
+				</div>
 			</div>
-			<div class="item">
-				<h2 class="ui inverted header">ACLS Lab</h2>
+			
+			<!-- Scenario Selection -->
+			<div class="ui inverted stackable grid" style="margin-bottom: 0;">
+				<div class="twelve wide column">
+					<div class="ui fluid selection dropdown" id="case-dropdown">
+						<input type="hidden" name="case" id="case">
+						<i class="dropdown icon"></i>
+						<div class="default text">Choose a Scenario to start with...</div>
+						<div class="menu">
+							<!-- Options will be populated by JavaScript -->
+						</div>
+					</div>
+				</div>
+				<div class="four wide column">
+					<div class="ui toggle checkbox" style="margin-top: 0.5rem;">
+						<input type="checkbox" id="realtime" checked value="true">
+						<label for="realtime">Realtime</label>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="ui inverted stackable grid" style="padding-top: 0.5rem;">
-			<div class="twelve wide column">
-				<div class="ui inverted stackable grid">
-					<div class="twelve wide column">
-						<div class="ui fluid selection dropdown" id="case-dropdown">
-							<input type="hidden" name="case" id="case">
-							<i class="dropdown icon"></i>
-							<div class="default text">Choose a Scenario to start with...</div>
+	</header>
+
+	<!-- Main Content Area -->
+	<main id="main-content">
+		<div class="ui inverted container-fluid" style="height: 100%; display: flex; flex-direction: column;">
+			
+			<!-- Desktop Layout -->
+			<div class="desktop-layout">
+				<div class="ui inverted stackable grid" style="flex: 1; margin: 0;">
+					<!-- Left Column - Shell Panel -->
+					<div class="eight wide column" style="display: flex; flex-direction: column;">
+						<div id="shell-panel" style="flex: 1; overflow-y: auto;">
+							ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different
+							ACLS scenarios. Choose from the above dropdown menu a scenario to start your simulation. Have fun!
+						</div>
+					</div>
+					
+					<!-- Right Column - Monitor and Log -->
+					<div class="eight wide column" style="display: flex; flex-direction: column;">
+						<!-- Monitor Container -->
+						<div id="monitor-container" class="ui inverted segment" style="margin: 0 0 1rem 0; padding: 1rem; display: none;">
+							<div id="monitor">
+								<div class="ui inverted grid">
+									<div class="eight wide column">
+										<div class="timers-section">
+											<p id="caseTimer" class="caseTimer" style="display:none;">Scenario time: <span id="caseMinutes">00</span>:<span id="caseSeconds">00</span></p>
+											<p id="cprTimer" class="cprTimer" style="display:none;">CPR time: <span id="cprMinutes">00</span>:<span id="cprSeconds">00</span></p>
+										</div>
+									</div>
+									<div class="eight wide column">
+										<div id="tools" class="tools-section" style="text-align: right;">
+											<img id="cprImg" alt="running cpr" src="img/cpr.png" style="display:none;"/>
+											<span id="cprNummer" class="cprNummer" style="display:none;">x<span id="cprNummerValue">0</span></span>
+											<img id="defiLogo" alt="Numbers of performed defibrillations" src="img/defi2.png" style="display:none;" />
+											<span id="defiNummer" class="defiNummer" style="display:none;">x<span id="defiNummerValue">0</span></span>
+										</div>
+									</div>
+								</div>
+
+								<div id="vitalParam" style="padding: 0.5rem; margin-top: 0.5rem; display:none; font-size: 1.2rem;">
+									<div class="ui two column grid">
+										<div class="column">
+											<div id="hf" style="color: #00ff00; margin-bottom: 0.5rem;">
+												HF <span id="hfvalue"></span> bpm
+											</div>
+											<div id="bp" style="color: #dc3545; margin-bottom: 0.5rem;">
+												BP <span id="bpvalue"></span> mmHg
+											</div>
+										</div>
+										<div class="column">
+											<div id="sat" style="color: #17a2b8; margin-bottom: 0.5rem;">Sat <span id="satvalue"></span>%</div>
+											<div id="co2" style="display:none; color: #ffc107; margin-bottom: 0.5rem;">
+												CO2 <span style="font-size: 0.8rem;">exp</span> <span id="co2value"></span>
+											</div>
+											<div id="temp" style="color:#fd7e14; display:none; font-size: 1rem;">
+												Temp <span id="tempvalue"></span> °C
+											</div>
+										</div>
+									</div>
+									<div style="margin-top: 0.5rem;">
+										<img id="ecgImg" alt="ECG monitor" src="img/" style="border: 1px solid #3a3a39; display:none; max-width: 100%; height: auto;" />
+									</div>
+								</div>
+
+								<div id="labor" style="padding: 0.5rem; margin-top: 0.5rem; display:none;">
+									<h4 class="ui inverted header">Labor data</h4>
+									<div style="overflow-x: auto;">
+										<table id="laborTable" class="ui inverted table">
+											<thead>
+												<tr>
+													<th>Parameter</th>
+													<th>Value</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Log Box -->
+						<div id="logBox" style="flex: 1; overflow-y: auto; min-height: 200px;">
+							<h5 class="ui inverted header" style="margin-bottom: 1rem;">Feedback Log</h5>
+							<div id="log" style="display:inline-block; text-align: left;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Mobile Layout -->
+			<div class="mobile-layout" style="display: none;">
+				<div style="flex: 1; display: flex; flex-direction: column;">
+					<!-- Shell Panel -->
+					<div id="shell-panel-mobile" style="flex: 1; overflow-y: auto; min-height: 250px; margin-bottom: 1rem;">
+						ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different
+						ACLS scenarios. Choose from the above dropdown menu a scenario to start your simulation. Have fun!
+					</div>
+					
+					<!-- Monitor Container Mobile -->
+					<div id="monitor-container-mobile" class="ui inverted segment" style="margin: 0 0 1rem 0; padding: 1rem; display: none;">
+						<!-- Monitor content will be moved here on mobile -->
+					</div>
+					
+					<!-- Log Box Mobile -->
+					<div id="logBox-mobile" style="flex: 1; overflow-y: auto; min-height: 150px;">
+						<h5 class="ui inverted header" style="margin-bottom: 1rem;">Feedback Log</h5>
+						<div id="log-mobile" style="display:inline-block; text-align: left;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Sticky Footer with Actions -->
+	<footer id="app-footer">
+		<div class="ui inverted container-fluid">
+			<!-- Action and Drug Dropdowns -->
+			<div id="menu" style="display:none; margin-bottom: 1rem;">
+				<div class="ui stackable two column grid">
+					<div class="column">
+						<div class="ui fluid search selection dropdown" id="action-dropdown">
+							<input type="hidden" name="action" id="action">
+							<i class="stethoscope icon"></i>
+							<div class="default text">Search for actions...</div>
 							<div class="menu">
 								<!-- Options will be populated by JavaScript -->
 							</div>
 						</div>
 					</div>
-					<div class="four wide column">
-						<div class="ui toggle checkbox" style="margin-top: 0.5rem;">
-							<input type="checkbox" id="realtime" checked value="true">
-							<label for="realtime">Realtime</label>
-						</div>
-					</div>
-				</div>
-				
-				<div id="shell-panel" class="p-2 mt-2 mb-2">
-					ACLS (Advanced Cardiac Life Support) lab is an easy-to-go application to learn and simulate different
-					ACLS scenarios. Choose from the above dropdown menu a scenario to start your simulation. Have fun!
-				</div>
-				<div id="menu" style="display:none; margin: 1rem 0 2rem 0;">
-					<div class="ui stackable two column grid">
-						<div class="column">
-							<div class="ui fluid search selection dropdown" id="action-dropdown">
-								<input type="hidden" name="action" id="action">
-								<i class="stethoscope icon"></i>
-								<div class="default text">Search for actions...</div>
-								<div class="menu">
-									<!-- Options will be populated by JavaScript -->
-								</div>
-							</div>
-						</div>
-						<div class="column">
-							<div class="ui fluid search selection dropdown" id="drug-dropdown">
-								<input type="hidden" name="drug" id="drug">
-								<i class="pills icon"></i>
-								<div class="default text">Search for drugs...</div>
-								<div class="menu">
-									<!-- Options will be populated by JavaScript -->
-								</div>
+					<div class="column">
+						<div class="ui fluid search selection dropdown" id="drug-dropdown">
+							<input type="hidden" name="drug" id="drug">
+							<i class="pills icon"></i>
+							<div class="default text">Search for drugs...</div>
+							<div class="menu">
+								<!-- Options will be populated by JavaScript -->
 							</div>
 						</div>
 					</div>
 				</div>
-
-					<!--
-            <div class="mt-3">
-                <h4>Medical disclaimer</h4>
-                <p>The information on this site is not intended or implied to be a substitute for professional medical advice, diagnosis or treatment. All content, including text, graphics, images and information, contained on or available through this web site are for general information/education and learning purposes only.</p>
-            </div>
-
-            <div class="mt-3">
-                <h4>License</h4>
-                <p>ACLS simulator is licensed under the terms of the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a></p>
-            </div>
-				-->
-			
 			</div>
-			<div class="four wide column">
-				<!-- Monitor Container - Moved to right column -->
-				<div id="monitor-container" class="ui inverted segment" style="margin: 1rem 0; padding: 1rem; display: none;">
-					<div id="monitor">
-						<div class="ui inverted grid">
-							<div class="eight wide column">
-								<div class="timers-section">
-									<p id="caseTimer" class="caseTimer" style="display:none;">Scenario time: <span id="caseMinutes">00</span>:<span id="caseSeconds">00</span></p>
-									<p id="cprTimer" class="cprTimer" style="display:none;">CPR time: <span id="cprMinutes">00</span>:<span id="cprSeconds">00</span></p>
-								</div>
-							</div>
-							<div class="eight wide column">
-								<div id="tools" class="tools-section" style="text-align: right;">
-									<img id="cprImg" alt="running cpr" src="img/cpr.png" style="display:none;"/>
-									<span id="cprNummer" class="cprNummer" style="display:none;">x<span id="cprNummerValue">0</span></span>
-									<img id="defiLogo" alt="Numbers of performed defibrillations" src="img/defi2.png" style="display:none;" />
-									<span id="defiNummer" class="defiNummer" style="display:none;">x<span id="defiNummerValue">0</span></span>
-								</div>
-							</div>
-						</div>
+			
+			<!-- Footer Attribution -->
+			<div style="text-align: center; padding-top: 1rem; border-top: 1px solid #374151;">
+				<p style="margin: 0; color: #6b7280; font-size: 0.75rem; opacity: 0.7;">
+					Powered by <a href="https://acutiq.com" target="_blank" style="color: #6b7280; text-decoration: none; opacity: 0.8;">Acutiq</a>
+				</p>
+			</div>
+		</div>
+	</footer>
 
-						<div id="vitalParam" style="padding: 0.5rem; margin-top: 0.5rem; display:none; font-size: 1.2rem;">
-							<div class="ui two column grid">
-								<div class="column">
-									<div id="hf" style="color: #00ff00; margin-bottom: 0.5rem;">
-										HF <span id="hfvalue"></span> bpm
-									</div>
-									<div id="bp" style="color: #dc3545; margin-bottom: 0.5rem;">
-										BP <span id="bpvalue"></span> mmHg
-									</div>
-								</div>
-								<div class="column">
-									<div id="sat" style="color: #17a2b8; margin-bottom: 0.5rem;">Sat <span id="satvalue"></span>%</div>
-									<div id="co2" style="display:none; color: #ffc107; margin-bottom: 0.5rem;">
-										CO2 <span style="font-size: 0.8rem;">exp</span> <span id="co2value"></span>
-									</div>
-									<div id="temp" style="color:#fd7e14; display:none; font-size: 1rem;">
-										Temp <span id="tempvalue"></span> °C
-									</div>
-								</div>
-							</div>
-							<div style="margin-top: 0.5rem;">
-								<img id="ecgImg" alt="ECG monitor" src="img/" style="border: 1px solid #3a3a39; display:none; max-width: 100%; height: auto;" />
-							</div>
-						</div>
-
-						<div id="labor" style="padding: 0.5rem; margin-top: 0.5rem; display:none;">
-							<h4 class="ui inverted header">Labor data</h4>
-							<div style="overflow-x: auto;">
-								<table id="laborTable" class="ui inverted table">
-									<thead>
-										<tr>
-											<th>Parameter</th>
-											<th>Value</th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Feedback Log moved to right column -->
-				<div style="margin-top: 1rem;" id="logBox">
-					<h5 class="ui inverted header" style="margin-bottom: 1rem;">Feedback Log</h5>
-					<div id="log" style="display:inline-block; text-align: left;"></div>
-				</div>
-
-						<!-- Button trigger modal -->
-					<!--
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dynamicVideoModal">
-								<i class="bi bi-play-btn"  style="font-size: 2.5rem;"></i>
-					</button>
-					-->
-						
-					
-					<div class="ui modal" id="dynamicVideoModal">
-						<i class="close icon" id="modal-video-close"></i>
-						<div class="header">
-							<span class="modal-title"></span>
-						</div>
-						<div class="content" style="padding: 0; margin: 0;">
-							<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;" id="player">
-							</div>
-						</div>
-					</div>
-
-					<div class="ui modal" id="dynamicImgModal">
-						<i class="close icon" id="modal-img-close"></i>
-						<div class="header">
-							<span class="modal-title"></span>
-						</div>
-						<div class="content" style="padding: 0; margin: 0;">
-							<img id="img-modal" style="width: 100%; height: auto; display: block; margin: 0 auto;" src=""/>
-						</div>
-					</div>
-
-						
-					
-					
-				</div>
+	<!-- Modals -->
+	<div class="ui modal" id="dynamicVideoModal">
+		<i class="close icon" id="modal-video-close"></i>
+		<div class="header">
+			<span class="modal-title"></span>
+		</div>
+		<div class="content" style="padding: 0; margin: 0;">
+			<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;" id="player">
 			</div>
 		</div>
 	</div>
 
-
-	<!-- Footer -->
-	<footer style="margin-top: 3rem; padding: 1.5rem 1rem; text-align: center; background: transparent;">
-		<p style="margin: 0; color: #6b7280; font-size: 0.75rem; opacity: 0.7;">
-			Powered by <a href="https://acutiq.com" target="_blank" style="color: #6b7280; text-decoration: none; opacity: 0.8;">Acutiq</a>
-		</p>
-	</footer>
+	<div class="ui modal" id="dynamicImgModal">
+		<i class="close icon" id="modal-img-close"></i>
+		<div class="header">
+			<span class="modal-title"></span>
+		</div>
+		<div class="content" style="padding: 0; margin: 0;">
+			<img id="img-modal" style="width: 100%; height: auto; display: block; margin: 0 auto;" src=""/>
+		</div>
+	</div>
 
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>

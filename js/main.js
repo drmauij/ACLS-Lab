@@ -541,7 +541,7 @@ function checkAllDataLoaded() {
 function attachChangeHandlers() {
     // Remove existing handlers to prevent duplicates
     $('#case, #action, #drug').off('change');
-    
+
     // Cases
     $('#case').on('change', function(evt, params) {
         var arg = $(this).val();
@@ -550,13 +550,13 @@ function attachChangeHandlers() {
             console.log('No case selected, returning');
             return;
         }
-        
+
         caseObj = cases[arg];
         if (!caseObj) {
             console.error('Case not found:', arg);
             return;
         }
-        
+
         console.log('Starting case:', caseObj.title);
         steps = caseObj.steps;
         onceTimeStepsActions = [];
@@ -600,6 +600,43 @@ function attachChangeHandlers() {
         // show menu and monitor container
         $("#menu").fadeIn();
         $("#monitor-container").fadeIn();
+        $("#monitor-container-mobile").fadeIn();
+        // Add class to body to adjust layout
+        $('body').addClass('monitor-visible');
+
+        // Mirror content for mobile layout
+        updateMobileLayout();
+    });
+
+    // Function to update mobile layout content
+    function updateMobileLayout() {
+        // Mirror shell panel content
+        $("#shell-panel-mobile").html($("#shell-panel").html());
+
+        // Mirror monitor content
+        $("#monitor-container-mobile").html($("#monitor-container").html());
+
+        // Mirror log content
+        $("#log-mobile").html($("#log").html());
+    }
+
+    // Update mobile content when main content changes
+    function syncMobileContent() {
+        if ($(window).width() <= 768) {
+            updateMobileLayout();
+        }
+    }
+
+    // Handle window resize
+    $(window).resize(function() {
+        if ($(window).width() <= 768) {
+            updateMobileLayout();
+        }
+    });
+
+    // Sync content on any major updates
+    $(document).on('DOMSubtreeModified', '#shell-panel, #monitor, #log', function() {
+        syncMobileContent();
     });
 
     // Actions
@@ -611,13 +648,13 @@ function attachChangeHandlers() {
             processingAction = true;
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(actionsKey, stepObj.action, arg);
-            
+
             if($("#realtime").is(':checked')){
                 $("#caseTimer").show();
             }else{
                 $("#caseTimer").hide();
             }
-            
+
             // Reset processing flag after a short delay
             setTimeout(() => {
                 processingAction = false;
@@ -634,7 +671,7 @@ function attachChangeHandlers() {
             processingDrug = true;
             var stepObj = steps[caseObj.stepCount];
             abstractStepHandler(drugsKey, stepObj.give, arg);
-            
+
             // Reset processing flag after a short delay
             setTimeout(() => {
                 processingDrug = false;
