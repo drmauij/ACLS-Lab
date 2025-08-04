@@ -269,7 +269,7 @@
         padding: 0.75rem !important;
         position: relative !important;
     }
-    
+
     /* Ensure dropdown menu is fully scrollable on mobile and shows upward */
     #scenarioSelectionModal #case-dropdown .menu {
         max-height: calc(50vh - 40px) !important;
@@ -290,7 +290,7 @@
         margin-bottom: 2px !important;
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3) !important;
     }
-    
+
     /* Force visibility when dropdown is active */
     #scenarioSelectionModal #case-dropdown.ui.dropdown.active .menu,
     #scenarioSelectionModal #case-dropdown.ui.dropdown.visible .menu {
@@ -299,22 +299,22 @@
         opacity: 1 !important;
         transform: none !important;
     }
-    
+
     /* Ensure proper touch scrolling and prevent modal interference */
     #scenarioSelectionModal #case-dropdown .menu {
         touch-action: pan-y !important;
         pointer-events: auto !important;
     }
-    
+
     /* Prevent modal dimmer from interfering with dropdown scrolling */
     #scenarioSelectionModal.ui.modal .dimmer {
         pointer-events: none !important;
     }
-    
+
     #scenarioSelectionModal.ui.modal {
         pointer-events: auto !important;
     }
-    
+
     /* Make dropdown items more touch-friendly */
     #scenarioSelectionModal #case-dropdown .menu .item {
         min-height: 44px !important;
@@ -486,7 +486,7 @@
         bottom: 0 !important;
         padding-top: 0 !important;
     }
-    
+
     .sidebar-header {
         display: flex !important;
         align-items: center !important;
