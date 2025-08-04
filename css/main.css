@@ -318,6 +318,28 @@ a:hover {
 #scenarioSelectionModal #case-dropdown .menu {
     max-height: 300px !important;
     overflow-y: auto !important;
+    overflow-x: hidden !important;
+    position: absolute !important;
+    z-index: 999999 !important;
+}
+
+/* Ensure the dropdown container doesn't limit height */
+#scenarioSelectionModal #case-dropdown {
+    position: relative !important;
+}
+
+/* Make sure modal content doesn't clip the dropdown */
+#scenarioSelectionModal .content {
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Override any conflicting dropdown menu styles */
+#scenarioSelectionModal .ui.dropdown .menu {
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
 }
 
 /* Force upward direction for action and drug dropdowns */
