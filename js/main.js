@@ -1,61 +1,51 @@
-// data preload from JSON files
+// data preload from JSON files - Load all in parallel
     var cases = {};
     var casesKey = [];
-    // parse and get all the cases, populate dropdown at the same time
-    console.log('Loading cases.json...');
-    $.getJSON( "/json/cases.json", function( data ) {
-      console.log('Cases data loaded:', Object.keys(data).length, 'scenarios');
-      $.each( data, function( key, obj ) {
-        cases[key] = obj;
-        casesKey.push(""+key);
-				$('#case-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.title+'</div>');
-      });
-      console.log('Case dropdown menu populated with', $('#case-dropdown .menu .item').length, 'items');
-
-      dataLoaded.cases = true;
-      checkAllDataLoaded();
-    }).fail(function(jqxhr, textStatus, error) {
-      console.error('Failed to load cases.json:', textStatus, error);
-    });
-
-
     var actions = {};
     var actionsKey = [];
-    // parse and get all the actions
-    console.log('Loading actions.json...');
-    $.getJSON( "/json/actions.json", function( data ) {
-      console.log('Actions data loaded:', Object.keys(data).length, 'actions');
-      $.each( data, function( key, obj ) {
-        actions[key] = obj;
-        actionsKey.push(""+key);
-         $('#action-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.description+'</div>');
-      });
-      console.log('Action dropdown menu populated with', $('#action-dropdown .menu .item').length, 'items');
-
-      dataLoaded.actions = true;
-      checkAllDataLoaded();
-    }).fail(function(jqxhr, textStatus, error) {
-      console.error('Failed to load actions.json:', textStatus, error);
-    });
-
-
     var drugs = {};
     var drugsKey = [];
-    // parse and get all the drugs
-    console.log('Loading drugs.json...');
-    $.getJSON( "/json/drugs.json", function( data ) {
-      console.log('Drugs data loaded:', Object.keys(data).length, 'drugs');
-      $.each( data, function( key, value ) {
-        drugs[key] = value;
-        drugsKey.push(""+key);
-				$('#drug-dropdown .menu').append('<div class="item" data-value="'+key+'">'+value+'</div>');
-      });
-      console.log('Drug dropdown menu populated with', $('#drug-dropdown .menu .item').length, 'items');
 
-      dataLoaded.drugs = true;
-      checkAllDataLoaded();
-    }).fail(function(jqxhr, textStatus, error) {
-      console.error('Failed to load drugs.json:', textStatus, error);
+    console.log('Loading all JSON data in parallel...');
+    
+    Promise.all([
+        $.getJSON("/json/cases.json"),
+        $.getJSON("/json/actions.json"),
+        $.getJSON("/json/drugs.json")
+    ]).then(function([casesData, actionsData, drugsData]) {
+        console.log('All data loaded successfully');
+        
+        // Process cases
+        $.each(casesData, function(key, obj) {
+            cases[key] = obj;
+            casesKey.push(""+key);
+            $('#case-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.title+'</div>');
+        });
+        
+        // Process actions
+        $.each(actionsData, function(key, obj) {
+            actions[key] = obj;
+            actionsKey.push(""+key);
+            $('#action-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.description+'</div>');
+        });
+        
+        // Process drugs
+        $.each(drugsData, function(key, value) {
+            drugs[key] = value;
+            drugsKey.push(""+key);
+            $('#drug-dropdown .menu').append('<div class="item" data-value="'+key+'">'+value+'</div>');
+        });
+        
+        console.log('All dropdowns populated - Cases:', casesKey.length, 'Actions:', actionsKey.length, 'Drugs:', drugsKey.length);
+        
+        dataLoaded.cases = true;
+        dataLoaded.actions = true;
+        dataLoaded.drugs = true;
+        
+        checkAllDataLoaded();
+        
+    }).catch(function(error) {
+        console.error('Failed to load JSON data:', error);
     });
 
 
@@ -534,13 +524,17 @@ var dataLoaded = {
 function checkAllDataLoaded() {
     if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs) {
         console.log('All data loaded - initializing dropdowns');
+        
+        // Hide loading indicator if present
+        $('.loading-indicator').fadeOut();
+        
         initializeDropdowns();
         
         // Refresh all dropdowns after items are populated to fix scrolling
         setTimeout(() => {
             $('#case-dropdown, #action-dropdown, #drug-dropdown').dropdown('refresh');
             console.log('Dropdowns refreshed after dynamic content loaded');
-        }, 100);
+        }, 50); // Reduced timeout
     }
 }
 

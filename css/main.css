@@ -1598,18 +1598,7 @@ body.monitor-visible #main-content {
     animation: fadeIn 0.3s ease-out;
 }
 
-/* ECG images preload */
-#preload { background: url(/img/AtrialFibrillation.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/AtrialFlutter.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/Brady.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/MultiPVC.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/SinusTach.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/SR.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/SVT.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/VF.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/VT.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/stemi.gif) no-repeat -9999px -9999px; }
-#preload { background: url(/img/CPR.gif) no-repeat -9999px -9999px; }
+/* ECG images will be loaded on-demand when scenarios are selected for better performance */
 
 /* Print styles */
 @media print {
