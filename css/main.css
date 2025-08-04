@@ -521,7 +521,7 @@ a:hover {
     background-color: transparent !important;
 }
 
-/* Monitor Container - temporarily hidden for debugging */
+/* Monitor Container */
 #monitor-container {
     background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
     border: none !important;
@@ -529,13 +529,11 @@ a:hover {
     box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.2) !important;
     padding: 1.5rem !important;
     margin: 1rem 0 !important;
-    display: none !important;
 }
 
 #monitor-container.ui.segment {
     background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
     border: none !important;
-    display: none !important;
 }
 
 /* Vital Parameters */
@@ -568,7 +566,7 @@ a:hover {
 #temp { color: #f97316 !important; }
 #temp #tempvalue { color: #f97316 !important; }
 
-/* Enhanced Log Box with Better Visual Hierarchy - temporarily hidden for debugging */
+/* Enhanced Log Box with Better Visual Hierarchy */
 #logBox {
     background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
     border: none;
@@ -578,7 +576,7 @@ a:hover {
     box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.2);
     position: relative;
     backdrop-filter: blur(10px);
-    display: none !important;
+    display: none;
 }
 
 /* Progress Indicator */
@@ -1068,6 +1066,10 @@ body.monitor-visible #main-content {
     margin-bottom: 1rem;
 }
 
+.sidebar-monitor {
+    display: none !important;
+}
+
 .sidebar-monitor #monitor-container {
     margin: 0 !important;
     border-radius: 8px;
@@ -1079,7 +1081,7 @@ body.monitor-visible #main-content {
 .sidebar-log {
     flex: 1;
     overflow: hidden;
-    display: flex;
+    display: none !important;
     flex-direction: column;
     min-height: 150px;
 }
