@@ -643,13 +643,8 @@ function attachChangeHandlers() {
         // Show/hide sidebar trigger based on screen size
         function updateSidebarVisibility() {
             if ($(window).width() <= 768) {
-                sidebarTrigger.show();
-                // Check if monitor is visible to show/hide trigger
-                if ($("#monitor-container").is(':visible') || $("#logBox").is(':visible')) {
-                    sidebarTrigger.removeClass('hidden');
-                } else {
-                    sidebarTrigger.addClass('hidden');
-                }
+                // Always show trigger on mobile when scenario is started
+                sidebarTrigger.show().removeClass('hidden');
             } else {
                 sidebarTrigger.hide();
                 sidebar.removeClass('active');

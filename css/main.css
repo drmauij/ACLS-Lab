@@ -1148,7 +1148,7 @@ body.monitor-visible #main-content {
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 1001;
     display: none;
     transition: all 0.3s ease;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
@@ -1276,6 +1276,8 @@ body.monitor-visible #main-content {
 
     .sidebar-trigger {
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .sidebar-trigger.hidden {
