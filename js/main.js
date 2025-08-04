@@ -637,14 +637,15 @@ function attachChangeHandlers() {
     // Sidebar functionality
     function initializeSidebar() {
         const sidebar = $('.sidebar');
-        const sidebarTrigger = $('#sidebar-trigger');
-        const sidebarOverlay = $('#sidebar-overlay');
+        const sidebarTrigger = $('.sidebar-trigger'); // Use class selector instead of ID
+        const sidebarOverlay = $('.sidebar-overlay'); // Use class selector instead of ID
 
         // Show/hide sidebar trigger based on screen size
         function updateSidebarVisibility() {
             if ($(window).width() <= 768) {
                 // Always show trigger on mobile when scenario is started
                 sidebarTrigger.show().removeClass('hidden');
+                console.log('Sidebar trigger shown on mobile');
             } else {
                 sidebarTrigger.hide();
                 sidebar.removeClass('active');
@@ -652,20 +653,32 @@ function attachChangeHandlers() {
             }
         }
 
+        // Remove any existing event handlers to prevent duplicates
+        sidebarTrigger.off('click');
+        sidebarOverlay.off('click');
+        $('.sidebar-collapse-btn').off('click');
+
         // Toggle sidebar on mobile
-        sidebarTrigger.on('click', function() {
+        sidebarTrigger.on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Sidebar trigger clicked');
             sidebar.addClass('active');
             sidebarOverlay.addClass('active').show();
         });
 
         // Close sidebar when clicking overlay
         sidebarOverlay.on('click', function() {
+            console.log('Sidebar overlay clicked');
             sidebar.removeClass('active');
             sidebarOverlay.removeClass('active').fadeOut(300);
         });
 
         // Close sidebar when clicking collapse button
-        $('#sidebar-collapse').on('click', function() {
+        $('.sidebar-collapse-btn').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Sidebar collapse button clicked');
             sidebar.removeClass('active');
             sidebarOverlay.removeClass('active').fadeOut(300);
         });

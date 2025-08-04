@@ -1148,10 +1148,11 @@ body.monitor-visible #main-content {
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 10000;
     display: none;
     transition: all 0.3s ease;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
 }
 
 .sidebar-trigger:hover {
