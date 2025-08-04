@@ -1019,7 +1019,7 @@ body.monitor-visible #main-content {
     right: 0;
     bottom: 200px;
     width: 350px;
-    background: transparent;
+    background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
     border-left: 1px solid #374151;
     display: flex !important;
     flex-direction: column;
@@ -1027,6 +1027,8 @@ body.monitor-visible #main-content {
     transition: transform 0.3s ease;
     visibility: visible !important;
     opacity: 1 !important;
+    backdrop-filter: blur(10px);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-header {
