@@ -840,6 +840,20 @@ function initializeDropdowns() {
                     '-webkit-overflow-scrolling': 'touch',
                     'touch-action': 'pan-y'
                 });
+                
+                // Force enable scrolling on mobile
+                $menu.on('touchstart', function(e) {
+                    e.stopPropagation();
+                });
+                
+                $menu.on('touchmove', function(e) {
+                    e.stopPropagation();
+                });
+                
+                // Prevent modal from interfering with dropdown scrolling
+                $menu.on('scroll', function(e) {
+                    e.stopPropagation();
+                });
             } else {
                 $menu.css({
                     'max-height': '250px',
@@ -850,8 +864,10 @@ function initializeDropdowns() {
             }
         },
         onHide: function() {
-            // Clean up any custom styles
-            $(this).find('.menu').removeAttr('style');
+            // Clean up any custom styles and event handlers
+            var $menu = $(this).find('.menu');
+            $menu.off('touchstart touchmove scroll');
+            $menu.removeAttr('style');
         }
     });
 
