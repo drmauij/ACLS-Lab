@@ -825,12 +825,33 @@ function initializeDropdowns() {
         onShow: function() {
             // Ensure proper positioning and scrolling
             var $menu = $(this).find('.menu');
-            $menu.css({
-                'max-height': '250px',
-                'overflow-y': 'auto',
-                'overflow-x': 'hidden',
-                'z-index': '10001'
-            });
+            var isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                $menu.css({
+                    'max-height': '50vh',
+                    'overflow-y': 'auto',
+                    'overflow-x': 'hidden',
+                    'z-index': '10001',
+                    'position': 'absolute',
+                    'top': '100%',
+                    'left': '0',
+                    'right': '0',
+                    '-webkit-overflow-scrolling': 'touch',
+                    'touch-action': 'pan-y'
+                });
+            } else {
+                $menu.css({
+                    'max-height': '250px',
+                    'overflow-y': 'auto',
+                    'overflow-x': 'hidden',
+                    'z-index': '10001'
+                });
+            }
+        },
+        onHide: function() {
+            // Clean up any custom styles
+            $(this).find('.menu').removeAttr('style');
         }
     });
 

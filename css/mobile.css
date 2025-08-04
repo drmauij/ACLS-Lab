@@ -272,8 +272,8 @@
     
     /* Ensure dropdown menu is fully scrollable on mobile */
     #scenarioSelectionModal #case-dropdown .menu {
-        max-height: 40vh !important;
-        overflow-y: scroll !important;
+        max-height: 50vh !important;
+        overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
         position: absolute !important;
         top: 100% !important;
@@ -281,6 +281,8 @@
         right: 0 !important;
         z-index: 10001 !important;
         border-radius: 0 0 6px 6px !important;
+        background: rgba(0, 0, 0, 0.95) !important;
+        backdrop-filter: blur(10px) !important;
     }
     
     /* Force visibility when dropdown is active */
@@ -289,6 +291,12 @@
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    /* Ensure proper touch scrolling */
+    #scenarioSelectionModal #case-dropdown .menu {
+        touch-action: pan-y !important;
     }
 }
 
