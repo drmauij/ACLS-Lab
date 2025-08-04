@@ -1078,7 +1078,15 @@ body.monitor-visible #main-content {
 }
 
 /* Ensure all sidebar header elements are always visible */
-.sidebar .sidebar-header,
+.sidebar .sidebar-header {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1003 !important;
+}
+
 .sidebar .sidebar-header *,
 .sidebar .sidebar-title,
 .sidebar .sidebar-collapse-btn {
@@ -1089,6 +1097,12 @@ body.monitor-visible #main-content {
 
 .sidebar .sidebar-title {
     display: block !important;
+    flex: 1 !important;
+}
+
+.sidebar .sidebar-collapse-btn {
+    display: flex !important;
+    flex-shrink: 0 !important;
 }
 
 .sidebar .sidebar-collapse-btn i {
@@ -1318,11 +1332,16 @@ body.monitor-visible #main-content {
     }
 
     .sidebar {
-        top: 0;
-        bottom: 0;
-        width: 100%;
-        transform: translateX(100%);
-        z-index: 1001;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        transform: translateX(100%) !important;
+        z-index: 1001 !important;
+        position: fixed !important;
+        right: 0 !important;
+        left: auto !important;
+        height: 100vh !important;
+        overflow-y: auto !important;
     }
 
     .sidebar.active {

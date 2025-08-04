@@ -481,6 +481,12 @@
 /* Mobile-specific sidebar styling */
 @media (max-width: 768px) {
     /* Ensure sidebar header is visible and properly styled on mobile */
+    .sidebar {
+        top: 0 !important;
+        bottom: 0 !important;
+        padding-top: 0 !important;
+    }
+    
     .sidebar-header {
         display: flex !important;
         align-items: center !important;
@@ -491,7 +497,9 @@
         min-height: 60px !important;
         flex-shrink: 0 !important;
         position: relative !important;
-        z-index: 1001 !important;
+        z-index: 1002 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .sidebar-title {
