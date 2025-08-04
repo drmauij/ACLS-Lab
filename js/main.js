@@ -637,15 +637,19 @@ function attachChangeHandlers() {
     // Sidebar functionality
     function initializeSidebar() {
         const sidebar = $('.sidebar');
-        const sidebarTrigger = $('.sidebar-trigger'); // Use class selector instead of ID
-        const sidebarOverlay = $('.sidebar-overlay'); // Use class selector instead of ID
+        const sidebarTrigger = $('.sidebar-trigger');
+        const sidebarOverlay = $('.sidebar-overlay');
 
-        // Show/hide sidebar trigger based on screen size
+        // Show/hide sidebar trigger based on screen size and scenario state
         function updateSidebarVisibility() {
             if ($(window).width() <= 768) {
-                // Always show trigger on mobile when scenario is started
-                sidebarTrigger.show().removeClass('hidden');
-                console.log('Sidebar trigger shown on mobile');
+                // Show trigger on mobile when scenario is started
+                if ($('body').hasClass('monitor-visible')) {
+                    sidebarTrigger.show().removeClass('hidden');
+                    console.log('Sidebar trigger shown on mobile');
+                } else {
+                    sidebarTrigger.hide().addClass('hidden');
+                }
             } else {
                 sidebarTrigger.hide();
                 sidebar.removeClass('active');
@@ -654,37 +658,39 @@ function attachChangeHandlers() {
         }
 
         // Remove any existing event handlers to prevent duplicates
-        sidebarTrigger.off('click');
-        sidebarOverlay.off('click');
-        $('.sidebar-collapse-btn').off('click');
+        $(document).off('click.sidebar');
+        $(document).off('keydown.sidebar');
 
-        // Toggle sidebar on mobile
-        sidebarTrigger.on('click', function(e) {
+        // Toggle sidebar on mobile - use event delegation
+        $(document).on('click.sidebar', '.sidebar-trigger', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Sidebar trigger clicked');
+            console.log('Sidebar trigger clicked - opening sidebar');
             sidebar.addClass('active');
             sidebarOverlay.addClass('active').show();
+            // Show monitor and log content
+            $('.sidebar-monitor').show();
+            $('.sidebar-log').show();
         });
 
         // Close sidebar when clicking overlay
-        sidebarOverlay.on('click', function() {
-            console.log('Sidebar overlay clicked');
+        $(document).on('click.sidebar', '.sidebar-overlay', function(e) {
+            console.log('Sidebar overlay clicked - closing sidebar');
             sidebar.removeClass('active');
             sidebarOverlay.removeClass('active').fadeOut(300);
         });
 
         // Close sidebar when clicking collapse button
-        $('.sidebar-collapse-btn').on('click', function(e) {
+        $(document).on('click.sidebar', '.sidebar-collapse-btn', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Sidebar collapse button clicked');
+            console.log('Sidebar collapse button clicked - closing sidebar');
             sidebar.removeClass('active');
             sidebarOverlay.removeClass('active').fadeOut(300);
         });
 
         // Close sidebar on escape key
-        $(document).on('keydown', function(e) {
+        $(document).on('keydown.sidebar', function(e) {
             if (e.key === 'Escape' && sidebar.hasClass('active')) {
                 sidebar.removeClass('active');
                 sidebarOverlay.removeClass('active').fadeOut(300);

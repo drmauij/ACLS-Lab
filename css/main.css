@@ -1228,6 +1228,13 @@ body.monitor-visible #main-content {
     transform: translateY(-50%) translateX(-2px);
 }
 
+/* Show trigger on mobile when scenario is active */
+@media (max-width: 768px) {
+    body.monitor-visible .sidebar-trigger {
+        display: block !important;
+    }
+}
+
 /* Sidebar header and close button styling */
 .sidebar-header {
     display: flex;
@@ -1327,28 +1334,36 @@ body.monitor-visible #main-content {
     }
 
     /* Sidebar mobile layout */
+@media (max-width: 768px) {
     .content-area {
         margin-right: 0 !important;
     }
 
     .sidebar {
+        position: fixed !important;
         top: 0 !important;
         bottom: 0 !important;
-        width: 100% !important;
-        transform: translateX(100%) !important;
-        z-index: 1001 !important;
-        position: fixed !important;
         right: 0 !important;
-        left: auto !important;
+        width: 90% !important;
+        max-width: 400px !important;
         height: 100vh !important;
+        transform: translateX(100%) !important;
+        transition: transform 0.3s ease !important;
+        z-index: 1001 !important;
         overflow-y: auto !important;
+        background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3) !important;
     }
 
     .sidebar.active {
-        transform: translateX(0);
+        transform: translateX(0) !important;
     }
 
     .sidebar-trigger {
+        display: none !important;
+    }
+
+    body.monitor-visible .sidebar-trigger {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -1357,6 +1372,7 @@ body.monitor-visible #main-content {
     .sidebar-trigger.hidden {
         display: none !important;
     }
+}
 
     .desktop-layout {
         display: none !important;
