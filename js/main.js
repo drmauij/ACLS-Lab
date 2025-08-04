@@ -707,10 +707,25 @@ function attachChangeHandlers() {
         }
     });
 
-    // Sync content on any major updates
-    $(document).on('DOMSubtreeModified', '#shell-panel, #monitor, #log', function() {
-        syncMobileContent();
-    });
+    // Sync content on any major updates using MutationObserver
+    if (typeof MutationObserver !== 'undefined') {
+        const observer = new MutationObserver(function(mutations) {
+            syncMobileContent();
+        });
+        
+        // Observe changes to shell panel, monitor, and log
+        const elementsToObserve = ['#shell-panel', '#monitor', '#log'];
+        elementsToObserve.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                observer.observe(element, { 
+                    childList: true, 
+                    subtree: true,
+                    characterData: true 
+                });
+            }
+        });
+    }
 
     // Force mobile update when scenario content changes
     setInterval(function() {
@@ -820,7 +835,7 @@ function initializeDropdowns() {
     // Search selection dropdowns for actions and drugs
     // Detect mobile to configure dropdowns appropriately
     function isMobile() {
-        return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        return window.innerWidth <= 768;
     }
     
     const mobileMode = isMobile();
@@ -832,6 +847,9 @@ function initializeDropdowns() {
         forceSelection: false,
         clearable: true,
         direction: 'upward',
+        search: !mobileMode,
+        fullTextSearch: !mobileMode,
+        selectOnKeydown: !mobileMode,
         onChange: function(value, text, $selectedItem) {
             console.log('Action dropdown onChange:', value, text);
             if (value && value !== '' && value !== null && value !== $('#action').val() && !processingActionChange) {
@@ -850,6 +868,9 @@ function initializeDropdowns() {
         forceSelection: false,
         clearable: true,
         direction: 'upward',
+        search: !mobileMode,
+        fullTextSearch: !mobileMode,
+        selectOnKeydown: !mobileMode,
         onChange: function(value, text, $selectedItem) {
             console.log('Drug dropdown onChange:', value, text);
             if (value && value !== '' && value !== null && value !== $('#drug').val() && !processingDrugChange) {
@@ -861,22 +882,6 @@ function initializeDropdowns() {
             }
         }
     };
-
-    // Add search functionality for desktop only
-    if (!mobileMode) {
-        actionDropdownConfig.search = true;
-        actionDropdownConfig.fullTextSearch = true;
-        drugDropdownConfig.search = true;  
-        drugDropdownConfig.fullTextSearch = true;
-    } else {
-        // Mobile mode - no search functionality
-        actionDropdownConfig.search = false;
-        actionDropdownConfig.fullTextSearch = false;
-        actionDropdownConfig.selectOnKeydown = false;
-        drugDropdownConfig.search = false;
-        drugDropdownConfig.fullTextSearch = false;
-        drugDropdownConfig.selectOnKeydown = false;
-    }
 
     $('#action-dropdown').dropdown(actionDropdownConfig);
     $('#drug-dropdown').dropdown(drugDropdownConfig);

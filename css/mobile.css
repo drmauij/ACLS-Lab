@@ -452,6 +452,32 @@
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
+        background: linear-gradient(145deg, #1f2937 0%, #374151 100%) !important;
+        min-height: 50px !important;
+        border-bottom: 1px solid #374151 !important;
+    }
+
+    .sidebar-title {
+        color: #f9fafb !important;
+        margin: 0 !important;
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .sidebar-collapse-btn {
+        background: rgba(239, 68, 68, 0.15) !important;
+        border: 1px solid rgba(239, 68, 68, 0.4) !important;
+        color: #ef4444 !important;
+        width: 24px !important;
+        height: 24px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     /* Mobile scenario content font size */

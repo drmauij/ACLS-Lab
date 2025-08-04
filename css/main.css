@@ -967,7 +967,7 @@ body.monitor-visible #main-content {
     right: 0;
     bottom: 200px;
     width: 350px;
-    background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
+    background: transparent;
     border-left: 1px solid #374151;
     display: flex;
     flex-direction: column;
@@ -976,36 +976,44 @@ body.monitor-visible #main-content {
 }
 
 .sidebar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-    border-bottom: 1px solid #374151;
-    background: #1f2937;
-    flex-shrink: 0;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 1rem !important;
+    border-bottom: 1px solid #374151 !important;
+    background: linear-gradient(145deg, #1f2937 0%, #374151 100%) !important;
+    flex-shrink: 0 !important;
+    min-height: 60px !important;
 }
 
 .sidebar-title {
     color: #f9fafb !important;
     margin: 0 !important;
     font-size: 1rem !important;
-    font-weight: 600;
+    font-weight: 600 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 1000 !important;
 }
 
 .sidebar-collapse-btn {
     background: rgba(239, 68, 68, 0.15) !important;
     border: 1px solid rgba(239, 68, 68, 0.4) !important;
     color: #ef4444 !important;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 6px;
-    transition: all 0.2s ease;
+    cursor: pointer !important;
+    padding: 0.5rem !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
     display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 1000 !important;
 }
 
 .sidebar-collapse-btn:hover {
