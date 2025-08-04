@@ -802,17 +802,12 @@ function initializeDropdowns() {
     let processingCaseChange = false;
     let processingActionChange = false;
     let processingDrugChange = false;
-    let selectedScenarioValue = null;
 
-    // Standard dropdown for case selection in modal - start immediately on selection
+    // Standard dropdown for case selection in modal
     $('#case-dropdown').dropdown({
-        allowReselection: true,
-        forceSelection: false,
-        fullTextSearch: true,
-        clearable: true,
         onChange: function(value, text, $selectedItem) {
             console.log('Case dropdown onChange triggered:', value, text);
-            if (value && value !== '' && value !== null && value !== 'test' && !processingCaseChange) {
+            if (value && value !== '' && value !== null && !processingCaseChange) {
                 processingCaseChange = true;
                 console.log('Starting scenario from modal:', value);
                 $('#case').val(value).trigger('change');
@@ -840,27 +835,11 @@ function initializeDropdowns() {
         }, 500);
     }
 
-    // Search selection dropdowns for actions and drugs
-    // Detect mobile to configure dropdowns appropriately
-    function isMobile() {
-        return window.innerWidth <= 768;
-    }
-    
-    const mobileMode = isMobile();
-    console.log('Mobile mode detected:', mobileMode);
-    
-    // Configure action dropdown based on device type
-    const actionDropdownConfig = {
-        allowReselection: true,
-        forceSelection: false,
-        clearable: true,
-        direction: 'upward',
-        search: !mobileMode,
-        fullTextSearch: !mobileMode,
-        selectOnKeydown: !mobileMode,
+    // Standard action dropdown
+    $('#action-dropdown').dropdown({
         onChange: function(value, text, $selectedItem) {
             console.log('Action dropdown onChange:', value, text);
-            if (value && value !== '' && value !== null && value !== $('#action').val() && !processingActionChange) {
+            if (value && value !== '' && value !== null && !processingActionChange) {
                 processingActionChange = true;
                 $('#action').val(value).trigger('change');
                 setTimeout(() => {
@@ -868,20 +847,13 @@ function initializeDropdowns() {
                 }, 100);
             }
         }
-    };
+    });
 
-    // Configure drug dropdown based on device type  
-    const drugDropdownConfig = {
-        allowReselection: true,
-        forceSelection: false,
-        clearable: true,
-        direction: 'upward',
-        search: !mobileMode,
-        fullTextSearch: !mobileMode,
-        selectOnKeydown: !mobileMode,
+    // Standard drug dropdown
+    $('#drug-dropdown').dropdown({
         onChange: function(value, text, $selectedItem) {
             console.log('Drug dropdown onChange:', value, text);
-            if (value && value !== '' && value !== null && value !== $('#drug').val() && !processingDrugChange) {
+            if (value && value !== '' && value !== null && !processingDrugChange) {
                 processingDrugChange = true;
                 $('#drug').val(value).trigger('change');
                 setTimeout(() => {
@@ -889,12 +861,9 @@ function initializeDropdowns() {
                 }, 100);
             }
         }
-    };
+    });
 
-    $('#action-dropdown').dropdown(actionDropdownConfig);
-    $('#drug-dropdown').dropdown(drugDropdownConfig);
-
-    console.log('All dropdowns initialized successfully with loop prevention');
+    console.log('All dropdowns initialized as standard Semantic UI dropdowns');
 }
 
 $(document).ready(function() {

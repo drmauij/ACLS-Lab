@@ -276,51 +276,34 @@ a:hover {
     vertical-align: middle !important;
 }
 
-/* Simplified Dropdown Styling - Standard Semantic UI */
-.ui.dropdown {
-    background: #1f2937 !important;
-    border: 1px solid #374151 !important;
-    color: #e5e7eb !important;
+/* Standard Semantic UI Dropdown Styling for Dark Theme */
+.ui.inverted.dropdown {
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-.ui.dropdown:hover {
-    border-color: #4b5563 !important;
+.ui.inverted.dropdown .menu {
+    background: rgba(0, 0, 0, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-.ui.dropdown.active,
-.ui.dropdown.visible {
-    border-color: #3b82f6 !important;
+.ui.inverted.dropdown .menu .item {
+    color: rgba(255, 255, 255, 0.9) !important;
 }
 
-.ui.dropdown > .dropdown.icon {
-    color: #9ca3af !important;
+.ui.inverted.dropdown .menu .item:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
 }
 
-.ui.dropdown > .text,
-.ui.dropdown > .default.text {
-    color: #e5e7eb !important;
+.ui.inverted.dropdown .menu .item.selected {
+    background: rgba(255, 255, 255, 0.15) !important;
 }
 
-.ui.dropdown > .default.text {
-    opacity: 0.7;
-}
-
-/* Dropdown Menu */
-.ui.dropdown .menu {
-    background: #1f2937 !important;
-    border: 1px solid #374151 !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-    max-height: 60vh !important;
-    overflow-y: auto !important;
-}
-
-/* Fix scenario dropdown in modal - allow full scrolling */
+/* Ensure scenario dropdown in modal can scroll properly */
 #scenarioSelectionModal #case-dropdown .menu {
     max-height: 300px !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
-    position: absolute !important;
-    z-index: 999999 !important;
 }
 
 /* Ensure the dropdown container doesn't limit height */
@@ -333,60 +316,6 @@ a:hover {
     overflow: visible !important;
     position: relative !important;
     z-index: 1 !important;
-}
-
-/* Override any conflicting dropdown menu styles */
-#scenarioSelectionModal .ui.dropdown .menu {
-    max-height: 300px !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-}
-
-/* Force upward direction for action and drug dropdowns */
-#action-dropdown .menu,
-#drug-dropdown .menu {
-    max-height: 60vh !important;
-    overflow-y: auto !important;
-    bottom: 100% !important;
-    top: auto !important;
-    margin-bottom: 2px !important;
-    margin-top: 0 !important;
-}
-
-/* Ensure dropdown menus stay within viewport */
-#action-dropdown.ui.dropdown.upward .menu,
-#drug-dropdown.ui.dropdown.upward .menu {
-    bottom: 100% !important;
-    top: auto !important;
-    max-height: 60vh !important;
-    overflow-y: auto !important;
-}
-
-.ui.dropdown .menu > .item {
-    background: transparent !important;
-    color: #e5e7eb !important;
-    border: none !important;
-}
-
-.ui.dropdown .menu > .item:hover {
-    background: #374151 !important;
-    color: #f9fafb !important;
-}
-
-.ui.dropdown .menu > .item.selected {
-    background: #3b82f6 !important;
-    color: #ffffff !important;
-}
-
-/* Search Input in Dropdown */
-.ui.search.dropdown > input.search {
-    background: transparent !important;
-    border: none !important;
-    color: #e5e7eb !important;
-}
-
-.ui.search.dropdown > input.search:focus {
-    background: transparent !important;
 }
 
 /* Enhanced Semantic UI Toggle styling */
