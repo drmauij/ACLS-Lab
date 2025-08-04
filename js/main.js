@@ -535,6 +535,12 @@ function checkAllDataLoaded() {
     if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs) {
         console.log('All data loaded - initializing dropdowns');
         initializeDropdowns();
+        
+        // Refresh all dropdowns after items are populated to fix scrolling
+        setTimeout(() => {
+            $('#case-dropdown, #action-dropdown, #drug-dropdown').dropdown('refresh');
+            console.log('Dropdowns refreshed after dynamic content loaded');
+        }, 100);
     }
 }
 
@@ -823,6 +829,9 @@ function initializeDropdowns() {
             }
         },
         onShow: function() {
+            // Refresh dropdown to recalculate menu dimensions after dynamic items are added
+            $(this).dropdown('refresh');
+            
             // Ensure proper positioning and scrolling
             var $menu = $(this).find('.menu');
             var isMobile = window.innerWidth <= 768;
@@ -898,6 +907,10 @@ function initializeDropdowns() {
                     processingActionChange = false;
                 }, 100);
             }
+        },
+        onShow: function() {
+            // Refresh dropdown to handle dynamically added items
+            $(this).dropdown('refresh');
         }
     });
 
@@ -912,6 +925,10 @@ function initializeDropdowns() {
                     processingDrugChange = false;
                 }, 100);
             }
+        },
+        onShow: function() {
+            // Refresh dropdown to handle dynamically added items
+            $(this).dropdown('refresh');
         }
     });
 
