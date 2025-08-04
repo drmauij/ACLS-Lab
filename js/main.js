@@ -803,8 +803,13 @@ function initializeDropdowns() {
     let processingActionChange = false;
     let processingDrugChange = false;
 
-    // Standard dropdown for case selection in modal
+    // Standard dropdown for case selection in modal with proper scrolling
     $('#case-dropdown').dropdown({
+        direction: 'downward',
+        fullTextSearch: true,
+        forceSelection: false,
+        allowAdditions: false,
+        showOnFocus: false,
         onChange: function(value, text, $selectedItem) {
             console.log('Case dropdown onChange triggered:', value, text);
             if (value && value !== '' && value !== null && !processingCaseChange) {
@@ -816,6 +821,16 @@ function initializeDropdowns() {
                     processingCaseChange = false;
                 }, 100);
             }
+        },
+        onShow: function() {
+            // Ensure proper positioning and scrolling
+            var $menu = $(this).find('.menu');
+            $menu.css({
+                'max-height': '250px',
+                'overflow-y': 'auto',
+                'overflow-x': 'hidden',
+                'z-index': '10001'
+            });
         }
     });
 
