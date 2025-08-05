@@ -539,12 +539,18 @@ function checkAllDataLoaded() {
 }
 
 function attachChangeHandlers() {
+    // Prevent multiple attachments
+    if (window.handlersAttached) {
+        return;
+    }
+    window.handlersAttached = true;
+    
     // Remove existing handlers to prevent duplicates
-    $('#case, #action, #drug').off('change');
+    $('#case, #action, #drug').off('change.acls');
 
     // Cases with debouncing to prevent rapid triggers
     let caseChangeTimeout;
-    $('#case').on('change', function(evt, params) {
+    $('#case').on('change.acls', function(evt, params) {
         var arg = $(this).val();
         console.log('Case change event triggered with value:', arg);
 
@@ -728,32 +734,41 @@ function attachChangeHandlers() {
         }
     }
 
-    // Sync content on any major updates using MutationObserver
-    if (typeof MutationObserver !== 'undefined') {
+    // Sync content on any major updates using MutationObserver with throttling
+    if (typeof MutationObserver !== 'undefined' && !window.observerAttached) {
+        window.observerAttached = true;
+        let throttleTimeout;
+        
         const observer = new MutationObserver(function(mutations) {
-            syncMobileContent();
+            // Throttle the observer to prevent excessive calls
+            if (throttleTimeout) return;
             
-            // Auto-scroll shell panels when content is added
-            mutations.forEach(function(mutation) {
-                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                    const target = mutation.target;
-                    
-                    // Check if the mutation happened in shell panel or its descendants
-                    if (target.id === 'shell-panel' || target.closest('#shell-panel')) {
-                        setTimeout(() => {
-                            autoScrollToBottom(document.getElementById('shell-panel'));
-                            autoScrollToBottom(document.getElementById('shell-panel-mobile'));
-                        }, 100);
+            throttleTimeout = setTimeout(() => {
+                throttleTimeout = null;
+                syncMobileContent();
+                
+                // Auto-scroll shell panels when content is added
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                        const target = mutation.target;
+                        
+                        // Check if the mutation happened in shell panel or its descendants
+                        if (target.id === 'shell-panel' || target.closest('#shell-panel')) {
+                            setTimeout(() => {
+                                autoScrollToBottom(document.getElementById('shell-panel'));
+                                autoScrollToBottom(document.getElementById('shell-panel-mobile'));
+                            }, 100);
+                        }
+                        
+                        // Also handle log auto-scroll
+                        if (target.id === 'log' || target.closest('#log')) {
+                            setTimeout(() => {
+                                autoScrollToBottom(document.getElementById('log'));
+                            }, 100);
+                        }
                     }
-                    
-                    // Also handle log auto-scroll
-                    if (target.id === 'log' || target.closest('#log')) {
-                        setTimeout(() => {
-                            autoScrollToBottom(document.getElementById('log'));
-                        }, 100);
-                    }
-                }
-            });
+                });
+            }, 250); // Throttle to 250ms
         });
         
         // Observe changes to shell panel, monitor, and log
@@ -763,19 +778,14 @@ function attachChangeHandlers() {
             if (element) {
                 observer.observe(element, { 
                     childList: true, 
-                    subtree: true,
-                    characterData: true 
+                    subtree: false, // Don't observe subtree to reduce callbacks
+                    characterData: false 
                 });
             }
         });
     }
 
-    // Force mobile update when scenario content changes
-    setInterval(function() {
-        if ($(window).width() <= 768) {
-            updateMobileLayout();
-        }
-    }, 500);
+    // Remove problematic auto-refresh interval that was causing loops
 
     // Additional trigger for scenario changes
     $(document).on('change', '#case', function() {
@@ -837,8 +847,18 @@ function attachChangeHandlers() {
 }
 
 function initializeDropdowns() {
+    // Prevent multiple initializations
+    if (window.dropdownsInitialized) {
+        return;
+    }
+    window.dropdownsInitialized = true;
+    
     // Clear any existing dropdown instances and event handlers
-    $('.ui.dropdown').dropdown('destroy');
+    try {
+        $('.ui.dropdown').dropdown('destroy');
+    } catch(e) {
+        // Ignore errors if dropdowns weren't initialized
+    }
     $('#action, #drug, #case').off('change');
 
     // Re-attach the change event handlers first
