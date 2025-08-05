@@ -189,14 +189,6 @@
 					</div>
 				</aside>
 				
-				<!-- Sidebar Trigger for Mobile -->
-				<button class="sidebar-trigger" id="sidebar-trigger">
-					Monitor & Logs
-				</button>
-				
-				<!-- Sidebar Overlay for Mobile -->
-				<div class="sidebar-overlay" id="sidebar-overlay"></div>
-				
 			</div>
 		</div>
 	</main>
@@ -229,8 +221,6 @@
 					</div>
 				</div>
 			</div>
-			
-			
 		</div>
 	</footer>
 
@@ -251,7 +241,6 @@
 				</div>
 			</div>
 		</div>
-		
 	</div>
 
 	<div class="ui modal" id="dynamicVideoModal">
@@ -279,22 +268,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js'></script>
 	<script src="js/jquery.pulse.min.js"></script>
-	<script>
-		// Prevent multiple script loading
-		if (!window.mainJsLoaded) {
-			window.mainJsLoaded = true;
-			// Load main.js only once
-			var script = document.createElement('script');
-			script.src = 'js/main.js';
-			script.onload = function() {
-				console.log('Main JS loaded successfully');
-			};
-			script.onerror = function() {
-				console.error('Failed to load main.js');
-			};
-			document.head.appendChild(script);
-		}
-	</script>
+	<script src="js/main.js"></script>
 
 </body>
 
