@@ -1031,20 +1031,7 @@ body.monitor-visible #main-content {
 }
 
 .sidebar-header {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    padding: 1rem !important;
-    border-bottom: 1px solid #374151 !important;
-    background: linear-gradient(145deg, #1f2937 0%, #374151 100%) !important;
-    flex-shrink: 0 !important;
-    min-height: 60px !important;
-    position: relative !important;
-    z-index: 9999 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    backdrop-filter: blur(10px);
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    display: none !important;
 }
 
 .sidebar-title {
@@ -1128,6 +1115,7 @@ body.monitor-visible #main-content {
     overflow: hidden;
     padding: 1rem;
     gap: 1rem;
+    height: 100%;
 }
 
 .sidebar-monitor {
@@ -1244,20 +1232,7 @@ body.monitor-visible #main-content {
     }
 
     .sidebar-header {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        position: relative !important;
-        z-index: 1003 !important;
-        background: linear-gradient(145deg, #1f2937 0%, #374151 100%) !important;
-        border-bottom: 1px solid #374151 !important;
-        padding: 1rem !important;
-        min-height: 60px !important;
-        flex-shrink: 0 !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
+        display: none !important;
     }
 
     .sidebar-title {
