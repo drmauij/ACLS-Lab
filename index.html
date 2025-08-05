@@ -61,31 +61,31 @@
 			color: #ffffff !important;
 			border: 1px solid #767676 !important;
 		}
-		
+
 		.ui.dropdown .menu,
 		.ui.dropdown.inverted .menu {
 			background-color: #1b1c1d !important;
 			border: 1px solid #767676 !important;
 		}
-		
+
 		.ui.dropdown .menu>.item,
 		.ui.dropdown.inverted .menu>.item {
 			color: rgba(255, 255, 255, 0.9) !important;
 			background-color: transparent !important;
 		}
-		
+
 		.ui.dropdown .menu>.item:hover,
 		.ui.dropdown.inverted .menu>.item:hover {
 			background-color: rgba(255, 255, 255, 0.08) !important;
 			color: #ffffff !important;
 		}
-		
+
 		.ui.dropdown .menu>.item.selected,
 		.ui.dropdown.inverted .menu>.item.selected {
 			background-color: rgba(255, 255, 255, 0.15) !important;
 			color: #ffffff !important;
 		}
-		
+
 		.ui.dropdown.selection,
 		.ui.dropdown.inverted.selection,
 		.ui.selection.dropdown,
@@ -94,14 +94,14 @@
 			color: #ffffff !important;
 			border-color: #767676 !important;
 		}
-		
+
 		.ui.dropdown.selection>.text,
 		.ui.dropdown.inverted.selection>.text,
 		.ui.selection.dropdown>.text,
 		.ui.selection.inverted.dropdown>.text {
 			color: rgba(255, 255, 255, 0.87) !important;
 		}
-		
+
 		.ui.dropdown.selection>.default.text,
 		.ui.dropdown.inverted.selection>.default.text {
 			color: rgba(255, 255, 255, 0.5) !important;
@@ -212,13 +212,12 @@
 	<div class="ui small inverted modal" id="startModal">
 		<div class="header">Select ACLS Scenario</div>
 		<div class="content">
-			<div class="ui fluid selection inverted dropdown" id="scenarioDropdown">
-				<input type="hidden" name="scenario">
+			<div class="ui fluid inverted selection dropdown" id="case-dropdown">
+				<input type="hidden" name="case" id="case">
 				<i class="dropdown icon"></i>
-				<div class="default text">Choose a scenario</div>
+				<div class="default text">Choose a Scenario to start with...</div>
 				<div class="menu">
-					<div class="item" data-value="vfib">V-Fib Arrest</div>
-					<div class="item" data-value="pea">PEA</div>
+					<!-- Scenario options will be dynamically populated from cases.json by JavaScript -->
 				</div>
 			</div>
 		</div>
@@ -249,12 +248,12 @@
 	<script>
 		$(document).ready(function () {
 			$('#startModal').modal({ closable: false }).modal('show');
-			$('#scenarioDropdown').dropdown();
+			$('#case-dropdown').dropdown(); // Changed from #scenarioDropdown to #case-dropdown
 			$('.ui.checkbox').checkbox();
 		});
 
 		function startScenario() {
-			const selected = $('#scenarioDropdown').dropdown('get value');
+			const selected = $('#case-dropdown').dropdown('get value'); // Changed from #scenarioDropdown to #case-dropdown
 			if (selected) {
 				$('#startModal').modal('hide');
 				$('#chat').append(`<div class="comment"><div class="content"><div class="text">Scenario loaded: ${selected}</div></div></div>`);
