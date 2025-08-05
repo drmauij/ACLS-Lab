@@ -1044,6 +1044,8 @@ body.monitor-visible #main-content {
     z-index: 9999 !important;
     visibility: visible !important;
     opacity: 1 !important;
+    backdrop-filter: blur(10px);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-title {
@@ -1334,7 +1336,6 @@ body.monitor-visible #main-content {
     }
 
     /* Sidebar mobile layout */
-@media (max-width: 768px) {
     .content-area {
         margin-right: 0 !important;
     }
@@ -1372,7 +1373,6 @@ body.monitor-visible #main-content {
     .sidebar-trigger.hidden {
         display: none !important;
     }
-}
 
     .desktop-layout {
         display: none !important;
