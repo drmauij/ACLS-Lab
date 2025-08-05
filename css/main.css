@@ -1134,10 +1134,7 @@ body.monitor-visible #main-content {
 .sidebar-monitor {
     flex-shrink: 0;
     margin-bottom: 1rem;
-}
-
-.sidebar-monitor {
-    display: none !important;
+    display: block;
 }
 
 .sidebar-monitor #monitor-container {
@@ -1151,7 +1148,7 @@ body.monitor-visible #main-content {
 .sidebar-log {
     flex: 1;
     overflow: hidden;
-    display: none !important;
+    display: flex;
     flex-direction: column;
     min-height: 150px;
 }
@@ -1234,6 +1231,110 @@ body.monitor-visible #main-content {
 @media (max-width: 768px) {
     body.monitor-visible .sidebar-trigger {
         display: block !important;
+    }
+
+    /* Force all sidebar elements to be visible on mobile */
+    .sidebar {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .sidebar-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        z-index: 1003 !important;
+        background: linear-gradient(145deg, #1f2937 0%, #374151 100%) !important;
+        border-bottom: 1px solid #374151 !important;
+        padding: 1rem !important;
+        min-height: 60px !important;
+        flex-shrink: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .sidebar-title {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: #f9fafb !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        margin: 0 !important;
+        flex: 1 !important;
+        z-index: 1004 !important;
+    }
+
+    .sidebar-collapse-btn {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background: rgba(239, 68, 68, 0.2) !important;
+        border: 1px solid rgba(239, 68, 68, 0.4) !important;
+        color: #ef4444 !important;
+        cursor: pointer !important;
+        padding: 0.5rem !important;
+        border-radius: 6px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 36px !important;
+        height: 36px !important;
+        flex-shrink: 0 !important;
+        z-index: 1004 !important;
+    }
+
+    .sidebar-collapse-btn i {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+    }
+
+    .sidebar-content {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+        padding: 1rem !important;
+        gap: 1rem !important;
+        overflow: hidden !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .sidebar-monitor {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .sidebar-log {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+        overflow: hidden !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        min-height: 150px !important;
+    }
+
+    /* Force all nested elements to be visible */
+    .sidebar * {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Ensure monitor and log content show when sidebar is active */
+    .sidebar.active .sidebar-monitor,
+    .sidebar.active .sidebar-log {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 }
 
