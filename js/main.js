@@ -671,12 +671,19 @@ function attachChangeHandlers() {
         $(document).on('click.sidebar', '.sidebar-trigger', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Sidebar trigger clicked - opening sidebar');
-            sidebar.addClass('active');
-            sidebarOverlay.addClass('active').show();
-            // Show monitor and log content
-            $('.sidebar-monitor').show();
-            $('.sidebar-log').show();
+            
+            if (sidebar.hasClass('active')) {
+                console.log('Sidebar trigger clicked - closing sidebar');
+                sidebar.removeClass('active');
+                sidebarOverlay.removeClass('active').fadeOut(300);
+            } else {
+                console.log('Sidebar trigger clicked - opening sidebar');
+                sidebar.addClass('active');
+                sidebarOverlay.addClass('active').show();
+                // Show monitor and log content
+                $('.sidebar-monitor').show();
+                $('.sidebar-log').show();
+            }
         });
 
         // Close sidebar when clicking overlay
