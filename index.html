@@ -50,6 +50,166 @@
 		.ui.dropdown .menu>.item {
 			color: #fff !important;
 		}
+		
+		/* Start Modal Dark Theme */
+		#startModal.ui.modal {
+			background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+			border: 1px solid #374151 !important;
+			border-radius: 16px !important;
+			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8) !important;
+			backdrop-filter: blur(20px);
+			color: #e5e7eb !important;
+		}
+		
+		#startModal .ui.modal > .header {
+			background: linear-gradient(145deg, #1f2937 0%, #374151 100%) !important;
+			color: #f9fafb !important;
+			border-bottom: 1px solid #4b5563 !important;
+			border-radius: 16px 16px 0 0 !important;
+			padding: 1.5rem !important;
+			font-weight: 600;
+			font-size: 1.25rem;
+		}
+		
+		#startModal .content {
+			padding: 2rem !important;
+			background: transparent !important;
+		}
+		
+		#startModal .content p {
+			font-size: 1.1rem;
+			line-height: 1.6;
+			margin-bottom: 2rem;
+			color: #d1d5db !important;
+			background: transparent !important;
+		}
+		
+		/* Scenario Dropdown Styling */
+		#scenarioDropdown {
+			font-size: 1.1rem !important;
+			padding: 1rem !important;
+			background: rgba(15, 23, 42, 0.8) !important;
+			border: 1px solid #374151 !important;
+			border-radius: 8px !important;
+			color: #e5e7eb !important;
+			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2) !important;
+		}
+		
+		#scenarioDropdown .default.text {
+			color: #9ca3af !important;
+			background: transparent !important;
+		}
+		
+		#scenarioDropdown .text {
+			color: #e5e7eb !important;
+			background: transparent !important;
+		}
+		
+		#scenarioDropdown .menu {
+			background: rgba(15, 23, 42, 0.95) !important;
+			border: 1px solid #374151 !important;
+			border-radius: 6px !important;
+			box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.4) !important;
+			backdrop-filter: blur(10px);
+			max-height: 250px !important;
+			overflow-y: auto !important;
+		}
+		
+		#scenarioDropdown .menu .item {
+			color: #d1d5db !important;
+			background: transparent !important;
+			border-bottom: 1px solid rgba(55, 65, 81, 0.3) !important;
+			padding: 0.75rem 1rem !important;
+			transition: all 0.2s ease;
+		}
+		
+		#scenarioDropdown .menu .item:last-child {
+			border-bottom: none !important;
+		}
+		
+		#scenarioDropdown .menu .item:hover {
+			background: rgba(59, 130, 246, 0.1) !important;
+			color: #f9fafb !important;
+		}
+		
+		#scenarioDropdown .menu .item.selected {
+			background: rgba(59, 130, 246, 0.2) !important;
+			color: #93c5fd !important;
+		}
+		
+		/* Custom scrollbar for dropdown */
+		#scenarioDropdown .menu::-webkit-scrollbar {
+			width: 6px;
+		}
+		
+		#scenarioDropdown .menu::-webkit-scrollbar-track {
+			background: rgba(55, 65, 81, 0.2);
+			border-radius: 3px;
+		}
+		
+		#scenarioDropdown .menu::-webkit-scrollbar-thumb {
+			background: rgba(107, 114, 128, 0.5);
+			border-radius: 3px;
+		}
+		
+		#scenarioDropdown .menu::-webkit-scrollbar-thumb:hover {
+			background: rgba(107, 114, 128, 0.7);
+		}
+		
+		/* Modal Actions */
+		#startModal .actions {
+			background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
+			border-top: 1px solid #4b5563 !important;
+			border-radius: 0 0 16px 16px !important;
+			padding: 1.5rem !important;
+		}
+		
+		#startModal .actions .ui.button {
+			background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+			color: white !important;
+			border: none !important;
+			border-radius: 8px !important;
+			padding: 0.75rem 1.5rem !important;
+			font-weight: 600;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+		}
+		
+		#startModal .actions .ui.button:hover {
+			background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
+			transform: translateY(-2px);
+			box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.4);
+		}
+		
+		#startModal .actions .ui.button:active {
+			transform: translateY(0);
+		}
+		
+		/* Mobile responsive adjustments */
+		@media (max-width: 768px) {
+			#startModal.ui.modal {
+				width: 95% !important;
+				margin: 0 auto !important;
+				position: fixed !important;
+				top: 10% !important;
+				left: 2.5% !important;
+				max-height: 80vh !important;
+			}
+			
+			#startModal .content {
+				padding: 1rem !important;
+			}
+			
+			#startModal .content p {
+				font-size: 0.95rem !important;
+				margin-bottom: 1.5rem !important;
+			}
+			
+			#scenarioDropdown {
+				font-size: 0.9rem !important;
+				padding: 0.75rem !important;
+			}
+		}
 	</style>
 </head>
 <body>
