@@ -1451,8 +1451,7 @@ body.monitor-visible #main-content {
         top: 0 !important;
         bottom: 0 !important;
         right: 0 !important;
-        width: 90% !important;
-        max-width: 400px !important;
+        width: 100% !important;
         height: 100vh !important;
         transform: translateX(100%) !important;
         transition: transform 0.3s ease !important;
