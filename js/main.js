@@ -721,14 +721,43 @@ function attachChangeHandlers() {
         }
     });
 
+    // Auto-scroll function for shell panels
+    function autoScrollToBottom(element) {
+        if (element && element.scrollHeight > element.clientHeight) {
+            element.scrollTop = element.scrollHeight;
+        }
+    }
+
     // Sync content on any major updates using MutationObserver
     if (typeof MutationObserver !== 'undefined') {
         const observer = new MutationObserver(function(mutations) {
             syncMobileContent();
+            
+            // Auto-scroll shell panels when content is added
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    const target = mutation.target;
+                    
+                    // Check if the mutation happened in shell panel or its descendants
+                    if (target.id === 'shell-panel' || target.closest('#shell-panel')) {
+                        setTimeout(() => {
+                            autoScrollToBottom(document.getElementById('shell-panel'));
+                            autoScrollToBottom(document.getElementById('shell-panel-mobile'));
+                        }, 100);
+                    }
+                    
+                    // Also handle log auto-scroll
+                    if (target.id === 'log' || target.closest('#log')) {
+                        setTimeout(() => {
+                            autoScrollToBottom(document.getElementById('log'));
+                        }, 100);
+                    }
+                }
+            });
         });
         
         // Observe changes to shell panel, monitor, and log
-        const elementsToObserve = ['#shell-panel', '#monitor', '#log'];
+        const elementsToObserve = ['#shell-panel', '#shell-panel-mobile', '#monitor', '#log'];
         elementsToObserve.forEach(selector => {
             const element = document.querySelector(selector);
             if (element) {
@@ -752,7 +781,18 @@ function attachChangeHandlers() {
     $(document).on('change', '#case', function() {
         setTimeout(function() {
             updateMobileLayout();
+            // Auto-scroll to bottom when scenario content changes
+            autoScrollToBottom(document.getElementById('shell-panel'));
+            autoScrollToBottom(document.getElementById('shell-panel-mobile'));
         }, 100);
+    });
+
+    // Auto-scroll when actions are performed
+    $(document).on('change', '#action, #drug', function() {
+        setTimeout(function() {
+            autoScrollToBottom(document.getElementById('shell-panel'));
+            autoScrollToBottom(document.getElementById('shell-panel-mobile'));
+        }, 500); // Longer delay to allow content to be processed
     });
 
     // Actions
