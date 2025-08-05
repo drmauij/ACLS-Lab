@@ -7,43 +7,43 @@
     var drugsKey = [];
 
     console.log('Loading all JSON data in parallel...');
-    
+
     Promise.all([
         $.getJSON("/json/cases.json"),
         $.getJSON("/json/actions.json"),
         $.getJSON("/json/drugs.json")
     ]).then(function([casesData, actionsData, drugsData]) {
         console.log('All data loaded successfully');
-        
+
         // Process cases
         $.each(casesData, function(key, obj) {
             cases[key] = obj;
             casesKey.push(""+key);
             $('#case-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.title+'</div>');
         });
-        
+
         // Process actions
         $.each(actionsData, function(key, obj) {
             actions[key] = obj;
             actionsKey.push(""+key);
             $('#action-dropdown .menu').append('<div class="item" data-value="'+key+'">'+obj.description+'</div>');
         });
-        
+
         // Process drugs
         $.each(drugsData, function(key, value) {
             drugs[key] = value;
             drugsKey.push(""+key);
             $('#drug-dropdown .menu').append('<div class="item" data-value="'+key+'">'+value+'</div>');
         });
-        
+
         console.log('All dropdowns populated - Cases:', casesKey.length, 'Actions:', actionsKey.length, 'Drugs:', drugsKey.length);
-        
+
         dataLoaded.cases = true;
         dataLoaded.actions = true;
         dataLoaded.drugs = true;
-        
+
         checkAllDataLoaded();
-        
+
     }).catch(function(error) {
         console.error('Failed to load JSON data:', error);
     });
@@ -106,7 +106,7 @@
                 cprTimer = setInterval( function(){ // start the original cprTimer
                     $("#cprSeconds").html(pad(++cprSec%60));
                     $("#cprMinutes").html(pad(parseInt(cprSec/60,10)));
-                }, 1000); 
+                }, 1000);
             }
         }, 10);
         // update whole scenarioTimer
@@ -120,7 +120,7 @@
                 caseTimer = setInterval( function(){ // start the original caseTimer
                     $("#caseSeconds").html(pad(++caseSec%60));
                     $("#caseMinutes").html(pad(parseInt(caseSec/60,10)));
-                }, 1000); 
+                }, 1000);
             }
         }, 10);
     }
@@ -218,7 +218,7 @@
             $("#sat").pulse(properties, {pulses:-1, duration:750});
             //alarmSound.play();
         }else{
-            $("#sat").pulse('destroy'); 
+            $("#sat").pulse('destroy');
             $("#sat").css('color', '#00ffff');
         }
     }
@@ -472,7 +472,7 @@
                 if(stepObj.quiz){
                     response = "<form>";
                     for (var option in stepObj.quiz) {
-                        response = response + "<input type='radio' name='test' value="+option+" onclick='choose(\""+option+"\");'/>&nbsp;("+option+") "+stepObj.quiz[option]+"<br/>";   
+                        response = response + "<input type='radio' name='test' value="+option+" onclick='choose(\""+option+"\");'/>&nbsp;("+option+") "+stepObj.quiz[option]+"<br/>";
                     }
                     response = response +"</form>";
 										printOut(response);
@@ -524,12 +524,12 @@ var dataLoaded = {
 function checkAllDataLoaded() {
     if (dataLoaded.cases && dataLoaded.actions && dataLoaded.drugs) {
         console.log('All data loaded - initializing dropdowns');
-        
+
         // Hide loading indicator if present
         $('.loading-indicator').fadeOut();
-        
+
         initializeDropdowns();
-        
+
         // Refresh all dropdowns after items are populated to fix scrolling
         setTimeout(() => {
             $('#case-dropdown, #action-dropdown, #drug-dropdown').dropdown('refresh');
@@ -544,7 +544,7 @@ function attachChangeHandlers() {
         return;
     }
     window.handlersAttached = true;
-    
+
     // Remove existing handlers to prevent duplicates
     $('#case, #action, #drug').off('change.acls');
 
@@ -671,7 +671,7 @@ function attachChangeHandlers() {
         $(document).on('click.sidebar', '.sidebar-trigger', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             if (sidebar.hasClass('active')) {
                 console.log('Sidebar trigger clicked - closing sidebar');
                 sidebar.removeClass('active');
@@ -745,20 +745,20 @@ function attachChangeHandlers() {
     if (typeof MutationObserver !== 'undefined' && !window.observerAttached) {
         window.observerAttached = true;
         let throttleTimeout;
-        
+
         const observer = new MutationObserver(function(mutations) {
             // Throttle the observer to prevent excessive calls
             if (throttleTimeout) return;
-            
+
             throttleTimeout = setTimeout(() => {
                 throttleTimeout = null;
                 syncMobileContent();
-                
+
                 // Auto-scroll shell panels when content is added
                 mutations.forEach(function(mutation) {
                     if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
                         const target = mutation.target;
-                        
+
                         // Check if the mutation happened in shell panel or its descendants
                         if (target.id === 'shell-panel' || target.closest('#shell-panel')) {
                             setTimeout(() => {
@@ -766,7 +766,7 @@ function attachChangeHandlers() {
                                 autoScrollToBottom(document.getElementById('shell-panel-mobile'));
                             }, 100);
                         }
-                        
+
                         // Also handle log auto-scroll
                         if (target.id === 'log' || target.closest('#log')) {
                             setTimeout(() => {
@@ -777,16 +777,16 @@ function attachChangeHandlers() {
                 });
             }, 250); // Throttle to 250ms
         });
-        
+
         // Observe changes to shell panel, monitor, and log
         const elementsToObserve = ['#shell-panel', '#shell-panel-mobile', '#monitor', '#log'];
         elementsToObserve.forEach(selector => {
             const element = document.querySelector(selector);
             if (element) {
-                observer.observe(element, { 
-                    childList: true, 
+                observer.observe(element, {
+                    childList: true,
                     subtree: false, // Don't observe subtree to reduce callbacks
-                    characterData: false 
+                    characterData: false
                 });
             }
         });
@@ -859,7 +859,7 @@ function initializeDropdowns() {
         return;
     }
     window.dropdownsInitialized = true;
-    
+
     // Clear any existing dropdown instances and event handlers
     try {
         $('.ui.dropdown').dropdown('destroy');
@@ -896,13 +896,13 @@ function initializeDropdowns() {
             }
         },
         onShow: function() {
-            // Refresh dropdown to recalculate menu dimensions after dynamic items are added
+            // Refresh dropdown to handle dynamically added items
             $(this).dropdown('refresh');
-            
+
             // Ensure proper positioning and scrolling
             var $menu = $(this).find('.menu');
             var isMobile = window.innerWidth <= 768;
-            
+
             if (isMobile) {
                 $menu.css({
                     'max-height': '50vh',
@@ -916,16 +916,16 @@ function initializeDropdowns() {
                     '-webkit-overflow-scrolling': 'touch',
                     'touch-action': 'pan-y'
                 });
-                
+
                 // Force enable scrolling on mobile
                 $menu.on('touchstart', function(e) {
                     e.stopPropagation();
                 });
-                
+
                 $menu.on('touchmove', function(e) {
                     e.stopPropagation();
                 });
-                
+
                 // Prevent modal from interfering with dropdown scrolling
                 $menu.on('scroll', function(e) {
                     e.stopPropagation();
