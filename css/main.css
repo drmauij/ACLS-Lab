@@ -339,12 +339,12 @@ a:hover {
         display: flex !important;
         flex-direction: column !important;
     }
-    
+
     #scenarioSelectionModal .header {
         flex-shrink: 0 !important;
         padding: 1rem !important;
     }
-    
+
     #scenarioSelectionModal .content {
         flex: 1 !important;
         overflow: visible !important;
@@ -353,19 +353,19 @@ a:hover {
         flex-direction: column !important;
         max-height: calc(80vh - 80px) !important;
     }
-    
+
     #scenarioSelectionModal .content p {
         flex-shrink: 0 !important;
         margin-bottom: 1rem !important;
         font-size: 0.9rem !important;
     }
-    
+
     #scenarioSelectionModal #case-dropdown {
         flex: 1 !important;
         position: relative !important;
         max-height: calc(60vh - 60px) !important;
     }
-    
+
     /* Force dropdown to display upward when near bottom */
     #scenarioSelectionModal #case-dropdown .menu {
         max-height: calc(60vh - 100px) !important;
@@ -386,7 +386,7 @@ a:hover {
         touch-action: pan-y !important;
         overscroll-behavior: contain !important;
     }
-    
+
     /* Ensure dropdown stays open and scrollable */
     #scenarioSelectionModal #case-dropdown.ui.dropdown.active .menu,
     #scenarioSelectionModal #case-dropdown.ui.dropdown.visible .menu {
@@ -395,7 +395,7 @@ a:hover {
         opacity: 1 !important;
         transform: none !important;
     }
-    
+
     /* Improve dropdown item styling on mobile */
     #scenarioSelectionModal #case-dropdown .menu .item {
         padding: 0.75rem 1rem !important;
@@ -407,16 +407,16 @@ a:hover {
         touch-action: manipulation !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
     }
-    
+
     #scenarioSelectionModal #case-dropdown .menu .item:last-child {
         border-bottom: none !important;
     }
-    
+
     /* Prevent modal dimmer from interfering */
     #scenarioSelectionModal .ui.dimmer {
         pointer-events: none !important;
     }
-    
+
     #scenarioSelectionModal.ui.modal {
         pointer-events: auto !important;
     }
@@ -1527,16 +1527,16 @@ body.monitor-visible #main-content {
     .sidebar-header {
         padding: 0.75rem 0.5rem 0.5rem 0.5rem;
     }
-    
+
     .sidebar-title {
         font-size: 0.9rem !important;
     }
-    
+
     .sidebar-collapse-btn {
         width: 24px;
         height: 24px;
     }
-    
+
     .sidebar-collapse-btn i {
         font-size: 0.8rem !important;
     }
