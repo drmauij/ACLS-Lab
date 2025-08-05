@@ -722,7 +722,7 @@ a:hover {
 #log {
     text-align: left !important;
     direction: ltr !important;
-    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    font-family: 'Poppins', sans-serif;
     font-size: 13px;
     line-height: 1.6;
     color: #d1d5db;
@@ -755,7 +755,7 @@ a:hover {
     border: none !important;
     border-bottom: 1px solid #374151 !important;
     padding: 0.75rem 1rem !important;
-    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-family: 'Poppins', sans-serif;
 }
 
 .ui.inverted.table tbody tr:hover td {
@@ -821,7 +821,7 @@ a:hover {
     color: #93c5fd;
     padding: 0.5rem 1rem;
     border-radius: 6px;
-    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 0.875rem;
     border: 1px solid rgba(59, 130, 246, 0.2);
@@ -837,7 +837,7 @@ a:hover {
     background: rgba(0, 0, 0, 0.5);
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
-    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 0.75rem;
     backdrop-filter: blur(5px);
@@ -858,7 +858,7 @@ code {
     border: 1px solid #334155;
     border-radius: 6px;
     padding: 0.25rem 0.5rem;
-    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-family: 'Poppins', sans-serif;
     font-size: 0.875rem;
 }
 
@@ -1170,6 +1170,7 @@ body.monitor-visible #main-content {
         max-height: calc(100vh - 400px) !important;
         word-wrap: break-word !important;
         white-space: pre-wrap !important;
+        font-family: 'Poppins', sans-serif !important;
     }
 
 /* Improve scrollbar for sidebar log */
