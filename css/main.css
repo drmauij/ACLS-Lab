@@ -1398,7 +1398,6 @@ border-top: 1px solid #374151;
     display: flex !important;
     flex-direction: column;
     height: 100%;
-    overflow: hidden;
 }
 
 .sidebar-logs #logBox h5 {
@@ -1407,8 +1406,6 @@ border-top: 1px solid #374151;
 
 .sidebar-logs #log {
     flex: 1;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
     padding: 0.75rem;
     font-size: 0.75rem;
@@ -1419,8 +1416,6 @@ border-top: 1px solid #374151;
     background: rgba(15, 23, 42, 0.3);
     border: 1px solid rgba(30, 41, 59, 0.3);
     border-radius: 6px;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(107, 114, 128, 0.5) transparent;
     min-height: 120px;
     max-height: calc(100vh - 500px);
 }

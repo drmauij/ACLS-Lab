@@ -161,7 +161,6 @@
     /* Log section */
     #logBox {
         margin: 0.5rem 0;
-        padding: 0.75rem;
     }
 
     #logBox h5 {
@@ -609,7 +608,7 @@
         flex: 1 !important;
         padding: 0.75rem !important;
         gap: 0.75rem !important;
-        overflow: hidden !important;
+        overflow: scroll !important;
         visibility: visible !important;
         opacity: 1 !important;
     }
@@ -640,12 +639,6 @@
     .sidebar-logs {
         flex: 1 !important;
         min-height: 150px !important;
-    }
-
-    /* Force all nested elements to be visible */
-    .sidebar * {
-        visibility: visible !important;
-        opacity: 1 !important;
     }
 
     /* Ensure all sections show when sidebar is active */
