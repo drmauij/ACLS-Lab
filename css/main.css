@@ -1992,6 +1992,35 @@ border-top: 1px solid #374151;
     border-bottom: none !important;
 }
 
+/* Force override any conflicting dropdown styles in modal */
+#scenarioSelectionModal .ui.dropdown .menu {
+    background: rgba(55, 65, 81, 0.98) !important;
+    border: 1px solid rgba(107, 114, 128, 0.5) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+#scenarioSelectionModal .ui.dropdown .menu .item {
+    color: #f9fafb !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(75, 85, 99, 0.2) !important;
+}
+
+#scenarioSelectionModal .ui.dropdown .menu .item:hover {
+    background: rgba(96, 165, 250, 0.2) !important;
+    color: #ffffff !important;
+}
+
+#scenarioSelectionModal .ui.dropdown .menu .item.selected {
+    background: rgba(96, 165, 250, 0.3) !important;
+    color: #ffffff !important;
+}
+
+#scenarioSelectionModal .ui.dropdown .menu .item:last-child {
+    border-bottom: none !important;
+}
+
 #scenarioSelectionModal .actions {
     background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
     border-top: 1px solid #4b5563 !important;
