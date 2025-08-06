@@ -700,16 +700,6 @@ a:hover {
     margin-right: 0.5rem;
 }
 
-#logBox::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.5), transparent);
-}
-
 #logBox h5 {
     color: #f9fafb !important;
     font-weight: 600;
