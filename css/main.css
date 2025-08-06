@@ -367,25 +367,26 @@ a:hover {
     }
 
     /* Force dropdown to display upward when near bottom */
-    #scenarioSelectionModal #case-dropdown .menu {
-        max-height: calc(60vh - 100px) !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-        -webkit-overflow-scrolling: touch !important;
-        position: absolute !important;
-        width: 100% !important;
-        bottom: 100% !important;
-        top: auto !important;
-        left: 0 !important;
-        z-index: 10001 !important;
-        background: rgba(0, 0, 0, 0.95) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 6px 6px 0 0 !important;
-        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3) !important;
-        margin-bottom: 2px !important;
-        touch-action: pan-y !important;
-        overscroll-behavior: contain !important;
-    }
+        #scenarioSelectionModal #case-dropdown .menu {
+            max-height: calc(60vh - 100px) !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            -webkit-overflow-scrolling: touch !important;
+            position: absolute !important;
+            width: 100% !important;
+            bottom: 100% !important;
+            top: auto !important;
+            left: 0 !important;
+            z-index: 10001 !important;
+            background: rgba(31, 41, 55, 0.95) !important;
+            border: 1px solid rgba(75, 85, 99, 0.4) !important;
+            border-radius: 8px 8px 0 0 !important;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3) !important;
+            backdrop-filter: blur(10px) !important;
+            margin-bottom: 2px !important;
+            touch-action: pan-y !important;
+            overscroll-behavior: contain !important;
+        }
 
     /* Ensure dropdown stays open and scrollable */
     #scenarioSelectionModal #case-dropdown.ui.dropdown.active .menu,
@@ -1620,24 +1621,6 @@ border-top: 1px solid #374151;
         overflow-y: visible !important;
         position: relative !important;
         z-index: 1 !important;
-    }
-
-    /* Completely override any desktop grid styling on mobile */
-    .mobile-layout .ui.grid,
-    .mobile-layout .ui.column,
-    .mobile-layout .ten.wide.column,
-    .mobile-layout .six.wide.column {
-        width: 100% !important;
-        max-width: 100% !important;
-        flex: none !important;
-        margin: 0 !important;
-        padding: 0.5rem !important;
-    }
-
-    .mobile-layout > div {
-        width: 100% !important;
-        max-width: 100% !important;
-        flex: none !important;
     }
 
     /* Ensure shell panel content is visible on mobile */
