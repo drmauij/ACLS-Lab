@@ -963,39 +963,71 @@ function initializeDropdowns() {
         }, 500);
     }
 
-    // Standard action dropdown
-    $('#action-dropdown').dropdown({
+    // Action and Drug dropdowns with upward direction and full viewport width
+    $('#action-dropdown, #drug-dropdown').dropdown({
+        direction: 'upward',
+        fullTextSearch: true,
+        forceSelection: false,
+        allowAdditions: false,
+        showOnFocus: false,
         onChange: function(value, text, $selectedItem) {
-            console.log('Action dropdown onChange:', value, text);
-            if (value && value !== '' && value !== null && !processingActionChange) {
-                processingActionChange = true;
-                $('#action').val(value).trigger('change');
-                setTimeout(() => {
-                    processingActionChange = false;
-                }, 100);
-            }
-        },
-        onShow: function() {
-            // Refresh dropdown to handle dynamically added items
-            $(this).dropdown('refresh');
-        }
-    });
+            var dropdownId = $(this).attr('id');
+            console.log(dropdownId + ' onChange:', value, text);
 
-    // Standard drug dropdown
-    $('#drug-dropdown').dropdown({
-        onChange: function(value, text, $selectedItem) {
-            console.log('Drug dropdown onChange:', value, text);
-            if (value && value !== '' && value !== null && !processingDrugChange) {
-                processingDrugChange = true;
-                $('#drug').val(value).trigger('change');
-                setTimeout(() => {
-                    processingDrugChange = false;
-                }, 100);
+            if (value && value !== '' && value !== null) {
+                if (dropdownId === 'action-dropdown' && !processingActionChange) {
+                    processingActionChange = true;
+                    $('#action').val(value).trigger('change');
+                    setTimeout(() => {
+                        processingActionChange = false;
+                    }, 100);
+                } else if (dropdownId === 'drug-dropdown' && !processingDrugChange) {
+                    processingDrugChange = true;
+                    $('#drug').val(value).trigger('change');
+                    setTimeout(() => {
+                        processingDrugChange = false;
+                    }, 100);
+                }
             }
         },
         onShow: function() {
-            // Refresh dropdown to handle dynamically added items
-            $(this).dropdown('refresh');
+            var $dropdown = $(this);
+            var $menu = $dropdown.find('.menu');
+
+            // Force upward positioning and full viewport width
+            $menu.css({
+                'position': 'fixed',
+                'bottom': $('#app-footer').outerHeight() + 'px',
+                'top': 'auto',
+                'left': '0',
+                'right': '0',
+                'width': '100vw',
+                'max-width': '100vw',
+                'margin': '0',
+                'z-index': '10002',
+                'max-height': '50vh',
+                'overflow-y': 'auto',
+                'overflow-x': 'hidden',
+                'border-radius': '8px 8px 0 0',
+                'box-shadow': '0 -4px 12px rgba(0, 0, 0, 0.3)',
+                'backdrop-filter': 'blur(10px)',
+                'background': 'rgba(0, 0, 0, 0.95)',
+                'border': '1px solid rgba(255, 255, 255, 0.1)',
+                'border-bottom': 'none'
+            });
+
+            // Ensure proper scrolling behavior
+            $menu.off('touchstart touchmove scroll').on('touchstart', function(e) {
+                e.stopPropagation();
+            }).on('touchmove', function(e) {
+                e.stopPropagation();
+            }).on('scroll', function(e) {
+                e.stopPropagation();
+            });
+        },
+        onHide: function() {
+            var $menu = $(this).find('.menu');
+            $menu.off('touchstart touchmove scroll');
         }
     });
 
