@@ -387,7 +387,7 @@
               if(failure==false){
                 // Replace with Semantic UI success icon
                 loaderElement.className = 'step-icon success-icon';
-                loaderElement.innerHTML = '<i class="green check circle icon"></i>';
+                loaderElement.innerHTML = '<i class="green check icon"></i>';
                 $('#'+id).css("color", "white").hide().fadeIn();
               }else{
                 // Replace with Semantic UI error icon
