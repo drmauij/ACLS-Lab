@@ -383,10 +383,10 @@
     function doSetTimeout(id, time, failure) {
       setTimeout(function() {
           if(failure==false){
-            $('#loader_'+id).removeClass('ui active inline loader').html('<i class="ui check green icon"></i>').hide().fadeIn();
+            $('#loader_'+id).removeClass('ui active inline mini loader').html('<i class="ui check green icon"></i>').hide().fadeIn();
             $('#'+id).css("color", "white").hide().fadeIn();
           }else{
-            $('#loader_'+id).removeClass('ui active inline loader').html('<i class="ui times red icon"></i>').hide().fadeIn();
+            $('#loader_'+id).removeClass('ui active inline mini loader').html('<i class="ui times red icon"></i>').hide().fadeIn();
           }
       }, time);
     }
@@ -427,7 +427,7 @@
                             actionStepTime = actionSteps[i][1];
                         }
                         id=id+1;
-        printOut("<div id='loader_"+id+"' class='ui active inline loader'></div><span class='text-light' id='"+id+"'>&nbsp;"+actionStepDescription+"</span><br/>", true);
+        printOut("<div id='loader_"+id+"' class='ui active inline mini loader'></div><span class='text-light' id='"+id+"'>&nbsp;"+actionStepDescription+"</span><br/>", true);
                         doSetTimeout(id, actionStepTime, failure);
                         wholetime = actionStepTime+500;
                         c++;
