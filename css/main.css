@@ -1402,8 +1402,8 @@ border-top: 1px solid #374151;
 
 /* App Logs Box */
 .sidebar-logs {
-    flex: 1;
-    min-height: 150px;
+    flex-shrink: 0;
+    min-height: auto;
 }
 
 .sidebar-logs #logBox {
@@ -1413,7 +1413,7 @@ border-top: 1px solid #374151;
     border-radius: 0 !important;
     display: flex !important;
     flex-direction: column;
-    height: 100%;
+    height: auto;
 }
 
 .sidebar-logs #logBox h5 {
@@ -1421,8 +1421,8 @@ border-top: 1px solid #374151;
 }
 
 .sidebar-logs #log {
-    flex: 1;
-    -webkit-overflow-scrolling: touch !important;
+    flex: none;
+    overflow: visible !important;
     padding: 0.75rem;
     font-size: 0.75rem;
     line-height: 1.4;
@@ -1432,8 +1432,9 @@ border-top: 1px solid #374151;
     background: rgba(15, 23, 42, 0.3);
     border: 1px solid rgba(30, 41, 59, 0.3);
     border-radius: 6px;
-    min-height: 120px;
-    max-height: calc(100vh - 500px);
+    min-height: auto;
+    max-height: none;
+    height: auto;
 }
 
 .sidebar-logs #log log {
@@ -1457,25 +1458,21 @@ border-top: 1px solid #374151;
 }
 
 /* Improve scrollbar for sidebar elements */
-.sidebar-content::-webkit-scrollbar,
-.sidebar-log #logBox #log::-webkit-scrollbar {
+.sidebar-content::-webkit-scrollbar {
     width: 4px;
 }
 
-.sidebar-content::-webkit-scrollbar-track,
-.sidebar-log #logBox #log::-webkit-scrollbar-track {
+.sidebar-content::-webkit-scrollbar-track {
     background: rgba(55, 65, 81, 0.1);
     border-radius: 2px;
 }
 
-.sidebar-content::-webkit-scrollbar-thumb,
-.sidebar-log #logBox #log::-webkit-scrollbar-thumb {
+.sidebar-content::-webkit-scrollbar-thumb {
     background: rgba(107, 114, 128, 0.4);
     border-radius: 2px;
 }
 
-.sidebar-content::-webkit-scrollbar-thumb:hover,
-.sidebar-log #logBox #log::-webkit-scrollbar-thumb:hover {
+.sidebar-content::-webkit-scrollbar-thumb:hover {
     background: rgba(107, 114, 128, 0.6);
 }
 
@@ -1604,11 +1601,11 @@ border-top: 1px solid #374151;
     .sidebar-log {
         display: flex !important;
         flex-direction: column !important;
-        flex: 1 !important;
-        overflow: hidden !important;
+        flex-shrink: 0 !important;
+        overflow: visible !important;
         visibility: visible !important;
         opacity: 1 !important;
-        min-height: 150px !important;
+        min-height: auto !important;
         background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
         border: 1px solid rgba(30, 41, 59, 0.5) !important;
         border-radius: 12px !important;
