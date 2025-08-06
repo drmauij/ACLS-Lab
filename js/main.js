@@ -496,28 +496,12 @@
                     response = response +"</form>";
 										printOut(response);
 
-										// Initialize radio buttons after DOM is updated with better mobile support
+										// Initialize radio buttons with standard Semantic UI behavior
 										setTimeout(function() {
-										    $('#quiz-form .ui.radio.checkbox').each(function() {
-										        var $checkbox = $(this);
-										        var option = $checkbox.data('option');
-
-										        // Remove any existing handlers first
-										        $checkbox.off('.quiz-handler');
-										        $checkbox.find('label').off('.quiz-handler');
-
-										        // Detect touch device more reliably
-										        var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
-
-										        function selectOption() {
-										            // Clear all other selections in this quiz
-										            $('#quiz-form .ui.radio.checkbox').removeClass('checked').find('input').prop('checked', false);
-
-										            // Set this one as checked
-										            $checkbox.addClass('checked').find('input').prop('checked', true);
-
-										            // Call the choose function and auto-scroll
-										            setTimeout(function() {
+										    $('#quiz-form .ui.radio.checkbox').checkbox({
+										        onChange: function() {
+										            var option = $(this).data('option');
+										            if (option) {
 										                choose(option);
 										                // Auto-scroll after quiz response
 										                setTimeout(function() {
@@ -530,43 +514,10 @@
 										                        shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
 										                    }
 										                }, 300);
-										            }, 50);
-										        }
-
-										        if (isTouchDevice) {
-										            // Touch devices - use touchstart for immediate feedback
-										            var touchStarted = false;
-										            
-										            $checkbox.on('touchstart.quiz-handler', function(e) {
-										                touchStarted = true;
-										                e.stopPropagation();
-										            });
-										            
-										            $checkbox.on('touchend.quiz-handler', function(e) {
-										                if (touchStarted) {
-										                    e.preventDefault();
-										                    e.stopPropagation();
-										                    touchStarted = false;
-										                    selectOption();
-										                }
-										            });
-										            
-										            // Prevent click events on touch devices
-										            $checkbox.on('click.quiz-handler', function(e) {
-										                e.preventDefault();
-										                e.stopPropagation();
-										                return false;
-										            });
-										        } else {
-										            // Desktop devices - use click
-										            $checkbox.on('click.quiz-handler', function(e) {
-										                e.preventDefault();
-										                e.stopPropagation();
-										                selectOption();
-										            });
+										            }
 										        }
 										    });
-										}, 200);
+										}, 100);
                 }
 
 								if(stepObj.msgAfter){
