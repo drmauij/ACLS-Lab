@@ -506,62 +506,70 @@
 								        var $label = $checkbox.find('label');
 
 								        if (isMobile) {
-								            // For mobile: Use simple click handling without Semantic UI checkbox initialization
-								            $checkbox.off('.mobileQuiz').on('click.mobileQuiz touchend.mobileQuiz', function(e) {
+								            // For mobile: Use comprehensive touch handling
+								            $checkbox.off('.mobileQuiz');
+								            
+								            // Handle both click and touch events
+								            $checkbox.on('click.mobileQuiz', function(e) {
 								                e.preventDefault();
 								                e.stopPropagation();
-
-								                // Clear all selections first
-								                $('#quiz-form .ui.radio.checkbox').removeClass('checked');
-								                $('#quiz-form input[type="radio"]').prop('checked', false);
-
-								                // Select this option
-								                $checkbox.addClass('checked');
-								                $input.prop('checked', true);
-
-								                var option = $input.val();
-								                if (option) {
-								                    choose(option);
-								                    // Auto-scroll after quiz response
-								                    setTimeout(function() {
-								                        var shellPanel = document.getElementById('shell-panel');
-								                        var shellPanelMobile = document.getElementById('shell-panel-mobile');
-								                        if (shellPanel) {
-								                            shellPanel.scrollTop = shellPanel.scrollHeight;
-								                        }
-								                        if (shellPanelMobile) {
-								                            shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
-								                        }
-								                    }, 300);
-								                }
+								                handleQuizSelection($checkbox, $input);
 								            });
+								            
+								            $checkbox.on('touchstart.mobileQuiz', function(e) {
+								                e.preventDefault();
+								                e.stopPropagation();
+								            });
+								            
+								            $checkbox.on('touchend.mobileQuiz', function(e) {
+								                e.preventDefault();
+								                e.stopPropagation();
+								                handleQuizSelection($checkbox, $input);
+								            });
+								            
+								            // Also handle direct input clicks
+								            $input.on('click.mobileQuiz', function(e) {
+								                e.stopPropagation();
+								                handleQuizSelection($checkbox, $input);
+								            });
+								            
+								            // Handle label clicks
+								            $label.on('click.mobileQuiz', function(e) {
+								                e.preventDefault();
+								                e.stopPropagation();
+								                handleQuizSelection($checkbox, $input);
+								            });
+								            
 								        } else {
 								            // For desktop: Use Semantic UI checkbox
 								            $checkbox.checkbox({
 								                onChecked: function() {
 								                    var option = $input.val();
 								                    if (option) {
-								                        // Disable all other options to prevent multiple selections
-								                        $('#quiz-form .ui.radio.checkbox').removeClass('checked');
-								                        $checkbox.addClass('checked');
-
 								                        choose(option);
-								                        // Auto-scroll after quiz response
-								                        setTimeout(function() {
-								                            var shellPanel = document.getElementById('shell-panel');
-								                            var shellPanelMobile = document.getElementById('shell-panel-mobile');
-								                            if (shellPanel) {
-								                                shellPanel.scrollTop = shellPanel.scrollHeight;
-								                            }
-								                            if (shellPanelMobile) {
-								                                shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
-								                            }
-								                        }, 300);
+								                        scrollToBottomAfterContent();
 								                    }
 								                }
 								            });
 								        }
 								    });
+								    
+								    // Helper function for quiz selection
+								    function handleQuizSelection($checkbox, $input) {
+								        // Clear all selections first
+								        $('#quiz-form .ui.radio.checkbox').removeClass('checked');
+								        $('#quiz-form input[type="radio"]').prop('checked', false);
+								        
+								        // Select this option
+								        $checkbox.addClass('checked');
+								        $input.prop('checked', true);
+								        
+								        var option = $input.val();
+								        if (option) {
+								            choose(option);
+								            scrollToBottomAfterContent();
+								        }
+								    }
 								}, 100);
                 }
 

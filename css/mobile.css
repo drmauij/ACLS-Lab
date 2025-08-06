@@ -78,14 +78,14 @@
         padding: 0 !important;
         opacity: 0 !important;
         z-index: 1 !important;
-        pointer-events: none !important;
+        pointer-events: auto !important;
     }
 
     .quiz-option label {
         display: block !important;
         position: relative !important;
         z-index: 2 !important;
-        pointer-events: none !important;
+        pointer-events: auto !important;
         width: 100% !important;
         box-sizing: border-box !important;
         cursor: pointer !important;
