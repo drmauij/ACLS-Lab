@@ -26,15 +26,23 @@
 }
 
 /* Prevent text elements from inheriting loader styles */
-.text-light:not(.ui.loader):before {
+.text-light:before {
     display: none !important;
+    content: none !important;
 }
 
-/* Ensure only actual loader elements show animation */
+/* Ensure only loader elements with proper classes show animation */
 span:not(.ui.loader):before,
 div:not(.ui.loader):before {
     content: none !important;
     display: none !important;
+}
+
+/* Prevent any pseudo-elements on text containers */
+.text-light > *:not(.ui.loader):before,
+.text-light > *:not(.ui.loader):after {
+    display: none !important;
+    content: none !important;
 }
 
 

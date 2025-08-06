@@ -382,12 +382,19 @@
     // lazy highlight for action Steps
     function doSetTimeout(id, time, failure) {
       setTimeout(function() {
-          if(failure==false){
-            // Original line: document.getElementById("loader_"+id).innerHTML = "<i class='green checkmark icon'></i>";
-            document.getElementById("loader_"+id).innerHTML = "<i class='green checkmark icon' style='display: inline-block; vertical-align: middle; margin-right: 0.25rem;'></i>";
-            $('#'+id).css("color", "white").hide().fadeIn();
-          }else{
-            $('#loader_'+id).removeClass('ui active inline mini loader').html('<i class="ui times red icon"></i>').hide().fadeIn();
+          var loaderElement = document.getElementById("loader_"+id);
+          if(loaderElement) {
+              if(failure==false){
+                // Remove all loader classes and replace with success icon
+                loaderElement.className = '';
+                loaderElement.innerHTML = "<i class='green checkmark icon' style='display: inline-block; vertical-align: middle; margin-right: 0.25rem;'></i>";
+                $('#'+id).css("color", "white").hide().fadeIn();
+              }else{
+                // Remove all loader classes and replace with error icon
+                loaderElement.className = '';
+                loaderElement.innerHTML = '<i class="ui times red icon"></i>';
+                $('#loader_'+id).hide().fadeIn();
+              }
           }
       }, time);
     }
