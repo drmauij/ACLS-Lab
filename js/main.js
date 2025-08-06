@@ -631,6 +631,11 @@ function attachChangeHandlers() {
             updateSidebarVisibility();
         }
 
+        // Show guidance pointing label after menu appears
+        setTimeout(() => {
+            showActionGuidance();
+        }, 800);
+
         // Mirror content for mobile layout
         updateMobileLayout();
         }, 150); // 150ms debounce delay
@@ -986,6 +991,7 @@ function initializeDropdowns() {
             if (value && value !== '' && value !== null) {
                 if (dropdownId === 'action-dropdown' && !processingActionChange) {
                     processingActionChange = true;
+                    hideActionGuidance();
                     $('#action').val(value).trigger('change');
 
                     // Reset dropdown after action is processed
@@ -1008,10 +1014,11 @@ function initializeDropdowns() {
             }
         },
         onShow: function() {
+            // Hide guidance when user opens dropdown
+            hideActionGuidance();
+            
             var $dropdown = $(this);
             var $menu = $dropdown.find('.menu');
-
-            // Force upward positioning and full viewport width
             $menu.css({
                 'position': 'fixed',
                 'bottom': $('#app-footer').outerHeight() + 'px',
@@ -1049,6 +1056,50 @@ function initializeDropdowns() {
     });
 
     console.log('All dropdowns initialized as standard Semantic UI dropdowns');
+}
+
+// Function to show guidance pointing to actions dropdown
+function showActionGuidance() {
+    // Remove any existing guidance
+    $('.action-guidance').remove();
+    
+    // Create pointing label
+    const guidanceLabel = $(`
+        <div class="ui pointing below blue label action-guidance" style="
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            z-index: 1000;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            pointer-events: none;
+        ">
+            <i class="hand point down icon"></i>
+            Choose your next action
+        </div>
+    `);
+    
+    // Position relative to action dropdown
+    $('#action-dropdown').css('position', 'relative').append(guidanceLabel);
+    
+    // Fade in the guidance
+    guidanceLabel.animate({ opacity: 1 }, 600);
+    
+    // Auto-hide after 8 seconds with fade out
+    setTimeout(() => {
+        guidanceLabel.animate({ opacity: 0 }, 400, function() {
+            $(this).remove();
+        });
+    }, 8000);
+}
+
+// Function to hide guidance when user interacts
+function hideActionGuidance() {
+    $('.action-guidance').animate({ opacity: 0 }, 300, function() {
+        $(this).remove();
+    });
 }
 
 $(document).ready(function() {
