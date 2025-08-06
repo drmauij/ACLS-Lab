@@ -12,11 +12,21 @@
 }
 
 /* Fix loader positioning within text */
-span .ui.inline.mini.loader:before {
+.ui.inline.mini.loader:before {
     border-color: rgba(255, 255, 255, 0.2) !important;
     border-top-color: #ffffff !important;
     width: 12px !important;
     height: 12px !important;
+}
+
+/* Ensure only the direct loader element shows animation */
+.ui.loader:not(.mini):before {
+    display: none !important;
+}
+
+/* Prevent parent elements from showing loader animation */
+.text-light.ui.loader:before {
+    display: none !important;
 }
 
 
