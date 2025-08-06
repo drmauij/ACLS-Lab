@@ -427,7 +427,7 @@
                             actionStepTime = actionSteps[i][1];
                         }
                         id=id+1;
-        printOut("<div id='loader_"+id+"' class='ui active inline mini loader'></div><span class='text-light' id='"+id+"'>&nbsp;"+actionStepDescription+"</span><br/>", true);
+        printOut("<span class='text-light' id='"+id+"'><span id='loader_"+id+"' class='ui active inline mini loader'></span>&nbsp;"+actionStepDescription+"</span><br/>", true);
                         doSetTimeout(id, actionStepTime, failure);
                         wholetime = actionStepTime+500;
                         c++;

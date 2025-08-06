@@ -1,3 +1,25 @@
+
+/* Slower loader animation for step loading */
+.ui.loader.mini {
+    animation-duration: 1.5s !important; /* Slower than default 1s */
+}
+
+/* Ensure inline loaders stay properly aligned */
+.ui.inline.loader {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-right: 0.25rem !important;
+}
+
+/* Fix loader positioning within text */
+span .ui.inline.mini.loader:before {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    border-top-color: #ffffff !important;
+    width: 12px !important;
+    height: 12px !important;
+}
+
+
 /*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
 
 /*
