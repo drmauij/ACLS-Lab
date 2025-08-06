@@ -478,9 +478,13 @@
                 }
                 // check for questions to add at the response
                 if(stepObj.quiz){
-                    response = "<form>";
+                    response = "<form id='quiz-form'>";
                     for (var option in stepObj.quiz) {
-                        response = response +"<input type='radio' name='test' value="+option+" onclick='choose(\""+option+"\");'/>&nbsp;("+option+") "+stepObj.quiz[option]+"<br/>";
+                        var optionId = "quiz-option-" + option;
+                        response = response + "<div class='quiz-option' style='margin: 8px 0; cursor: pointer; padding: 8px; border-radius: 4px; transition: background-color 0.2s; border: 1px solid rgba(255,255,255,0.1);' onclick='selectQuizOption(\""+option+"\")' onmouseover='this.style.backgroundColor=\"rgba(52, 152, 219, 0.1)\"' onmouseout='if(!this.querySelector(\"input\").checked) this.style.backgroundColor=\"transparent\"'>";
+                        response = response + "<input type='radio' id='" + optionId + "' name='quiz-test' value='" + option + "' style='margin-right: 8px; pointer-events: none;'/>";
+                        response = response + "<label for='" + optionId + "' style='cursor: pointer; user-select: none; pointer-events: none;'>(" + option + ") " + stepObj.quiz[option] + "</label>";
+                        response = response + "</div>";
                     }
                     response = response +"</form>";
 										printOut(response);
@@ -514,6 +518,28 @@
         if(caseObj.stepCount>Object.keys(steps).length){
             $("<h3>You failed " + caseObj.errorCount + " on " + Object.keys(steps).length + "</h3>").appendTo("#log").hide().fadeIn();
         }
+    }
+
+    // Quiz option selection helper
+    function selectQuizOption(option) {
+        // Set the radio button as checked
+        var radioButton = document.getElementById("quiz-option-" + option);
+        if (radioButton) {
+            radioButton.checked = true;
+        }
+        
+        // Update visual feedback
+        var quizOptions = document.querySelectorAll('.quiz-option');
+        quizOptions.forEach(function(optionDiv) {
+            optionDiv.style.backgroundColor = 'transparent';
+        });
+        
+        // Highlight selected option
+        var selectedDiv = event.currentTarget;
+        selectedDiv.style.backgroundColor = 'rgba(52, 152, 219, 0.2)';
+        
+        // Call the choose function
+        choose(option);
     }
 
     // Quiz
