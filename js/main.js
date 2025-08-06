@@ -481,39 +481,51 @@
                     response = "<form id='quiz-form' style='margin: 1rem 0;'>";
                     for (var option in stepObj.quiz) {
                         var optionId = "quiz-option-" + option;
-                        response = response + "<div class='ui radio checkbox quiz-option' style='margin: 12px 0; display: block;' data-option='" + option + "'>";
-                        response = response + "<input type='radio' id='" + optionId + "' name='quiz-test' value='" + option + "'/>";
-                        response = response + "<label for='" + optionId + "'>(" + option + ") " + stepObj.quiz[option] + "</label>";
+                        response = response + "<div class='ui radio checkbox quiz-option' style='margin: 12px 0; display: block; cursor: pointer;' data-option='" + option + "'>";
+                        response = response + "<input type='radio' id='" + optionId + "' name='quiz-test' value='" + option + "' style='opacity: 0; position: absolute;'/>";
+                        response = response + "<label for='" + optionId + "' style='cursor: pointer; user-select: none; width: 100%; display: block;'>(" + option + ") " + stepObj.quiz[option] + "</label>";
                         response = response + "</div>";
                     }
                     response = response +"</form>";
 										printOut(response);
 
-										// Initialize Semantic UI radio checkboxes after DOM is updated
+										// Initialize radio buttons after DOM is updated with simpler approach
 										setTimeout(function() {
 										    $('#quiz-form .ui.radio.checkbox').each(function() {
 										        var $checkbox = $(this);
 										        var option = $checkbox.data('option');
 
-										        // Initialize Semantic UI checkbox
-										        $checkbox.checkbox({
-										            onChecked: function() {
-										                // Clear any existing handlers to prevent conflicts
-										                $('#quiz-form .ui.radio.checkbox').off('click.quiz');
+										        // Remove any existing handlers first
+										        $checkbox.off('.quiz-handler');
+
+										        // Initialize Semantic UI checkbox without conflicting handlers
+										        $checkbox.checkbox();
+
+										        // Add single unified click handler that works on both desktop and mobile
+										        $checkbox.on('click.quiz-handler touchstart.quiz-handler', function(e) {
+										            e.preventDefault();
+										            e.stopPropagation();
+										            
+										            // Clear all other selections in this quiz
+										            $('#quiz-form .ui.radio.checkbox').removeClass('checked').find('input').prop('checked', false);
+										            
+										            // Set this one as checked
+										            $(this).addClass('checked').find('input').prop('checked', true);
+										            
+										            // Call the choose function
+										            setTimeout(function() {
 										                choose(option);
-										            }
+										            }, 100);
 										        });
 
-										        // Add click handler for the entire div to improve usability
-										        $checkbox.off('click.quiz').on('click.quiz', function(e) {
-										            // Only trigger if not already checked
-										            var $input = $(this).find('input[type="radio"]');
-										            if (!$input.is(':checked')) {
-										                $(this).checkbox('set checked');
-										            }
+										        // Also handle label clicks specifically for better accessibility
+										        $checkbox.find('label').on('click.quiz-handler', function(e) {
+										            e.preventDefault();
+										            e.stopPropagation();
+										            $checkbox.trigger('click');
 										        });
 										    });
-										}, 200);
+										}, 300);
                 }
 
 								if(stepObj.msgAfter){
