@@ -1211,12 +1211,15 @@ border-top: 1px solid #374151;
 .sidebar-log {
     flex: 1;
     background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+    border: 1px solid rgba(30, 41, 59, 0.5);
     border-radius: 12px;
     padding: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
     min-height: 120px;
-    backdrop-filter: blur(10px);
     overflow: hidden;
 }
 
