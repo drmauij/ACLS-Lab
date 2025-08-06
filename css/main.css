@@ -297,28 +297,44 @@ h1, h2, h3, h4, h5, h6 {
     display: block !important;
     position: relative !important;
     cursor: pointer !important;
-    padding: 0.25rem !important;
+    padding: 0.5rem !important;
     border-radius: 6px !important;
     transition: none !important;
-    min-height: 36px !important;
+    min-height: 44px !important;
     -webkit-tap-highlight-color: transparent !important;
     touch-action: manipulation !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
 }
 
-/* Disable hover effects on mobile to prevent flickering */
+/* Desktop hover effects only */
 @media (hover: hover) and (pointer: fine) {
-    #quiz-form .ui.radio.checkbox:hover,
-    #quiz-form .ui.radio.checkbox:focus {
+    #quiz-form .ui.radio.checkbox:hover {
         background-color: rgba(59, 130, 246, 0.1) !important;
-        outline: none !important;
     }
 }
 
-/* No hover effects on touch devices */
+/* Mobile/Touch devices - no hover effects and better touch handling */
 @media (hover: none) and (pointer: coarse) {
-    #quiz-form .ui.radio.checkbox:hover,
-    #quiz-form .ui.radio.checkbox:focus {
+    #quiz-form .ui.radio.checkbox {
+        padding: 0.75rem 0.5rem !important;
+        min-height: 48px !important;
         background-color: transparent !important;
+        border: 1px solid rgba(75, 85, 99, 0.3) !important;
+        margin: 4px 0 !important;
+    }
+    
+    #quiz-form .ui.radio.checkbox:hover,
+    #quiz-form .ui.radio.checkbox:focus,
+    #quiz-form .ui.radio.checkbox:active {
+        background-color: transparent !important;
+        transform: none !important;
+        outline: none !important;
+    }
+    
+    #quiz-form .ui.radio.checkbox:active {
+        background-color: rgba(59, 130, 246, 0.1) !important;
     }
 }
 
@@ -328,19 +344,20 @@ h1, h2, h3, h4, h5, h6 {
 
 #quiz-form .ui.radio.checkbox label {
     color: #e5e7eb !important;
-    padding-left: 2rem !important;
+    padding-left: 2.5rem !important;
     cursor: pointer !important;
     font-size: 0.95rem !important;
-    line-height: 1.5 !important;
-    display: block !important;
+    line-height: 1.4 !important;
+    display: flex !important;
     position: relative !important;
     user-select: none !important;
     -webkit-user-select: none !important;
+    -webkit-touch-callout: none !important;
     transition: color 0.15s ease !important;
     width: 100% !important;
-    min-height: 32px !important;
-    display: flex !important;
+    min-height: 36px !important;
     align-items: center !important;
+    pointer-events: none !important;
 }
 
 #quiz-form .ui.radio.checkbox:hover label,
@@ -351,21 +368,24 @@ h1, h2, h3, h4, h5, h6 {
 #quiz-form .ui.radio.checkbox label:before {
     content: '' !important;
     position: absolute !important;
-    left: 0 !important;
+    left: -2rem !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    width: 16px !important;
-    height: 16px !important;
+    width: 18px !important;
+    height: 18px !important;
     border-radius: 50% !important;
     background: #374151 !important;
     border: 2px solid #6b7280 !important;
     transition: all 0.15s ease !important;
     pointer-events: none !important;
+    flex-shrink: 0 !important;
 }
 
-#quiz-form .ui.radio.checkbox:hover label:before {
-    border-color: #60a5fa !important;
-    background: #475569 !important;
+@media (hover: hover) and (pointer: fine) {
+    #quiz-form .ui.radio.checkbox:hover label:before {
+        border-color: #60a5fa !important;
+        background: #475569 !important;
+    }
 }
 
 #quiz-form .ui.radio.checkbox.checked label:before,
@@ -377,15 +397,16 @@ h1, h2, h3, h4, h5, h6 {
 #quiz-form .ui.radio.checkbox label:after {
     content: '' !important;
     position: absolute !important;
-    left: 4px !important;
+    left: -1.75rem !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    width: 8px !important;
-    height: 8px !important;
+    width: 10px !important;
+    height: 10px !important;
     border-radius: 50% !important;
     background: transparent !important;
     transition: background 0.15s ease !important;
     pointer-events: none !important;
+    flex-shrink: 0 !important;
 }
 
 #quiz-form .ui.radio.checkbox.checked label:after,

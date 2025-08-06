@@ -496,7 +496,7 @@
                     response = response +"</form>";
 										printOut(response);
 
-										// Initialize radio buttons after DOM is updated with simpler approach
+										// Initialize radio buttons after DOM is updated with better mobile support
 										setTimeout(function() {
 										    $('#quiz-form .ui.radio.checkbox').each(function() {
 										        var $checkbox = $(this);
@@ -504,81 +504,69 @@
 
 										        // Remove any existing handlers first
 										        $checkbox.off('.quiz-handler');
+										        $checkbox.find('label').off('.quiz-handler');
 
-										        // Initialize Semantic UI checkbox without conflicting handlers
-										        $checkbox.checkbox();
+										        // Detect touch device more reliably
+										        var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
 
-										        // Use different events for different device types to prevent flickering
-										        var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+										        function selectOption() {
+										            // Clear all other selections in this quiz
+										            $('#quiz-form .ui.radio.checkbox').removeClass('checked').find('input').prop('checked', false);
+
+										            // Set this one as checked
+										            $checkbox.addClass('checked').find('input').prop('checked', true);
+
+										            // Call the choose function and auto-scroll
+										            setTimeout(function() {
+										                choose(option);
+										                // Auto-scroll after quiz response
+										                setTimeout(function() {
+										                    var shellPanel = document.getElementById('shell-panel');
+										                    var shellPanelMobile = document.getElementById('shell-panel-mobile');
+										                    if (shellPanel) {
+										                        shellPanel.scrollTop = shellPanel.scrollHeight;
+										                    }
+										                    if (shellPanelMobile) {
+										                        shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
+										                    }
+										                }, 300);
+										            }, 50);
+										        }
 
 										        if (isTouchDevice) {
-										            // Touch devices - use touchend to prevent flickering
+										            // Touch devices - use touchstart for immediate feedback
+										            var touchStarted = false;
+										            
+										            $checkbox.on('touchstart.quiz-handler', function(e) {
+										                touchStarted = true;
+										                e.stopPropagation();
+										            });
+										            
 										            $checkbox.on('touchend.quiz-handler', function(e) {
+										                if (touchStarted) {
+										                    e.preventDefault();
+										                    e.stopPropagation();
+										                    touchStarted = false;
+										                    selectOption();
+										                }
+										            });
+										            
+										            // Prevent click events on touch devices
+										            $checkbox.on('click.quiz-handler', function(e) {
 										                e.preventDefault();
 										                e.stopPropagation();
-
-										                // Clear all other selections in this quiz
-										                $('#quiz-form .ui.radio.checkbox').removeClass('checked').find('input').prop('checked', false);
-
-										                // Set this one as checked
-										                $(this).addClass('checked').find('input').prop('checked', true);
-
-										                // Call the choose function and auto-scroll
-                                        setTimeout(function() {
-                                            choose(option);
-                                            // Auto-scroll after quiz response with longer delay for content to render
-                                            setTimeout(function() {
-                                                // Scroll to bottom of content
-                                                var shellPanel = document.getElementById('shell-panel');
-                                                var shellPanelMobile = document.getElementById('shell-panel-mobile');
-                                                if (shellPanel) {
-                                                    shellPanel.scrollTop = shellPanel.scrollHeight;
-                                                }
-                                                if (shellPanelMobile) {
-                                                    shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
-                                                }
-                                            }, 500);
-                                        }, 50);
+										                return false;
 										            });
 										        } else {
 										            // Desktop devices - use click
 										            $checkbox.on('click.quiz-handler', function(e) {
 										                e.preventDefault();
 										                e.stopPropagation();
-
-										                // Clear all other selections in this quiz
-										                $('#quiz-form .ui.radio.checkbox').removeClass('checked').find('input').prop('checked', false);
-
-										                // Set this one as checked
-										                $(this).addClass('checked').find('input').prop('checked', true);
-
-										                // Call the choose function and auto-scroll
-                                        setTimeout(function() {
-                                            choose(option);
-                                            // Auto-scroll after quiz response with longer delay for content to render
-                                            setTimeout(function() {
-                                                // Scroll to bottom of content
-                                                var shellPanel = document.getElementById('shell-panel');
-                                                var shellPanelMobile = document.getElementById('shell-panel-mobile');
-                                                if (shellPanel) {
-                                                    shellPanel.scrollTop = shellPanel.scrollHeight;
-                                                }
-                                                if (shellPanelMobile) {
-                                                    shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
-                                                }
-                                            }, 500);
-                                        }, 50);
+										                selectOption();
 										            });
 										        }
-
-										        // Also handle label clicks specifically for better accessibility
-										        $checkbox.find('label').on('click.quiz-handler touchend.quiz-handler', function(e) {
-										            e.preventDefault();
-										            e.stopPropagation();
-										            $checkbox.trigger(isTouchDevice ? 'touchend' : 'click');
-										        });
 										    });
-										}, 300);
+										}, 200);
                 }
 
 								if(stepObj.msgAfter){
