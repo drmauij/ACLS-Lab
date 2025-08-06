@@ -20,6 +20,8 @@
 }
 
 /* Prevent pseudo-elements on text elements that might inherit loader styles */
+.text-light:before,
+.text-light:after,
 span:not(.ui.loader):before,
 span:not(.ui.loader):after,
 div:not(.ui.loader):before,
@@ -30,11 +32,25 @@ div:not(.ui.loader):after {
     border: none !important;
 }
 
-/* Specifically allow loader elements to function normally */
-.ui.loader:before,
-.ui.loader:after {
+/* Prevent parent divs of loaders from showing pseudo-elements */
+div:has(.ui.loader):before,
+div:has(.ui.loader):after {
+    content: none !important;
+    display: none !important;
+    animation: none !important;
+    border: none !important;
+}
+
+/* Only allow actual loader elements to show the spinning animation */
+.ui.loader:before {
     content: "" !important;
     display: block !important;
+}
+
+/* Ensure no other elements can inherit loader animations */
+*:not(.ui.loader):not(.ui.loader *):before,
+*:not(.ui.loader):not(.ui.loader *):after {
+    animation-name: none !important;
 }
 
 /* Success icon styling and alignment */
