@@ -1065,7 +1065,7 @@ function showActionGuidance() {
     
     // Create pointing label
     const guidanceLabel = $(`
-        <div class="ui pointing below blue label action-guidance" style="
+        <div class="ui pointing below yellow label action-guidance" style="
             position: absolute;
             top: -45px;
             left: 50%;
@@ -1075,6 +1075,10 @@ function showActionGuidance() {
             font-size: 0.85rem;
             white-space: nowrap;
             pointer-events: none;
+            background: #f1c40f !important;
+            color: #2c3e50 !important;
+            border: 2px solid #f39c12 !important;
+            box-shadow: 0 2px 8px rgba(241, 196, 15, 0.4) !important;
         ">
             <i class="hand point down icon"></i>
             Choose your next action
