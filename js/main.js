@@ -1097,7 +1097,7 @@ function showActionGuidance() {
     const guidanceLabel = $(`
         <div class="ui pointing below yellow label action-guidance" style="
             position: absolute;
-            top: -45px;
+            top: -35px;
             left: 50%;
             transform: translateX(-50%);
             opacity: 0;
@@ -1110,7 +1110,6 @@ function showActionGuidance() {
             border: 2px solid #f39c12 !important;
             box-shadow: 0 2px 8px rgba(241, 196, 15, 0.4) !important;
         ">
-            <i class="hand point down icon"></i>
             Choose your next action
         </div>
     `);
