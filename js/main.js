@@ -59,11 +59,11 @@
         var cprNummerValue = parseInt($("#cprNummerValue").html())+1; //cpr cycles+1
         $("#cprNummerValue").html(""+cprNummerValue);
         $("#cprImg").show();
-        $("#cprNummer").show();
+        $("#cprCounter").show();
         $("#cprImg").effect( "pulsate", {
           times: 700
         }, 500000);
-        $("#cprNummer").effect( "pulsate", {
+        $("#cprCounter").effect( "pulsate", {
           times: 700
         }, 500000);
         var bls=false;
@@ -255,7 +255,7 @@
         var defiNummerValue = parseInt($("#defiNummerValue").html())+1;
         $("#defiNummerValue").html(""+defiNummerValue);
         $("#defiLogo").fadeIn();
-        $("#defiNummer").fadeIn();
+        $("#defiCounter").fadeIn();
     }
 
 
@@ -593,10 +593,10 @@ function attachChangeHandlers() {
         $("#labor").hide();
         $("#laborTable tbody").empty();
         $("#defiLogo").hide();
-        $("#defiNummer").hide();
+        $("#defiCounter").hide();
         $("#defiNummerValue").html("0");
         $("#cprImg").hide();
-        $("#cprNummer").hide();
+        $("#cprCounter").hide();
         $("#cprNummerValue").html("0");
         $("#co2").hide();
         $("#temp").hide();
