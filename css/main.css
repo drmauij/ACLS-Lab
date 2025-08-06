@@ -1554,11 +1554,10 @@ border-top: 1px solid #374151;
         height: 100vh !important;
         transform: translateX(100%) !important;
         transition: transform 0.3s ease !important;
-        z-index: 10000 !important;
+        z-index: 1001 !important;
         overflow-y: auto !important;
         background: linear-gradient(145deg, #111827 0%, #1f2937 100%) !important;
         box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3) !important;
-        padding-top: 0 !important;
     }
 
     .sidebar.active {
