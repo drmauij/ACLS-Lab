@@ -386,8 +386,8 @@
           if(loaderElement) {
               if(failure==false){
                 // Remove all loader classes and replace with success icon
-                loaderElement.className = '';
-                loaderElement.innerHTML = "<i class='green checkmark icon' style='display: inline-block; vertical-align: middle; margin-right: 0.25rem;'></i>";
+                loaderElement.className = 'success-icon';
+                loaderElement.innerHTML = "<i class='green checkmark icon'></i>";
                 $('#'+id).css("color", "white").hide().fadeIn();
               }else{
                 // Remove all loader classes and replace with error icon

@@ -11,12 +11,6 @@
     margin-right: 0.25rem !important;
 }
 
-/* Ensure step icons (success/checkmark) are aligned with text */
-.checkmark.icon {
-    vertical-align: middle !important;
-    margin-right: 0.25rem !important;
-}
-
 /* Fix loader positioning within text */
 .ui.inline.mini.loader:before {
     border-color: rgba(255, 255, 255, 0.2) !important;
@@ -25,24 +19,46 @@
     height: 12px !important;
 }
 
-/* Prevent text elements from inheriting loader styles */
-.text-light:before {
-    display: none !important;
-    content: none !important;
-}
-
-/* Ensure only loader elements with proper classes show animation */
-span:not(.ui.loader):before,
-div:not(.ui.loader):before {
+/* Prevent ALL pseudo-elements except on actual loader elements */
+*:not(.ui.loader):before,
+*:not(.ui.loader):after {
+    animation: none !important;
+    border: none !important;
     content: none !important;
     display: none !important;
 }
 
-/* Prevent any pseudo-elements on text containers */
-.text-light > *:not(.ui.loader):before,
-.text-light > *:not(.ui.loader):after {
+/* Only allow loader animation on actual loader elements */
+.ui.loader:before {
+    content: "" !important;
+    display: block !important;
+}
+
+/* Success icon styling and alignment */
+.success-icon {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-right: 0.25rem !important;
+}
+
+.success-icon .checkmark.icon {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin: 0 0.25rem 0 0 !important;
+    line-height: 1 !important;
+    font-size: 1em !important;
+}
+
+/* Ensure text containers don't inherit any loader styles */
+.text-light {
+    position: relative !important;
+}
+
+.text-light:before,
+.text-light:after {
     display: none !important;
     content: none !important;
+    animation: none !important;
 }
 
 
