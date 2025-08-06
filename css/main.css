@@ -1545,7 +1545,7 @@ border-top: 1px solid #374151;
 }
 
 /* Enhanced Responsive Design for Sticky Layout */
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
     body {
         padding: 0 !important;
     }
