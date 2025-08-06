@@ -19,17 +19,20 @@
     height: 12px !important;
 }
 
-/* Prevent ALL pseudo-elements except on actual loader elements */
-*:not(.ui.loader):before,
-*:not(.ui.loader):after {
-    animation: none !important;
-    border: none !important;
+/* Prevent pseudo-elements on text elements that might inherit loader styles */
+span:not(.ui.loader):before,
+span:not(.ui.loader):after,
+div:not(.ui.loader):before,
+div:not(.ui.loader):after {
     content: none !important;
     display: none !important;
+    animation: none !important;
+    border: none !important;
 }
 
-/* Only allow loader animation on actual loader elements */
-.ui.loader:before {
+/* Specifically allow loader elements to function normally */
+.ui.loader:before,
+.ui.loader:after {
     content: "" !important;
     display: block !important;
 }
@@ -54,8 +57,9 @@
     position: relative !important;
 }
 
-.text-light:before,
-.text-light:after {
+/* Prevent text-light elements from showing loader pseudo-elements */
+.text-light:not(.ui.loader):before,
+.text-light:not(.ui.loader):after {
     display: none !important;
     content: none !important;
     animation: none !important;
