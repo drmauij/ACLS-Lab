@@ -1234,6 +1234,19 @@ border-top: 1px solid #374151;
     min-height: 120px;
 }
 
+.sidebar-logs #log log {
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: inside;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    color: #d1d5db;
+}
+
+.sidebar-logs #log log::marker {
+    color: #60a5fa;
+}
+
 .sidebar-logs #log:empty::before {
     content: 'Activity log will appear here when actions are performed...';
     color: #64748b;
