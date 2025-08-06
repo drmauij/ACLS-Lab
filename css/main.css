@@ -1,4 +1,3 @@
-
 /* Slower loader animation for step loading */
 .ui.loader.mini {
     animation-duration: 1.5s !important; /* Slower than default 1s */
@@ -79,6 +78,39 @@ div:has(.ui.loader):after {
     display: none !important;
     content: none !important;
     animation: none !important;
+}
+
+/* Simple step icon styling */
+.step-icon {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-right: 0.25rem !important;
+    line-height: 1 !important;
+}
+
+/* Ensure loading icons maintain their animation */
+.loading-icon .ui.icon {
+    animation: spinAround 1s linear infinite !important;
+}
+
+/* Success and error icon containers */
+.success-icon,
+.error-icon {
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+
+/* Ensure Semantic UI icons display properly */
+.step-icon .icon {
+    margin: 0 !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+
+/* Ensure text containers don't inherit any unwanted styles */
+.text-light {
+    position: relative !important;
+    background: transparent !important;
 }
 
 
@@ -1150,7 +1182,7 @@ border-top: 1px solid #374151;
     gap: 0.5rem;
 }
 
-/* Timers Box */
+/* Sidebar Timers Box */
 .sidebar-timers {
     flex-shrink: 0;
 }
@@ -1926,6 +1958,11 @@ border-top: 1px solid #374151;
 @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
+}
+
+@keyframes spinAround {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes slideIn {

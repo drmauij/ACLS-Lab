@@ -385,14 +385,14 @@
           var loaderElement = document.getElementById("loader_"+id);
           if(loaderElement) {
               if(failure==false){
-                // Remove all loader classes and replace with success icon
-                loaderElement.className = 'success-icon';
-                loaderElement.innerHTML = "<i class='green checkmark icon'></i>";
+                // Replace with Semantic UI success icon
+                loaderElement.className = 'step-icon success-icon';
+                loaderElement.innerHTML = '<i class="green check circle icon"></i>';
                 $('#'+id).css("color", "white").hide().fadeIn();
               }else{
-                // Remove all loader classes and replace with error icon
-                loaderElement.className = '';
-                loaderElement.innerHTML = '<i class="ui times red icon"></i>';
+                // Replace with Semantic UI error icon
+                loaderElement.className = 'step-icon error-icon';
+                loaderElement.innerHTML = '<i class="red times circle icon"></i>';
                 $('#loader_'+id).hide().fadeIn();
               }
           }
@@ -435,7 +435,7 @@
                             actionStepTime = actionSteps[i][1];
                         }
                         id=id+1;
-        printOut("<div class='text-light' id='"+id+"'><span id='loader_"+id+"' class='ui active inline mini loader'></span>&nbsp;"+actionStepDescription+"</div>", true);
+        printOut("<div class='text-light' id='"+id+"'><span id='loader_"+id+"' class='step-icon loading-icon'><i class='blue spinner loading icon'></i></span>&nbsp;"+actionStepDescription+"</div>", true);
                         doSetTimeout(id, actionStepTime, failure);
                         wholetime = actionStepTime+500;
                         c++;
@@ -480,7 +480,7 @@
                 if(stepObj.quiz){
                     response = "<form>";
                     for (var option in stepObj.quiz) {
-                        response = response + "<input type='radio' name='test' value="+option+" onclick='choose(\""+option+"\");'/>&nbsp;("+option+") "+stepObj.quiz[option]+"<br/>";
+                        response = response +"<input type='radio' name='test' value="+option+" onclick='choose(\""+option+"\");'/>&nbsp;("+option+") "+stepObj.quiz[option]+"<br/>";
                     }
                     response = response +"</form>";
 										printOut(response);
