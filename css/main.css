@@ -11,6 +11,12 @@
     margin-right: 0.25rem !important;
 }
 
+/* Ensure step icons (success/checkmark) are aligned with text */
+.checkmark.icon {
+    vertical-align: middle !important;
+    margin-right: 0.25rem !important;
+}
+
 /* Fix loader positioning within text */
 .ui.inline.mini.loader:before {
     border-color: rgba(255, 255, 255, 0.2) !important;
