@@ -623,9 +623,7 @@ a:hover {
     background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
     border: none;
     border-radius: 16px;
-    padding: 1.5rem;
     margin-top: 1rem;
-    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.2);
     position: relative;
     backdrop-filter: blur(10px);
     display: none;
@@ -824,13 +822,11 @@ a:hover {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 0.875rem;
-    border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .cprTimer {
     background: rgba(34, 197, 94, 0.1);
     color: #6ee7b7;
-    border-color: rgba(34, 197, 94, 0.2);
 }
 
 .cprNummer, .defiNummer {
@@ -992,11 +988,6 @@ border-top: 1px solid #374151;
     padding: 0.5rem;
 }
 
-/* Monitor adjustments */
-body.monitor-visible #main-content {
-    top: 120px !important;
-}
-
 /* Sidebar Layout */
 .main-container {
     display: flex;
@@ -1015,6 +1006,7 @@ body.monitor-visible #main-content {
 
 .sidebar {
     position: fixed;
+    height: 100%;
     top: 80px;
     right: 0;
     bottom: 200px;
@@ -1031,21 +1023,6 @@ body.monitor-visible #main-content {
     overflow: hidden;
 }
 
-.sidebar-header {
-    display: none !important;
-}
-
-.sidebar-title {
-    color: #f9fafb !important;
-    margin: 0 !important;
-    font-size: 1rem !important;
-    font-weight: 600 !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    z-index: 1002 !important;
-    flex: 1 !important;
-}
 
 .sidebar-collapse-btn {
     background: rgba(239, 68, 68, 0.15) !important;
@@ -1066,28 +1043,6 @@ body.monitor-visible #main-content {
     z-index: 1002 !important;
 }
 
-/* Ensure all sidebar header elements are always visible */
-.sidebar .sidebar-header {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: flex !important;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 1003 !important;
-}
-
-.sidebar .sidebar-header *,
-.sidebar .sidebar-title,
-.sidebar .sidebar-collapse-btn {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: flex !important;
-}
-
-.sidebar .sidebar-title {
-    display: block !important;
-    flex: 1 !important;
-}
 
 .sidebar .sidebar-collapse-btn {
     display: flex !important;
@@ -1124,12 +1079,9 @@ body.monitor-visible #main-content {
 /* Timers Section */
 .sidebar-timers {
     flex-shrink: 0;
-    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
-    border: 1px solid rgba(30, 41, 59, 0.5);
     border-radius: 12px;
     padding: 1rem;
     margin-bottom: 0.75rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
 }
 
@@ -1221,11 +1173,9 @@ body.monitor-visible #main-content {
 .sidebar-monitor {
     flex-shrink: 0;
     background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
-    border: 1px solid rgba(30, 41, 59, 0.5);
     border-radius: 12px;
     padding: 1rem;
     margin-bottom: 0.75rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
 }
 
@@ -1261,13 +1211,11 @@ body.monitor-visible #main-content {
 .sidebar-log {
     flex: 1;
     background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
-    border: 1px solid rgba(30, 41, 59, 0.5);
     border-radius: 12px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     min-height: 120px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     overflow: hidden;
 }
@@ -1769,7 +1717,7 @@ body.monitor-visible #main-content {
     }
 
     #app-header {
-        padding: 0.125rem 0.25rem !important;
+        padding: 0.3rem 0.25rem !important;
     }
 
     #app-footer {
