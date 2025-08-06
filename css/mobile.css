@@ -1,5 +1,61 @@
 /* Mobile Responsive Styles for ACLS Simulator */
 
+/* Quiz-specific styling for Semantic UI radio buttons on mobile */
+@media (max-width: 768px) {
+    .quiz-option {
+        margin: 0.75rem 0 !important;
+        padding: 0.75rem !important;
+        background: rgba(15, 23, 42, 0.3) !important;
+        border: 1px solid rgba(30, 41, 59, 0.3) !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .quiz-option:hover {
+        background: rgba(59, 130, 246, 0.1) !important;
+        border-color: rgba(59, 130, 246, 0.3) !important;
+    }
+
+    .quiz-option label {
+        color: #e5e7eb !important;
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        cursor: pointer !important;
+        padding-left: 1.85714em !important;
+    }
+
+    .quiz-option label:hover {
+        color: #f9fafb !important;
+    }
+
+    /* Semantic UI radio button styling for dark theme on mobile */
+    .ui.radio.checkbox input:checked~.box:before,
+    .ui.radio.checkbox input:checked~label:before {
+        background: #3b82f6 !important;
+        border-color: #3b82f6 !important;
+    }
+
+    .ui.radio.checkbox input:checked~.box:after,
+    .ui.radio.checkbox input:checked~label:after {
+        background: #ffffff !important;
+    }
+
+    .ui.radio.checkbox .box:before,
+    .ui.radio.checkbox label:before {
+        background: rgba(55, 65, 81, 0.5) !important;
+        border: 2px solid #6b7280 !important;
+    }
+
+    .ui.radio.checkbox:hover .box:before,
+    .ui.radio.checkbox:hover label:before {
+        background: rgba(75, 85, 99, 0.5) !important;
+        border-color: #9ca3af !important;
+    }
+}
+
 /* Base mobile styles */
 @media (max-width: 768px) {
     body {
