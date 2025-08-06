@@ -501,28 +501,60 @@
 										        // Initialize Semantic UI checkbox without conflicting handlers
 										        $checkbox.checkbox();
 
-										        // Add single unified click handler that works on both desktop and mobile
-										        $checkbox.on('click.quiz-handler touchstart.quiz-handler', function(e) {
-										            e.preventDefault();
-										            e.stopPropagation();
-										            
-										            // Clear all other selections in this quiz
-										            $('#quiz-form .ui.radio.checkbox').removeClass('checked').find('input').prop('checked', false);
-										            
-										            // Set this one as checked
-										            $(this).addClass('checked').find('input').prop('checked', true);
-										            
-										            // Call the choose function
-										            setTimeout(function() {
-										                choose(option);
-										            }, 100);
-										        });
+										        // Use different events for different device types to prevent flickering
+										        var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+										        
+										        if (isTouchDevice) {
+										            // Touch devices - use touchend to prevent flickering
+										            $checkbox.on('touchend.quiz-handler', function(e) {
+										                e.preventDefault();
+										                e.stopPropagation();
+										                
+										                // Clear all other selections in this quiz
+										                $('#quiz-form .ui.radio.checkbox').removeClass('checked').find('input').prop('checked', false);
+										                
+										                // Set this one as checked
+										                $(this).addClass('checked').find('input').prop('checked', true);
+										                
+										                // Call the choose function and auto-scroll
+										                setTimeout(function() {
+										                    choose(option);
+										                    // Auto-scroll after quiz response
+										                    setTimeout(function() {
+										                        autoScrollToBottom(document.getElementById('shell-panel'));
+										                        autoScrollToBottom(document.getElementById('shell-panel-mobile'));
+										                    }, 500);
+										                }, 50);
+										            });
+										        } else {
+										            // Desktop devices - use click
+										            $checkbox.on('click.quiz-handler', function(e) {
+										                e.preventDefault();
+										                e.stopPropagation();
+										                
+										                // Clear all other selections in this quiz
+										                $('#quiz-form .ui.radio.checkbox').removeClass('checked').find('input').prop('checked', false);
+										                
+										                // Set this one as checked
+										                $(this).addClass('checked').find('input').prop('checked', true);
+										                
+										                // Call the choose function and auto-scroll
+										                setTimeout(function() {
+										                    choose(option);
+										                    // Auto-scroll after quiz response
+										                    setTimeout(function() {
+										                        autoScrollToBottom(document.getElementById('shell-panel'));
+										                        autoScrollToBottom(document.getElementById('shell-panel-mobile'));
+										                    }, 500);
+										                }, 50);
+										            });
+										        }
 
 										        // Also handle label clicks specifically for better accessibility
-										        $checkbox.find('label').on('click.quiz-handler', function(e) {
+										        $checkbox.find('label').on('click.quiz-handler touchend.quiz-handler', function(e) {
 										            e.preventDefault();
 										            e.stopPropagation();
-										            $checkbox.trigger('click');
+										            $checkbox.trigger(isTouchDevice ? 'touchend' : 'click');
 										        });
 										    });
 										}, 300);
