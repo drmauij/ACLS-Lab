@@ -483,21 +483,37 @@
                         var optionId = "quiz-option-" + option;
                         response = response + "<div class='ui radio checkbox quiz-option' style='margin: 12px 0; display: block;' data-option='" + option + "'>";
                         response = response + "<input type='radio' id='" + optionId + "' name='quiz-test' value='" + option + "'/>";
-                        response = response + "<label for='" + optionId + "' style='color: #e5e7eb; padding-left: 1.8rem; cursor: pointer; display: block; line-height: 1.4;'>(" + option + ") " + stepObj.quiz[option] + "</label>";
+                        response = response + "<label for='" + optionId + "'>(" + option + ") " + stepObj.quiz[option] + "</label>";
                         response = response + "</div>";
                     }
                     response = response +"</form>";
 										printOut(response);
 										
-										// Initialize Semantic UI radio checkboxes after content is added
+										// Initialize Semantic UI radio checkboxes after DOM is updated
 										setTimeout(function() {
-										    $('#quiz-form .ui.radio.checkbox').checkbox({
-										        onChecked: function() {
-										            var option = $(this).closest('.quiz-option').data('option');
-										            choose(option);
-										        }
+										    $('#quiz-form .ui.radio.checkbox').each(function() {
+										        var $checkbox = $(this);
+										        var option = $checkbox.data('option');
+										        
+										        // Initialize Semantic UI checkbox
+										        $checkbox.checkbox({
+										            onChecked: function() {
+										                // Clear any existing handlers to prevent conflicts
+										                $('#quiz-form .ui.radio.checkbox').off('click.quiz');
+										                choose(option);
+										            }
+										        });
+										        
+										        // Add click handler for the entire div to improve usability
+										        $checkbox.off('click.quiz').on('click.quiz', function(e) {
+										            // Only trigger if not already checked
+										            var $input = $(this).find('input[type="radio"]');
+										            if (!$input.is(':checked')) {
+										                $(this).checkbox('set checked');
+										            }
+										        });
 										    });
-										}, 100);
+										}, 200);
                 }
 
 								if(stepObj.msgAfter){
