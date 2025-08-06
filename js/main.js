@@ -496,41 +496,18 @@
                     response = response +"</form>";
 									printOut(response);
 
-								// Initialize Semantic UI radio checkboxes with better mobile handling
+								// Initialize radio checkboxes with proper mobile handling
 								setTimeout(function() {
+								    var isMobile = window.innerWidth <= 768;
+								    
 								    $('#quiz-form .ui.radio.checkbox').each(function() {
 								        var $checkbox = $(this);
 								        var $input = $checkbox.find('input[type="radio"]');
 								        var $label = $checkbox.find('label');
 
-								        // Initialize Semantic UI checkbox
-								        $checkbox.checkbox({
-								            onChecked: function() {
-								                var option = $input.val();
-								                if (option) {
-								                    // Disable all other options to prevent multiple selections
-								                    $('#quiz-form .ui.radio.checkbox').removeClass('checked');
-								                    $checkbox.addClass('checked');
-
-								                    choose(option);
-								                    // Auto-scroll after quiz response
-								                    setTimeout(function() {
-								                        var shellPanel = document.getElementById('shell-panel');
-								                        var shellPanelMobile = document.getElementById('shell-panel-mobile');
-								                        if (shellPanel) {
-								                            shellPanel.scrollTop = shellPanel.scrollHeight;
-								                        }
-								                        if (shellPanelMobile) {
-								                            shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
-								                        }
-								                    }, 300);
-								                }
-								            }
-								        });
-
-								        // Add mobile-specific click handling
-								        if (window.innerWidth <= 768) {
-								            $checkbox.off('click touch').on('click touch', function(e) {
+								        if (isMobile) {
+								            // For mobile: Use simple click handling without Semantic UI checkbox initialization
+								            $checkbox.off('.mobileQuiz').on('click.mobileQuiz touchend.mobileQuiz', function(e) {
 								                e.preventDefault();
 								                e.stopPropagation();
 
@@ -544,7 +521,30 @@
 
 								                var option = $input.val();
 								                if (option) {
+								                    choose(option);
+								                    // Auto-scroll after quiz response
 								                    setTimeout(function() {
+								                        var shellPanel = document.getElementById('shell-panel');
+								                        var shellPanelMobile = document.getElementById('shell-panel-mobile');
+								                        if (shellPanel) {
+								                            shellPanel.scrollTop = shellPanel.scrollHeight;
+								                        }
+								                        if (shellPanelMobile) {
+								                            shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
+								                        }
+								                    }, 300);
+								                }
+								            });
+								        } else {
+								            // For desktop: Use Semantic UI checkbox
+								            $checkbox.checkbox({
+								                onChecked: function() {
+								                    var option = $input.val();
+								                    if (option) {
+								                        // Disable all other options to prevent multiple selections
+								                        $('#quiz-form .ui.radio.checkbox').removeClass('checked');
+								                        $checkbox.addClass('checked');
+
 								                        choose(option);
 								                        // Auto-scroll after quiz response
 								                        setTimeout(function() {
@@ -557,19 +557,12 @@
 								                                shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
 								                            }
 								                        }, 300);
-								                    }, 50);
+								                    }
 								                }
-								            });
-
-								            // Also handle label clicks specifically
-								            $label.off('click touch').on('click touch', function(e) {
-								                e.preventDefault();
-								                e.stopPropagation();
-								                $checkbox.trigger('click');
 								            });
 								        }
 								    });
-								}, 150);
+								}, 100);
                 }
 
 								if(stepObj.msgAfter){
