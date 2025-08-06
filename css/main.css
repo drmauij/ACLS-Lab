@@ -291,7 +291,7 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.3;
 }
 
-/* Radio Buttons - Proper alignment and styling */
+/* Radio Buttons - General styling */
 input[type="radio"] {
     appearance: radio;
     -webkit-appearance: radio;
@@ -308,7 +308,7 @@ input[type="radio"] {
     flex-shrink: 0 !important;
 }
 
-/* Label styling for proper alignment */
+/* Label styling for general radio buttons */
 label[for] {
     color: #e5e7eb !important;
     cursor: pointer !important;
@@ -328,15 +328,71 @@ label[for]:hover {
     background-color: rgba(96, 165, 250, 0.1) !important;
 }
 
-/* Ensure radio button text wraps properly */
-label[for] .option-text {
-    flex: 1 !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
+/* Quiz-specific radio button styling */
+.quiz-option {
+    display: flex !important;
+    align-items: flex-start !important;
+    margin: 0.75rem 0 !important;
+    padding: 0.75rem !important;
+    background: rgba(15, 23, 42, 0.3) !important;
+    border: 1px solid rgba(30, 41, 59, 0.3) !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
 }
 
-/* Mobile-specific adjustments */
+.quiz-option:hover {
+    background: rgba(59, 130, 246, 0.1) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.quiz-option input[type="radio"] {
+    margin: 0 !important;
+    margin-right: 0.75rem !important;
+    margin-top: 0.1em !important;
+    flex-shrink: 0 !important;
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.quiz-option label {
+    flex: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    color: #e5e7eb !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    text-align: left !important;
+}
+
+.quiz-option label:hover {
+    background: transparent !important;
+}
+
+/* Mobile-specific quiz adjustments */
 @media (max-width: 768px) {
+    .quiz-option {
+        margin: 0.5rem 0 !important;
+        padding: 1rem !important;
+    }
+
+    .quiz-option input[type="radio"] {
+        width: 20px !important;
+        height: 20px !important;
+        margin-right: 1rem !important;
+    }
+
+    .quiz-option label {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+    }
+
+    /* General radio buttons on mobile */
     input[type="radio"] {
         width: 18px !important;
         height: 18px !important;
