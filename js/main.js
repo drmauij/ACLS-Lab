@@ -488,13 +488,13 @@
                     }
                     response = response +"</form>";
 										printOut(response);
-										
+
 										// Initialize Semantic UI radio checkboxes after DOM is updated
 										setTimeout(function() {
 										    $('#quiz-form .ui.radio.checkbox').each(function() {
 										        var $checkbox = $(this);
 										        var option = $checkbox.data('option');
-										        
+
 										        // Initialize Semantic UI checkbox
 										        $checkbox.checkbox({
 										            onChecked: function() {
@@ -503,7 +503,7 @@
 										                choose(option);
 										            }
 										        });
-										        
+
 										        // Add click handler for the entire div to improve usability
 										        $checkbox.off('click.quiz').on('click.quiz', function(e) {
 										            // Only trigger if not already checked
@@ -661,7 +661,7 @@ function attachChangeHandlers() {
             updateSidebarVisibility();
         }
 
-        // Show guidance pointing label after menu appears
+        // Show guidance pointing to actions dropdown
         setTimeout(() => {
             showActionGuidance();
         }, 800);
@@ -1046,7 +1046,7 @@ function initializeDropdowns() {
         onShow: function() {
             // Hide guidance when user opens dropdown
             hideActionGuidance();
-            
+
             var $dropdown = $(this);
             var $menu = $dropdown.find('.menu');
             $menu.css({
@@ -1092,12 +1092,12 @@ function initializeDropdowns() {
 function showActionGuidance() {
     // Remove any existing guidance
     $('.action-guidance').remove();
-    
+
     // Create pointing label
     const guidanceLabel = $(`
         <div class="ui pointing below yellow label action-guidance" style="
             position: absolute;
-            top: -50px;
+            top: -45px;
             left: 50%;
             transform: translateX(-50%);
             opacity: 0;
@@ -1105,21 +1105,17 @@ function showActionGuidance() {
             font-size: 0.85rem;
             white-space: nowrap;
             pointer-events: none;
-            background: #f1c40f !important;
-            color: #2c3e50 !important;
-            border: 2px solid #f39c12 !important;
-            box-shadow: 0 2px 8px rgba(241, 196, 15, 0.4) !important;
         ">
             Choose your next action
         </div>
     `);
-    
+
     // Position relative to action dropdown
     $('#action-dropdown').css('position', 'relative').append(guidanceLabel);
-    
+
     // Fade in the guidance
     guidanceLabel.animate({ opacity: 1 }, 600);
-    
+
     // Auto-hide after 8 seconds with fade out
     setTimeout(() => {
         guidanceLabel.animate({ opacity: 0 }, 400, function() {
