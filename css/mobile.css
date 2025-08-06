@@ -548,7 +548,7 @@
     /* Ensure sidebar content doesn't overlap header */
     .sidebar-content {
         padding-top: 0 !important;
-        margin-top: 0 !important;
+        margin-top: 50px !important;
     }
 
     /* Override any conflicting styles that might hide the header */
