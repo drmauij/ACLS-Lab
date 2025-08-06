@@ -435,7 +435,7 @@
                             actionStepTime = actionSteps[i][1];
                         }
                         id=id+1;
-        printOut("<div class='text-light' id='"+id+"'><span id='loader_"+id+"' class='step-icon loading-icon'><i class='blue spinner loading icon'></i></span>&nbsp;"+actionStepDescription+"</div>", true);
+        printOut("<div class='text-light' id='"+id+"'><span id='loader_"+id+"' class='step-icon loading-icon'><i class='white spinner loading icon'></i></span>&nbsp;"+actionStepDescription+"</div>", true);
                         doSetTimeout(id, actionStepTime, failure);
                         wholetime = actionStepTime+500;
                         c++;
