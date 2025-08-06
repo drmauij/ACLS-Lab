@@ -1093,7 +1093,7 @@ function showActionGuidance() {
     // Remove any existing guidance
     $('.action-guidance').remove();
 
-    // Create pointing label
+    // Create pointing label using proper Semantic UI syntax
     const guidanceLabel = $(`
         <div class="ui pointing below yellow label action-guidance" style="
             position: absolute;
