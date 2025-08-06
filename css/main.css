@@ -293,11 +293,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Quiz Radio Buttons - Semantic UI Dark Theme */
 #quiz-form .ui.radio.checkbox {
-    margin: 12px 0 !important;
+    margin: 6px 0 !important;
     display: block !important;
     position: relative !important;
     cursor: pointer !important;
-    padding: 0.5rem !important;
+    padding: 0.375rem !important;
     border-radius: 6px !important;
     transition: background-color 0.2s ease !important;
 }
