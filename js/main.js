@@ -485,39 +485,48 @@
                 }
                 // check for questions to add at the response
                 if(stepObj.quiz){
-                    response = "<form id='quiz-form' style='margin: 12px 0;'>"; // Adjusted margin for spacing
+                    response = "<form id='quiz-form' style='margin: 8px 0;'>";
                     for (var option in stepObj.quiz) {
                         var optionId = "quiz-option-" + option;
-                        response = response + "<div class='ui radio checkbox quiz-option' style='margin: 12px 0; display: block; cursor: pointer;' data-option='" + option + "'>";
-                        response = response + "<input type='radio' id='" + optionId + "' name='quiz-test' value='" + option + "' style='opacity: 0; position: absolute;'/>";
-                        response = response + "<label for='" + optionId + "' style='cursor: pointer; user-select: none; width: 100%; display: block;'>(" + option + ") " + stepObj.quiz[option] + "</label>";
+                        response = response + "<div class='ui radio checkbox quiz-option' data-option='" + option + "'>";
+                        response = response + "<input type='radio' id='" + optionId + "' name='quiz-test' value='" + option + "'/>";
+                        response = response + "<label for='" + optionId + "'>(" + option + ") " + stepObj.quiz[option] + "</label>";
                         response = response + "</div>";
                     }
                     response = response +"</form>";
 										printOut(response);
 
-										// Initialize radio buttons with standard Semantic UI behavior
-										setTimeout(function() {
-										    $('#quiz-form .ui.radio.checkbox').checkbox({
-										        onChange: function() {
-										            var option = $(this).data('option');
-										            if (option) {
-										                choose(option);
-										                // Auto-scroll after quiz response
-										                setTimeout(function() {
-										                    var shellPanel = document.getElementById('shell-panel');
-										                    var shellPanelMobile = document.getElementById('shell-panel-mobile');
-										                    if (shellPanel) {
-										                        shellPanel.scrollTop = shellPanel.scrollHeight;
-										                    }
-										                    if (shellPanelMobile) {
-										                        shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
-										                    }
-										                }, 300);
-										            }
-										        }
-										    });
-										}, 100);
+									// Initialize radio buttons with direct click handling
+									setTimeout(function() {
+									    // Use direct change event on radio inputs
+									    $('#quiz-form input[type=radio]').on('change', function() {
+									        if (this.checked) {
+									            var option = $(this).val();
+									            if (option) {
+									                choose(option);
+									                // Auto-scroll after quiz response
+									                setTimeout(function() {
+									                    var shellPanel = document.getElementById('shell-panel');
+									                    var shellPanelMobile = document.getElementById('shell-panel-mobile');
+									                    if (shellPanel) {
+									                        shellPanel.scrollTop = shellPanel.scrollHeight;
+									                    }
+									                    if (shellPanelMobile) {
+									                        shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
+									                    }
+									                }, 300);
+									            }
+									        }
+									    });
+
+									    // Also handle label clicks
+									    $('#quiz-form label').on('click', function() {
+									        var input = $('#' + $(this).attr('for'));
+									        if (input.length) {
+									            input.prop('checked', true).trigger('change');
+									        }
+									    });
+									}, 100);
                 }
 
 								if(stepObj.msgAfter){
