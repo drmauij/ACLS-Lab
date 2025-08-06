@@ -370,6 +370,13 @@
         $('#shell-panel').animate({"scrollTop": $('#shell-panel')[0].scrollHeight}, "fast");
     }
 
+    // Helper function to ensure scrolling to the bottom after content has rendered
+    function scrollToBottomAfterContent() {
+        setTimeout(() => {
+            autoScrollToBottom(document.getElementById('shell-panel'));
+            autoScrollToBottom(document.getElementById('shell-panel-mobile'));
+        }, 1000); // Increased delay to ensure content is rendered
+    }
 
     // Command handler
     var caseObj = null;
@@ -478,7 +485,7 @@
                 }
                 // check for questions to add at the response
                 if(stepObj.quiz){
-                    response = "<form id='quiz-form' style='margin: 1rem 0;'>";
+                    response = "<form id='quiz-form' style='margin: 12px 0;'>"; // Adjusted margin for spacing
                     for (var option in stepObj.quiz) {
                         var optionId = "quiz-option-" + option;
                         response = response + "<div class='ui radio checkbox quiz-option' style='margin: 12px 0; display: block; cursor: pointer;' data-option='" + option + "'>";
@@ -503,50 +510,48 @@
 
 										        // Use different events for different device types to prevent flickering
 										        var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-										        
+
 										        if (isTouchDevice) {
 										            // Touch devices - use touchend to prevent flickering
 										            $checkbox.on('touchend.quiz-handler', function(e) {
 										                e.preventDefault();
 										                e.stopPropagation();
-										                
+
 										                // Clear all other selections in this quiz
 										                $('#quiz-form .ui.radio.checkbox').removeClass('checked').find('input').prop('checked', false);
-										                
+
 										                // Set this one as checked
 										                $(this).addClass('checked').find('input').prop('checked', true);
-										                
+
 										                // Call the choose function and auto-scroll
-										                setTimeout(function() {
-										                    choose(option);
-										                    // Auto-scroll after quiz response
-										                    setTimeout(function() {
-										                        autoScrollToBottom(document.getElementById('shell-panel'));
-										                        autoScrollToBottom(document.getElementById('shell-panel-mobile'));
-										                    }, 500);
-										                }, 50);
+                                        setTimeout(function() {
+                                            choose(option);
+                                            // Auto-scroll after quiz response with longer delay for content to render
+                                            setTimeout(function() {
+                                                scrollToBottomAfterContent();
+                                            }, 1000);
+                                        }, 50);
 										            });
 										        } else {
 										            // Desktop devices - use click
 										            $checkbox.on('click.quiz-handler', function(e) {
 										                e.preventDefault();
 										                e.stopPropagation();
-										                
+
 										                // Clear all other selections in this quiz
 										                $('#quiz-form .ui.radio.checkbox').removeClass('checked').find('input').prop('checked', false);
-										                
+
 										                // Set this one as checked
 										                $(this).addClass('checked').find('input').prop('checked', true);
-										                
+
 										                // Call the choose function and auto-scroll
-										                setTimeout(function() {
-										                    choose(option);
-										                    // Auto-scroll after quiz response
-										                    setTimeout(function() {
-										                        autoScrollToBottom(document.getElementById('shell-panel'));
-										                        autoScrollToBottom(document.getElementById('shell-panel-mobile'));
-										                    }, 500);
-										                }, 50);
+                                        setTimeout(function() {
+                                            choose(option);
+                                            // Auto-scroll after quiz response with longer delay for content to render
+                                            setTimeout(function() {
+                                                scrollToBottomAfterContent();
+                                            }, 1000);
+                                        }, 50);
 										            });
 										        }
 
@@ -841,12 +846,11 @@ function attachChangeHandlers() {
                 throttleTimeout = null;
                 syncMobileContent();
 
-                // Auto-scroll shell panels when content is added
+                // Auto-scroll when content is added to shell panels or log
                 mutations.forEach(function(mutation) {
                     if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
                         const target = mutation.target;
 
-                        // Check if the mutation happened in shell panel or its descendants
                         if (target.id === 'shell-panel' || target.closest('#shell-panel')) {
                             setTimeout(() => {
                                 autoScrollToBottom(document.getElementById('shell-panel'));
@@ -854,7 +858,6 @@ function attachChangeHandlers() {
                             }, 100);
                         }
 
-                        // Also handle log auto-scroll
                         if (target.id === 'log' || target.closest('#log')) {
                             setTimeout(() => {
                                 autoScrollToBottom(document.getElementById('log'));
@@ -872,14 +875,13 @@ function attachChangeHandlers() {
             if (element) {
                 observer.observe(element, {
                     childList: true,
-                    subtree: false, // Don't observe subtree to reduce callbacks
+                    subtree: false,
                     characterData: false
                 });
             }
         });
     }
 
-    // Remove problematic auto-refresh interval that was causing loops
 
     // Additional trigger for scenario changes
     $(document).on('change', '#case', function() {
