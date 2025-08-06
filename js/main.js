@@ -496,11 +496,10 @@
                     response = response +"</form>";
 										printOut(response);
 
-									// Initialize radio buttons with direct click handling
+									// Initialize Semantic UI radio checkboxes
 									setTimeout(function() {
-									    // Use direct change event on radio inputs
-									    $('#quiz-form input[type=radio]').on('change', function() {
-									        if (this.checked) {
+									    $('#quiz-form .ui.radio.checkbox').checkbox({
+									        onChecked: function() {
 									            var option = $(this).val();
 									            if (option) {
 									                choose(option);
@@ -516,14 +515,6 @@
 									                    }
 									                }, 300);
 									            }
-									        }
-									    });
-
-									    // Also handle label clicks
-									    $('#quiz-form label').on('click', function() {
-									        var input = $('#' + $(this).attr('for'));
-									        if (input.length) {
-									            input.prop('checked', true).trigger('change');
 									        }
 									    });
 									}, 100);
