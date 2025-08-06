@@ -528,8 +528,16 @@
                                             choose(option);
                                             // Auto-scroll after quiz response with longer delay for content to render
                                             setTimeout(function() {
-                                                scrollToBottomAfterContent();
-                                            }, 1000);
+                                                // Scroll to bottom of content
+                                                var shellPanel = document.getElementById('shell-panel');
+                                                var shellPanelMobile = document.getElementById('shell-panel-mobile');
+                                                if (shellPanel) {
+                                                    shellPanel.scrollTop = shellPanel.scrollHeight;
+                                                }
+                                                if (shellPanelMobile) {
+                                                    shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
+                                                }
+                                            }, 500);
                                         }, 50);
 										            });
 										        } else {
@@ -549,8 +557,16 @@
                                             choose(option);
                                             // Auto-scroll after quiz response with longer delay for content to render
                                             setTimeout(function() {
-                                                scrollToBottomAfterContent();
-                                            }, 1000);
+                                                // Scroll to bottom of content
+                                                var shellPanel = document.getElementById('shell-panel');
+                                                var shellPanelMobile = document.getElementById('shell-panel-mobile');
+                                                if (shellPanel) {
+                                                    shellPanel.scrollTop = shellPanel.scrollHeight;
+                                                }
+                                                if (shellPanelMobile) {
+                                                    shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
+                                                }
+                                            }, 500);
                                         }, 50);
 										            });
 										        }
@@ -812,7 +828,7 @@ function attachChangeHandlers() {
     // Initialize sidebar
     const updateSidebarVisibility = initializeSidebar();
 
-    // Update mobile content when main content changes
+    // Sync content on any major updates using MutationObserver with throttling
     function syncMobileContent() {
         if ($(window).width() <= 768) {
             updateMobileLayout();
@@ -833,7 +849,7 @@ function attachChangeHandlers() {
         }
     }
 
-    // Sync content on any major updates using MutationObserver with throttling
+    // Observe changes to shell panel, monitor, and log
     if (typeof MutationObserver !== 'undefined' && !window.observerAttached) {
         window.observerAttached = true;
         let throttleTimeout;
@@ -868,7 +884,6 @@ function attachChangeHandlers() {
             }, 250); // Throttle to 250ms
         });
 
-        // Observe changes to shell panel, monitor, and log
         const elementsToObserve = ['#shell-panel', '#shell-panel-mobile', '#monitor', '#log'];
         elementsToObserve.forEach(selector => {
             const element = document.querySelector(selector);
