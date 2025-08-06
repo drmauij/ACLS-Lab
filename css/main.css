@@ -1273,7 +1273,7 @@ code {
     opacity: 1 !important;
     backdrop-filter: blur(10px);
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+    height: 100% !important;
 }
 
 .sidebar-content {
