@@ -972,21 +972,30 @@ function initializeDropdowns() {
         showOnFocus: false,
         onChange: function(value, text, $selectedItem) {
             var dropdownId = $(this).attr('id');
+            var $dropdown = $(this);
             console.log(dropdownId + ' onChange:', value, text);
 
             if (value && value !== '' && value !== null) {
                 if (dropdownId === 'action-dropdown' && !processingActionChange) {
                     processingActionChange = true;
                     $('#action').val(value).trigger('change');
+                    
+                    // Reset dropdown after action is processed
                     setTimeout(() => {
+                        $dropdown.dropdown('clear');
+                        $dropdown.dropdown('set text', 'Select an action...');
                         processingActionChange = false;
-                    }, 100);
+                    }, 500);
                 } else if (dropdownId === 'drug-dropdown' && !processingDrugChange) {
                     processingDrugChange = true;
                     $('#drug').val(value).trigger('change');
+                    
+                    // Reset dropdown after drug is processed
                     setTimeout(() => {
+                        $dropdown.dropdown('clear');
+                        $dropdown.dropdown('set text', 'Select a drug...');
                         processingDrugChange = false;
-                    }, 100);
+                    }, 500);
                 }
             }
         },
