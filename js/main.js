@@ -489,11 +489,14 @@
                 }
                 // check for questions to add at the response
                 if(stepObj.quiz){
-                    response = "<form id='quiz-form' style='margin: 8px 0;'>";
+                    // Create a unique form ID for each quiz to prevent conflicts
+                    var quizFormId = 'quiz-form-' + caseObj.stepCount;
+                    response = "<form id='" + quizFormId + "' class='quiz-form' style='margin: 8px 0;'>";
                     for (var option in stepObj.quiz) {
-                        var optionId = "quiz-option-" + option;
+                        var optionId = "quiz-option-" + caseObj.stepCount + "-" + option;
+                        var radioName = "quiz-test-" + caseObj.stepCount;
                         response = response + "<div class='ui radio checkbox quiz-option' data-option='" + option + "'>";
-                        response = response + "<input type='radio' id='" + optionId + "' name='quiz-test' value='" + option + "'/>";
+                        response = response + "<input type='radio' id='" + optionId + "' name='" + radioName + "' value='" + option + "'/>";
                         response = response + "<label for='" + optionId + "'>(" + option + ") " + stepObj.quiz[option] + "</label>";
                         response = response + "</div>";
                     }
@@ -502,12 +505,14 @@
 
 								// Initialize radio checkboxes with unified handling
                                 setTimeout(function() {
+                                    var currentQuizFormId = '#quiz-form-' + caseObj.stepCount;
+                                    
                                     // Helper function for quiz selection
-                                    function handleQuizSelection(option) {
+                                    function handleQuizSelection(option, $currentForm) {
                                         console.log('Quiz selection triggered for option:', option);
 
-                                        // Check if quiz is already answered (disabled)
-                                        if ($('#quiz-form').hasClass('quiz-answered')) {
+                                        // Check if this specific quiz form is already answered
+                                        if ($currentForm.hasClass('quiz-answered')) {
                                             console.log('Quiz already answered, ignoring click');
                                             return;
                                         }
@@ -515,15 +520,15 @@
                                         if (option) {
                                             console.log('Calling choose() with option:', option);
                                             
-                                            // Disable the quiz form immediately to prevent multiple clicks
-                                            $('#quiz-form').addClass('quiz-answered');
-                                            $('#quiz-form .ui.radio.checkbox').addClass('disabled');
-                                            $('#quiz-form input[type="radio"]').prop('disabled', true);
+                                            // Disable only the current quiz form to prevent multiple clicks
+                                            $currentForm.addClass('quiz-answered');
+                                            $currentForm.find('.ui.radio.checkbox').addClass('disabled');
+                                            $currentForm.find('input[type="radio"]').prop('disabled', true);
                                             
                                             // Visual feedback for selected option
-                                            $('#quiz-form .ui.radio.checkbox').removeClass('checked');
-                                            $('#quiz-form input[value="' + option + '"]').prop('checked', true);
-                                            $('#quiz-form input[value="' + option + '"]').closest('.ui.radio.checkbox').addClass('checked');
+                                            $currentForm.find('.ui.radio.checkbox').removeClass('checked');
+                                            $currentForm.find('input[value="' + option + '"]').prop('checked', true);
+                                            $currentForm.find('input[value="' + option + '"]').closest('.ui.radio.checkbox').addClass('checked');
                                             
                                             choose(option);
 
@@ -541,11 +546,12 @@
                                         }
                                     }
 
-                                    // Unified event handling for all devices
-                                    $('#quiz-form .ui.radio.checkbox').each(function() {
+                                    // Unified event handling for all devices - target the current quiz form specifically
+                                    $(currentQuizFormId + ' .ui.radio.checkbox').each(function() {
                                         var $checkbox = $(this);
                                         var $input = $checkbox.find('input[type="radio"]');
                                         var $label = $checkbox.find('label');
+                                        var $currentForm = $(currentQuizFormId);
 
                                         // Remove any existing event handlers
                                         $checkbox.off('.quiz');
@@ -558,7 +564,7 @@
                                             e.stopPropagation();
                                             var option = $input.val();
                                             console.log('Quiz checkbox clicked for option:', option);
-                                            handleQuizSelection(option);
+                                            handleQuizSelection(option, $currentForm);
                                         });
 
                                         // Also handle direct input clicks
@@ -566,7 +572,7 @@
                                             e.stopPropagation();
                                             var option = $(this).val();
                                             console.log('Quiz input clicked for option:', option);
-                                            handleQuizSelection(option);
+                                            handleQuizSelection(option, $currentForm);
                                         });
 
                                         // Handle label clicks
@@ -575,7 +581,7 @@
                                             e.stopPropagation();
                                             var option = $input.val();
                                             console.log('Quiz label clicked for option:', option);
-                                            handleQuizSelection(option);
+                                            handleQuizSelection(option, $currentForm);
                                         });
                                     });
                                 }, 100);
