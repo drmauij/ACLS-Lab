@@ -790,32 +790,31 @@
 
 .help-trigger {
     position: fixed;
-    top: calc(50% + 40px);
-    right: -2px;
-    transform: translateY(-50%) rotate(-90deg);
-    transform-origin: center;
+    top: calc(50% + 80px);
+    right: 0;
+    transform: translateY(-50%);
     background: linear-gradient(145deg, #6b7280 0%, #4b5563 100%);
     color: white;
     border: none;
     border-radius: 8px 0 0 8px;
     padding: 1rem 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    z-index: 10001;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    display: block !important;
-    letter-spacing: 0.5px;
-    visibility: visible !important;
-    opacity: 1 !important;
     writing-mode: vertical-rl;
     text-orientation: mixed;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    z-index: 10000;
+    display: block !important;
+    transition: all 0.3s ease;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .help-trigger:hover {
     background: linear-gradient(145deg, #9ca3af 0%, #6b7280 100%);
-    transform: translateY(-50%) rotate(-90deg) translateX(-3px);
+    transform: translateY(-50%) translateX(-2px);
 }
 
 /* Force help trigger to always be visible on all screen sizes */
