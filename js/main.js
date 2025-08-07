@@ -972,7 +972,11 @@ function attachChangeHandlers() {
             const helpTrigger = $('.help-trigger');
 
             // Always show help trigger regardless of screen size or scenario state
-            helpTrigger.show().removeClass('hidden');
+            helpTrigger.show().removeClass('hidden').css({
+                'display': 'block',
+                'visibility': 'visible',
+                'opacity': '1'
+            });
 
             if ($(window).width() <= 768) {
                 // Show sidebar trigger on mobile when scenario is started
@@ -1471,6 +1475,16 @@ $(document).ready(function() {
             console.log("Instant mode enabled");
         }
     });
+
+    // Force help button to be visible on page load
+    setTimeout(() => {
+        $('.help-trigger').show().css({
+            'display': 'block !important',
+            'visibility': 'visible !important',
+            'opacity': '1 !important'
+        });
+        console.log('Help trigger forced to be visible');
+    }, 100);
 
     // Add modern UI enhancements
     initializeModernUI();

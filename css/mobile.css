@@ -811,7 +811,7 @@
 
 .help-trigger {
     position: fixed;
-    top: calc(50% + 25px);
+    top: calc(50% + 35px);
     right: -2px;
     transform: translateY(-50%) rotate(-90deg);
     transform-origin: center;
@@ -823,11 +823,13 @@
     font-size: 0.75rem;
     font-weight: 600;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 10001;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
-    display: block;
+    display: block !important;
     letter-spacing: 0.5px;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .help-trigger:hover {
@@ -835,15 +837,19 @@
     transform: translateY(-50%) rotate(-90deg) translateX(-3px);
 }
 
-/* Show help trigger on all screen sizes */
+/* Force help trigger to always be visible on all screen sizes */
 @media (min-width: 769px) {
     .help-trigger {
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 }
 
 @media (max-width: 768px) {
     .help-trigger {
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 }
