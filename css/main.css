@@ -1392,17 +1392,67 @@ code {
     border-radius: 8px !important;
     margin: 0 !important;
     font-size: 0.8rem !important;
+    width: 100% !important;
+    table-layout: auto !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
 }
 
 .sidebar-labor .ui.inverted.table thead th {
     background: rgba(15, 23, 42, 0.5) !important;
     padding: 0.5rem !important;
     font-size: 0.75rem !important;
+    color: #f9fafb !important;
+    font-weight: 600 !important;
+    border: none !important;
+    text-align: left !important;
+    display: table-cell !important;
+    vertical-align: middle !important;
+}
+
+.sidebar-labor .ui.inverted.table thead th:first-child {
+    width: 60% !important;
+}
+
+.sidebar-labor .ui.inverted.table thead th:last-child {
+    width: 40% !important;
+}
+
+.sidebar-labor .ui.inverted.table tbody tr {
+    background: transparent !important;
+    display: table-row !important;
 }
 
 .sidebar-labor .ui.inverted.table td {
-    padding: 0.4rem 0.5rem !important;
+    padding: 0.5rem !important;
     border-bottom: 1px solid rgba(30, 41, 59, 0.2) !important;
+    color: #d1d5db !important;
+    background: transparent !important;
+    border-left: none !important;
+    border-right: none !important;
+    text-align: left !important;
+    vertical-align: middle !important;
+    display: table-cell !important;
+    word-wrap: break-word !important;
+}
+
+.sidebar-labor .ui.inverted.table td:first-child {
+    width: 60% !important;
+    font-weight: 500 !important;
+}
+
+.sidebar-labor .ui.inverted.table td:last-child {
+    width: 40% !important;
+    color: #60a5fa !important;
+    font-weight: 600 !important;
+}
+
+.sidebar-labor .ui.inverted.table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+.sidebar-labor .ui.inverted.table tbody tr:hover td {
+    background: rgba(59, 130, 246, 0.05) !important;
 }
 
 /* App Logs Box */
@@ -1784,7 +1834,7 @@ code {
 
     #main-content {
         top: 65px !important;
-        bottom: 60px !important;
+        bottom: 80px !important;
         padding: 0.5rem;
         overflow-y: auto !important;
         overflow-x: hidden !important;
@@ -1793,7 +1843,7 @@ code {
 
     body.monitor-visible #main-content {
         top: 65px !important;
-        bottom: 60px !important;
+        bottom: 80px !important;
     }
 
     /* Sidebar mobile layout */
