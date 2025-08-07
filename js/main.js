@@ -637,8 +637,17 @@
                                             return;
                                         }
 
+                                        // Check if quiz is currently being processed
+                                        if ($currentForm.hasClass('quiz-processing')) {
+                                            console.log('Quiz currently being processed, ignoring click');
+                                            return;
+                                        }
+
                                         if (option) {
                                             console.log('Calling choose() with option:', option);
+
+                                            // Mark quiz as being processed to prevent multiple clicks
+                                            $currentForm.addClass('quiz-processing');
 
                                             // Visual feedback for selected option (but don't disable yet)
                                             $currentForm.find('.ui.radio.checkbox').removeClass('checked');
@@ -647,6 +656,11 @@
 
                                             // Call choose() function - it will handle disabling if answer is correct
                                             choose(option);
+
+                                            // Remove processing flag after a short delay
+                                            setTimeout(() => {
+                                                $currentForm.removeClass('quiz-processing');
+                                            }, 500);
 
                                             // Auto-scroll after quiz selection with multiple attempts
                                             setTimeout(() => {
@@ -739,6 +753,16 @@
         console.log('Choose function called with:', arg, 'Current step:', caseObj.stepCount);
         var optionsKey = ['a','b','c','d'];
 
+        // Find the quiz form that corresponds to this answer
+        var quizFormId = '#quiz-form-' + caseObj.stepCount;
+        var $quizForm = $(quizFormId);
+        
+        // Check if this quiz is already answered to prevent duplicate processing
+        if ($quizForm.hasClass('quiz-answered')) {
+            console.log('Quiz already answered, ignoring selection');
+            return;
+        }
+
         // The quiz was created in the previous step, but we're now in the next step
         // So we need to check the current step for the expected answer
         var currentStepObj = steps[caseObj.stepCount];
@@ -761,6 +785,11 @@
                 response = currentStepObj.msgOk || "Correct!";
                 printOut("<div class='alert alert-success my-1'>" + response + "</div>");
 
+                // Mark quiz as answered immediately to prevent duplicate processing
+                $quizForm.addClass('quiz-answered');
+                $quizForm.find('.ui.radio.checkbox').addClass('disabled');
+                $quizForm.find('input[type="radio"]').prop('disabled', true);
+
                 // Only advance step and disable quiz for correct answers
                 caseObj.stepCount++;
                 console.log('Quiz completed correctly - advancing to step:', caseObj.stepCount);
@@ -776,14 +805,6 @@
                 if (currentStepObj.msgAfter) {
                     printOut("<p class='mt-1'>" + processSidebarLinks(currentStepObj.msgAfter) + "</p>");
                 }
-
-                // Disable the quiz form only for correct answers
-                // The quiz form was created for the previous step (before stepCount was incremented)
-                var quizFormId = '#quiz-form-' + (caseObj.stepCount - 1);
-                var $quizForm = $(quizFormId);
-                $quizForm.addClass('quiz-answered');
-                $quizForm.find('.ui.radio.checkbox').addClass('disabled');
-                $quizForm.find('input[type="radio"]').prop('disabled', true);
 
             } else {
                 response = currentStepObj.msgKo || "Incorrect, try again...";
