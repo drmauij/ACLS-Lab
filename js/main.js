@@ -377,10 +377,10 @@
             autoScrollToBottom(document.getElementById('shell-panel'));
             autoScrollToBottom(document.getElementById('shell-panel-mobile'));
         };
-        
+
         // Immediate scroll
         scrollAttempt();
-        
+
         // Delayed scrolls to catch content that renders later
         setTimeout(scrollAttempt, 100);
         setTimeout(scrollAttempt, 300);
@@ -489,7 +489,7 @@
 
 								// response printout
                 printOut("<p class='mt-1'>"+response+"</p>");
-                
+
                 // Force scroll after main response
                 setTimeout(() => {
                     scrollToBottomAfterContent();
@@ -521,7 +521,7 @@
 								// Initialize radio checkboxes with unified handling
                                 setTimeout(function() {
                                     var currentQuizFormId = '#quiz-form-' + caseObj.stepCount;
-                                    
+
                                     // Helper function for quiz selection
                                     function handleQuizSelection(option, $currentForm) {
                                         console.log('Quiz selection triggered for option:', option);
@@ -534,28 +534,28 @@
 
                                         if (option) {
                                             console.log('Calling choose() with option:', option);
-                                            
+
                                             // Disable only the current quiz form to prevent multiple clicks
                                             $currentForm.addClass('quiz-answered');
                                             $currentForm.find('.ui.radio.checkbox').addClass('disabled');
                                             $currentForm.find('input[type="radio"]').prop('disabled', true);
-                                            
+
                                             // Visual feedback for selected option
                                             $currentForm.find('.ui.radio.checkbox').removeClass('checked');
                                             $currentForm.find('input[value="' + option + '"]').prop('checked', true);
                                             $currentForm.find('input[value="' + option + '"]').closest('.ui.radio.checkbox').addClass('checked');
-                                            
+
                                             choose(option);
 
                                             // Auto-scroll after quiz selection with multiple attempts
                                             setTimeout(() => {
                                                 scrollToBottomAfterContent();
                                             }, 300);
-                                            
+
                                             setTimeout(() => {
                                                 scrollToBottomAfterContent();
                                             }, 800);
-                                            
+
                                             setTimeout(() => {
                                                 scrollToBottomAfterContent();
                                             }, 1500);
@@ -637,7 +637,7 @@
     function choose(arg){
         console.log('Choose function called with:', arg, 'Current step:', caseObj.stepCount);
         var optionsKey = ['a','b','c','d'];
-        
+
         // The quiz was created in the previous step, but we're now in the next step
         // So we need to check the current step for the expected answer
         var currentStepObj = steps[caseObj.stepCount];
@@ -888,7 +888,7 @@ function attachChangeHandlers() {
         if (element) {
             // Force scroll to bottom regardless of height comparison
             element.scrollTop = element.scrollHeight;
-            
+
             // Additional check for mobile devices
             if (window.innerWidth <= 768) {
                 // Use smooth scrolling behavior for mobile
