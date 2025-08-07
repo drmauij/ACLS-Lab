@@ -499,7 +499,7 @@
 								// Initialize radio checkboxes with proper mobile handling
 								setTimeout(function() {
 								    var isMobile = window.innerWidth <= 768;
-								    
+
 								    $('#quiz-form .ui.radio.checkbox').each(function() {
 								        var $checkbox = $(this);
 								        var $input = $checkbox.find('input[type="radio"]');
@@ -508,38 +508,38 @@
 								        if (isMobile) {
 								            // For mobile: Use comprehensive touch handling
 								            $checkbox.off('.mobileQuiz');
-								            
+
 								            // Handle both click and touch events
 								            $checkbox.on('click.mobileQuiz', function(e) {
 								                e.preventDefault();
 								                e.stopPropagation();
 								                handleQuizSelection($checkbox, $input);
 								            });
-								            
+
 								            $checkbox.on('touchstart.mobileQuiz', function(e) {
 								                e.preventDefault();
 								                e.stopPropagation();
 								            });
-								            
+
 								            $checkbox.on('touchend.mobileQuiz', function(e) {
 								                e.preventDefault();
 								                e.stopPropagation();
 								                handleQuizSelection($checkbox, $input);
 								            });
-								            
+
 								            // Also handle direct input clicks
 								            $input.on('click.mobileQuiz', function(e) {
 								                e.stopPropagation();
 								                handleQuizSelection($checkbox, $input);
 								            });
-								            
+
 								            // Handle label clicks
 								            $label.on('click.mobileQuiz', function(e) {
 								                e.preventDefault();
 								                e.stopPropagation();
 								                handleQuizSelection($checkbox, $input);
 								            });
-								            
+
 								        } else {
 								            // For desktop: Use Semantic UI checkbox
 								            $checkbox.checkbox({
@@ -553,17 +553,17 @@
 								            });
 								        }
 								    });
-								    
+
 								    // Helper function for quiz selection
 								    function handleQuizSelection($checkbox, $input) {
 								        // Clear all selections first
 								        $('#quiz-form .ui.radio.checkbox').removeClass('checked');
 								        $('#quiz-form input[type="radio"]').prop('checked', false);
-								        
+
 								        // Select this option
 								        $checkbox.addClass('checked');
 								        $input.prop('checked', true);
-								        
+
 								        var option = $input.val();
 								        if (option) {
 								            choose(option);
