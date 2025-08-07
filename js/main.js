@@ -404,6 +404,19 @@
         }
     }
 
+    // Function to process markdown-style sidebar links
+    function processSidebarLinks(text) {
+        // Pattern to match [text](open-sidebar) or [text](open-sidebar:section)
+        const linkPattern = /\[([^\]]+)\]\(open-sidebar(?::([^)]+))?\)/g;
+        
+        return text.replace(linkPattern, function(match, linkText, section) {
+            // Default to monitor section if no specific section is provided
+            const targetSection = section || 'monitor';
+            
+            return `<a href="#" class="sidebar-link" data-section="${targetSection}" style="color: #60a5fa; text-decoration: underline; cursor: pointer;">${linkText}</a>`;
+        });
+    }
+
     // Helper function to ensure scrolling to the bottom after content has rendered
     function scrollToBottomAfterContent() {
         // Function to scroll specific element
@@ -547,7 +560,10 @@
 
                 calledOptions = []; // clear the calledOptions array for this step
 
-								// response printout
+								// Process markdown-style sidebar links before printing
+                response = processSidebarLinks(response);
+                
+                // response printout
                 printOut("<p class='mt-1'>"+response+"</p>");
 
                 // Force scroll after main response
@@ -875,6 +891,7 @@ function attachChangeHandlers() {
         // Remove any existing event handlers to prevent duplicates
         $(document).off('click.sidebar');
         $(document).off('keydown.sidebar');
+        $(document).off('click.sidebarLink');
 
         // Toggle sidebar on mobile - use event delegation
         $(document).on('click.sidebar', '.sidebar-trigger', function(e) {
@@ -916,6 +933,42 @@ function attachChangeHandlers() {
             if (e.key === 'Escape' && sidebar.hasClass('active')) {
                 sidebar.removeClass('active');
                 sidebarOverlay.removeClass('active').fadeOut(300);
+            }
+        });
+
+        // Handle sidebar links in content
+        $(document).on('click.sidebarLink', '.sidebar-link', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const section = $(this).data('section') || 'monitor';
+            
+            // Only work on mobile/tablet devices
+            if ($(window).width() <= 768) {
+                console.log('Sidebar link clicked - opening sidebar to section:', section);
+                sidebar.addClass('active');
+                sidebarOverlay.addClass('active').show();
+                
+                // Show the appropriate section content
+                if (section === 'monitor') {
+                    $('.sidebar-monitor').show();
+                    $('.sidebar-log').hide();
+                } else if (section === 'log') {
+                    $('.sidebar-monitor').hide();
+                    $('.sidebar-log').show();
+                } else {
+                    // Default to showing both
+                    $('.sidebar-monitor').show();
+                    $('.sidebar-log').show();
+                }
+                
+                // Add a small delay to ensure content is visible before scrolling
+                setTimeout(() => {
+                    const targetElement = $('.sidebar-' + section);
+                    if (targetElement.length > 0) {
+                        targetElement[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 100);
             }
         });
 
