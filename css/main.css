@@ -67,29 +67,17 @@ div:has(.ui.loader):after {
     font-size: 1em !important;
 }
 
-/* Ensure text containers don't inherit any loader styles and maintain stable layout */
+/* Ensure text containers don't inherit any loader styles */
 .text-light {
     position: relative !important;
-    background: transparent !important;
-    display: flex !important;
-    align-items: flex-start !important;
-    line-height: 1.6 !important;
-    min-height: 1.6em !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
 }
 
-/* Prevent text from shifting during icon changes */
-.text-light .step-icon {
-    margin-top: 0.1em !important;
-    flex-shrink: 0 !important;
-}
-
-/* Ensure text content maintains stable positioning */
-.text-light > span:not(.step-icon) {
-    flex: 1 !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
+/* Prevent text-light elements from showing loader pseudo-elements */
+.text-light:not(.ui.loader):before,
+.text-light:not(.ui.loader):after {
+    display: none !important;
+    content: none !important;
+    animation: none !important;
 }
 
 /* Simple step icon styling */
@@ -337,7 +325,6 @@ h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word !important;
     cursor: pointer !important;
     padding-left: 1.85714em !important;
-    transition: none !important;
 }
 
 .quiz-option label:hover {
@@ -366,17 +353,6 @@ h1, h2, h3, h4, h5, h6 {
 .ui.radio.checkbox:hover label:before {
     background: rgba(75, 85, 99, 0.5) !important;
     border-color: #9ca3af !important;
-    transition: none !important;
-}
-
-/* Stable hover state without transitions */
-.quiz-option:hover {
-    background: rgba(59, 130, 246, 0.15) !important;
-    border-color: rgba(59, 130, 246, 0.4) !important;
-}
-
-.quiz-option:hover label {
-    color: #ffffff !important;
 }
 
 /* Mobile-specific quiz adjustments */
@@ -384,22 +360,11 @@ h1, h2, h3, h4, h5, h6 {
     .quiz-option {
         margin: 0.5rem 0 !important;
         padding: 1rem !important;
-        transition: none !important;
     }
 
     .quiz-option label {
         font-size: 0.9rem !important;
         line-height: 1.4 !important;
-        transition: none !important;
-    }
-    
-    .quiz-option:hover {
-        background: rgba(59, 130, 246, 0.15) !important;
-        border-color: rgba(59, 130, 246, 0.4) !important;
-    }
-
-    .quiz-option:hover label {
-        color: #ffffff !important;
     }
 }
 
@@ -2172,22 +2137,8 @@ code {
     background: linear-gradient(145deg, #4b5563, #6b7280);
 }
 
-/* Enhanced animations and transitions */
-*:not(.quiz-option):not(.quiz-option *):not(.ui.radio.checkbox):not(.ui.radio.checkbox *) {
+/* Enhanced animations and transitions */* {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Specifically disable transitions for quiz elements */
-.quiz-option,
-.quiz-option *,
-.ui.radio.checkbox,
-.ui.radio.checkbox *,
-.ui.radio.checkbox .box:before,
-.ui.radio.checkbox label:before,
-.ui.radio.checkbox .box:after,
-.ui.radio.checkbox label:after {
-    transition: none !important;
-    animation: none !important;
 }
 
 /* Loading animations */

@@ -368,57 +368,38 @@
             $(response).appendTo("#shell-panel").hide().toggle("highlight", {color: 'white'}, 600);
         }
 
-        // Force immediate scroll for both desktop and mobile with padding
+        // Force immediate scroll for both desktop and mobile
         const shellPanel = document.getElementById('shell-panel');
         const shellPanelMobile = document.getElementById('shell-panel-mobile');
 
-        // Helper function to scroll with padding
-        const scrollWithPadding = (element) => {
-            if (element) {
-                const targetScrollTop = element.scrollHeight - element.clientHeight + 10;
-                element.scrollTop = Math.max(0, targetScrollTop);
-            }
-        };
-
         if (shellPanel) {
-            scrollWithPadding(shellPanel);
+            shellPanel.scrollTop = shellPanel.scrollHeight;
         }
 
         // Update mobile content and scroll
         if (window.innerWidth <= 768 && shellPanelMobile) {
             shellPanelMobile.innerHTML = shellPanel.innerHTML;
-            scrollWithPadding(shellPanelMobile);
+            shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
         }
 
-        // Additional jQuery animation for smooth scrolling fallback with padding
-        const targetScrollTop = $('#shell-panel')[0].scrollHeight - $('#shell-panel')[0].clientHeight + 10;
-        const targetScrollTopMobile = $('#shell-panel-mobile')[0] ? $('#shell-panel-mobile')[0].scrollHeight - $('#shell-panel-mobile')[0].clientHeight + 10 : 0;
-        
-        $('#shell-panel').animate({"scrollTop": Math.max(0, targetScrollTop)}, "fast");
-        $('#shell-panel-mobile').animate({"scrollTop": Math.max(0, targetScrollTopMobile)}, "fast");
+        // Additional jQuery animation for smooth scrolling fallback
+        $('#shell-panel').animate({"scrollTop": $('#shell-panel')[0].scrollHeight}, "fast");
+        $('#shell-panel-mobile').animate({"scrollTop": $('#shell-panel-mobile')[0].scrollHeight}, "fast");
     }
 
     // Auto-scroll function for shell panels (global scope)
     function autoScrollToBottom(element) {
         if (element) {
-            // Calculate scroll position with extra padding (10px)
-            const targetScrollTop = element.scrollHeight - element.clientHeight + 10;
-            
-            // Force scroll to bottom with padding
-            element.scrollTop = Math.max(0, targetScrollTop);
+            // Force scroll to bottom regardless of height comparison
+            element.scrollTop = element.scrollHeight;
 
             // Additional check for mobile devices
             if (window.innerWidth <= 768) {
-                // Use smooth scrolling behavior for mobile with padding
+                // Use smooth scrolling behavior for mobile
                 element.scrollTo({
-                    top: Math.max(0, targetScrollTop),
+                    top: element.scrollHeight,
                     behavior: 'smooth'
                 });
-                
-                // Force another scroll attempt after smooth scroll completes
-                setTimeout(() => {
-                    element.scrollTop = Math.max(0, targetScrollTop);
-                }, 300);
             }
         }
     }
@@ -438,20 +419,16 @@
 
     // Helper function to ensure scrolling to the bottom after content has rendered
     function scrollToBottomAfterContent() {
-        // Function to scroll specific element with padding
+        // Function to scroll specific element
         const scrollElement = (element) => {
             if (element) {
-                // Calculate target scroll position with 10px padding
-                const targetScrollTop = element.scrollHeight - element.clientHeight + 10;
-                const finalScrollTop = Math.max(0, targetScrollTop);
-                
-                // Force scroll to bottom with padding
-                element.scrollTop = finalScrollTop;
+                // Force scroll to bottom with smooth behavior
+                element.scrollTop = element.scrollHeight;
 
                 // Also try using scrollTo for better mobile support
                 if (element.scrollTo) {
                     element.scrollTo({
-                        top: finalScrollTop,
+                        top: element.scrollHeight,
                         behavior: 'smooth'
                     });
                 }
@@ -477,16 +454,10 @@
         requestAnimationFrame(() => {
             scrollAttempt();
 
-            // Additional delayed scrolls for complex content with better mobile timing
+            // Additional delayed scrolls for complex content
             setTimeout(scrollAttempt, 100);
             setTimeout(scrollAttempt, 300);
             setTimeout(scrollAttempt, 600);
-            
-            // Extra attempts for mobile devices
-            if (window.innerWidth <= 768) {
-                setTimeout(scrollAttempt, 800);
-                setTimeout(scrollAttempt, 1000);
-            }
         });
     }
 
@@ -637,17 +608,8 @@
                                             return;
                                         }
 
-                                        // Check if quiz is currently being processed
-                                        if ($currentForm.hasClass('quiz-processing')) {
-                                            console.log('Quiz currently being processed, ignoring click');
-                                            return;
-                                        }
-
                                         if (option) {
                                             console.log('Calling choose() with option:', option);
-
-                                            // Mark quiz as being processed to prevent multiple clicks
-                                            $currentForm.addClass('quiz-processing');
 
                                             // Visual feedback for selected option (but don't disable yet)
                                             $currentForm.find('.ui.radio.checkbox').removeClass('checked');
@@ -656,11 +618,6 @@
 
                                             // Call choose() function - it will handle disabling if answer is correct
                                             choose(option);
-
-                                            // Remove processing flag after a short delay
-                                            setTimeout(() => {
-                                                $currentForm.removeClass('quiz-processing');
-                                            }, 500);
 
                                             // Auto-scroll after quiz selection with multiple attempts
                                             setTimeout(() => {
@@ -691,19 +648,10 @@
 
                                         // Add unified click handler to the entire checkbox container
                                         $checkbox.on('click.quiz', function(e) {
-                                            // Don't prevent default - let the radio button work normally
+                                            e.preventDefault();
                                             e.stopPropagation();
                                             var option = $input.val();
                                             console.log('Quiz checkbox clicked for option:', option);
-                                            
-                                            // Ensure the radio button gets selected
-                                            $input.prop('checked', true);
-                                            $checkbox.addClass('checked');
-                                            
-                                            // Remove checked class from siblings
-                                            $currentForm.find('.ui.radio.checkbox').not($checkbox).removeClass('checked');
-                                            $currentForm.find('input[type="radio"]').not($input).prop('checked', false);
-                                            
                                             handleQuizSelection(option, $currentForm);
                                         });
 
@@ -712,30 +660,15 @@
                                             e.stopPropagation();
                                             var option = $(this).val();
                                             console.log('Quiz input clicked for option:', option);
-                                            
-                                            // Ensure proper visual state
-                                            $checkbox.addClass('checked');
-                                            $currentForm.find('.ui.radio.checkbox').not($checkbox).removeClass('checked');
-                                            $currentForm.find('input[type="radio"]').not($(this)).prop('checked', false);
-                                            
                                             handleQuizSelection(option, $currentForm);
                                         });
 
                                         // Handle label clicks
                                         $label.on('click.quiz', function(e) {
-                                            // Don't prevent default - let the label work normally with its radio button
+                                            e.preventDefault();
                                             e.stopPropagation();
                                             var option = $input.val();
                                             console.log('Quiz label clicked for option:', option);
-                                            
-                                            // Ensure the radio button gets selected
-                                            $input.prop('checked', true);
-                                            $checkbox.addClass('checked');
-                                            
-                                            // Remove checked class from siblings
-                                            $currentForm.find('.ui.radio.checkbox').not($checkbox).removeClass('checked');
-                                            $currentForm.find('input[type="radio"]').not($input).prop('checked', false);
-                                            
                                             handleQuizSelection(option, $currentForm);
                                         });
                                     });
@@ -777,16 +710,6 @@
         console.log('Choose function called with:', arg, 'Current step:', caseObj.stepCount);
         var optionsKey = ['a','b','c','d'];
 
-        // Find the quiz form that corresponds to this answer
-        var quizFormId = '#quiz-form-' + caseObj.stepCount;
-        var $quizForm = $(quizFormId);
-        
-        // Check if this quiz is already answered to prevent duplicate processing
-        if ($quizForm.hasClass('quiz-answered')) {
-            console.log('Quiz already answered, ignoring selection');
-            return;
-        }
-
         // The quiz was created in the previous step, but we're now in the next step
         // So we need to check the current step for the expected answer
         var currentStepObj = steps[caseObj.stepCount];
@@ -809,11 +732,6 @@
                 response = currentStepObj.msgOk || "Correct!";
                 printOut("<div class='alert alert-success my-1'>" + response + "</div>");
 
-                // Mark quiz as answered immediately to prevent duplicate processing
-                $quizForm.addClass('quiz-answered');
-                $quizForm.find('.ui.radio.checkbox').addClass('disabled');
-                $quizForm.find('input[type="radio"]').prop('disabled', true);
-
                 // Only advance step and disable quiz for correct answers
                 caseObj.stepCount++;
                 console.log('Quiz completed correctly - advancing to step:', caseObj.stepCount);
@@ -829,6 +747,14 @@
                 if (currentStepObj.msgAfter) {
                     printOut("<p class='mt-1'>" + processSidebarLinks(currentStepObj.msgAfter) + "</p>");
                 }
+
+                // Disable the quiz form only for correct answers
+                // The quiz form was created for the previous step (before stepCount was incremented)
+                var quizFormId = '#quiz-form-' + (caseObj.stepCount - 1);
+                var $quizForm = $(quizFormId);
+                $quizForm.addClass('quiz-answered');
+                $quizForm.find('.ui.radio.checkbox').addClass('disabled');
+                $quizForm.find('input[type="radio"]').prop('disabled', true);
 
             } else {
                 response = currentStepObj.msgKo || "Incorrect, try again...";
