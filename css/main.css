@@ -1617,6 +1617,34 @@ code {
     transform: translateY(-50%) translateX(-2px);
 }
 
+/* Help trigger button */
+.help-trigger {
+    position: fixed;
+    top: calc(50% + 80px);
+    right: 0;
+    transform: translateY(-50%);
+    background: linear-gradient(145deg, #6b7280 0%, #4b5563 100%);
+    color: white;
+    border: none;
+    border-radius: 8px 0 0 8px;
+    padding: 1rem 0.5rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    z-index: 9999;
+    display: block;
+    transition: all 0.3s ease;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+}
+
+.help-trigger:hover {
+    background: linear-gradient(145deg, #5b6470 0%, #374151 100%);
+    transform: translateY(-50%) translateX(-2px);
+}
+
 /* Show trigger on mobile when scenario is active */
 @media (max-width: 768px) {
     body.monitor-visible .sidebar-trigger {

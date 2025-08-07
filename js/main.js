@@ -969,15 +969,19 @@ function attachChangeHandlers() {
         // Show/hide sidebar trigger based on screen size and scenario state
         function updateSidebarVisibility() {
             if ($(window).width() <= 768) {
-                // Show trigger on mobile when scenario is started
+                // Show sidebar trigger on mobile when scenario is started
                 if ($('body').hasClass('monitor-visible')) {
                     sidebarTrigger.show().removeClass('hidden');
                     console.log('Sidebar trigger shown on mobile');
                 } else {
                     sidebarTrigger.hide().addClass('hidden');
                 }
+                // Help trigger is always visible on mobile
+                $('.help-trigger').show();
+                console.log('Help trigger forced to be visible');
             } else {
                 sidebarTrigger.hide();
+                $('.help-trigger').show(); // Keep help trigger visible on desktop too
                 sidebar.removeClass('active');
                 sidebarOverlay.removeClass('active').hide();
             }
