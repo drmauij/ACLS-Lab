@@ -726,44 +726,7 @@
         // Check if the current step has a choose property (expected answer)
         if (currentStepObj.choose) {
             console.log('Expected answer:', currentStepObj.choose, 'User answer:', arg);
-
-            // Check if answer is correct
-            var isCorrect = (currentStepObj.choose === arg || 
-                           (Array.isArray(currentStepObj.choose) && currentStepObj.choose.includes(arg)));
-
-            var response;
-            if (isCorrect) {
-                response = currentStepObj.msgOk || "Correct!";
-                printOut("<div class='alert alert-success my-1'>" + response + "</div>");
-            } else {
-                response = currentStepObj.msgKo || "Incorrect, but let's continue...";
-                printOut("<div class='alert alert-warning my-1'>" + response + "</div>");
-                caseObj.errorCount++;
-            }
-
-            // Process markdown-style sidebar links before printing
-            response = processSidebarLinks(response);
-
-            // Always advance to next step regardless of correct/incorrect answer
-            caseObj.stepCount++;
-            console.log('Quiz completed - advancing to step:', caseObj.stepCount);
-
-            // Execute any functions defined for this step
-            if (currentStepObj.callFunc) {
-                for (var funcName in currentStepObj.callFunc) {
-                    eval("" + funcName + "(" + currentStepObj.callFunc[funcName] + ")");
-                }
-            }
-
-            // Check for msgAfter content (additional message after quiz)
-            if (currentStepObj.msgAfter) {
-                printOut("<p class='mt-1'>" + processSidebarLinks(currentStepObj.msgAfter) + "</p>");
-            }
-
-            // Force scroll after quiz response
-            setTimeout(() => {
-                scrollToBottomAfterContent();
-            }, 200);
+            abstractStepHandler(optionsKey, currentStepObj.choose, arg);
         } else {
             console.log('Quiz step without choose option - treating as informational quiz, advancing step');
             // For quiz steps without choose option, just advance to next step
@@ -1122,13 +1085,7 @@ function attachChangeHandlers() {
         if (arg && caseObj && steps[caseObj.stepCount] && !processingAction) {
             processingAction = true;
             var stepObj = steps[caseObj.stepCount];
-            
-            // Check if this step has an action requirement
-            if (stepObj.action) {
-                abstractStepHandler(actionsKey, stepObj.action, arg);
-            } else {
-                console.log('Current step does not require an action, skipping');
-            }
+            abstractStepHandler(actionsKey, stepObj.action, arg);
 
             if($("#realtime-toggle").hasClass('active')){
                 $("#caseTimer").show();
@@ -1152,13 +1109,7 @@ function attachChangeHandlers() {
         if (arg && caseObj && steps[caseObj.stepCount] && !processingDrug) {
             processingDrug = true;
             var stepObj = steps[caseObj.stepCount];
-            
-            // Check if this step has a drug requirement
-            if (stepObj.give) {
-                abstractStepHandler(drugsKey, stepObj.give, arg);
-            } else {
-                console.log('Current step does not require a drug, skipping');
-            }
+            abstractStepHandler(drugsKey, stepObj.give, arg);
 
             // Reset processing flag after a short delay
             setTimeout(() => {
