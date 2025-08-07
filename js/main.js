@@ -367,7 +367,24 @@
         }else{ // standard print-out mit highlight!
             $(response).appendTo("#shell-panel").hide().toggle("highlight", {color: 'white'}, 600);
         }
+        
+        // Force immediate scroll for both desktop and mobile
+        const shellPanel = document.getElementById('shell-panel');
+        const shellPanelMobile = document.getElementById('shell-panel-mobile');
+        
+        if (shellPanel) {
+            shellPanel.scrollTop = shellPanel.scrollHeight;
+        }
+        
+        // Update mobile content and scroll
+        if (window.innerWidth <= 768 && shellPanelMobile) {
+            shellPanelMobile.innerHTML = shellPanel.innerHTML;
+            shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
+        }
+        
+        // Additional jQuery animation for smooth scrolling fallback
         $('#shell-panel').animate({"scrollTop": $('#shell-panel')[0].scrollHeight}, "fast");
+        $('#shell-panel-mobile').animate({"scrollTop": $('#shell-panel-mobile')[0].scrollHeight}, "fast");
     }
 
     // Auto-scroll function for shell panels (global scope)
@@ -389,20 +406,46 @@
 
     // Helper function to ensure scrolling to the bottom after content has rendered
     function scrollToBottomAfterContent() {
+        // Function to scroll specific element
+        const scrollElement = (element) => {
+            if (element) {
+                // Force scroll to bottom with smooth behavior
+                element.scrollTop = element.scrollHeight;
+                
+                // Also try using scrollTo for better mobile support
+                if (element.scrollTo) {
+                    element.scrollTo({
+                        top: element.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Force a repaint to ensure scroll takes effect
+                element.offsetHeight;
+            }
+        };
+
         // Multiple scroll attempts to ensure content is visible
         const scrollAttempt = () => {
-            autoScrollToBottom(document.getElementById('shell-panel'));
-            autoScrollToBottom(document.getElementById('shell-panel-mobile'));
+            const shellPanel = document.getElementById('shell-panel');
+            const shellPanelMobile = document.getElementById('shell-panel-mobile');
+            
+            scrollElement(shellPanel);
+            scrollElement(shellPanelMobile);
         };
 
         // Immediate scroll
         scrollAttempt();
 
-        // Delayed scrolls to catch content that renders later
-        setTimeout(scrollAttempt, 100);
-        setTimeout(scrollAttempt, 300);
-        setTimeout(scrollAttempt, 600);
-        setTimeout(scrollAttempt, 1000);
+        // Use requestAnimationFrame for better timing
+        requestAnimationFrame(() => {
+            scrollAttempt();
+            
+            // Additional delayed scrolls for complex content
+            setTimeout(scrollAttempt, 100);
+            setTimeout(scrollAttempt, 300);
+            setTimeout(scrollAttempt, 600);
+        });
     }
 
     // Command handler
@@ -916,34 +959,37 @@ function attachChangeHandlers() {
                 syncMobileContent();
 
                 // Auto-scroll when content is added to shell panels or log
-                        mutations.forEach(function(mutation) {
-                            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                                const target = mutation.target;
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                        const target = mutation.target;
 
-                                if (target.id === 'shell-panel' || target.closest('#shell-panel')) {
-                                    setTimeout(() => {
-                                        var shellPanel = document.getElementById('shell-panel');
-                                        var shellPanelMobile = document.getElementById('shell-panel-mobile');
-                                        if (shellPanel && shellPanel.scrollHeight > shellPanel.clientHeight) {
-                                            shellPanel.scrollTop = shellPanel.scrollHeight;
-                                        }
-                                        if (shellPanelMobile && shellPanelMobile.scrollHeight > shellPanelMobile.clientHeight) {
-                                            shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
-                                        }
-                                    }, 100);
+                        if (target.id === 'shell-panel' || target.closest('#shell-panel')) {
+                            // Force immediate scroll after content is added
+                            requestAnimationFrame(() => {
+                                const shellPanel = document.getElementById('shell-panel');
+                                const shellPanelMobile = document.getElementById('shell-panel-mobile');
+                                
+                                if (shellPanel) {
+                                    shellPanel.scrollTop = shellPanel.scrollHeight;
                                 }
+                                if (shellPanelMobile) {
+                                    shellPanelMobile.innerHTML = shellPanel.innerHTML;
+                                    shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
+                                }
+                            });
+                        }
 
-                                if (target.id === 'log' || target.closest('#log')) {
-                                    setTimeout(() => {
-                                        var logPanel = document.getElementById('log');
-                                        if (logPanel && logPanel.scrollHeight > logPanel.clientHeight) {
-                                            logPanel.scrollTop = logPanel.scrollHeight;
-                                        }
-                                    }, 100);
+                        if (target.id === 'log' || target.closest('#log')) {
+                            requestAnimationFrame(() => {
+                                const logPanel = document.getElementById('log');
+                                if (logPanel) {
+                                    logPanel.scrollTop = logPanel.scrollHeight;
                                 }
-                            }
-                        });
-            }, 250); // Throttle to 250ms
+                            });
+                        }
+                    }
+                });
+            }, 100); // Reduced throttle for faster response
         });
 
         const elementsToObserve = ['#shell-panel', '#shell-panel-mobile', '#monitor', '#log'];
@@ -952,8 +998,8 @@ function attachChangeHandlers() {
             if (element) {
                 observer.observe(element, {
                     childList: true,
-                    subtree: false,
-                    characterData: false
+                    subtree: true,
+                    characterData: true
                 });
             }
         });
