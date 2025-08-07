@@ -368,7 +368,7 @@
             $(response).appendTo("#shell-panel").hide().toggle("highlight", {color: 'white'}, 600);
         }
 
-        // Force Immediate scroll for both desktop and mobile with padding
+        // Force immediate scroll for both desktop and mobile with padding
         const shellPanel = document.getElementById('shell-panel');
         const shellPanelMobile = document.getElementById('shell-panel-mobile');
 
@@ -1468,24 +1468,6 @@ $(document).ready(function() {
 
     // Add modern UI enhancements
     initializeModernUI();
-
-    // Initialize help trigger click handler
-    $(document).off('click.helpTrigger').on('click.helpTrigger', '.help-trigger', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Help trigger clicked - opening demo.sopwise.ai');
-        window.open('https://demo.sopwise.ai', '_blank');
-    });
-
-    // Force help button to be visible on page load
-    setTimeout(() => {
-        $('.help-trigger').show().css({
-            'display': 'block !important',
-            'visibility': 'visible !important',
-            'opacity': '1 !important'
-        });
-        console.log('Help trigger forced to be visible');
-    }, 100);
 });
 
 function initializeModernUI() {
