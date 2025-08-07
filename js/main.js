@@ -393,7 +393,7 @@
         // Additional jQuery animation for smooth scrolling fallback with padding
         const targetScrollTop = $('#shell-panel')[0].scrollHeight - $('#shell-panel')[0].clientHeight + 10;
         const targetScrollTopMobile = $('#shell-panel-mobile')[0] ? $('#shell-panel-mobile')[0].scrollHeight - $('#shell-panel-mobile')[0].clientHeight + 10 : 0;
-        
+
         $('#shell-panel').animate({"scrollTop": Math.max(0, targetScrollTop)}, "fast");
         $('#shell-panel-mobile').animate({"scrollTop": Math.max(0, targetScrollTopMobile)}, "fast");
     }
@@ -403,7 +403,7 @@
         if (element) {
             // Calculate scroll position with extra padding (10px)
             const targetScrollTop = element.scrollHeight - element.clientHeight + 10;
-            
+
             // Force scroll to bottom with padding
             element.scrollTop = Math.max(0, targetScrollTop);
 
@@ -414,7 +414,7 @@
                     top: Math.max(0, targetScrollTop),
                     behavior: 'smooth'
                 });
-                
+
                 // Force another scroll attempt after smooth scroll completes
                 setTimeout(() => {
                     element.scrollTop = Math.max(0, targetScrollTop);
@@ -444,7 +444,7 @@
                 // Calculate target scroll position with 10px padding
                 const targetScrollTop = element.scrollHeight - element.clientHeight + 10;
                 const finalScrollTop = Math.max(0, targetScrollTop);
-                
+
                 // Force scroll to bottom with padding
                 element.scrollTop = finalScrollTop;
 
@@ -481,7 +481,7 @@
             setTimeout(scrollAttempt, 100);
             setTimeout(scrollAttempt, 300);
             setTimeout(scrollAttempt, 600);
-            
+
             // Extra attempts for mobile devices
             if (window.innerWidth <= 768) {
                 setTimeout(scrollAttempt, 800);
@@ -629,47 +629,84 @@
                                     var $currentForm = $(currentQuizFormId);
 
                                     // Initialize Semantic UI radio checkboxes properly
-                                    $(currentQuizFormId + ' .ui.radio.checkbox').checkbox();
+                                    // $(currentQuizFormId + ' .ui.radio.checkbox').checkbox(); // Removed original initialization
 
-                                    // Handle quiz selection with Semantic UI onChange event
-                                    $(currentQuizFormId + ' .ui.radio.checkbox').checkbox({
-                                        onChange: function() {
-                                            var $checkbox = $(this).closest('.ui.radio.checkbox');
-                                            var $input = $checkbox.find('input[type="radio"]');
-                                            var option = $input.val();
+                                    // Handle direct input clicks and changes for better mobile compatibility
+                                    $(currentQuizFormId + ' input[type="radio"]').on('click change', function(e) {
+                                        var $input = $(this);
+                                        var option = $input.val();
+                                        var $checkbox = $input.closest('.ui.radio.checkbox');
 
-                                            // Check if this specific quiz form is already answered
-                                            if ($currentForm.hasClass('quiz-answered')) {
-                                                console.log('Quiz already answered, ignoring selection');
-                                                return false;
-                                            }
+                                        console.log('Radio input clicked/changed for option:', option);
 
-                                            // Check if quiz is currently being processed
-                                            if ($currentForm.hasClass('quiz-processing')) {
-                                                console.log('Quiz currently being processed, ignoring selection');
-                                                return false;
-                                            }
-
-                                            if (option) {
-                                                console.log('Quiz selection triggered for option:', option);
-
-                                                // Mark quiz as being processed to prevent multiple clicks
-                                                $currentForm.addClass('quiz-processing');
-
-                                                // Call choose() function
-                                                choose(option);
-
-                                                // Remove processing flag after a short delay
-                                                setTimeout(() => {
-                                                    $currentForm.removeClass('quiz-processing');
-                                                }, 500);
-
-                                                // Auto-scroll after quiz selection
-                                                setTimeout(() => {
-                                                    scrollToBottomAfterContent();
-                                                }, 300);
-                                            }
+                                        // Check if this specific quiz form is already answered
+                                        if ($currentForm.hasClass('quiz-answered')) {
+                                            console.log('Quiz already answered, ignoring selection');
+                                            e.preventDefault();
+                                            return false;
                                         }
+
+                                        // Check if quiz is currently being processed
+                                        if ($currentForm.hasClass('quiz-processing')) {
+                                            console.log('Quiz currently being processed, ignoring selection');
+                                            e.preventDefault();
+                                            return false;
+                                        }
+
+                                        if (option) {
+                                            // Ensure this radio button is selected
+                                            $input.prop('checked', true);
+                                            $checkbox.addClass('checked');
+
+                                            // Deselect other radio buttons in this quiz
+                                            $currentForm.find('input[type="radio"]').not($input).prop('checked', false);
+                                            $currentForm.find('.ui.radio.checkbox').not($checkbox).removeClass('checked');
+
+                                            console.log('Quiz selection triggered for option:', option);
+
+                                            // Mark quiz as being processed to prevent multiple clicks
+                                            $currentForm.addClass('quiz-processing');
+
+                                            // Call choose() function
+                                            choose(option);
+
+                                            // Remove processing flag after a short delay
+                                            setTimeout(() => {
+                                                $currentForm.removeClass('quiz-processing');
+                                            }, 500);
+
+                                            // Auto-scroll after quiz selection
+                                            setTimeout(() => {
+                                                scrollToBottomAfterContent();
+                                            }, 300);
+                                        }
+                                    });
+
+                                    // Also handle label clicks for better compatibility
+                                    $(currentQuizFormId + ' .ui.radio.checkbox label').on('click', function(e) {
+                                        var $label = $(this);
+                                        var $checkbox = $label.closest('.ui.radio.checkbox');
+                                        var $input = $checkbox.find('input[type="radio"]');
+                                        var option = $input.val();
+
+                                        console.log('Quiz label clicked for option:', option);
+
+                                        // Check if this specific quiz form is already answered
+                                        if ($currentForm.hasClass('quiz-answered')) {
+                                            console.log('Quiz already answered, ignoring selection');
+                                            e.preventDefault();
+                                            return false;
+                                        }
+
+                                        // Check if quiz is currently being processed
+                                        if ($currentForm.hasClass('quiz-processing')) {
+                                            console.log('Quiz currently being processed, ignoring selection');
+                                            e.preventDefault();
+                                            return false;
+                                        }
+
+                                        // Trigger the input click to ensure proper handling
+                                        $input.trigger('click');
                                     });
                                 }, 100);
                 }
@@ -712,7 +749,7 @@
         // Find the quiz form that corresponds to this answer
         var quizFormId = '#quiz-form-' + caseObj.stepCount;
         var $quizForm = $(quizFormId);
-        
+
         // Check if this quiz is already answered to prevent duplicate processing
         if ($quizForm.hasClass('quiz-answered')) {
             console.log('Quiz already answered, ignoring selection');
