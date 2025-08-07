@@ -367,21 +367,21 @@
         }else{ // standard print-out mit highlight!
             $(response).appendTo("#shell-panel").hide().toggle("highlight", {color: 'white'}, 600);
         }
-        
+
         // Force immediate scroll for both desktop and mobile
         const shellPanel = document.getElementById('shell-panel');
         const shellPanelMobile = document.getElementById('shell-panel-mobile');
-        
+
         if (shellPanel) {
             shellPanel.scrollTop = shellPanel.scrollHeight;
         }
-        
+
         // Update mobile content and scroll
         if (window.innerWidth <= 768 && shellPanelMobile) {
             shellPanelMobile.innerHTML = shellPanel.innerHTML;
             shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
         }
-        
+
         // Additional jQuery animation for smooth scrolling fallback
         $('#shell-panel').animate({"scrollTop": $('#shell-panel')[0].scrollHeight}, "fast");
         $('#shell-panel-mobile').animate({"scrollTop": $('#shell-panel-mobile')[0].scrollHeight}, "fast");
@@ -408,11 +408,11 @@
     function processSidebarLinks(text) {
         // Pattern to match [text](open-sidebar) or [text](open-sidebar:section)
         const linkPattern = /\[([^\]]+)\]\(open-sidebar(?::([^)]+))?\)/g;
-        
+
         return text.replace(linkPattern, function(match, linkText, section) {
             // Default to monitor section if no specific section is provided
             const targetSection = section || 'monitor';
-            
+
             return `<a href="#" class="sidebar-link" data-section="${targetSection}" style="color: #60a5fa; text-decoration: underline; cursor: pointer;">${linkText}</a>`;
         });
     }
@@ -424,7 +424,7 @@
             if (element) {
                 // Force scroll to bottom with smooth behavior
                 element.scrollTop = element.scrollHeight;
-                
+
                 // Also try using scrollTo for better mobile support
                 if (element.scrollTo) {
                     element.scrollTo({
@@ -432,7 +432,7 @@
                         behavior: 'smooth'
                     });
                 }
-                
+
                 // Force a repaint to ensure scroll takes effect
                 element.offsetHeight;
             }
@@ -442,7 +442,7 @@
         const scrollAttempt = () => {
             const shellPanel = document.getElementById('shell-panel');
             const shellPanelMobile = document.getElementById('shell-panel-mobile');
-            
+
             scrollElement(shellPanel);
             scrollElement(shellPanelMobile);
         };
@@ -453,7 +453,7 @@
         // Use requestAnimationFrame for better timing
         requestAnimationFrame(() => {
             scrollAttempt();
-            
+
             // Additional delayed scrolls for complex content
             setTimeout(scrollAttempt, 100);
             setTimeout(scrollAttempt, 300);
@@ -562,7 +562,7 @@
 
 								// Process markdown-style sidebar links before printing
                 response = processSidebarLinks(response);
-                
+
                 // response printout
                 printOut("<p class='mt-1'>"+response+"</p>");
 
@@ -940,15 +940,15 @@ function attachChangeHandlers() {
         $(document).on('click.sidebarLink', '.sidebar-link', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             const section = $(this).data('section') || 'monitor';
-            
+
             // Only work on mobile/tablet devices
             if ($(window).width() <= 768) {
                 console.log('Sidebar link clicked - opening sidebar to section:', section);
                 sidebar.addClass('active');
                 sidebarOverlay.addClass('active').show();
-                
+
                 // Show the appropriate section content
                 if (section === 'monitor') {
                     $('.sidebar-monitor').show();
@@ -961,7 +961,7 @@ function attachChangeHandlers() {
                     $('.sidebar-monitor').show();
                     $('.sidebar-log').show();
                 }
-                
+
                 // Add a small delay to ensure content is visible before scrolling
                 setTimeout(() => {
                     const targetElement = $('.sidebar-' + section);
@@ -996,7 +996,7 @@ function attachChangeHandlers() {
         }
     });
 
-    
+
 
     // Observe changes to shell panel, monitor, and log
     if (typeof MutationObserver !== 'undefined' && !window.observerAttached) {
@@ -1021,7 +1021,7 @@ function attachChangeHandlers() {
                             requestAnimationFrame(() => {
                                 const shellPanel = document.getElementById('shell-panel');
                                 const shellPanelMobile = document.getElementById('shell-panel-mobile');
-                                
+
                                 if (shellPanel) {
                                     shellPanel.scrollTop = shellPanel.scrollHeight;
                                 }
