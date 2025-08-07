@@ -726,7 +726,37 @@
         // Check if the current step has a choose property (expected answer)
         if (currentStepObj.choose) {
             console.log('Expected answer:', currentStepObj.choose, 'User answer:', arg);
-            abstractStepHandler(optionsKey, currentStepObj.choose, arg);
+            
+            // Check if answer is correct
+            var isCorrect = (currentStepObj.choose === arg || 
+                           (Array.isArray(currentStepObj.choose) && currentStepObj.choose.includes(arg)));
+            
+            var response;
+            if (isCorrect) {
+                response = currentStepObj.msgOk || "Correct!";
+                printOut("<div class='alert alert-success my-1'>" + response + "</div>");
+            } else {
+                response = currentStepObj.msgKo || "Incorrect, but let's continue...";
+                printOut("<div class='alert alert-warning my-1'>" + response + "</div>");
+                caseObj.errorCount++;
+            }
+            
+            // Always advance to next step regardless of correct/incorrect answer
+            caseObj.stepCount++;
+            console.log('Quiz completed - advancing to step:', caseObj.stepCount);
+            
+            // Execute any functions defined for this step
+            if (currentStepObj.callFunc) {
+                for (var funcName in currentStepObj.callFunc) {
+                    eval("" + funcName + "(" + currentStepObj.callFunc[funcName] + ")");
+                }
+            }
+            
+            // Force scroll after quiz response
+            setTimeout(() => {
+                scrollToBottomAfterContent();
+            }, 200);
+            
         } else {
             console.log('Quiz step without choose option - treating as informational quiz, advancing step');
             // For quiz steps without choose option, just advance to next step
