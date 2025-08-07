@@ -470,7 +470,21 @@
                 }
 
                 response = stepObj.msgOk;
-                caseObj.stepCount++;
+
+                // For quiz steps, only increment after correct answer
+                if (stepObj.quiz && stepObj.choose) {
+                    // This is a quiz step - only increment if correct
+                    if (stepObj.choose === arg) {
+                        caseObj.stepCount++;
+                        console.log('Quiz correct - advancing to step:', caseObj.stepCount);
+                    } else {
+                        console.log('Quiz incorrect - staying on step:', caseObj.stepCount);
+                    }
+                } else {
+                    // Regular action/drug step - increment normally
+                    caseObj.stepCount++;
+                    console.log('Regular step - advancing to step:', caseObj.stepCount);
+                }
                 calledOptions = []; // clear the calledOptions array for this step
 
 								// response printout
@@ -619,8 +633,21 @@
 
     // Quiz
     function choose(arg){
+        console.log('Choose function called with:', arg, 'Current step:', caseObj.stepCount);
         var optionsKey = ['a','b','c','d'];
         var stepObj = steps[caseObj.stepCount];
+
+        if (!stepObj) {
+            console.error('No step object found for step:', caseObj.stepCount);
+            return;
+        }
+
+        if (!stepObj.choose) {
+            console.warn('No choose option defined for current step:', caseObj.stepCount);
+            return;
+        }
+
+        console.log('Expected answer:', stepObj.choose, 'User answer:', arg);
         abstractStepHandler(optionsKey, stepObj.choose, arg);
     }
 
