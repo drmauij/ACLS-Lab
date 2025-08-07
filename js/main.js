@@ -471,22 +471,16 @@
 
                 response = stepObj.msgOk;
 
-                // Only increment step counter once - check if this is a quiz step
-                if (stepObj.quiz && stepObj.choose) {
-                    // This is a quiz step with choose option - only increment if correct answer
-                    if (stepObj.choose === arg) {
-                        caseObj.stepCount++;
-                        console.log('Quiz correct - advancing to step:', caseObj.stepCount);
-                    } else {
-                        console.log('Quiz incorrect - staying on step:', caseObj.stepCount);
-                    }
-                } else if (!stepObj.quiz) {
+                // Handle step increment based on step type
+                if (stepObj.quiz) {
+                    // Quiz steps are handled by the choose() function, don't increment here
+                    console.log('Quiz step handled by choose() function');
+                } else {
                     // Regular action/drug step (not a quiz) - increment normally
                     caseObj.stepCount++;
                     console.log('Regular step - advancing to step:', caseObj.stepCount);
                 }
-                // Note: For quiz steps without choose option, don't increment here as it will be handled elsewhere
-                
+
                 calledOptions = []; // clear the calledOptions array for this step
 
 								// response printout
@@ -637,20 +631,29 @@
     function choose(arg){
         console.log('Choose function called with:', arg, 'Current step:', caseObj.stepCount);
         var optionsKey = ['a','b','c','d'];
-        var stepObj = steps[caseObj.stepCount];
+        var currentStepObj = steps[caseObj.stepCount];
+        var nextStepObj = steps[caseObj.stepCount + 1];
 
-        if (!stepObj) {
+        if (!currentStepObj) {
             console.error('No step object found for step:', caseObj.stepCount);
             return;
         }
 
-        if (!stepObj.choose) {
-            console.warn('No choose option defined for current step:', caseObj.stepCount);
+        if (!currentStepObj.quiz) {
+            console.warn('No quiz defined for current step:', caseObj.stepCount);
             return;
         }
 
-        console.log('Expected answer:', stepObj.choose, 'User answer:', arg);
-        abstractStepHandler(optionsKey, stepObj.choose, arg);
+        if (!nextStepObj || !nextStepObj.choose) {
+            console.log('Quiz step without choose option in next step - treating as informational quiz, advancing step');
+            // For quiz steps without choose option in next step, just advance to next step
+            caseObj.stepCount++;
+            printOut("<p class='mt-1'>Selected option: " + arg + "</p>");
+            return;
+        }
+
+        console.log('Expected answer (from next step):', nextStepObj.choose, 'User answer:', arg);
+        abstractStepHandler(optionsKey, nextStepObj.choose, arg);
     }
 
 var dataLoaded = {
