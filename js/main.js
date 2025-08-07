@@ -471,15 +471,9 @@
 
                 response = stepObj.msgOk;
 
-                // Handle step increment based on step type
-                if (stepObj.quiz) {
-                    // Quiz steps are handled by the choose() function, don't increment here
-                    console.log('Quiz step handled by choose() function');
-                } else {
-                    // Regular action/drug step (not a quiz) - increment normally
-                    caseObj.stepCount++;
-                    console.log('Regular step - advancing to step:', caseObj.stepCount);
-                }
+                // Always increment step counter for correct answers
+                caseObj.stepCount++;
+                console.log('Correct answer - advancing to step:', caseObj.stepCount);
 
                 calledOptions = []; // clear the calledOptions array for this step
 
