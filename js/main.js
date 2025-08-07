@@ -471,20 +471,22 @@
 
                 response = stepObj.msgOk;
 
-                // For quiz steps, only increment after correct answer
+                // Only increment step counter once - check if this is a quiz step
                 if (stepObj.quiz && stepObj.choose) {
-                    // This is a quiz step - only increment if correct
+                    // This is a quiz step with choose option - only increment if correct answer
                     if (stepObj.choose === arg) {
                         caseObj.stepCount++;
                         console.log('Quiz correct - advancing to step:', caseObj.stepCount);
                     } else {
                         console.log('Quiz incorrect - staying on step:', caseObj.stepCount);
                     }
-                } else {
-                    // Regular action/drug step - increment normally
+                } else if (!stepObj.quiz) {
+                    // Regular action/drug step (not a quiz) - increment normally
                     caseObj.stepCount++;
                     console.log('Regular step - advancing to step:', caseObj.stepCount);
                 }
+                // Note: For quiz steps without choose option, don't increment here as it will be handled elsewhere
+                
                 calledOptions = []; // clear the calledOptions array for this step
 
 								// response printout
