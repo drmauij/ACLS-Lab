@@ -611,16 +611,12 @@
                                         if (option) {
                                             console.log('Calling choose() with option:', option);
 
-                                            // Disable only the current quiz form to prevent multiple clicks
-                                            $currentForm.addClass('quiz-answered');
-                                            $currentForm.find('.ui.radio.checkbox').addClass('disabled');
-                                            $currentForm.find('input[type="radio"]').prop('disabled', true);
-
-                                            // Visual feedback for selected option
+                                            // Visual feedback for selected option (but don't disable yet)
                                             $currentForm.find('.ui.radio.checkbox').removeClass('checked');
                                             $currentForm.find('input[value="' + option + '"]').prop('checked', true);
                                             $currentForm.find('input[value="' + option + '"]').closest('.ui.radio.checkbox').addClass('checked');
 
+                                            // Call choose() function - it will handle disabling if answer is correct
                                             choose(option);
 
                                             // Auto-scroll after quiz selection with multiple attempts
@@ -753,11 +749,12 @@
                 }
 
                 // Disable the quiz form only for correct answers
-                var currentQuizFormId = '#quiz-form-' + caseObj.stepCount;
-                var $currentForm = $(currentQuizFormId);
-                $currentForm.addClass('quiz-answered');
-                $currentForm.find('.ui.radio.checkbox').addClass('disabled');
-                $currentForm.find('input[type="radio"]').prop('disabled', true);
+                // The quiz form was created for the previous step (before stepCount was incremented)
+                var quizFormId = '#quiz-form-' + (caseObj.stepCount - 1);
+                var $quizForm = $(quizFormId);
+                $quizForm.addClass('quiz-answered');
+                $quizForm.find('.ui.radio.checkbox').addClass('disabled');
+                $quizForm.find('input[type="radio"]').prop('disabled', true);
 
             } else {
                 response = currentStepObj.msgKo || "Incorrect, try again...";
