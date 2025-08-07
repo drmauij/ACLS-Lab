@@ -372,10 +372,20 @@
 
     // Helper function to ensure scrolling to the bottom after content has rendered
     function scrollToBottomAfterContent() {
-        setTimeout(() => {
+        // Multiple scroll attempts to ensure content is visible
+        const scrollAttempt = () => {
             autoScrollToBottom(document.getElementById('shell-panel'));
             autoScrollToBottom(document.getElementById('shell-panel-mobile'));
-        }, 1000); // Increased delay to ensure content is rendered
+        };
+        
+        // Immediate scroll
+        scrollAttempt();
+        
+        // Delayed scrolls to catch content that renders later
+        setTimeout(scrollAttempt, 100);
+        setTimeout(scrollAttempt, 300);
+        setTimeout(scrollAttempt, 600);
+        setTimeout(scrollAttempt, 1000);
     }
 
     // Command handler
@@ -479,6 +489,11 @@
 
 								// response printout
                 printOut("<p class='mt-1'>"+response+"</p>");
+                
+                // Force scroll after main response
+                setTimeout(() => {
+                    scrollToBottomAfterContent();
+                }, 200);
                 // check if for the current action is defined any Function to execute
                 if(stepObj.callFunc){
                   // execute defined Functions
@@ -532,17 +547,18 @@
                                             
                                             choose(option);
 
-                                            // Auto-scroll after quiz selection
+                                            // Auto-scroll after quiz selection with multiple attempts
                                             setTimeout(() => {
-                                                var shellPanel = document.getElementById('shell-panel');
-                                                var shellPanelMobile = document.getElementById('shell-panel-mobile');
-                                                if (shellPanel && shellPanel.scrollHeight > shellPanel.clientHeight) {
-                                                    shellPanel.scrollTop = shellPanel.scrollHeight;
-                                                }
-                                                if (shellPanelMobile && shellPanelMobile.scrollHeight > shellPanelMobile.clientHeight) {
-                                                    shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
-                                                }
-                                            }, 500);
+                                                scrollToBottomAfterContent();
+                                            }, 300);
+                                            
+                                            setTimeout(() => {
+                                                scrollToBottomAfterContent();
+                                            }, 800);
+                                            
+                                            setTimeout(() => {
+                                                scrollToBottomAfterContent();
+                                            }, 1500);
                                         }
                                     }
 
@@ -869,8 +885,18 @@ function attachChangeHandlers() {
 
     // Auto-scroll function for shell panels
     function autoScrollToBottom(element) {
-        if (element && element.scrollHeight > element.clientHeight) {
+        if (element) {
+            // Force scroll to bottom regardless of height comparison
             element.scrollTop = element.scrollHeight;
+            
+            // Additional check for mobile devices
+            if (window.innerWidth <= 768) {
+                // Use smooth scrolling behavior for mobile
+                element.scrollTo({
+                    top: element.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
         }
     }
 
@@ -966,10 +992,11 @@ function attachChangeHandlers() {
                 $("#caseTimer").hide();
             }
 
-            // Reset processing flag after a short delay
+            // Trigger scrolling after action is processed
             setTimeout(() => {
+                scrollToBottomAfterContent();
                 processingAction = false;
-            }, 500);
+            }, 800);
         }
     });
 
