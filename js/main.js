@@ -423,6 +423,73 @@
         }
     }
 
+    // Function to process markdown-style sidebar links
+    function processSidebarLinks(text) {
+        // Pattern to match [text](open-sidebar) or [text](open-sidebar:section)
+        const linkPattern = /\[([^\]]+)\]\(open-sidebar(?::([^)]+))?\)/g;
+
+        return text.replace(linkPattern, function(match, linkText, section) {
+            // Default to monitor section if no specific section is provided
+            const targetSection = section || 'monitor';
+
+            return `<a href="#" class="sidebar-link" data-section="${targetSection}" style="color: #60a5fa; text-decoration: underline; cursor: pointer;">${linkText}</a>`;
+        });
+    }
+
+    // Helper function to ensure scrolling to the bottom after content has rendered
+    function scrollToBottomAfterContent() {
+        // Function to scroll specific element with padding
+        const scrollElement = (element) => {
+            if (element) {
+                // Calculate target scroll position with 10px padding
+                const targetScrollTop = element.scrollHeight - element.clientHeight + 10;
+                const finalScrollTop = Math.max(0, targetScrollTop);
+
+                // Force scroll to bottom with padding
+                element.scrollTop = finalScrollTop;
+
+                // Also try using scrollTo for better mobile support
+                if (element.scrollTo) {
+                    element.scrollTo({
+                        top: finalScrollTop,
+                        behavior: 'smooth'
+                    });
+                }
+
+                // Force a repaint to ensure scroll takes effect
+                element.offsetHeight;
+            }
+        };
+
+        // Multiple scroll attempts to ensure content is visible
+        const scrollAttempt = () => {
+            const shellPanel = document.getElementById('shell-panel');
+            const shellPanelMobile = document.getElementById('shell-panel-mobile');
+
+            scrollElement(shellPanel);
+            scrollElement(shellPanelMobile);
+        };
+
+        // Immediate scroll
+        scrollAttempt();
+
+        // Use requestAnimationFrame for better timing
+        requestAnimationFrame(() => {
+            scrollAttempt();
+
+            // Additional delayed scrolls for complex content with better mobile timing
+            setTimeout(scrollAttempt, 100);
+            setTimeout(scrollAttempt, 300);
+            setTimeout(scrollAttempt, 600);
+
+            // Extra attempts for mobile devices
+            if (window.innerWidth <= 768) {
+                setTimeout(scrollAttempt, 800);
+                setTimeout(scrollAttempt, 1000);
+            }
+        });
+    }
+
     // Command handler
     var caseObj = null;
     var steps = {};
@@ -763,74 +830,6 @@
         }
     }
 
-    // Process markdown-style sidebar links
-    function processSidebarLinks(text) {
-        // Pattern to match [text](open-sidebar) or [text](open-sidebar:section)
-        const linkPattern = /\[([^\]]+)\]\(open-sidebar(?::([^)]+))?\)/g;
-
-        return text.replace(linkPattern, function(match, linkText, section) {
-            // Default to monitor section if no specific section is provided
-            const targetSection = section || 'monitor';
-
-            return `<a href="#" class="sidebar-link" data-section="${targetSection}" style="color: #60a5fa; text-decoration: underline; cursor: pointer;">${linkText}</a>`;
-        });
-    }
-
-    // Helper function to ensure scrolling to the bottom after content has rendered
-    function scrollToBottomAfterContent() {
-        // Function to scroll specific element with padding
-        const scrollElement = (element) => {
-            if (element) {
-                // Calculate target scroll position with 10px padding
-                const targetScrollTop = element.scrollHeight - element.clientHeight + 10;
-                const finalScrollTop = Math.max(0, targetScrollTop);
-
-                // Force scroll to bottom with padding
-                element.scrollTop = finalScrollTop;
-
-                // Also try using scrollTo for better mobile support
-                if (element.scrollTo) {
-                    element.scrollTo({
-                        top: finalScrollTop,
-                        behavior: 'smooth'
-                    });
-                }
-
-                // Force a repaint to ensure scroll takes effect
-                element.offsetHeight;
-            }
-        };
-
-        // Multiple scroll attempts to ensure content is visible
-        const scrollAttempt = () => {
-            const shellPanel = document.getElementById('shell-panel');
-            const shellPanelMobile = document.getElementById('shell-panel-mobile');
-
-            scrollElement(shellPanel);
-            scrollElement(shellPanelMobile);
-        };
-
-        // Immediate scroll
-        scrollAttempt();
-
-        // Use requestAnimationFrame for better timing
-        requestAnimationFrame(() => {
-            scrollAttempt();
-
-            // Additional delayed scrolls for complex content with better mobile timing
-            setTimeout(scrollAttempt, 100);
-            setTimeout(scrollAttempt, 300);
-            setTimeout(scrollAttempt, 600);
-
-            // Extra attempts for mobile devices
-            if (window.innerWidth <= 768) {
-                setTimeout(scrollAttempt, 800);
-                setTimeout(scrollAttempt, 1000);
-            }
-        });
-    }
-
-
 var dataLoaded = {
     cases: false,
     actions: false,
@@ -969,17 +968,8 @@ function attachChangeHandlers() {
 
         // Show/hide sidebar trigger based on screen size and scenario state
         function updateSidebarVisibility() {
-            const helpTrigger = $('.help-trigger');
-
-            // Always show help trigger regardless of screen size or scenario state
-            helpTrigger.show().removeClass('hidden').css({
-                'display': 'block',
-                'visibility': 'visible',
-                'opacity': '1'
-            });
-
             if ($(window).width() <= 768) {
-                // Show sidebar trigger on mobile when scenario is started
+                // Show trigger on mobile when scenario is started
                 if ($('body').hasClass('monitor-visible')) {
                     sidebarTrigger.show().removeClass('hidden');
                     console.log('Sidebar trigger shown on mobile');
@@ -1013,7 +1003,7 @@ function attachChangeHandlers() {
                 sidebarOverlay.addClass('active').show();
                 // Show monitor and log content
                 $('.sidebar-monitor').show();
-                $('.sidebar-log').hide();
+                $('.sidebar-log').show();
             }
         });
 
@@ -1475,16 +1465,6 @@ $(document).ready(function() {
             console.log("Instant mode enabled");
         }
     });
-
-    // Force help button to be visible on page load
-    setTimeout(() => {
-        $('.help-trigger').show().css({
-            'display': 'block !important',
-            'visibility': 'visible !important',
-            'opacity': '1 !important'
-        });
-        console.log('Help trigger forced to be visible');
-    }, 100);
 
     // Add modern UI enhancements
     initializeModernUI();
