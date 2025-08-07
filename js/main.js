@@ -649,29 +649,26 @@
     function choose(arg){
         console.log('Choose function called with:', arg, 'Current step:', caseObj.stepCount);
         var optionsKey = ['a','b','c','d'];
+        
+        // The quiz was created in the previous step, but we're now in the next step
+        // So we need to check the current step for the expected answer
         var currentStepObj = steps[caseObj.stepCount];
-        var nextStepObj = steps[caseObj.stepCount + 1];
 
         if (!currentStepObj) {
             console.error('No step object found for step:', caseObj.stepCount);
             return;
         }
 
-        if (!currentStepObj.quiz) {
-            console.warn('No quiz defined for current step:', caseObj.stepCount);
-            return;
-        }
-
-        if (!nextStepObj || !nextStepObj.choose) {
-            console.log('Quiz step without choose option in next step - treating as informational quiz, advancing step');
-            // For quiz steps without choose option in next step, just advance to next step
+        // Check if the current step has a choose property (expected answer)
+        if (currentStepObj.choose) {
+            console.log('Expected answer:', currentStepObj.choose, 'User answer:', arg);
+            abstractStepHandler(optionsKey, currentStepObj.choose, arg);
+        } else {
+            console.log('Quiz step without choose option - treating as informational quiz, advancing step');
+            // For quiz steps without choose option, just advance to next step
             caseObj.stepCount++;
             printOut("<p class='mt-1'>Selected option: " + arg + "</p>");
-            return;
         }
-
-        console.log('Expected answer (from next step):', nextStepObj.choose, 'User answer:', arg);
-        abstractStepHandler(optionsKey, nextStepObj.choose, arg);
     }
 
 var dataLoaded = {
