@@ -1122,7 +1122,13 @@ function attachChangeHandlers() {
         if (arg && caseObj && steps[caseObj.stepCount] && !processingAction) {
             processingAction = true;
             var stepObj = steps[caseObj.stepCount];
-            abstractStepHandler(actionsKey, stepObj.action, arg);
+            
+            // Check if this step has an action requirement
+            if (stepObj.action) {
+                abstractStepHandler(actionsKey, stepObj.action, arg);
+            } else {
+                console.log('Current step does not require an action, skipping');
+            }
 
             if($("#realtime-toggle").hasClass('active')){
                 $("#caseTimer").show();
@@ -1146,7 +1152,13 @@ function attachChangeHandlers() {
         if (arg && caseObj && steps[caseObj.stepCount] && !processingDrug) {
             processingDrug = true;
             var stepObj = steps[caseObj.stepCount];
-            abstractStepHandler(drugsKey, stepObj.give, arg);
+            
+            // Check if this step has a drug requirement
+            if (stepObj.give) {
+                abstractStepHandler(drugsKey, stepObj.give, arg);
+            } else {
+                console.log('Current step does not require a drug, skipping');
+            }
 
             // Reset processing flag after a short delay
             setTimeout(() => {
