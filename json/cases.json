@@ -35,7 +35,7 @@
           "5": {
             "action": ["vitalParams", "ecg"],
             "allrequest": false,
-            "msgOk": "The ECG and vital parameters are shown on the monitor of the portable defibrillator. What kind of rythm is the one displayed?",
+            "msgOk": "The [ECG and vital parameters](open-sidebar) are shown on the [monitor](open-sidebar:monitor) of the portable defibrillator. What kind of rythm is the one displayed?",
             "msgKo": "First get an ECG to assess the hearth rythm!",
             "callFunc": {
               "stopCPR": null,
@@ -73,7 +73,7 @@
           },
           "9": {
             "action": "venousAccess",
-            "msgOk": "You successfully established an IV access. Remember to check the blood sugar value! 2 Minutes are meanwhile over...",
+            "msgOk": "You successfully established an IV access. Remember to [check the blood sugar value](open-sidebar)! 2 Minutes are meanwhile over...",
             "msgKo": "You should think to take an IV access while the CPR is running",
             "callFunc": {
               "setLabor": "'Blood sugar', 90, 'mg/dL'",
@@ -82,7 +82,7 @@
           },
           "10": {
             "action": "ecg",
-            "msgOk": "You get the new ECG. The patient remains instabil. You also notice a rapid decrease of the oxygen saturation. What do you do?",
+            "msgOk": "You get the [new ECG](open-sidebar). The patient remains instabil. You also notice a rapid decrease of the oxygen saturation. What do you do?",
             "msgKo": "After 2 minutes CPR cycles you should check again the hearth rhythm",
             "callFunc": {
               "stopCPR": null,
@@ -115,7 +115,7 @@
           },
           "14": {
             "action": "co2Check",
-            "msgOk": "Correct! Checking for exhaled CO2 (capnography) is the best way to be sure about a successful intubation, to monitor for the quality of given CPR and to early recognition of ROSC (Return of Spontan Circulation). Other 2 minutes are meanwhile over, what next?",
+            "msgOk": "Correct! Checking for [exhaled CO2 (capnography)](open-sidebar) is the best way to be sure about a successful intubation, to monitor for the quality of given CPR and to early recognition of ROSC (Return of Spontan Circulation). Other 2 minutes are meanwhile over, what next?",
             "msgKo": "Think to check for CO2 level once you've intubated the patient!",
             "callFunc": {
               "completeCPR": null,
@@ -183,7 +183,7 @@
             },
           "21": {
             "action": "ecg",
-            "msgOk": "The resulting ECG is displayed on the monitor. What now?",
+            "msgOk": "The [resulting ECG](open-sidebar) is displayed on the monitor. What now?",
             "msgKo": "Check again the ECG!",
             "callFunc": {
                 "stopCPR": null,
@@ -220,7 +220,7 @@
           },
           "25": {
             "action": "ecg",
-            "msgOk": "The resulting ECG is displayed on the monitor. What now?",
+            "msgOk": "The [resulting ECG](open-sidebar) is displayed on the monitor. What now?",
             "msgKo": "Check again the ECG!",
             "callFunc": {
                 "stopCPR": null,
@@ -323,7 +323,7 @@
           },
           "5": {
             "choose": "b",
-            "msgOk": "Correct! You admistrate ASS (500 mg, IV) and Heparin (5000 IE, IV). As you are preparing the patient for transport, he suddenly becomes dizzy and feels as if he is going to pass out.",
+            "msgOk": "Correct! You admistrate ASS (250 mg, IV) and Heparin (5000 IE, IV). As you are preparing the patient for transport, he suddenly becomes dizzy and feels as if he is going to pass out.",
             "msgKo": "False! The right one is the option b",
             "callFunc": {
               "setECG": "'Brady.gif', 32",
@@ -371,7 +371,7 @@
             },
           "11": {
             "action": "ecg",
-            "msgOk": "You got the new ECG. The patiest ist still unconscious. You check again for the pulse and again you can't find anything. What next?",
+            "msgOk": "You got the [new ECG](open-sidebar). The patiest ist still unconscious. You check again for the pulse and again you can't find anything. What next?",
             "msgKo": "After 2 minutes CPR cycle you should check again the hearth rhythm",
             "callFunc": {
                 "stopCPR": null,
