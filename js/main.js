@@ -726,12 +726,67 @@
         // Check if the current step has a choose property (expected answer)
         if (currentStepObj.choose) {
             console.log('Expected answer:', currentStepObj.choose, 'User answer:', arg);
-            abstractStepHandler(optionsKey, currentStepObj.choose, arg);
+
+            // Check if answer is correct
+            var isCorrect = (currentStepObj.choose === arg ||
+                           (Array.isArray(currentStepObj.choose) && currentStepObj.choose.includes(arg)));
+
+            var response;
+            if (isCorrect) {
+                response = currentStepObj.msgOk || "Correct!";
+                printOut("<div class='alert alert-success my-1'>" + response + "</div>");
+
+                // Only advance step and disable quiz for correct answers
+                caseObj.stepCount++;
+                console.log('Quiz completed correctly - advancing to step:', caseObj.stepCount);
+
+                // Execute any functions defined for this step
+                if (currentStepObj.callFunc) {
+                    for (var funcName in currentStepObj.callFunc) {
+                        eval("" + funcName + "(" + currentStepObj.callFunc[funcName] + ")");
+                    }
+                }
+
+                // Check for msgAfter content (additional message after quiz)
+                if (currentStepObj.msgAfter) {
+                    printOut("<p class='mt-1'>" + processSidebarLinks(currentStepObj.msgAfter) + "</p>");
+                }
+
+                // Disable the quiz form only for correct answers
+                var currentQuizFormId = '#quiz-form-' + caseObj.stepCount;
+                var $currentForm = $(currentQuizFormId);
+                $currentForm.addClass('quiz-answered');
+                $currentForm.find('.ui.radio.checkbox').addClass('disabled');
+                $currentForm.find('input[type="radio"]').prop('disabled', true);
+
+            } else {
+                response = currentStepObj.msgKo || "Incorrect, try again...";
+                printOut("<div class='alert alert-danger my-1'>" + response + "</div>");
+                caseObj.errorCount++;
+                console.log('Quiz answered incorrectly - allowing retry');
+
+                // Do NOT advance step or disable quiz for incorrect answers
+                // The user can try again
+            }
+
+            // Process markdown-style sidebar links before printing
+            response = processSidebarLinks(response);
+
+            // Force scroll after quiz response
+            setTimeout(() => {
+                scrollToBottomAfterContent();
+            }, 200);
         } else {
-            console.log('Quiz step without choose option - treating as informational quiz, advancing step');
-            // For quiz steps without choose option, just advance to next step
+        // This block handles steps that are not quizzes or quizzes without a defined 'choose' option
+        // Here, we just print the answer and advance to the next step
+            console.log('No specific quiz answer expected, processing as informational.');
             caseObj.stepCount++;
-            printOut("<p class='mt-1'>Selected option: " + arg + "</p>");
+            printOut("<p class='mt-1'>Selected: " + arg + "</p>");
+
+            // Force scroll after informational response
+            setTimeout(() => {
+                scrollToBottomAfterContent();
+            }, 200);
         }
     }
 
