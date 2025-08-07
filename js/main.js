@@ -370,6 +370,23 @@
         $('#shell-panel').animate({"scrollTop": $('#shell-panel')[0].scrollHeight}, "fast");
     }
 
+    // Auto-scroll function for shell panels (global scope)
+    function autoScrollToBottom(element) {
+        if (element) {
+            // Force scroll to bottom regardless of height comparison
+            element.scrollTop = element.scrollHeight;
+
+            // Additional check for mobile devices
+            if (window.innerWidth <= 768) {
+                // Use smooth scrolling behavior for mobile
+                element.scrollTo({
+                    top: element.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    }
+
     // Helper function to ensure scrolling to the bottom after content has rendered
     function scrollToBottomAfterContent() {
         // Multiple scroll attempts to ensure content is visible
@@ -883,22 +900,7 @@ function attachChangeHandlers() {
         }
     });
 
-    // Auto-scroll function for shell panels
-    function autoScrollToBottom(element) {
-        if (element) {
-            // Force scroll to bottom regardless of height comparison
-            element.scrollTop = element.scrollHeight;
-
-            // Additional check for mobile devices
-            if (window.innerWidth <= 768) {
-                // Use smooth scrolling behavior for mobile
-                element.scrollTo({
-                    top: element.scrollHeight,
-                    behavior: 'smooth'
-                });
-            }
-        }
-    }
+    
 
     // Observe changes to shell panel, monitor, and log
     if (typeof MutationObserver !== 'undefined' && !window.observerAttached) {
