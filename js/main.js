@@ -691,10 +691,19 @@
 
                                         // Add unified click handler to the entire checkbox container
                                         $checkbox.on('click.quiz', function(e) {
-                                            e.preventDefault();
+                                            // Don't prevent default - let the radio button work normally
                                             e.stopPropagation();
                                             var option = $input.val();
                                             console.log('Quiz checkbox clicked for option:', option);
+                                            
+                                            // Ensure the radio button gets selected
+                                            $input.prop('checked', true);
+                                            $checkbox.addClass('checked');
+                                            
+                                            // Remove checked class from siblings
+                                            $currentForm.find('.ui.radio.checkbox').not($checkbox).removeClass('checked');
+                                            $currentForm.find('input[type="radio"]').not($input).prop('checked', false);
+                                            
                                             handleQuizSelection(option, $currentForm);
                                         });
 
@@ -703,15 +712,30 @@
                                             e.stopPropagation();
                                             var option = $(this).val();
                                             console.log('Quiz input clicked for option:', option);
+                                            
+                                            // Ensure proper visual state
+                                            $checkbox.addClass('checked');
+                                            $currentForm.find('.ui.radio.checkbox').not($checkbox).removeClass('checked');
+                                            $currentForm.find('input[type="radio"]').not($(this)).prop('checked', false);
+                                            
                                             handleQuizSelection(option, $currentForm);
                                         });
 
                                         // Handle label clicks
                                         $label.on('click.quiz', function(e) {
-                                            e.preventDefault();
+                                            // Don't prevent default - let the label work normally with its radio button
                                             e.stopPropagation();
                                             var option = $input.val();
                                             console.log('Quiz label clicked for option:', option);
+                                            
+                                            // Ensure the radio button gets selected
+                                            $input.prop('checked', true);
+                                            $checkbox.addClass('checked');
+                                            
+                                            // Remove checked class from siblings
+                                            $currentForm.find('.ui.radio.checkbox').not($checkbox).removeClass('checked');
+                                            $currentForm.find('input[type="radio"]').not($input).prop('checked', false);
+                                            
                                             handleQuizSelection(option, $currentForm);
                                         });
                                     });
