@@ -368,38 +368,57 @@
             $(response).appendTo("#shell-panel").hide().toggle("highlight", {color: 'white'}, 600);
         }
 
-        // Force immediate scroll for both desktop and mobile
+        // Force immediate scroll for both desktop and mobile with padding
         const shellPanel = document.getElementById('shell-panel');
         const shellPanelMobile = document.getElementById('shell-panel-mobile');
 
+        // Helper function to scroll with padding
+        const scrollWithPadding = (element) => {
+            if (element) {
+                const targetScrollTop = element.scrollHeight - element.clientHeight + 10;
+                element.scrollTop = Math.max(0, targetScrollTop);
+            }
+        };
+
         if (shellPanel) {
-            shellPanel.scrollTop = shellPanel.scrollHeight;
+            scrollWithPadding(shellPanel);
         }
 
         // Update mobile content and scroll
         if (window.innerWidth <= 768 && shellPanelMobile) {
             shellPanelMobile.innerHTML = shellPanel.innerHTML;
-            shellPanelMobile.scrollTop = shellPanelMobile.scrollHeight;
+            scrollWithPadding(shellPanelMobile);
         }
 
-        // Additional jQuery animation for smooth scrolling fallback
-        $('#shell-panel').animate({"scrollTop": $('#shell-panel')[0].scrollHeight}, "fast");
-        $('#shell-panel-mobile').animate({"scrollTop": $('#shell-panel-mobile')[0].scrollHeight}, "fast");
+        // Additional jQuery animation for smooth scrolling fallback with padding
+        const targetScrollTop = $('#shell-panel')[0].scrollHeight - $('#shell-panel')[0].clientHeight + 10;
+        const targetScrollTopMobile = $('#shell-panel-mobile')[0] ? $('#shell-panel-mobile')[0].scrollHeight - $('#shell-panel-mobile')[0].clientHeight + 10 : 0;
+        
+        $('#shell-panel').animate({"scrollTop": Math.max(0, targetScrollTop)}, "fast");
+        $('#shell-panel-mobile').animate({"scrollTop": Math.max(0, targetScrollTopMobile)}, "fast");
     }
 
     // Auto-scroll function for shell panels (global scope)
     function autoScrollToBottom(element) {
         if (element) {
-            // Force scroll to bottom regardless of height comparison
-            element.scrollTop = element.scrollHeight;
+            // Calculate scroll position with extra padding (10px)
+            const targetScrollTop = element.scrollHeight - element.clientHeight + 10;
+            
+            // Force scroll to bottom with padding
+            element.scrollTop = Math.max(0, targetScrollTop);
 
             // Additional check for mobile devices
             if (window.innerWidth <= 768) {
-                // Use smooth scrolling behavior for mobile
+                // Use smooth scrolling behavior for mobile with padding
                 element.scrollTo({
-                    top: element.scrollHeight,
+                    top: Math.max(0, targetScrollTop),
                     behavior: 'smooth'
                 });
+                
+                // Force another scroll attempt after smooth scroll completes
+                setTimeout(() => {
+                    element.scrollTop = Math.max(0, targetScrollTop);
+                }, 300);
             }
         }
     }
@@ -419,16 +438,20 @@
 
     // Helper function to ensure scrolling to the bottom after content has rendered
     function scrollToBottomAfterContent() {
-        // Function to scroll specific element
+        // Function to scroll specific element with padding
         const scrollElement = (element) => {
             if (element) {
-                // Force scroll to bottom with smooth behavior
-                element.scrollTop = element.scrollHeight;
+                // Calculate target scroll position with 10px padding
+                const targetScrollTop = element.scrollHeight - element.clientHeight + 10;
+                const finalScrollTop = Math.max(0, targetScrollTop);
+                
+                // Force scroll to bottom with padding
+                element.scrollTop = finalScrollTop;
 
                 // Also try using scrollTo for better mobile support
                 if (element.scrollTo) {
                     element.scrollTo({
-                        top: element.scrollHeight,
+                        top: finalScrollTop,
                         behavior: 'smooth'
                     });
                 }
@@ -454,10 +477,16 @@
         requestAnimationFrame(() => {
             scrollAttempt();
 
-            // Additional delayed scrolls for complex content
+            // Additional delayed scrolls for complex content with better mobile timing
             setTimeout(scrollAttempt, 100);
             setTimeout(scrollAttempt, 300);
             setTimeout(scrollAttempt, 600);
+            
+            // Extra attempts for mobile devices
+            if (window.innerWidth <= 768) {
+                setTimeout(scrollAttempt, 800);
+                setTimeout(scrollAttempt, 1000);
+            }
         });
     }
 
