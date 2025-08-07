@@ -89,8 +89,18 @@ div:has(.ui.loader):after {
 }
 
 /* Ensure loading icons maintain their animation */
-.loading-icon .ui.icon {
+.loading-icon .ui.icon,
+.ui.loader.mini,
+.ui.inline.loader {
     animation: spinAround 1s linear infinite !important;
+}
+
+/* Specific spinner animation for step loading */
+.step-icon .loading-icon i,
+.step-icon .loading-icon .icon {
+    animation: spinAround 1s linear infinite !important;
+    display: inline-block !important;
+    transform-origin: center !important;
 }
 
 /* Success and error icon containers */
@@ -2138,8 +2148,18 @@ code {
 }
 
 @keyframes spinAround {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Apply spinning animation to all loading elements */
+.ui.loading,
+.ui.loader,
+.loading-icon,
+.loading-icon *,
+i.loading,
+i.spinner {
+    animation: spinAround 1s linear infinite !important;
 }
 
 @keyframes slideIn {
