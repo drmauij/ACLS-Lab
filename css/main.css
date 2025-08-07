@@ -358,6 +358,19 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* Disabled quiz styling */
+.quiz-answered .quiz-option {
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+}
+
+.quiz-answered .quiz-option.checked {
+    opacity: 1 !important;
+    background: rgba(59, 130, 246, 0.2) !important;
+    border-color: rgba(59, 130, 246, 0.5) !important;
+}
+
 h1 { font-size: 2.25rem; }
 h2 { font-size: 1.875rem; }
 h3 { font-size: 1.5rem; }

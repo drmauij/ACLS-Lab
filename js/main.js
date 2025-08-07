@@ -508,6 +508,12 @@
                                     function handleQuizSelection($checkbox, $input) {
                                         console.log('Quiz selection triggered for option:', $input.val());
 
+                                        // Check if quiz is already answered (disabled)
+                                        if ($('#quiz-form').hasClass('quiz-answered')) {
+                                            console.log('Quiz already answered, ignoring click');
+                                            return;
+                                        }
+
                                         // Clear all selections first
                                         $('#quiz-form .ui.radio.checkbox').removeClass('checked');
                                         $('#quiz-form input[type="radio"]').prop('checked', false);
@@ -519,6 +525,13 @@
                                         var option = $input.val();
                                         if (option) {
                                             console.log('Calling choose() with option:', option);
+                                            
+                                            // Disable the quiz form immediately to prevent multiple clicks
+                                            $('#quiz-form').addClass('quiz-answered');
+                                            $('#quiz-form .ui.radio.checkbox').addClass('disabled').off('click.mobileQuiz touchend.mobileQuiz');
+                                            $('#quiz-form input[type="radio"]').prop('disabled', true).off('click.mobileQuiz');
+                                            $('#quiz-form label').off('click.mobileQuiz');
+                                            
                                             choose(option);
 
                                             // Auto-scroll after quiz selection
@@ -571,9 +584,20 @@
                                             // For desktop: Use Semantic UI checkbox
                                             $checkbox.checkbox({
                                                 onChecked: function() {
+                                                    // Check if quiz is already answered (disabled)
+                                                    if ($('#quiz-form').hasClass('quiz-answered')) {
+                                                        console.log('Quiz already answered, ignoring click');
+                                                        return;
+                                                    }
+
                                                     var option = $input.val();
                                                     if (option) {
                                                         console.log('Desktop quiz selection:', option);
+                                                        
+                                                        // Disable the quiz form immediately to prevent multiple clicks
+                                                        $('#quiz-form').addClass('quiz-answered');
+                                                        $('#quiz-form .ui.radio.checkbox').checkbox('set disabled');
+                                                        
                                                         choose(option);
 
                                                         // Auto-scroll after quiz selection
