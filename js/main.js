@@ -500,13 +500,11 @@
                     response = response +"</form>";
 					printOut(response);
 
-								// Initialize radio checkboxes with proper mobile handling
+								// Initialize radio checkboxes with unified handling
                                 setTimeout(function() {
-                                    var isMobile = window.innerWidth <= 768;
-
                                     // Helper function for quiz selection
-                                    function handleQuizSelection($checkbox, $input) {
-                                        console.log('Quiz selection triggered for option:', $input.val());
+                                    function handleQuizSelection(option) {
+                                        console.log('Quiz selection triggered for option:', option);
 
                                         // Check if quiz is already answered (disabled)
                                         if ($('#quiz-form').hasClass('quiz-answered')) {
@@ -514,23 +512,18 @@
                                             return;
                                         }
 
-                                        // Clear all selections first
-                                        $('#quiz-form .ui.radio.checkbox').removeClass('checked');
-                                        $('#quiz-form input[type="radio"]').prop('checked', false);
-
-                                        // Select this option
-                                        $checkbox.addClass('checked');
-                                        $input.prop('checked', true);
-
-                                        var option = $input.val();
                                         if (option) {
                                             console.log('Calling choose() with option:', option);
                                             
                                             // Disable the quiz form immediately to prevent multiple clicks
                                             $('#quiz-form').addClass('quiz-answered');
-                                            $('#quiz-form .ui.radio.checkbox').addClass('disabled').off('click.mobileQuiz touchend.mobileQuiz');
-                                            $('#quiz-form input[type="radio"]').prop('disabled', true).off('click.mobileQuiz');
-                                            $('#quiz-form label').off('click.mobileQuiz');
+                                            $('#quiz-form .ui.radio.checkbox').addClass('disabled');
+                                            $('#quiz-form input[type="radio"]').prop('disabled', true);
+                                            
+                                            // Visual feedback for selected option
+                                            $('#quiz-form .ui.radio.checkbox').removeClass('checked');
+                                            $('#quiz-form input[value="' + option + '"]').prop('checked', true);
+                                            $('#quiz-form input[value="' + option + '"]').closest('.ui.radio.checkbox').addClass('checked');
                                             
                                             choose(option);
 
@@ -548,69 +541,42 @@
                                         }
                                     }
 
+                                    // Unified event handling for all devices
                                     $('#quiz-form .ui.radio.checkbox').each(function() {
                                         var $checkbox = $(this);
                                         var $input = $checkbox.find('input[type="radio"]');
                                         var $label = $checkbox.find('label');
 
-                                        if (isMobile) {
-                                            // For mobile: Use comprehensive touch handling
-                                            $checkbox.off('.mobileQuiz');
+                                        // Remove any existing event handlers
+                                        $checkbox.off('.quiz');
+                                        $input.off('.quiz');
+                                        $label.off('.quiz');
 
-                                            // Handle both click and touch events
-                                            $checkbox.on('click.mobileQuiz touchend.mobileQuiz', function(e) {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                console.log('Mobile quiz click/touch detected');
-                                                handleQuizSelection($checkbox, $input);
-                                            });
+                                        // Add unified click handler to the entire checkbox container
+                                        $checkbox.on('click.quiz', function(e) {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            var option = $input.val();
+                                            console.log('Quiz checkbox clicked for option:', option);
+                                            handleQuizSelection(option);
+                                        });
 
-                                            // Also handle direct input clicks
-                                            $input.on('click.mobileQuiz', function(e) {
-                                                e.stopPropagation();
-                                                console.log('Mobile quiz input click detected');
-                                                handleQuizSelection($checkbox, $input);
-                                            });
+                                        // Also handle direct input clicks
+                                        $input.on('click.quiz change.quiz', function(e) {
+                                            e.stopPropagation();
+                                            var option = $(this).val();
+                                            console.log('Quiz input clicked for option:', option);
+                                            handleQuizSelection(option);
+                                        });
 
-                                            // Handle label clicks
-                                            $label.on('click.mobileQuiz', function(e) {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                console.log('Mobile quiz label click detected');
-                                                handleQuizSelection($checkbox, $input);
-                                            });
-
-                                        } else {
-                                            // For desktop: Use Semantic UI checkbox
-                                            $checkbox.checkbox({
-                                                onChecked: function() {
-                                                    // Check if quiz is already answered (disabled)
-                                                    if ($('#quiz-form').hasClass('quiz-answered')) {
-                                                        console.log('Quiz already answered, ignoring click');
-                                                        return;
-                                                    }
-
-                                                    var option = $input.val();
-                                                    if (option) {
-                                                        console.log('Desktop quiz selection:', option);
-                                                        
-                                                        // Disable the quiz form immediately to prevent multiple clicks
-                                                        $('#quiz-form').addClass('quiz-answered');
-                                                        $('#quiz-form .ui.radio.checkbox').checkbox('set disabled');
-                                                        
-                                                        choose(option);
-
-                                                        // Auto-scroll after quiz selection
-                                                        setTimeout(() => {
-                                                            var shellPanel = document.getElementById('shell-panel');
-                                                            if (shellPanel && shellPanel.scrollHeight > shellPanel.clientHeight) {
-                                                                shellPanel.scrollTop = shellPanel.scrollHeight;
-                                                            }
-                                                        }, 500);
-                                                    }
-                                                }
-                                            });
-                                        }
+                                        // Handle label clicks
+                                        $label.on('click.quiz', function(e) {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            var option = $input.val();
+                                            console.log('Quiz label clicked for option:', option);
+                                            handleQuizSelection(option);
+                                        });
                                     });
                                 }, 100);
                 }
