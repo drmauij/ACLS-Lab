@@ -623,121 +623,53 @@
                     response = response +"</form>";
 					printOut(response);
 
-								// Initialize radio checkboxes with unified handling
+								// Initialize Semantic UI checkboxes and handle selection
                                 setTimeout(function() {
                                     var currentQuizFormId = '#quiz-form-' + caseObj.stepCount;
+                                    var $currentForm = $(currentQuizFormId);
 
-                                    // Helper function for quiz selection
-                                    function handleQuizSelection(option, $currentForm) {
-                                        console.log('Quiz selection triggered for option:', option);
+                                    // Initialize Semantic UI radio checkboxes properly
+                                    $(currentQuizFormId + ' .ui.radio.checkbox').checkbox();
 
-                                        // Check if this specific quiz form is already answered
-                                        if ($currentForm.hasClass('quiz-answered')) {
-                                            console.log('Quiz already answered, ignoring click');
-                                            return;
-                                        }
-
-                                        // Check if quiz is currently being processed
-                                        if ($currentForm.hasClass('quiz-processing')) {
-                                            console.log('Quiz currently being processed, ignoring click');
-                                            return;
-                                        }
-
-                                        if (option) {
-                                            console.log('Calling choose() with option:', option);
-
-                                            // Mark quiz as being processed to prevent multiple clicks
-                                            $currentForm.addClass('quiz-processing');
-
-                                            // Visual feedback for selected option (but don't disable yet)
-                                            $currentForm.find('.ui.radio.checkbox').removeClass('checked');
-                                            $currentForm.find('input[value="' + option + '"]').prop('checked', true);
-                                            $currentForm.find('input[value="' + option + '"]').closest('.ui.radio.checkbox').addClass('checked');
-
-                                            // Call choose() function - it will handle disabling if answer is correct
-                                            choose(option);
-
-                                            // Remove processing flag after a short delay
-                                            setTimeout(() => {
-                                                $currentForm.removeClass('quiz-processing');
-                                            }, 500);
-
-                                            // Auto-scroll after quiz selection with multiple attempts
-                                            setTimeout(() => {
-                                                scrollToBottomAfterContent();
-                                            }, 300);
-
-                                            setTimeout(() => {
-                                                scrollToBottomAfterContent();
-                                            }, 800);
-
-                                            setTimeout(() => {
-                                                scrollToBottomAfterContent();
-                                            }, 1500);
-                                        }
-                                    }
-
-                                    // Unified event handling for all devices - target the current quiz form specifically
-                                    $(currentQuizFormId + ' .ui.radio.checkbox').each(function() {
-                                        var $checkbox = $(this);
-                                        var $input = $checkbox.find('input[type="radio"]');
-                                        var $label = $checkbox.find('label');
-                                        var $currentForm = $(currentQuizFormId);
-
-                                        // Remove any existing event handlers
-                                        $checkbox.off('.quiz');
-                                        $input.off('.quiz');
-                                        $label.off('.quiz');
-
-                                        // Add unified click handler to the entire checkbox container
-                                        $checkbox.on('click.quiz', function(e) {
-                                            // Don't prevent default - let the radio button work normally
-                                            e.stopPropagation();
+                                    // Handle quiz selection with Semantic UI onChange event
+                                    $(currentQuizFormId + ' .ui.radio.checkbox').checkbox({
+                                        onChange: function() {
+                                            var $checkbox = $(this).closest('.ui.radio.checkbox');
+                                            var $input = $checkbox.find('input[type="radio"]');
                                             var option = $input.val();
-                                            console.log('Quiz checkbox clicked for option:', option);
-                                            
-                                            // Ensure the radio button gets selected
-                                            $input.prop('checked', true);
-                                            $checkbox.addClass('checked');
-                                            
-                                            // Remove checked class from siblings
-                                            $currentForm.find('.ui.radio.checkbox').not($checkbox).removeClass('checked');
-                                            $currentForm.find('input[type="radio"]').not($input).prop('checked', false);
-                                            
-                                            handleQuizSelection(option, $currentForm);
-                                        });
 
-                                        // Also handle direct input clicks
-                                        $input.on('click.quiz change.quiz', function(e) {
-                                            e.stopPropagation();
-                                            var option = $(this).val();
-                                            console.log('Quiz input clicked for option:', option);
-                                            
-                                            // Ensure proper visual state
-                                            $checkbox.addClass('checked');
-                                            $currentForm.find('.ui.radio.checkbox').not($checkbox).removeClass('checked');
-                                            $currentForm.find('input[type="radio"]').not($(this)).prop('checked', false);
-                                            
-                                            handleQuizSelection(option, $currentForm);
-                                        });
+                                            // Check if this specific quiz form is already answered
+                                            if ($currentForm.hasClass('quiz-answered')) {
+                                                console.log('Quiz already answered, ignoring selection');
+                                                return false;
+                                            }
 
-                                        // Handle label clicks
-                                        $label.on('click.quiz', function(e) {
-                                            // Don't prevent default - let the label work normally with its radio button
-                                            e.stopPropagation();
-                                            var option = $input.val();
-                                            console.log('Quiz label clicked for option:', option);
-                                            
-                                            // Ensure the radio button gets selected
-                                            $input.prop('checked', true);
-                                            $checkbox.addClass('checked');
-                                            
-                                            // Remove checked class from siblings
-                                            $currentForm.find('.ui.radio.checkbox').not($checkbox).removeClass('checked');
-                                            $currentForm.find('input[type="radio"]').not($input).prop('checked', false);
-                                            
-                                            handleQuizSelection(option, $currentForm);
-                                        });
+                                            // Check if quiz is currently being processed
+                                            if ($currentForm.hasClass('quiz-processing')) {
+                                                console.log('Quiz currently being processed, ignoring selection');
+                                                return false;
+                                            }
+
+                                            if (option) {
+                                                console.log('Quiz selection triggered for option:', option);
+
+                                                // Mark quiz as being processed to prevent multiple clicks
+                                                $currentForm.addClass('quiz-processing');
+
+                                                // Call choose() function
+                                                choose(option);
+
+                                                // Remove processing flag after a short delay
+                                                setTimeout(() => {
+                                                    $currentForm.removeClass('quiz-processing');
+                                                }, 500);
+
+                                                // Auto-scroll after quiz selection
+                                                setTimeout(() => {
+                                                    scrollToBottomAfterContent();
+                                                }, 300);
+                                            }
+                                        }
                                     });
                                 }, 100);
                 }
