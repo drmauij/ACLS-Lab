@@ -1027,6 +1027,14 @@ function attachChangeHandlers() {
             sidebarOverlay.removeClass('active').fadeOut(300);
         });
 
+        // Handle help trigger button click
+        $(document).on('click.sidebar', '.help-trigger', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Help trigger clicked - opening help page');
+            window.open('https://demo.sopwise.ai', '_blank');
+        });
+
         // Close sidebar on escape key
         $(document).on('keydown.sidebar', function(e) {
             if (e.key === 'Escape' && sidebar.hasClass('active')) {
