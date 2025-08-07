@@ -968,16 +968,21 @@ function attachChangeHandlers() {
 
         // Show/hide sidebar trigger based on screen size and scenario state
         function updateSidebarVisibility() {
+            const helpTrigger = $('.help-trigger');
+            
             if ($(window).width() <= 768) {
-                // Show trigger on mobile when scenario is started
+                // Show triggers on mobile when scenario is started
                 if ($('body').hasClass('monitor-visible')) {
                     sidebarTrigger.show().removeClass('hidden');
+                    helpTrigger.show().removeClass('hidden');
                     console.log('Sidebar trigger shown on mobile');
                 } else {
                     sidebarTrigger.hide().addClass('hidden');
+                    helpTrigger.hide().addClass('hidden');
                 }
             } else {
                 sidebarTrigger.hide();
+                helpTrigger.hide();
                 sidebar.removeClass('active');
                 sidebarOverlay.removeClass('active').hide();
             }
@@ -1005,6 +1010,14 @@ function attachChangeHandlers() {
                 $('.sidebar-monitor').show();
                 $('.sidebar-log').show();
             }
+        });
+
+        // Handle help button click - open help URL
+        $(document).on('click.help', '.help-trigger', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Help trigger clicked - opening help URL');
+            window.open('https://demo.sopwise.ai', '_blank');
         });
 
         // Close sidebar when clicking overlay
