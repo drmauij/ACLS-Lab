@@ -18,9 +18,9 @@ var quizAnsweredSteps = new Set(); // Track which steps have had their quiz answ
 function loadAllData() {
     console.log('Loading all data...');
     $.when(
-        $.getJSON('/data/cases.json'),
-        $.getJSON('/data/actions.json'),
-        $.getJSON('/data/drugs.json')
+        $.getJSON('/json/cases.json'),
+        $.getJSON('/json/actions.json'),
+        $.getJSON('/json/drugs.json')
     ).done(function(cases, actions, drugs) {
         dataLoaded.cases = cases[0];
         dataLoaded.actions = actions[0];
@@ -122,15 +122,16 @@ function startScenario(caseId) {
 // Function to load a specific scenario
 function loadScenario(caseId) {
     console.log('Loading scenario:', caseId);
-    $.getJSON('/data/cases/' + caseId + '.json', function(scenarioData) {
+    var scenarioData = dataLoaded.cases[caseId];
+    if (scenarioData) {
         console.log('Scenario data loaded:', scenarioData);
         if (scenarioData.realtime !== undefined) {
             realtime = scenarioData.realtime;
         }
-        displayStep(scenarioData.steps[0]); // Start with the first step
-    }).fail(function(jqxhr, textStatus, error) {
-        console.error('Error loading scenario data:', textStatus, error);
-    });
+        displayStep(scenarioData.steps[1]); // Start with step 1
+    } else {
+        console.error('Scenario not found:', caseId);
+    }
 }
 
 // Function to display a step
